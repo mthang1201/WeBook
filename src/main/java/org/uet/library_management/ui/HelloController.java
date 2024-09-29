@@ -1,4 +1,4 @@
-package org.uet.library_management;
+package org.uet.library_management.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
