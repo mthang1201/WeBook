@@ -28,7 +28,7 @@ public class UserRepository {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("userName"));
+                user.setName(rs.getString("name"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
                 user.setAddress(rs.getString("address"));
@@ -55,7 +55,7 @@ public class UserRepository {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("userName"));
+                user.setName(rs.getString("name"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
                 user.setAddress(rs.getString("address"));
@@ -90,14 +90,14 @@ public class UserRepository {
     public List<User> findByName(String name) {
         List<User> users = new ArrayList<>();
 
-        String query = "SELECT * FROM " + db_table + " WHERE userName LIKE ?";
+        String query = "SELECT * FROM " + db_table + " WHERE name LIKE ?";
         ResultSet rs = connectJDBC.executeQueryWithParams(query, name);
         while (true) {
             try {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("userName"));
+                user.setName(rs.getString("name"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
                 user.setAddress(rs.getString("address"));
