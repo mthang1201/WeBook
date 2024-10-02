@@ -1,21 +1,9 @@
 package org.uet.library_management.entities.documents;
 
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-/**
- * Document.
- */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Document {
+public abstract class Document {
     private String documentId;
 
     private String documentName;
-
-    private String isbn;
 
     private String genre;
 

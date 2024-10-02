@@ -2,6 +2,7 @@ module org.uet.library_management {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
+    requires java.sql;
 
 
     opens org.uet.library_management to javafx.fxml;
