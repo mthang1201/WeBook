@@ -7,9 +7,9 @@ public class ConnectJDBC {
     public Connection connect() {
         Connection conn;
         try {
-            String url = "jdbc:mysql://localhost:3306/library_db";
+            String url = "jdbc:mysql://localhost:3307/library_db";
             String username = "root";
-            String password = "";
+            String password = "root";
             conn = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);

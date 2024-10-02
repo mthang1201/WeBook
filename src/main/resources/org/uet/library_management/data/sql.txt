@@ -1,3 +1,7 @@
+create database library_db;
+
+use library_db;
+
 CREATE TABLE books (
     documentId INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -61,3 +65,29 @@ CREATE TABLE loandetails (
     CONSTRAINT fk_loandetails_books FOREIGN KEY (documentId) REFERENCES books (documentId),
     CONSTRAINT fk_loandetails_theses FOREIGN KEY (documentId) REFERENCES theses (documentId)
 );
+
+INSERT INTO books (title, authors, publisher, publishedDate, description, isbn, pageCount, categories, averageRating, ratingsCount, imageLinks, language, maturityRating, printType, availableCopies) VALUES
+('The Great Gatsby', 'F. Scott Fitzgerald', 'Scribner', '1925-04-10', 'A novel about the American dream.', '9780743273565', 180, 'Fiction, Classic', 3.91, 4000000, 'https://example.com/gatsby.jpg', 'en', 'NOT_MATURE', 'BOOK', 5),
+('1984', 'George Orwell', 'Secker & Warburg', '1949-06-08', 'Dystopian novel set in a totalitarian society.', '9780451524935', 328, 'Fiction, Dystopia', 4.17, 3000000, 'https://example.com/1984.jpg', 'en', 'NOT_MATURE', 'BOOK', 3),
+('To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.', '1960-07-11', 'A novel about racial injustice in the Deep South.', '9780061120084', 281, 'Fiction, Classic', 4.28, 4500000, 'https://example.com/mockingbird.jpg', 'en', 'NOT_MATURE', 'BOOK', 2);
+
+INSERT INTO theses (title, authors, publishedDate, institution, degree, description, categories, language, citationCount, availableCopies) VALUES
+('A Study on Quantum Computing', 'Alice Smith', '2023-05-15', 'Harvard University', 'PhD', 'Explores the potential of quantum computing in various fields.', 'Computer Science, Quantum Physics', 'en', 15, 1),
+('The Impact of Social Media on Youth', 'John Doe', '2022-08-20', 'Stanford University', 'Master', 'Analyzes how social media influences the behavior of young people.', 'Sociology, Media Studies', 'en', 25, 2),
+('Renewable Energy Sources and Sustainability', 'Emily Johnson', '2021-11-10', 'MIT', 'Master', 'Discusses the importance of renewable energy for sustainable development.', 'Environmental Science, Energy', 'en', 10, 0);
+
+INSERT INTO users (name, phoneNumber, email, address, membershipStatus, privileges) VALUES
+('Alice Johnson', '123-456-7890', 'alice.johnson@example.com', '123 Main St, Anytown, USA', 'Active', 'Standard'),
+('Bob Smith', '098-765-4321', 'bob.smith@example.com', '456 Elm St, Othertown, USA', 'Inactive', 'Standard'),
+('Charlie Brown', '555-555-5555', 'charlie.brown@example.com', '789 Pine St, Sometown, USA', 'Active', 'Admin');
+
+INSERT INTO loans (loanDate, dueDate, returnDate, status, comments, userId) VALUES
+('2024-09-01', '2024-09-15', NULL, 'Active', 'First-time borrower.', 1),
+('2024-09-05', '2024-09-20', '2024-09-19', 'Returned', 'No issues.', 2),
+('2024-09-10', '2024-09-25', NULL, 'Active', 'Late return expected.', 3);
+
+INSERT INTO loandetails (loanId, documentId, documentType) VALUES
+(1, 1, 'book'),
+(2, 2, 'book'),
+(3, 3, 'thesis'),
+(1, 2, 'thesis');
