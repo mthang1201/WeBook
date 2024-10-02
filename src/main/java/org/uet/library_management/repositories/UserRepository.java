@@ -28,9 +28,12 @@ public class UserRepository {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
+                user.setName(rs.getString("userName"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setMembershipStatus(rs.getString("membershipStatus"));
+                user.setPrivileges(rs.getString("privileges"));
 
                 users.add(user);
 
@@ -52,9 +55,12 @@ public class UserRepository {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
+                user.setName(rs.getString("userName"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setMembershipStatus(rs.getString("membershipStatus"));
+                user.setPrivileges(rs.getString("privileges"));
 
                 users.add(user);
 
@@ -91,9 +97,12 @@ public class UserRepository {
                 if (!rs.next()) break;
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
+                user.setName(rs.getString("userName"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setMembershipStatus(rs.getString("membershipStatus"));
+                user.setPrivileges(rs.getString("privileges"));
 
                 users.add(user);
 
@@ -105,13 +114,13 @@ public class UserRepository {
     }
 
     public void add(User user) {
-        String query = "INSERT INTO " + db_table + " (userName, phoneNumber, email, definition, example) VALUES (?, ?, ?, ?, ?)";
-        connectJDBC.executeUpdate(query, user.getUserName(), user.getPhoneNumber(), user.getEmail());
+        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges) VALUES (?, ?, ?, ?, ?, ?)";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges());
     }
 
     public void update(User user) {
-        String query = "UPDATE " + db_table + " SET userName = ?, phoneNumber = ?, email = ?, definition = ?, example = ? WHERE userId = ?";
-        connectJDBC.executeUpdate(query, user.getUserName(), user.getPhoneNumber(), user.getEmail(), user.getUserId());
+        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges(), user.getUserId());
     }
 
     public void remove(User user) {

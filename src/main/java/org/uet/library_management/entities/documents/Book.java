@@ -8,7 +8,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book extends Document {
+    private String publisher;
+
     private String isbn;
 
-    private String publisher;
+    private int pageCount;
+
+    private double averageRating;
+
+    private int ratingsCount;
+
+    private String imageLinks;
+
+    private String maturityRating;
+
+    private String printType;
 }

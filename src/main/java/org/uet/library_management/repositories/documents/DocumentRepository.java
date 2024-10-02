@@ -35,11 +35,18 @@ public abstract class DocumentRepository {
 
     private void populateSpecificAttributes(Document document, ResultSet rs) throws SQLException {
         if (document instanceof Book book) {
-            book.setIsbn(rs.getString("ISBN"));
             book.setPublisher(rs.getString("publisher"));
+            book.setIsbn(rs.getString("isbn"));
+            book.setPageCount(rs.getInt("pageCount"));
+            book.setAverageRating(rs.getDouble("averageRating"));
+            book.setRatingsCount(rs.getInt("ratingsCount"));
+            book.setImageLinks(rs.getString("imageLinks"));
+            book.setMaturityRating(rs.getString("maturityRating"));
+            book.setPrintType(rs.getString("printType"));
         } else if (document instanceof Thesis thesis) {
-            thesis.setUniversity(rs.getString("university"));
-            thesis.setSupervisor(rs.getString("supervisor"));
+            thesis.setInstitution(rs.getString("institution"));
+            thesis.setDegree(rs.getString("degree"));
+            thesis.setCitationCount(rs.getInt("citationCount"));
         }
     }
 
@@ -51,15 +58,15 @@ public abstract class DocumentRepository {
         while (true) {
             try {
                 if (!rs.next()) break;
-
                 Document document = createDocument();
-                document.setDocumentId(rs.getString("documentId"));
-                document.setDocumentName(rs.getString("documentName"));
-                document.setGenre(rs.getString("genre"));
-                document.setAuthorName(rs.getString("authorName"));
-                document.setDocumentDescription(rs.getString("documentDescription"));
-                document.setPublishedDate(rs.getString("publishedDate"));
-                document.setQuantityInStock(rs.getInt("quantityInStock"));
+                document.setDocumentId(rs.getInt("documentId"));
+                document.setTitle(rs.getString("title"));
+                document.setAuthors(rs.getString("authors"));
+                document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
+                document.setDescription(rs.getString("description"));
+                document.setCategories(rs.getString("categories"));
+                document.setLanguage(rs.getString("language"));
+                document.setAvailableCopies(rs.getInt("availableCopies"));
 
                 populateSpecificAttributes(document, rs);
 

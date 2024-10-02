@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Thesis extends Document {
-    private String university;
+    private String institution;
 
-    private String supervisor;
+    private String degree;
+
+    private int citationCount;
 }

@@ -8,17 +8,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Document {
-    private String documentId;
+    private int documentId;
 
-    private String documentName;
+    private String title;
 
-    private String genre;
-
-    private String authorName;
-
-    private String documentDescription;
+    private String authors;
 
     private String publishedDate;
 
-    private int quantityInStock;
+    private String description;
+
+    private String categories;
+
+    private String language;
+
+    private int availableCopies;
 }

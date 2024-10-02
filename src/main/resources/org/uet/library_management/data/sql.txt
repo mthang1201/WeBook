@@ -1,0 +1,63 @@
+CREATE TABLE books (
+    documentId INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    authors TEXT,
+    publisher VARCHAR(255),
+    publishedDate DATE,
+    description TEXT,
+    isbn VARCHAR(20),
+    pageCount INT,
+    categories TEXT,
+    averageRating DECIMAL(3, 2),
+    ratingsCount INT,
+    imageLinks TEXT,
+    language VARCHAR(10),
+    maturityRating VARCHAR(50),
+    printType VARCHAR(50),
+    availableCopies INT
+);
+
+CREATE TABLE theses (
+    documentId INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    authors TEXT,
+    publishedDate DATE,
+    institution VARCHAR(255),
+    degree VARCHAR(50),
+    description TEXT,
+    categories TEXT,
+    language VARCHAR(10),
+    citationCount INT,
+    availableCopies INT
+);
+
+CREATE TABLE users (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phoneNumber VARCHAR(20),
+    email VARCHAR(255),
+    address TEXT,
+    membershipStatus VARCHAR(50),
+    privileges VARCHAR(255)
+);
+
+CREATE TABLE loans (
+    loanId INT AUTO_INCREMENT PRIMARY KEY,
+    loanDate DATE NOT NULL,
+    dueDate DATE NOT NULL,
+    returnDate DATE,
+    status VARCHAR(255),
+    comments TEXT,
+    userId INT NOT NULL,
+    CONSTRAINT fk_loans_users FOREIGN KEY (userId) REFERENCES users (userId)
+);
+
+
+CREATE TABLE loandetails (
+    loanId INT NOT NULL,
+    documentId INT NOT NULL,
+    documentType ENUM('book', 'thesis') NOT NULL,
+    CONSTRAINT fk_loandetails_loans FOREIGN KEY (loanId) REFERENCES loans (loanId),
+    CONSTRAINT fk_loandetails_books FOREIGN KEY (documentId) REFERENCES books (documentId),
+    CONSTRAINT fk_loandetails_theses FOREIGN KEY (documentId) REFERENCES theses (documentId)
+);
