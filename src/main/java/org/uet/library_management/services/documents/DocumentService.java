@@ -13,7 +13,6 @@ public class DocumentService {
     }
 
     protected void loadRepository() {
-        repository = new DocumentRepository();
     }
 
     public List<Document> findAll() {
