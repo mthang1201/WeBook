@@ -1,10 +1,23 @@
-package org.uet.library_management.repositories;
+package org.uet.library_management.repositories.documents;
 
+import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.entities.documents.Document;
 
 import java.util.List;
 
 public class DocumentRepository {
+    protected String db_table;
+
+    private final ConnectJDBC connectJDBC;
+
+    public DocumentRepository() {
+        connectJDBC = new ConnectJDBC();
+        loadDatabase();
+    }
+
+    protected void loadDatabase() {
+        db_table = "documents";
+    }
 
     public List<Document> findAll() {
         return null;

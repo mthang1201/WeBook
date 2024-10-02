@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
-    private static String db_table;
+    private String db_table;
 
     private final ConnectJDBC connectJDBC;
 

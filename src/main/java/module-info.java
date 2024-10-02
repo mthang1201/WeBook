@@ -17,4 +17,8 @@ module org.uet.library_management {
     opens org.uet.library_management.entities.documents to javafx.fxml;
     exports org.uet.library_management.ui;
     opens org.uet.library_management.ui to javafx.fxml;
+    exports org.uet.library_management.repositories.documents;
+    opens org.uet.library_management.repositories.documents to javafx.fxml;
+    exports org.uet.library_management.services.documents;
+    opens org.uet.library_management.services.documents to javafx.fxml;
 }

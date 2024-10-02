@@ -1,15 +1,19 @@
-package org.uet.library_management.services;
+package org.uet.library_management.services.documents;
 
 import org.uet.library_management.entities.documents.Document;
-import org.uet.library_management.repositories.DocumentRepository;
+import org.uet.library_management.repositories.documents.DocumentRepository;
 
 import java.util.List;
 
 public class DocumentService {
-    private DocumentRepository repository;
+    protected DocumentRepository repository;
 
     public DocumentService() {
-        this.repository = new DocumentRepository();
+        loadRepository();
+    }
+
+    protected void loadRepository() {
+        repository = new DocumentRepository();
     }
 
     public List<Document> findAll() {
