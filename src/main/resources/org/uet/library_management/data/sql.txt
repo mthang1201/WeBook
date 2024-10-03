@@ -69,25 +69,58 @@ CREATE TABLE loandetails (
 INSERT INTO books (title, authors, publisher, publishedDate, description, isbn, pageCount, categories, averageRating, ratingsCount, imageLinks, language, maturityRating, printType, availableCopies) VALUES
 ('The Great Gatsby', 'F. Scott Fitzgerald', 'Scribner', '1925-04-10', 'A novel about the American dream.', '9780743273565', 180, 'Fiction, Classic', 3.91, 4000000, 'https://example.com/gatsby.jpg', 'en', 'NOT_MATURE', 'BOOK', 5),
 ('1984', 'George Orwell', 'Secker & Warburg', '1949-06-08', 'Dystopian novel set in a totalitarian society.', '9780451524935', 328, 'Fiction, Dystopia', 4.17, 3000000, 'https://example.com/1984.jpg', 'en', 'NOT_MATURE', 'BOOK', 3),
-('To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.', '1960-07-11', 'A novel about racial injustice in the Deep South.', '9780061120084', 281, 'Fiction, Classic', 4.28, 4500000, 'https://example.com/mockingbird.jpg', 'en', 'NOT_MATURE', 'BOOK', 2);
+('To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.', '1960-07-11', 'A novel about racial injustice in the Deep South.', '9780061120084', 281, 'Fiction, Classic', 4.28, 4500000, 'https://example.com/mockingbird.jpg', 'en', 'NOT_MATURE', 'BOOK', 2),
+('Pride and Prejudice', 'Jane Austen', 'T. Egerton', '1813-01-28', 'A romantic novel of manners.', '9780143105428', 279, 'Classic, Romance', 4.25, 4000, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 6),
+('Moby-Dick', 'Herman Melville', 'Harper & Brothers', '1851-10-18', 'The narrative of Captain Ahab\'s obsession.', '9781503280786', 635, 'Classic, Adventure', 3.51, 3000, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 2),
+('The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', '1951-07-16', 'A story about teenage rebellion.', '9780316769488', 277, 'Classic, Fiction', 3.81, 4500, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 1),
+('Brave New World', 'Aldous Huxley', 'Chatto & Windus', '1932-08-30', 'A dystopian novel about a technologically advanced society.', '9780060850524', 311, 'Dystopian, Fiction', 3.98, 4000, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 4),
+('Fahrenheit 451', 'Ray Bradbury', 'Ballantine Books', '1953-10-19', 'A novel about a future where books are banned.', '9781451673319', 158, 'Dystopian, Fiction', 3.94, 3500, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 3),
+('The Hobbit', 'J.R.R. Tolkien', 'George Allen & Unwin', '1937-09-21', 'A fantasy novel about Bilbo Baggins\' adventure.', '9780547928227', 310, 'Fantasy, Fiction', 4.27, 4500, 'link_to_image', 'English', 'NOT_MATURE', 'BOOK', 5);
 
 INSERT INTO theses (title, authors, publishedDate, institution, degree, description, categories, language, citationCount, availableCopies) VALUES
 ('A Study on Quantum Computing', 'Alice Smith', '2023-05-15', 'Harvard University', 'PhD', 'Explores the potential of quantum computing in various fields.', 'Computer Science, Quantum Physics', 'en', 15, 1),
 ('The Impact of Social Media on Youth', 'John Doe', '2022-08-20', 'Stanford University', 'Master', 'Analyzes how social media influences the behavior of young people.', 'Sociology, Media Studies', 'en', 25, 2),
-('Renewable Energy Sources and Sustainability', 'Emily Johnson', '2021-11-10', 'MIT', 'Master', 'Discusses the importance of renewable energy for sustainable development.', 'Environmental Science, Energy', 'en', 10, 0);
+('Renewable Energy Sources and Sustainability', 'Emily Johnson', '2021-11-10', 'MIT', 'Master', 'Discusses the importance of renewable energy for sustainable development.', 'Environmental Science, Energy', 'en', 10, 0),
+('Artificial Intelligence in Healthcare', 'Bob Brown', '2021-12-12', 'Health Institute', 'Masters', 'AI applications in healthcare.', 'Computer Science', 'English', 20, 4),
+('Global Economic Trends', 'Emily Davis', '2020-09-09', 'Business School', 'Bachelors', 'Analysis of economic trends.', 'Economics', 'English', 5, 3),
+('Cybersecurity Challenges', 'Michael Green', '2022-01-25', 'Cyber University', 'Masters', 'Investigating cybersecurity threats.', 'Information Technology', 'English', 10, 2),
+('Education Reforms in the 21st Century', 'Sarah White', '2023-06-30', 'Education University', 'PhD', 'Reforms in education systems.', 'Education', 'English', 18, 3),
+('The Future of Work', 'David Black', '2021-08-15', 'Business Institute', 'Masters', 'Workplace changes and future trends.', 'Business', 'English', 14, 2),
+('Sustainable Agriculture Practices', 'Laura Blue', '2022-04-18', 'Agricultural University', 'Bachelors', 'Sustainable farming methods.', 'Agriculture', 'English', 7, 1);
 
 INSERT INTO users (name, phoneNumber, email, address, membershipStatus, privileges) VALUES
 ('Alice Johnson', '123-456-7890', 'alice.johnson@example.com', '123 Main St, Anytown, USA', 'Active', 'Standard'),
 ('Bob Smith', '098-765-4321', 'bob.smith@example.com', '456 Elm St, Othertown, USA', 'Inactive', 'Standard'),
-('Charlie Brown', '555-555-5555', 'charlie.brown@example.com', '789 Pine St, Sometown, USA', 'Active', 'Admin');
+('Charlie Brown', '555-555-5555', 'charlie.brown@example.com', '789 Pine St, Sometown, USA', 'Active', 'Admin'),
+('Daisy Ridley', '555-4321', 'daisy.ridley@example.com', '321 Maple St, Springfield', 'Active', 'Premium'),
+('Ethan Hunt', '555-6789', 'ethan.hunt@example.com', '654 Cedar St, Springfield', 'Active', 'Standard'),
+('Fiona Apple', '555-1357', 'fiona.apple@example.com', '987 Birch St, Springfield', 'Inactive', 'Premium'),
+('George Lucas', '555-2468', 'george.lucas@example.com', '159 Spruce St, Springfield', 'Active', 'Standard'),
+('Hannah Montana', '555-3579', 'hannah.montana@example.com', '753 Willow St, Springfield', 'Active', 'Premium'),
+('Ian McKellen', '555-8642', 'ian.mckellen@example.com', '321 Fir St, Springfield', 'Active', 'Standard'),
+('Jenna Ortega', '555-9512', 'jenna.ortega@example.com', '456 Aspen St, Springfield', 'Active', 'Premium');
 
 INSERT INTO loans (loanDate, dueDate, returnDate, status, comments, userId) VALUES
 ('2024-09-01', '2024-09-15', NULL, 'Active', 'First-time borrower.', 1),
 ('2024-09-05', '2024-09-20', '2024-09-19', 'Returned', 'No issues.', 2),
-('2024-09-10', '2024-09-25', NULL, 'Active', 'Late return expected.', 3);
+('2024-09-10', '2024-09-25', NULL, 'Active', 'Late return expected.', 3),
+('2024-04-01', '2024-04-15', '2024-04-10', 'Returned', 'Returned on time', 4),
+('2024-05-01', '2024-05-15', NULL, 'Active', 'Third loan', 5),
+('2024-06-01', '2024-06-15', NULL, 'Active', 'Fourth loan', 6),
+('2024-07-01', '2024-07-15', '2024-07-10', 'Returned', 'Returned early', 7),
+('2024-08-01', '2024-08-15', NULL, 'Active', 'Fifth loan', 8),
+('2024-09-01', '2024-09-15', NULL, 'Active', 'Sixth loan', 9),
+('2024-10-01', '2024-10-15', NULL, 'Active', 'Seventh loan', 10);
 
 INSERT INTO loandetails (loanId, documentId, documentType) VALUES
 (1, 1, 'book'),
 (2, 2, 'book'),
 (3, 3, 'thesis'),
-(1, 2, 'thesis');
+(1, 2, 'thesis'),
+(4, 4, 'thesis'),
+(5, 5, 'book'),
+(6, 6, 'thesis'),
+(7, 7, 'book'),
+(8, 8, 'book'),
+(9, 9, 'thesis'),
+(10, 10, 'book');
