@@ -27,12 +27,12 @@ public class DocumentService {
         return repository.countAll();
     }
 
-    public List<Document> findByName(String name) {
-        return repository.findByName(name);
+    public List<Document> findByName(String title) {
+        return repository.findByTitle(title);
     }
 
-    public List<Document> findByAuthor(String author) {
-        return repository.findByAuthor(author);
+    public List<Document> findByAuthor(String authors) {
+        return repository.findByAuthors(authors);
     }
 
     public void add(Document document) {
