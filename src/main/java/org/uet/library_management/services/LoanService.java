@@ -1,6 +1,6 @@
 package org.uet.library_management.services;
 
-import org.uet.library_management.entities.User;
+import org.uet.library_management.entities.Loan;
 import org.uet.library_management.repositories.LoanRepository;
 
 import java.util.List;
@@ -12,11 +12,11 @@ public class LoanService {
         this.repository = new LoanRepository();
     }
 
-    public List<User> findAll() {
+    public List<Loan> findAll() {
         return repository.findAll();
     }
 
-    public List<User> findAllByPage(int page, int pageSize) {
+    public List<Loan> findAllByPage(int page, int pageSize) {
         return repository.findAllByPage(page, pageSize);
     }
 
@@ -24,19 +24,19 @@ public class LoanService {
         return repository.countAll();
     }
 
-    public List<User> findByName(String name) {
-        return repository.findByName(name);
+    public List<Loan> findById(int id) {
+        return repository.findById(id);
     }
 
-    public void add(User user) {
+    public void add(Loan user) {
         repository.add(user);
     }
 
-    public void update(User user) {
+    public void update(Loan user) {
         repository.update(user);
     }
 
-    public void remove(User user) {
+    public void remove(Loan user) {
         repository.remove(user);
     }
 
