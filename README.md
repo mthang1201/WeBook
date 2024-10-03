@@ -10,9 +10,9 @@
    Start your MySQL server and import the `.sql` file located at `{project_dir}/src/main/resources/org/uet/library_management/data/library.sql`.
 
 3. **Database Configuration**  
-   Your database should be running on port 3306 with the following credentials:
-   - **User:** root
-   - **Password:** root  
+   Your database should be running on port `3306` with the following credentials:
+   - **User:** `root`
+   - **Password:** `root`  
    (If your server uses different credentials, please update the configuration in the code.)
 
 4. **Reload Maven Dependencies**  
