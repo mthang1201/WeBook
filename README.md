@@ -1,4 +1,5 @@
 # library_management
+A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like QRcode.
 
 
 ## Build Instructions
@@ -20,6 +21,25 @@
 
 5. **Run the Application**  
    Finally, click the green "Run" button in the IDE, and you're good to go!
+
+
+## List of features
+- Borrow books
+
+
+## Features to add
+- QRcode
+- Authentication
+- Notification
+- Comments
+- Elasticsearch
+- CI/CD
+
+
+## Third party tools
+- Maven
+- JavaFX
+- Lombook
 
 
 ## Contributors
