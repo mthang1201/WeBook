@@ -3,7 +3,10 @@ module org.uet.library_management {
     requires javafx.fxml;
     requires static lombok;
     requires java.sql;
-
+    requires google.api.client;
+    requires com.google.api.client;
+    requires com.google.api.services.books;
+    requires com.google.api.client.json.gson;
 
     opens org.uet.library_management to javafx.fxml;
     exports org.uet.library_management;
