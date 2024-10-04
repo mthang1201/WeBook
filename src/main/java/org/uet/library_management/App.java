@@ -9,7 +9,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneManager.getInstance().setStage(stage);
-        SceneManager.getInstance().setScene("hello-view.fxml");
+        SceneManager.getInstance().setScene("main.fxml");
     }
 
     public static void main(String[] args) {

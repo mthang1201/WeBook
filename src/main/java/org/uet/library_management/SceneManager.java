@@ -32,7 +32,7 @@ public class SceneManager {
     public void setScene(String sceneName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
 
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setTitle("Hello!");
