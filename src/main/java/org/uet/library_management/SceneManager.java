@@ -1,12 +1,17 @@
 package org.uet.library_management;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class SceneManager {
+    @FXML
+    private BorderPane contentPane;
+
     private static Stage stage;
 
     private static SceneManager instance;
@@ -33,5 +38,19 @@ public class SceneManager {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setContentPane(BorderPane contentPane) {
+        this.contentPane = contentPane;
+    }
+
+    public void setSubScene(String sceneName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+            BorderPane pageContent = loader.load();
+            contentPane.getChildren().setAll(pageContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
