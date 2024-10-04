@@ -13,6 +13,7 @@ import org.uet.library_management.services.api.BooksApiService;
 import org.uet.library_management.services.documents.BookService;
 import org.uet.library_management.services.documents.ThesisService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HelloController {
@@ -20,7 +21,7 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
+    protected void onHelloButtonClick() throws IOException {
         welcomeText.setText("Welcome to JavaFX Application!");
 //        UserService userService = new UserService();
 //        List<User> users = userService.findAll();
@@ -43,6 +44,6 @@ public class HelloController {
 //            System.out.println(loan.getLoanId() + " " + loan.getLoanDate() + " " + loan.getDueDate());
 //        }
         BooksApiService apiService = new BooksApiService();
-        apiService.createQuery("Đắc nhân tâm");
+        apiService.searchByISBN("9786043946413");
     }
 }
