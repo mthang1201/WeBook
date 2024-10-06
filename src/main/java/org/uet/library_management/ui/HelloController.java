@@ -21,7 +21,7 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() throws IOException {
+    protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
 //        UserService userService = new UserService();
 //        List<User> users = userService.findAll();
@@ -43,7 +43,5 @@ public class HelloController {
 //        for (Loan loan : loans) {
 //            System.out.println(loan.getLoanId() + " " + loan.getLoanDate() + " " + loan.getDueDate());
 //        }
-        BooksApiService apiService = new BooksApiService();
-        apiService.searchByISBN("0156012197");
     }
 }
