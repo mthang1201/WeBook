@@ -17,12 +17,12 @@ public class Book extends Document {
     private int ratingsCount;
     private String printType;
     private List<String> isbn;
-    private Volume.VolumeInfo.ImageLinks imageLinks;
+    private String imageLinks;
     private String maturityRating;
 
     public Book(String title, List<String> authors, String publisher, String publishedDate, String description,
                 List<String> categories, Integer pageCount, Double averageRating, String maturityRating,
-                String printType, String language, List<String> isbn, Volume.VolumeInfo.ImageLinks imageLinks) {
+                String printType, String language, List<String> isbn, String imageLinks) {
         super(title, authors, publishedDate, description, categories, language);
         this.publisher = publisher;
         this.pageCount = pageCount;

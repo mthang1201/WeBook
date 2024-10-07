@@ -4,6 +4,9 @@ import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
 import org.uet.library_management.entities.documents.Book;
 import org.uet.library_management.services.api.BooksApiService;
+import org.uet.library_management.services.api.image.ImageURLContext;
+import org.uet.library_management.services.api.image.NormalThumbnail;
+import org.uet.library_management.services.api.image.SmallThumbnail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,22 +29,7 @@ public class SearchByISBN implements SearchStrategy{
 
             Volumes volumes = volumesList.execute();
 
-
             if (volumes.getItems() != null && !volumes.getItems().isEmpty()) {
-//                System.out.println("Search results for ISBN: " + ISBN);
-//                for (Volume volume : volumes.getItems()) {
-//                    System.out.println("Title: " + volume.getVolumeInfo().getTitle());
-//                    System.out.println("Authors: " + volume.getVolumeInfo().getAuthors());
-//                    System.out.println("Publisher: " + volume.getVolumeInfo().getPublisher());
-//                    System.out.println("Published Date: " + volume.getVolumeInfo().getPublishedDate());
-//                    System.out.println("Description: " + volume.getVolumeInfo().getDescription());
-//                    System.out.println("Categories: " + volume.getVolumeInfo().getCategories());
-//                    System.out.println("Page Count: " + volume.getVolumeInfo().getPageCount());
-//                    System.out.println("Average Rating: " + volume.getVolumeInfo().getAverageRating());
-//                    System.out.println("Print Type: " + volume.getVolumeInfo().getPrintType());
-//                    System.out.println("Language: " + volume.getVolumeInfo().getLanguage());
-//                    System.out.println("ISBN: " + ISBN);
-//                    System.out.println("=================================");
                 List<Book> bookList = new ArrayList<>();
                 List<String> isbnList = new ArrayList<>();
                 Volume volume = volumes.getItems().getFirst();
@@ -50,6 +38,11 @@ public class SearchByISBN implements SearchStrategy{
                             .filter(identifier -> identifier.getType().equals("ISBN_10") || identifier.getType().equals("ISBN_13"))
                             .map(identifier -> identifier.getIdentifier())
                             .collect(Collectors.toList());
+                }
+                ImageURLContext imageURLContext = new ImageURLContext();
+                imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
+                if (imageURLContext.getImageURL() == null) {
+                    imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
                 }
                 Book newBook = new Book(
                         volume.getVolumeInfo().getTitle(),
@@ -64,7 +57,7 @@ public class SearchByISBN implements SearchStrategy{
                         volume.getVolumeInfo().getPrintType(),
                         volume.getVolumeInfo().getLanguage(),
                         isbnList,
-                        volume.getVolumeInfo().getImageLinks());
+                        imageURLContext.getImageURL());
                 bookList.add(newBook);
                 return bookList;
             } else {

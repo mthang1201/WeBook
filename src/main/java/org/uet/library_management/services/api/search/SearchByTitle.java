@@ -5,6 +5,9 @@ import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
 import org.uet.library_management.entities.documents.Book;
 import org.uet.library_management.services.api.BooksApiService;
+import org.uet.library_management.services.api.image.ImageURLContext;
+import org.uet.library_management.services.api.image.NormalThumbnail;
+import org.uet.library_management.services.api.image.SmallThumbnail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +39,11 @@ public class SearchByTitle implements SearchStrategy{
                                 .map(identifier -> identifier.getIdentifier())
                                 .collect(Collectors.toList());
                     }
+                    ImageURLContext imageURLContext = new ImageURLContext();
+                    imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
+                    if (imageURLContext.getImageURL() == null) {
+                        imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
+                    }
                     Book newBook = new Book(
                             volume.getVolumeInfo().getTitle(),
                             volume.getVolumeInfo().getAuthors(),
@@ -49,7 +57,7 @@ public class SearchByTitle implements SearchStrategy{
                             volume.getVolumeInfo().getPrintType(),
                             volume.getVolumeInfo().getLanguage(),
                             isbnList,
-                            volume.getVolumeInfo().getImageLinks());
+                            imageURLContext.getImageURL());
                     bookList.add(newBook);
                 }
                 return bookList;
