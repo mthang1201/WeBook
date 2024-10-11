@@ -14,6 +14,26 @@ public class MenuController {
         SceneManager.getInstance().setSubScene("home.fxml");
     }
 
+    @FXML
+    private void handleGetAllMenu() {
+        SceneManager.getInstance().setSubScene("getAll.fxml");
+    }
+
+    @FXML
+    private void handleBookmarkMenu() {
+        SceneManager.getInstance().setSubScene("bookmark.fxml");
+    }
+
+    @FXML
+    private void handleFinishedMenu() {
+        SceneManager.getInstance().setSubScene("finished.fxml");
+    }
+
+    @FXML
+    private void handleBooksMenu() {
+        SceneManager.getInstance().setSubScene("books.fxml");
+    }
+
 //    @FXML
 //    private void handleHomeMenu() {
 //        SceneManager.getInstance().setSubScene("home.fxml");

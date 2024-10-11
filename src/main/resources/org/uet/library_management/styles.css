@@ -1,0 +1,48 @@
+.left-sider {
+    -fx-background-color: #dbdbda;
+    -fx-pref-width: 200;
+    -fx-pref-height: 530;
+}
+
+.search-pane {
+    -fx-pref-width: 180;
+    -fx-pref-height: 52;
+}
+
+.search-button {
+    -fx-pref-width: 180;
+}
+
+.search-button:hover {
+
+}
+
+.menu-pane {
+    -fx-pref-height: 395;
+}
+
+.menu-label {
+    -fx-pref-width: 180;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #262626;
+    -fx-pref-width: 180;
+    -fx-pref-height: 30;
+}
+
+.menu-button:hover {
+    -fx-background-color: #262626;
+    -fx-text-fill: #eeeeee;
+}
+
+.username-pane {
+    -fx-pref-height: 83;
+}
+
+.content-pane {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 800;
+    -fx-pref-height: 530;
+}
