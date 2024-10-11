@@ -1,0 +1,5 @@
+package org.uet.library_management.services.notifications;
+
+public interface LoanObserver {
+    void update(String documentID, String loanDate, String dueDate);
+}
