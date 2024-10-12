@@ -3,7 +3,7 @@ A library management application written from scratch in Java using the JavaFX d
 
 
 ## Demo
-![Demo Video](https://github.com/mthang1201/library_management/tree/master/media/demo.gif)
+![Demo Video](/media/demo.gif)
 
 
 ## Build Instructions
