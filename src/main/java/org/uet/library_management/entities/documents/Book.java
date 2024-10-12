@@ -16,20 +16,22 @@ public class Book extends Document {
     private double averageRating;
     private int ratingsCount;
     private String printType;
-    private List<String> isbn;
+    private String isbn_10;
+    private String isbn_13;
     private String imageLinks;
     private String maturityRating;
 
-    public Book(String title, List<String> authors, String publisher, String publishedDate, String description,
-                List<String> categories, Integer pageCount, Double averageRating, String maturityRating,
-                String printType, String language, List<String> isbn, String imageLinks) {
+    public Book(String title, String authors, String publisher, String publishedDate, String description,
+                String categories, Integer pageCount, Double averageRating, String maturityRating,
+                String printType, String language, String isbn_10, String isbn_13, String imageLinks) {
         super(title, authors, publishedDate, description, categories, language);
         this.publisher = publisher;
         this.pageCount = pageCount;
         this.averageRating = averageRating;
         this.maturityRating = maturityRating;
         this.printType = printType;
-        this.isbn = isbn;
+        this.isbn_10 = isbn_10;
+        this.isbn_13 = isbn_13;
         this.imageLinks = imageLinks;
     }
 }

@@ -11,6 +11,7 @@ import org.uet.library_management.services.api.image.SmallThumbnail;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,32 +33,7 @@ public class SearchByTitle implements SearchStrategy{
             if (volumes.getItems() != null && !volumes.getItems().isEmpty()) {
                 List<Book> bookList = new ArrayList<>();
                 for (Volume volume : volumes.getItems()) {
-                    List<String> isbnList = new ArrayList<>();
-                    if (volume.getVolumeInfo().getIndustryIdentifiers() != null) {
-                        isbnList = volume.getVolumeInfo().getIndustryIdentifiers().stream()
-                                .filter(identifier -> identifier.getType().equals("ISBN_10") || identifier.getType().equals("ISBN_13"))
-                                .map(identifier -> identifier.getIdentifier())
-                                .collect(Collectors.toList());
-                    }
-                    ImageURLContext imageURLContext = new ImageURLContext();
-                    imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
-                    if (imageURLContext.getImageURL() == null) {
-                        imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
-                    }
-                    Book newBook = new Book(
-                            volume.getVolumeInfo().getTitle(),
-                            volume.getVolumeInfo().getAuthors(),
-                            volume.getVolumeInfo().getPublisher(),
-                            volume.getVolumeInfo().getPublishedDate(),
-                            volume.getVolumeInfo().getDescription(),
-                            volume.getVolumeInfo().getCategories(),
-                            volume.getVolumeInfo().getPageCount(),
-                            volume.getVolumeInfo().getAverageRating(),
-                            volume.getVolumeInfo().getMaturityRating(),
-                            volume.getVolumeInfo().getPrintType(),
-                            volume.getVolumeInfo().getLanguage(),
-                            isbnList,
-                            imageURLContext.getImageURL());
+                    Book newBook = BookDetailsExtractor.extractBookDetails(volume);
                     bookList.add(newBook);
                 }
                 return bookList;
@@ -65,7 +41,6 @@ public class SearchByTitle implements SearchStrategy{
                 return Collections.emptyList();
             }
         } catch (IOException e) {
-            System.err.println("Error occurred while searching for title: " + title);
             e.printStackTrace();
             return Collections.emptyList();
         }

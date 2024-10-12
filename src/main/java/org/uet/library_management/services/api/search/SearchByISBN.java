@@ -7,6 +7,7 @@ import org.uet.library_management.services.api.BooksApiService;
 import org.uet.library_management.services.api.image.ImageURLContext;
 import org.uet.library_management.services.api.image.NormalThumbnail;
 import org.uet.library_management.services.api.image.SmallThumbnail;
+import com.google.api.services.books.v1.model.Volume.VolumeInfo.IndustryIdentifiers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,40 +26,16 @@ public class SearchByISBN implements SearchStrategy{
             String query = "isbn:" + ISBN;
 
             Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
-            volumesList.setMaxResults(1L);
+            volumesList.setMaxResults(5L);
 
             Volumes volumes = volumesList.execute();
 
             if (volumes.getItems() != null && !volumes.getItems().isEmpty()) {
                 List<Book> bookList = new ArrayList<>();
-                List<String> isbnList = new ArrayList<>();
-                Volume volume = volumes.getItems().getFirst();
-                if (volume.getVolumeInfo().getIndustryIdentifiers() != null) {
-                    isbnList = volume.getVolumeInfo().getIndustryIdentifiers().stream()
-                            .filter(identifier -> identifier.getType().equals("ISBN_10") || identifier.getType().equals("ISBN_13"))
-                            .map(identifier -> identifier.getIdentifier())
-                            .collect(Collectors.toList());
+                for (Volume volume : volumes.getItems()) {
+                    Book newBook = BookDetailsExtractor.extractBookDetails(volume);
+                    bookList.add(newBook);
                 }
-                ImageURLContext imageURLContext = new ImageURLContext();
-                imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
-                if (imageURLContext.getImageURL() == null) {
-                    imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
-                }
-                Book newBook = new Book(
-                        volume.getVolumeInfo().getTitle(),
-                        volume.getVolumeInfo().getAuthors(),
-                        volume.getVolumeInfo().getPublisher(),
-                        volume.getVolumeInfo().getPublishedDate(),
-                        volume.getVolumeInfo().getDescription(),
-                        volume.getVolumeInfo().getCategories(),
-                        volume.getVolumeInfo().getPageCount(),
-                        volume.getVolumeInfo().getAverageRating(),
-                        volume.getVolumeInfo().getMaturityRating(),
-                        volume.getVolumeInfo().getPrintType(),
-                        volume.getVolumeInfo().getLanguage(),
-                        isbnList,
-                        imageURLContext.getImageURL());
-                bookList.add(newBook);
                 return bookList;
             } else {
                 return Collections.emptyList();
