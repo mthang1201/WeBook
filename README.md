@@ -2,6 +2,10 @@
 A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like QRcode.
 
 
+## Demo
+![Demo Video](https://raw.githubusercontent.com/mthang1201/library_management/master/media/demo.mov)
+
+
 ## Build Instructions
 
 1. **Clone the Project**  
