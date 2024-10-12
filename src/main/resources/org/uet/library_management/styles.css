@@ -1,0 +1,83 @@
+.left-sider {
+    -fx-background-color: #dbdbda;
+    -fx-pref-width: 200;
+    -fx-font-size: 14px;
+}
+
+.scroll-pane {
+    -fx-hbar-policy: NEVER;  /* Hide horizontal scrollbar */
+    -fx-vbar-policy: AS_NEEDED;  /* Hide vertical scrollbar */
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #dbdbda;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #b4b4b4; /* Color of the scrollbar thumb (the draggable part) */
+    -fx-pref-width: 8px;
+}
+
+.menu-pane {
+    -fx-pref-height: 447;
+    -fx-alignment: TOP_CENTER;
+}
+
+.search-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 10 10 0 10;
+}
+
+.search-text-field {
+    -fx-background-color: #dedede; /* Background color */
+    -fx-text-fill: #262626;
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-radius: 8px; /* Rounded corners */
+    -fx-padding: 5px; /* Padding inside the TextField */
+    -fx-border-width: 1px; /* Border width */
+}
+
+.search-text-field:focused {
+    -fx-border-color: #8a8a8a;
+    -fx-border-width: 3px;
+}
+
+.search-text-field .prompt-text {
+    -fx-text-fill: #a7a9a9; /* Change color of the prompt text */
+    -fx-font-style: italic; /* Make it italic */
+}
+
+.menu-label {
+    -fx-text-fill: #262626;
+    -fx-pref-width: 170;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 16px;
+    -fx-padding: 20 0 5 0;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #262626;
+    -fx-pref-width: 170;
+    -fx-pref-height: 30;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.menu-button:hover {
+    -fx-background-color: #262626;
+    -fx-text-fill: #eeeeee;
+}
+
+.username-button {
+    -fx-background-color: transparent;
+    -fx-pref-width: 200;
+    -fx-pref-height: 83;
+    -fx-font-size: 16px;
+    /*-fx-alignment: */
+}
+
+.content-pane {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 800;
+    -fx-pref-height: 530;
+}
