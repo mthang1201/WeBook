@@ -5,20 +5,51 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.uet.library_management.ui.MenuController"
-      alignment="TOP_CENTER"
       styleClass="left-sider">
-    <TextField styleClass="search-button" text="Tìm kiếm"/>
-    <Label styleClass="menu-label" text="Sách" />
-    <Button styleClass="menu-button" onAction="#handleHomeMenu" text="Trang chủ" />
-    <Button styleClass="menu-button" onAction="#handleLibraryMenu" text="Book Store" />
-    <Label styleClass="menu-label" text="Thư viện" />
-    <Button styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả" />
-    <Button styleClass="menu-button" onAction="#handleBookmarkMenu" text="Muốn đọc" />
-    <Button styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong" />
-    <Button styleClass="menu-button" onAction="#handleBooksMenu" text="Sách" />
-    <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
-    <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
+    <VBox styleClass="menu-pane">
+        <VBox styleClass="search-pane">
+            <TextField fx:id="searchTextField" styleClass="search-text-field" promptText="Tìm kiếm" />
+        </VBox>
+        <Label styleClass="menu-label" text="Sách" />
+        <Button fx:id="homeButton" styleClass="menu-button" onAction="#handleHomeMenu" text="Trang chủ">
+            <graphic>
+                <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@icons/home.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button styleClass="menu-button" onAction="#handleLibraryMenu" text="Book Store" />
+        <Label styleClass="menu-label" text="Thư viện" />
+        <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
+            <graphic>
+                <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@icons/getAll.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button styleClass="menu-button" onAction="#handleBookmarkMenu" text="Muốn đọc" />
+        <Button styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong" />
+        <Button styleClass="menu-button" onAction="#handleBooksMenu" text="Sách" />
+        <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
+            <graphic>
+                <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@icons/upload.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
+        <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
+    </VBox>
+    <Button fx:id="username" styleClass="username-button" text="Anonymous">
+        <graphic>
+            <ImageView fitHeight="40" fitWidth="40">
+                <Image url="@icons/avatar-male.png" />
+            </ImageView>
+        </graphic>
+    </Button>
 </VBox>
