@@ -1,5 +1,9 @@
 package org.uet.library_management.services.api.search;
 
+import org.uet.library_management.entities.documents.Book;
+
+import java.util.List;
+
 public class SearchContext {
     private SearchStrategy strategy;
 
@@ -7,7 +11,7 @@ public class SearchContext {
         this.strategy = strategy;
     }
 
-    public void executeSearch(String query) {
-        strategy.search(query);
+    public List<Book> executeSearch(String query) {
+        return strategy.search(query);
     }
 }

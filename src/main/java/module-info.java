@@ -7,6 +7,7 @@ module org.uet.library_management {
     requires com.google.api.client;
     requires com.google.api.services.books;
     requires com.google.api.client.json.gson;
+    requires org.apache.commons.text;
 
     opens org.uet.library_management to javafx.fxml;
     exports org.uet.library_management;
