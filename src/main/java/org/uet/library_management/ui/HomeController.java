@@ -1,7 +1,47 @@
 package org.uet.library_management.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.entities.documents.Document;
+import org.uet.library_management.services.api.BooksApiService;
+import org.uet.library_management.services.api.search.SearchByTitle;
+import org.uet.library_management.services.api.search.SearchContext;
+import org.uet.library_management.services.core.documents.BookService;
+
+import java.util.List;
 
 public class HomeController {
+    @FXML
+    public FlowPane gridViewPane;
+
+    @FXML
+    public void initialize() {
+        gridViewPane.setPadding(new Insets(10,10,10,10));
+        BookService service = new BookService();
+        List<Document> books = service.findAll();
+
+        SearchContext test = new SearchContext();
+        test.setStrategy(new SearchByTitle());
+        List<Book> searchTest2 = test.executeSearch("oop");
+
+
+        for (Book book : searchTest2) {
+            VBox vbox = new VBox();
+            ImageView imageView = new ImageView(new Image(book.getImageLinks()));
+            imageView.setFitWidth(100);
+            imageView.setFitHeight(100);
+
+            Label titleLabel = new Label(book.getTitle());
+            Label authorsLabel = new Label(book.getAuthors());
+
+            vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
+            gridViewPane.getChildren().add(vbox);
+        }
+    }
 }
