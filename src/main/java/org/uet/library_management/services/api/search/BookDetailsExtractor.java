@@ -12,12 +12,11 @@ public class BookDetailsExtractor {
     public static Book extractBookDetails (Volume volume) {
         //solve authors//
         List<String> authors = volume.getVolumeInfo().getAuthors();
-        String str_authors = String.join(", ", authors);
+        String str_authors = (authors != null && !authors.isEmpty()) ? String.join(", ", authors) : "Không có tác giả";
 
         //solve categories//
         List<String> categories = volume.getVolumeInfo().getCategories();
-        String str_categories = String.join(", ", categories);
-
+        String str_categories = (categories != null && !categories.isEmpty()) ? String.join(", ", categories) : "Không có thể loại";
         //solve isbn//
         String isbn_10 = null;
         String isbn_13 = null;
@@ -37,21 +36,32 @@ public class BookDetailsExtractor {
         if (imageURLContext.getImageURL() == null) {
             imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
         }
+        String title = volume.getVolumeInfo().getTitle() != null ? volume.getVolumeInfo().getTitle() : "Không có tiêu đề";
+        String publisher = volume.getVolumeInfo().getPublisher() != null ? volume.getVolumeInfo().getPublisher() : "Không có nhà xuất bản";
+        String publishedDate = volume.getVolumeInfo().getPublishedDate() != null ? volume.getVolumeInfo().getPublishedDate() : "Không có ngày xuất bản";
+        String description = volume.getVolumeInfo().getDescription() != null ? volume.getVolumeInfo().getDescription() : "Không có mô tả";
+        Integer pageCount = volume.getVolumeInfo().getPageCount() != null ? volume.getVolumeInfo().getPageCount() : 0;
+        Double averageRating = volume.getVolumeInfo().getAverageRating() != null ? volume.getVolumeInfo().getAverageRating() : 0.0;
+        String maturityRating = volume.getVolumeInfo().getMaturityRating() != null ? volume.getVolumeInfo().getMaturityRating() : "Không có đánh giá trưởng thành";
+        String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
+        String language = volume.getVolumeInfo().getLanguage() != null ? volume.getVolumeInfo().getLanguage() : "Không có ngôn ngữ";
+
         Book newBook = new Book(
-                volume.getVolumeInfo().getTitle(),
+                title,
                 str_authors,
-                volume.getVolumeInfo().getPublisher(),
-                volume.getVolumeInfo().getPublishedDate(),
-                volume.getVolumeInfo().getDescription(),
+                publisher,
+                publishedDate,
+                description,
                 str_categories,
-                volume.getVolumeInfo().getPageCount(),
-                volume.getVolumeInfo().getAverageRating(),
-                volume.getVolumeInfo().getMaturityRating(),
-                volume.getVolumeInfo().getPrintType(),
-                volume.getVolumeInfo().getLanguage(),
+                pageCount,
+                averageRating,
+                maturityRating,
+                printType,
+                language,
                 isbn_10,
                 isbn_13,
-                imageURLContext.getImageURL());
+                imageURLContext.getImageURL()
+        );
         return newBook;
     }
 }
