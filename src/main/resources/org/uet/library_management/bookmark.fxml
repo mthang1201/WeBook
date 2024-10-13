@@ -7,7 +7,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.HelloController">
+            fx:controller="org.uet.library_management.ui.BookmarkController">
     <Label fx:id="welcomeText"/>
     <Label>Hello</Label>
     <Button text="Hello!" onAction="#onHelloButtonClick"/>

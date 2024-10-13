@@ -3,7 +3,7 @@ package org.uet.library_management.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class BookmarkController {
     @FXML
     private Label welcomeText;
 

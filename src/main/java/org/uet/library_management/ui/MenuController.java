@@ -63,7 +63,7 @@ public class MenuController {
 
     @FXML
     private void handleLibraryMenu() {
-        SceneManager.getInstance().setSubScene("hello-view.fxml");
+        SceneManager.getInstance().setSubScene("bookmark.fxml");
     }
 
     @FXML

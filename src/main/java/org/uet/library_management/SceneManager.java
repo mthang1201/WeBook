@@ -48,7 +48,7 @@ public class SceneManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
             BorderPane pageContent = loader.load();
-            contentPane.getChildren().setAll(pageContent);
+            contentPane.setCenter(pageContent);
         } catch (IOException e) {
             e.printStackTrace();
         }

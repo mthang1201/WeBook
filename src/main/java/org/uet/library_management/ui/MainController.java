@@ -11,7 +11,7 @@ public class MainController {
     @FXML
     private void initialize() {
         SceneManager.getInstance().setContentPane(contentPane);
-        SceneManager.getInstance().setSubScene("hello-view.fxml");
+        SceneManager.getInstance().setSubScene("home.fxml");
     }
 }
 
