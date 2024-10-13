@@ -11,6 +11,9 @@ public class Small implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getSmall();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getSmall();
+        }
+        return null;
     }
 }

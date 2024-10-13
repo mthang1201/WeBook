@@ -2,9 +2,7 @@ package org.uet.library_management.services.api.search;
 
 import com.google.api.services.books.v1.model.Volume;
 import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.services.api.image.ImageURLContext;
-import org.uet.library_management.services.api.image.NormalThumbnail;
-import org.uet.library_management.services.api.image.SmallThumbnail;
+import org.uet.library_management.services.api.image.*;
 
 import java.util.List;
 
@@ -32,10 +30,23 @@ public class BookDetailsExtractor {
 
         //solve imgLinks//
         ImageURLContext imageURLContext = new ImageURLContext();
-        imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
+        imageURLContext.setImageURLGenerator(new ExtraLarge(volume));
+        if (imageURLContext.getImageURL() == null) {
+            imageURLContext.setImageURLGenerator(new Large(volume));
+        }
+        if (imageURLContext.getImageURL() == null) {
+            imageURLContext.setImageURLGenerator(new Medium(volume));
+        }
+        if (imageURLContext.getImageURL() == null) {
+            imageURLContext.setImageURLGenerator(new Small(volume));
+        }
+        if (imageURLContext.getImageURL() == null) {
+            imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
+        }
         if (imageURLContext.getImageURL() == null) {
             imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
         }
+
         String title = volume.getVolumeInfo().getTitle() != null ? volume.getVolumeInfo().getTitle() : "Không có tiêu đề";
         String publisher = volume.getVolumeInfo().getPublisher() != null ? volume.getVolumeInfo().getPublisher() : "Không có nhà xuất bản";
         String publishedDate = volume.getVolumeInfo().getPublishedDate() != null ? volume.getVolumeInfo().getPublishedDate() : "Không có ngày xuất bản";
@@ -45,7 +56,11 @@ public class BookDetailsExtractor {
         String maturityRating = volume.getVolumeInfo().getMaturityRating() != null ? volume.getVolumeInfo().getMaturityRating() : "Không có đánh giá trưởng thành";
         String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
         String language = volume.getVolumeInfo().getLanguage() != null ? volume.getVolumeInfo().getLanguage() : "Không có ngôn ngữ";
-
+        String thumbnailUrl = imageURLContext.getImageURL() + "&fife=w800";
+        if (thumbnailUrl == null || thumbnailUrl.isEmpty()) {
+            thumbnailUrl = "https://via.placeholder.com/150";
+        }
+        System.out.println("Thumbnail URL: " + thumbnailUrl);
         Book newBook = new Book(
                 title,
                 str_authors,
@@ -60,7 +75,7 @@ public class BookDetailsExtractor {
                 language,
                 isbn_10,
                 isbn_13,
-                imageURLContext.getImageURL()
+                thumbnailUrl
         );
         return newBook;
     }

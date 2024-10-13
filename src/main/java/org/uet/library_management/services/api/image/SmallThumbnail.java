@@ -11,6 +11,9 @@ public class SmallThumbnail implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getSmallThumbnail();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getSmallThumbnail();
+        }
+        return null;
     }
 }

@@ -11,6 +11,9 @@ public class Large implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getLarge();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getLarge();
+        }
+        return null;
     }
 }

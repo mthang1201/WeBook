@@ -11,6 +11,9 @@ public class Medium implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getMedium();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getMedium();
+        }
+        return null;
     }
 }

@@ -11,6 +11,9 @@ public class ExtraLarge implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getExtraLarge();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getExtraLarge();
+        }
+        return null;
     }
 }

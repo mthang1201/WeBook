@@ -27,7 +27,7 @@ public class SearchByTitle implements SearchStrategy{
             String query = "intitle:" + title;
 
             Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
-            volumesList.setMaxResults(5L);
+            volumesList.setMaxResults(10L);
 
             Volumes volumes = volumesList.execute();
             if (volumes.getItems() != null && !volumes.getItems().isEmpty()) {

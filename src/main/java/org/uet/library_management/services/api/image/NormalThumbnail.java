@@ -11,7 +11,10 @@ public class NormalThumbnail implements ImageURLGenerator {
 
     @Override
     public String processImageURL() {
-        return volume.getVolumeInfo().getImageLinks().getThumbnail();
+        if (volume.getVolumeInfo().getImageLinks() != null) {
+            return volume.getVolumeInfo().getImageLinks().getThumbnail();
+        }
+        return null;
     }
 }
 
