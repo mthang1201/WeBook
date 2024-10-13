@@ -45,9 +45,9 @@
         <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
         <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
     </VBox>
-    <Button fx:id="username" styleClass="username-button" text="Anonymous">
+    <Button fx:id="usernameButton" styleClass="username-button" text="Anonymous">
         <graphic>
-            <ImageView fitHeight="40" fitWidth="40">
+            <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
                 <Image url="@icons/avatar-male.png" />
             </ImageView>
         </graphic>

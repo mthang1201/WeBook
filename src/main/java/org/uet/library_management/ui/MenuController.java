@@ -1,5 +1,7 @@
 package org.uet.library_management.ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,15 +16,29 @@ public class MenuController {
     public Button homeButton;
     public Button getAllButton;
     public Button addBooksButton;
+    public Button usernameButton;
 
     public ImageView homeImageView;
     public ImageView getAllImageView;
     public ImageView addBooksImageView;
+    public ImageView usernameImageView;
 
     @FXML
     public void initialize() {
+        searchTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    SceneManager.getInstance().setSubScene("suggestSearch.fxml");
+                } else {
+                    SceneManager.getInstance().setSubScene("search.fxml");
+                }
+            }
+        });
+
         // Set mouse event handlers
         searchTextField.setOnMouseClicked(this::handleSearchTextFieldMouseClick);
+
         homeButton.setOnMouseEntered(this::handleHomeButtonMouseEnter);
         homeButton.setOnMouseExited(this::handleHomeButtonMouseExit);
 
@@ -62,13 +78,13 @@ public class MenuController {
     }
 
     @FXML
-    private void handleLibraryMenu() {
-        SceneManager.getInstance().setSubScene("bookmark.fxml");
+    private void handleHomeMenu() {
+        SceneManager.getInstance().setSubScene("home.fxml");
     }
 
     @FXML
-    private void handleHomeMenu() {
-        SceneManager.getInstance().setSubScene("home.fxml");
+    private void handleLibraryMenu() {
+        SceneManager.getInstance().setSubScene("bookmark.fxml");
     }
 
     @FXML

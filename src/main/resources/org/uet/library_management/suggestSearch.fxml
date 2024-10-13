@@ -5,9 +5,10 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.HomeController">
+            fx:controller="org.uet.library_management.ui.SuggestSearchController"
+            prefHeight="400.0" prefWidth="600.0">
     <top>
-        <Label styleClass="head-label" text="Trang chủ" />
+        <Label text="Đang hiển thị gợi ý liên quan đến " />
     </top>
     <center>
         <VBox />

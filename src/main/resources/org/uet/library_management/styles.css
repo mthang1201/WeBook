@@ -80,4 +80,10 @@
     -fx-background-color: #ffffff;
     -fx-pref-width: 800;
     -fx-pref-height: 530;
+    -fx-padding: 40 40 40 40;
+}
+
+.head-label {
+    -fx-font-weight: BOLD;
+    -fx-font-size: 32px;
 }
