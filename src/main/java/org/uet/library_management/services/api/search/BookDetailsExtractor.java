@@ -57,10 +57,9 @@ public class BookDetailsExtractor {
         String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
         String language = volume.getVolumeInfo().getLanguage() != null ? volume.getVolumeInfo().getLanguage() : "Không có ngôn ngữ";
         String thumbnailUrl = imageURLContext.getImageURL() + "&fife=w800";
-        if (thumbnailUrl == null || thumbnailUrl.isEmpty()) {
+        if (thumbnailUrl.equals("null&fife=w800")) {
             thumbnailUrl = "https://via.placeholder.com/150";
         }
-        System.out.println("Thumbnail URL: " + thumbnailUrl);
         Book newBook = new Book(
                 title,
                 str_authors,
