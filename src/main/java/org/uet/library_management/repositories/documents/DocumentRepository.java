@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DocumentRepository implements MySQLRepository<Document> {
+public abstract class DocumentRepository<T extends Document> implements MySQLRepository<T> {
     protected String db_table;
 
     protected final ConnectJDBC connectJDBC;
@@ -37,8 +37,8 @@ public abstract class DocumentRepository implements MySQLRepository<Document> {
     private void populateSpecificAttributes(Document document, ResultSet rs) throws SQLException {
         if (document instanceof Book book) {
             book.setPublisher(rs.getString("publisher"));
-            book.setIsbn10(rs.getString("isbn"));
-            book.setIsbn13(rs.getString("isbn"));
+            book.setIsbn10(rs.getString("isbn10"));
+            book.setIsbn13(rs.getString("isbn13"));
             book.setPageCount(rs.getInt("pageCount"));
             book.setAverageRating(rs.getDouble("averageRating"));
             book.setRatingsCount(rs.getInt("ratingsCount"));
@@ -52,63 +52,49 @@ public abstract class DocumentRepository implements MySQLRepository<Document> {
         }
     }
 
+    private T populateDocument(ResultSet rs) throws SQLException {
+        Document document = createDocument();
+        document.setDocumentId(rs.getInt("documentId"));
+        document.setTitle(rs.getString("title"));
+        document.setAuthors(rs.getString("authors"));
+        document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
+        document.setDescription(rs.getString("description"));
+        document.setCategories(rs.getString("categories"));
+        document.setLanguage(rs.getString("language"));
+        document.setAvailableCopies(rs.getInt("availableCopies"));
+
+        populateSpecificAttributes(document, rs);
+        return (T) document;
+    }
+
     @Override
-    public List<Document> findAll() {
-        List<Document> documents = new ArrayList<>();
-
+    public List<T> findAll() {
+        List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Document document = createDocument();
-                document.setDocumentId(rs.getInt("documentId"));
-                document.setTitle(rs.getString("title"));
-                document.setAuthors(rs.getString("authors"));
-                document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
-                document.setDescription(rs.getString("description"));
-                document.setCategories(rs.getString("categories"));
-                document.setLanguage(rs.getString("language"));
-                document.setAvailableCopies(rs.getInt("availableCopies"));
 
-                populateSpecificAttributes(document, rs);
-
-                documents.add(document);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while(rs.next()) {
+                documents.add(populateDocument(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return documents;
     }
 
     @Override
-    public List<Document> findAllByPage(int page, int pageSize) {
-        List<Document> documents = new ArrayList<>();
+    public List<T> findAllByPage(int page, int pageSize) {
+        List<T> documents = new ArrayList<>();
         int offset = (page - 1) * pageSize;
         String query = "SELECT * FROM " + db_table + " LIMIT " + pageSize + " OFFSET " + offset;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Document document = createDocument();
-                document.setDocumentId(rs.getInt("documentId"));
-                document.setTitle(rs.getString("title"));
-                document.setAuthors(rs.getString("authors"));
-                document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
-                document.setDescription(rs.getString("description"));
-                document.setCategories(rs.getString("categories"));
-                document.setLanguage(rs.getString("language"));
-                document.setAvailableCopies(rs.getInt("availableCopies"));
 
-                populateSpecificAttributes(document, rs);
-
-                documents.add(document);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while(rs.next()) {
+                documents.add(populateDocument(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return documents;
@@ -130,61 +116,31 @@ public abstract class DocumentRepository implements MySQLRepository<Document> {
         return count;
     }
 
-    public List<Document> findByTitle(String title) {
-        List<Document> documents = new ArrayList<>();
-
+    public List<T> findByTitle(String title) {
+        List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
-        ResultSet rs = connectJDBC.executeQueryWithParams(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Document document = createDocument();
-                document.setDocumentId(rs.getInt("documentId"));
-                document.setTitle(rs.getString("title"));
-                document.setAuthors(rs.getString("authors"));
-                document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
-                document.setDescription(rs.getString("description"));
-                document.setCategories(rs.getString("categories"));
-                document.setLanguage(rs.getString("language"));
-                document.setAvailableCopies(rs.getInt("availableCopies"));
 
-                populateSpecificAttributes(document, rs);
-
-                documents.add(document);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+            while(rs.next()) {
+                documents.add(populateDocument(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return documents;
     }
 
-    public List<Document> findByAuthors(String authors) {
-        List<Document> documents = new ArrayList<>();
-
+    public List<T> findByAuthors(String authors) {
+        List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE authors LIKE ?";
-        ResultSet rs = connectJDBC.executeQueryWithParams(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Document document = createDocument();
-                document.setDocumentId(rs.getInt("documentId"));
-                document.setTitle(rs.getString("title"));
-                document.setAuthors(rs.getString("authors"));
-                document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
-                document.setDescription(rs.getString("description"));
-                document.setCategories(rs.getString("categories"));
-                document.setLanguage(rs.getString("language"));
-                document.setAvailableCopies(rs.getInt("availableCopies"));
 
-                populateSpecificAttributes(document, rs);
-
-                documents.add(document);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+            while(rs.next()) {
+                documents.add(populateDocument(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return documents;

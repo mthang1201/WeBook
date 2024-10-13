@@ -3,7 +3,7 @@ package org.uet.library_management.repositories.documents;
 import org.uet.library_management.entities.documents.Book;
 import org.uet.library_management.entities.documents.Document;
 
-public class BookRepository extends DocumentRepository {
+public class BookRepository extends DocumentRepository<Book> {
     public BookRepository() {
         super();
     }

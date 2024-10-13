@@ -5,7 +5,7 @@ import org.uet.library_management.repositories.documents.DocumentRepository;
 
 import java.util.List;
 
-public class DocumentService {
+public class DocumentService<T extends Document> {
     protected DocumentRepository repository;
 
     public DocumentService() {
@@ -15,11 +15,11 @@ public class DocumentService {
     protected void loadRepository() {
     }
 
-    public List<Document> findAll() {
+    public List<T> findAll() {
         return repository.findAll();
     }
 
-    public List<Document> findAllByPage(int page, int pageSize) {
+    public List<T> findAllByPage(int page, int pageSize) {
         return repository.findAllByPage(page, pageSize);
     }
 
@@ -27,11 +27,11 @@ public class DocumentService {
         return repository.countAll();
     }
 
-    public List<Document> findByTitle(String title) {
+    public List<T> findByTitle(String title) {
         return repository.findByTitle(title);
     }
 
-    public List<Document> findByAuthor(String authors) {
+    public List<T> findByAuthor(String authors) {
         return repository.findByAuthors(authors);
     }
 

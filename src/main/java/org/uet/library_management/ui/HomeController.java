@@ -18,13 +18,12 @@ import java.util.List;
 
 public class HomeController {
     @FXML
-    public FlowPane gridViewPane;
+    public FlowPane flowPane;
 
     @FXML
     public void initialize() {
-        gridViewPane.setPadding(new Insets(10,10,10,10));
-        BookService service = new BookService();
-        List<Document> books = service.findAll();
+        flowPane.setPadding(new Insets(10,10,10,10));
+        Book book1 = new Book();
 
         SearchContext test = new SearchContext();
         test.setStrategy(new SearchByTitle());
@@ -41,7 +40,7 @@ public class HomeController {
             Label authorsLabel = new Label(book.getAuthors());
 
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
-            gridViewPane.getChildren().add(vbox);
+            flowPane.getChildren().add(vbox);
         }
     }
 }

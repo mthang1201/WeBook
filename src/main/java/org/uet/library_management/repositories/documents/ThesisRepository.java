@@ -3,7 +3,7 @@ package org.uet.library_management.repositories.documents;
 import org.uet.library_management.entities.documents.Thesis;
 import org.uet.library_management.entities.documents.Document;
 
-public class ThesisRepository extends DocumentRepository {
+public class ThesisRepository extends DocumentRepository<Thesis> {
     public ThesisRepository() {
         super();
     }
