@@ -23,7 +23,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button styleClass="menu-button" onAction="#handleLibraryMenu" text="Giá sách" />
+        <Button styleClass="menu-button" onAction="#handleBookShelfMenu" text="Giá sách" />
         <Label styleClass="menu-label" text="Thư viện" />
         <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
             <graphic>
