@@ -130,7 +130,7 @@ public abstract class DocumentRepository implements MySQLRepository<Document> {
         return count;
     }
 
-    public List<Document> findByName(String title) {
+    public List<Document> findByTitle(String title) {
         List<Document> documents = new ArrayList<>();
 
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";

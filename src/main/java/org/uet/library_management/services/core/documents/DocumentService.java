@@ -1,4 +1,4 @@
-package org.uet.library_management.services.documents;
+package org.uet.library_management.services.core.documents;
 
 import org.uet.library_management.entities.documents.Document;
 import org.uet.library_management.repositories.documents.DocumentRepository;
@@ -27,7 +27,7 @@ public class DocumentService {
         return repository.countAll();
     }
 
-    public List<Document> findByName(String title) {
+    public List<Document> findByTitle(String title) {
         return repository.findByTitle(title);
     }
 

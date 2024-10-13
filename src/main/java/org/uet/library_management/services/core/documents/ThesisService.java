@@ -1,4 +1,4 @@
-package org.uet.library_management.services.documents;
+package org.uet.library_management.services.core.documents;
 
 import org.uet.library_management.repositories.documents.ThesisRepository;
 

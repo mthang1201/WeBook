@@ -1,4 +1,4 @@
-package org.uet.library_management.services;
+package org.uet.library_management.services.core;
 
 import org.uet.library_management.entities.Loan;
 import org.uet.library_management.repositories.LoanRepository;
@@ -6,7 +6,7 @@ import org.uet.library_management.repositories.LoanRepository;
 import java.util.List;
 
 public class LoanService {
-    private LoanRepository repository;
+    private final LoanRepository repository;
 
     public LoanService() {
         this.repository = new LoanRepository();

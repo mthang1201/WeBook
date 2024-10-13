@@ -1,4 +1,4 @@
-package org.uet.library_management.services;
+package org.uet.library_management.services.core;
 
 import org.uet.library_management.entities.User;
 import org.uet.library_management.repositories.UserRepository;
@@ -6,7 +6,7 @@ import org.uet.library_management.repositories.UserRepository;
 import java.util.List;
 
 public class UserService {
-    private UserRepository repository;
+    private final UserRepository repository;
 
     public UserService() {
         this.repository = new UserRepository();

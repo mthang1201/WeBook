@@ -18,7 +18,7 @@ public class BeforeDueDateSubject {
     //ban da qua han tra cuon sach "bookName", se bi phat.
     public void notifyObservers() {
         for (LoanObserver observer : observers) {
-            observer.update(loan.getDocumetnID(), loan.getLoanDate(), loan.getDueDate());
+            observer.update(loan.getDocumentId(), loan.getLoanDate(), loan.getDueDate());
         }
     }
 }
