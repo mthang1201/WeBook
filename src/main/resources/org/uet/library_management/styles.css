@@ -89,4 +89,6 @@
 }
 
 .flow-pane {
+    -fx-hgap: 25;
+    -fx-vgap: 40;
 }

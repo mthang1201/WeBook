@@ -8,11 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.entities.documents.Document;
-import org.uet.library_management.services.api.BooksApiService;
 import org.uet.library_management.services.api.search.SearchByTitle;
 import org.uet.library_management.services.api.search.SearchContext;
-import org.uet.library_management.services.core.documents.BookService;
 
 import java.util.List;
 
@@ -27,14 +24,14 @@ public class HomeController {
 
         SearchContext test = new SearchContext();
         test.setStrategy(new SearchByTitle());
-        List<Book> searchTest2 = test.executeSearch("oop");
+        List<Book> searchTest2 = test.executeSearch("a");
 
 
         for (Book book : searchTest2) {
             VBox vbox = new VBox();
             ImageView imageView = new ImageView(new Image(book.getImageLinks()));
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(100);
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(300);
 
             Label titleLabel = new Label(book.getTitle());
             Label authorsLabel = new Label(book.getAuthors());
