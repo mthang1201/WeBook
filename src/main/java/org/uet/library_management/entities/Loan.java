@@ -23,5 +23,7 @@ public class Loan {
 
     private String comments;
 
+    private String documentId;
+
     private String userId;
 }

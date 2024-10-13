@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoanRepository {
-    private String db_table;
+public class LoanRepository implements MySQLRepository<Loan> {
+    private final String db_table;
 
     private final ConnectJDBC connectJDBC;
 
@@ -17,7 +17,8 @@ public class LoanRepository {
         connectJDBC = new ConnectJDBC();
         db_table = "loans";
     }
-    
+
+    @Override
     public List<Loan> findAll() {
         List<Loan> loans = new ArrayList<>();
 
@@ -45,6 +46,7 @@ public class LoanRepository {
         return loans;
     }
 
+    @Override
     public List<Loan> findAllByPage(int page, int pageSize) {
         List<Loan> loans = new ArrayList<>();
         int offset = (page - 1) * pageSize;
@@ -72,6 +74,7 @@ public class LoanRepository {
         return loans;
     }
 
+    @Override
     public int countAll() {
         String query = "SELECT COUNT(*) AS total FROM " + db_table;
         int count = 0;
@@ -114,6 +117,7 @@ public class LoanRepository {
         return loans;
     }
 
+    @Override
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +
                 "comments, userId) VALUES (?, ?, ?, ?, ?, ?)";
@@ -121,6 +125,7 @@ public class LoanRepository {
                 loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getUserId());
     }
 
+    @Override
     public void update(Loan loan) {
         String query = "UPDATE " + db_table + " SET loanDate = ?, dueDate = ?, returnDate = ?, " +
                 "status = ?, comments = ?, userId = ? WHERE loanId = ?";
@@ -129,11 +134,13 @@ public class LoanRepository {
                 loan.getLoanId());
     }
 
+    @Override
     public void remove(Loan loan) {
         String query = "DELETE FROM " + db_table + " WHERE loanId = ?";
         connectJDBC.executeUpdate(query, loan.getLoanId());
     }
 
+    @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);

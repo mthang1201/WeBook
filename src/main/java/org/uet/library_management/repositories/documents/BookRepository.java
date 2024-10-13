@@ -17,12 +17,12 @@ public class BookRepository extends DocumentRepository {
     public void add(Document document) {
         Book book = (Book) document;
         String query = "INSERT INTO " + db_table + " (title, authors, publisher, " +
-                "publishedDate, description, isbn, pageCount, categories, averageRating, " +
+                "publishedDate, description, isbn10, isbn13, pageCount, categories, averageRating, " +
                 "ratingsCount, imageLinks, language, maturityRating, printType, " +
                 "availableCopies) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
                 book.getPublisher(), document.getPublishedDate(), document.getDescription(),
-                book.getIsbn(), book.getPageCount(), document.getCategories(),
+                book.getIsbn10(), book.getIsbn13(), book.getPageCount(), document.getCategories(),
                 book.getAverageRating(), book.getRatingsCount(), book.getImageLinks(),
                 document.getLanguage(), book.getMaturityRating(), book.getPrintType(),
                 document.getAvailableCopies());
@@ -53,7 +53,7 @@ public class BookRepository extends DocumentRepository {
                 "WHERE documentId = ?";
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
                 book.getPublisher(), document.getPublishedDate(), document.getDescription(),
-                book.getIsbn(), book.getPageCount(), document.getCategories(),
+                book.getIsbn10(), book.getIsbn13(), book.getPageCount(), document.getCategories(),
                 book.getAverageRating(), book.getRatingsCount(), book.getImageLinks(),
                 document.getLanguage(), book.getMaturityRating(), book.getPrintType(),
                 document.getAvailableCopies(), document.getDocumentId());

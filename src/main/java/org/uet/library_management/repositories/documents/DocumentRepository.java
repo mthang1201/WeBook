@@ -4,13 +4,14 @@ import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.entities.documents.Book;
 import org.uet.library_management.entities.documents.Document;
 import org.uet.library_management.entities.documents.Thesis;
+import org.uet.library_management.repositories.MySQLRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DocumentRepository {
+public abstract class DocumentRepository implements MySQLRepository<Document> {
     protected String db_table;
 
     protected final ConnectJDBC connectJDBC;
@@ -36,7 +37,8 @@ public abstract class DocumentRepository {
     private void populateSpecificAttributes(Document document, ResultSet rs) throws SQLException {
         if (document instanceof Book book) {
             book.setPublisher(rs.getString("publisher"));
-            book.setIsbn(rs.getString("isbn"));
+            book.setIsbn10(rs.getString("isbn"));
+            book.setIsbn13(rs.getString("isbn"));
             book.setPageCount(rs.getInt("pageCount"));
             book.setAverageRating(rs.getDouble("averageRating"));
             book.setRatingsCount(rs.getInt("ratingsCount"));
@@ -50,6 +52,7 @@ public abstract class DocumentRepository {
         }
     }
 
+    @Override
     public List<Document> findAll() {
         List<Document> documents = new ArrayList<>();
 
@@ -80,6 +83,7 @@ public abstract class DocumentRepository {
         return documents;
     }
 
+    @Override
     public List<Document> findAllByPage(int page, int pageSize) {
         List<Document> documents = new ArrayList<>();
         int offset = (page - 1) * pageSize;
@@ -110,6 +114,7 @@ public abstract class DocumentRepository {
         return documents;
     }
 
+    @Override
     public int countAll() {
         String query = "SELECT COUNT(*) AS total FROM " + db_table;
         int count = 0;
@@ -125,7 +130,7 @@ public abstract class DocumentRepository {
         return count;
     }
 
-    public List<Document> findByTitle(String title) {
+    public List<Document> findByName(String title) {
         List<Document> documents = new ArrayList<>();
 
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
@@ -185,6 +190,7 @@ public abstract class DocumentRepository {
         return documents;
     }
 
+    @Override
     public void add(Document document) {
         String query = "INSERT INTO " + db_table + " (title, authors, publishedDate, description, categories, language, availableCopies) VALUES (?, ?, ?, ?, ?, ?, ?)";
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
@@ -193,6 +199,7 @@ public abstract class DocumentRepository {
                 document.getAvailableCopies());
     }
 
+    @Override
     public void update(Document document) {
         String query = "UPDATE " + db_table + " SET title = ?, authors = ?, publishedDate = ?, description = ?, categories = ?, language = ?, availableCopies = ? WHERE documentId = ?";
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
@@ -201,11 +208,13 @@ public abstract class DocumentRepository {
                 document.getAvailableCopies(), document.getDocumentId());
     }
 
+    @Override
     public void remove(Document document) {
         String query = "DELETE FROM " + db_table + " WHERE documentId = ?";
         connectJDBC.executeUpdate(query, document.getDocumentId());
     }
 
+    @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);
