@@ -24,12 +24,11 @@ public class HomeController {
 
         SearchContext test = new SearchContext();
         test.setStrategy(new SearchByTitle());
-        List<Book> searchTest2 = test.executeSearch("a");
-
+        List<Book> searchTest2 = test.executeSearch("classroom of the elite");
 
         for (Book book : searchTest2) {
             VBox vbox = new VBox();
-            ImageView imageView = new ImageView(new Image(book.getImageLinks()));
+            ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
             imageView.setFitWidth(200);
             imageView.setFitHeight(300);
 
