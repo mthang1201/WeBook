@@ -44,8 +44,8 @@ public class MenuController {
         getAllButton.setOnMouseEntered(this::handleGetAllButtonMouseEnter);
         getAllButton.setOnMouseExited(this::handleGetAllButtonMouseExit);
 
-        addBooksImageView.setOnMouseEntered(this::handleAddBooksButtonMouseEnter);
-        addBooksImageView.setOnMouseExited(this::handleAddBooksButtonMouseExit);
+        addBooksButton.setOnMouseEntered(this::handleAddBooksButtonMouseEnter);
+        addBooksButton.setOnMouseExited(this::handleAddBooksButtonMouseExit);
     }
 
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
@@ -69,11 +69,11 @@ public class MenuController {
     }
 
     private void handleAddBooksButtonMouseEnter(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload-white.png")));
+        addBooksImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload-white.png")));
     }
 
     private void handleAddBooksButtonMouseExit(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload.png")));
+        addBooksImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload.png")));
     }
 
     @FXML

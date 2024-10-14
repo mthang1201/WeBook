@@ -10,6 +10,6 @@
         <Label styleClass="head-label" text="Tất cả" />
     </top>
     <center>
-        <VBox />
+        <FlowPane fx:id="flowPane" styleClass="flow-pane" />
     </center>
 </BorderPane>

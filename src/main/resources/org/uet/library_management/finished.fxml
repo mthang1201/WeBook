@@ -10,6 +10,6 @@
         <Label styleClass="head-label" text="Hoàn thành" />
     </top>
     <center>
-        <VBox />
+        <FlowPane fx:id="flowPane" styleClass="flow-pane" />
     </center>
 </BorderPane>

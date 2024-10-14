@@ -10,6 +10,7 @@
         <Label styleClass="head-label" text="Muốn đọc" />
     </top>
     <center>
+        <FlowPane fx:id="flowPane" styleClass="flow-pane" />
         <VBox alignment="CENTER" spacing="10">
             <Label text="Không có sách" />
             <Label text="Để thêm vào bộ sưu tập này, hãy bấm vào bất kỳ sách nào trong giá sách và chọn Muốn đọc" />
