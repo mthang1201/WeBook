@@ -52,6 +52,7 @@ public class BookDetailsExtractor {
         String publishedDate = volume.getVolumeInfo().getPublishedDate() != null ? volume.getVolumeInfo().getPublishedDate() : "Không có ngày xuất bản";
         String description = volume.getVolumeInfo().getDescription() != null ? volume.getVolumeInfo().getDescription() : "Không có mô tả";
         Integer pageCount = volume.getVolumeInfo().getPageCount() != null ? volume.getVolumeInfo().getPageCount() : 0;
+        Integer ratingsCount = volume.getVolumeInfo().getRatingsCount() != null ? volume.getVolumeInfo().getRatingsCount() : 0;
         Double averageRating = volume.getVolumeInfo().getAverageRating() != null ? volume.getVolumeInfo().getAverageRating() : 0.0;
         String maturityRating = volume.getVolumeInfo().getMaturityRating() != null ? volume.getVolumeInfo().getMaturityRating() : "Không có đánh giá trưởng thành";
         String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
@@ -60,7 +61,7 @@ public class BookDetailsExtractor {
         if (thumbnailUrl.equals("null&fife=w800")) {
             thumbnailUrl = "https://via.placeholder.com/150";
         }
-//        System.out.println("Thumbnail URL:" + thumbnailUrl + "\n");
+
         Book newBook = new Book(
                 title,
                 str_authors,
@@ -68,6 +69,7 @@ public class BookDetailsExtractor {
                 publishedDate,
                 description,
                 str_categories,
+                ratingsCount,
                 pageCount,
                 averageRating,
                 maturityRating,

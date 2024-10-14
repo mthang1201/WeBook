@@ -8,8 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.api.search.SearchByAuthor;
+import org.uet.library_management.api.search.SearchByGeneral;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
+import org.uet.library_management.api.sort.SortByAvgRating;
+import org.uet.library_management.api.sort.SortByNewest;
+import org.uet.library_management.api.sort.SortByOldest;
 
 import java.util.List;
 
@@ -23,8 +28,9 @@ public class HomeController {
         Book book1 = new Book();
 
         SearchContext test = new SearchContext();
-        test.setStrategy(new SearchByTitle());
-        List<Book> searchTest2 = test.executeSearch("d");
+        test.setStrategy(new SearchByAuthor());
+        List<Book> searchTest2 = test.executeSearch("Eto Mori");
+        searchTest2.sort(new SortByAvgRating());
 
         for (Book book : searchTest2) {
             VBox vbox = new VBox();
