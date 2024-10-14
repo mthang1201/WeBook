@@ -2,7 +2,6 @@ package org.uet.library_management.ui;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -29,9 +28,9 @@ public class MenuController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
                 if (!newValue.isEmpty()) {
-                    SceneManager.getInstance().setSubScene("suggestSearch.fxml");
+                    SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
                 } else {
-                    SceneManager.getInstance().setSubScene("search.fxml");
+                    SceneManager.getInstance().setSubScene("search/search.fxml");
                 }
             }
         });
@@ -50,7 +49,7 @@ public class MenuController {
     }
 
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
-        SceneManager.getInstance().setSubScene("search.fxml");
+        SceneManager.getInstance().setSubScene("search/search.fxml");
     }
 
     private void handleHomeButtonMouseEnter(MouseEvent event) {
