@@ -10,6 +10,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         SceneManager.getInstance().setStage(stage);
         SceneManager.getInstance().setScene("main.fxml");
+//        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
     public static void main(String[] args) {

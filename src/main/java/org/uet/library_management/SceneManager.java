@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneManager {
+    private static final String PREFIX_URL = "ui/";
+
     @FXML
     private BorderPane contentPane;
 
@@ -30,13 +32,13 @@ public class SceneManager {
     }
 
     public void setScene(String sceneName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
         Scene scene = new Scene(fxmlLoader.load(), 1000, 530);
         scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());
 
-        stage.setTitle("Hello!");
+        stage.setTitle("Library Management");
         stage.setScene(scene);
         stage.show();
     }
@@ -47,7 +49,7 @@ public class SceneManager {
 
     public void setSubScene(String sceneName) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
             BorderPane pageContent = loader.load();
             contentPane.setCenter(pageContent);
         } catch (IOException e) {

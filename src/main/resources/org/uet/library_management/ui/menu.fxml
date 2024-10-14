@@ -19,7 +19,7 @@
         <Button fx:id="homeButton" styleClass="menu-button" onAction="#handleHomeMenu" text="Trang chủ">
             <graphic>
                 <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@icons/home.png" />
+                    <Image url="@../icons/home.png" />
                 </ImageView>
             </graphic>
         </Button>
@@ -28,7 +28,7 @@
         <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
             <graphic>
                 <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@icons/getAll.png" />
+                    <Image url="@../icons/getAll.png" />
                 </ImageView>
             </graphic>
         </Button>
@@ -38,7 +38,7 @@
         <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
             <graphic>
                 <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@icons/upload.png" />
+                    <Image url="@../icons/upload.png" />
                 </ImageView>
             </graphic>
         </Button>
@@ -48,7 +48,7 @@
     <Button fx:id="usernameButton" styleClass="username-button" text="Anonymous">
         <graphic>
             <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
-                <Image url="@icons/avatar-male.png" />
+                <Image url="@../icons/avatar-male.png" />
             </ImageView>
         </graphic>
     </Button>

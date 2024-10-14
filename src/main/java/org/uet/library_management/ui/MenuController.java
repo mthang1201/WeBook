@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import org.uet.library_management.SceneManager;
 
 public class MenuController {
+    private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
+
     public TextField searchTextField;
     public Button homeButton;
     public Button getAllButton;
@@ -53,27 +55,27 @@ public class MenuController {
     }
 
     private void handleHomeButtonMouseEnter(MouseEvent event) {
-        homeImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/home-white.png")));
+        homeImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "home-white.png")));
     }
 
     private void handleHomeButtonMouseExit(MouseEvent event) {
-        homeImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/home.png")));
+        homeImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "home.png")));
     }
 
     private void handleGetAllButtonMouseEnter(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/getAll-white.png")));
+        getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll-white.png")));
     }
 
     private void handleGetAllButtonMouseExit(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/getAll.png")));
+        getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll.png")));
     }
 
     private void handleAddBooksButtonMouseEnter(MouseEvent event) {
-        addBooksImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload-white.png")));
+        addBooksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "upload-white.png")));
     }
 
     private void handleAddBooksButtonMouseExit(MouseEvent event) {
-        addBooksImageView.setImage(new Image(getClass().getResourceAsStream("/org/uet/library_management/icons/upload.png")));
+        addBooksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "upload.png")));
     }
 
     @FXML
