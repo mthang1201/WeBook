@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.services.api.search.SearchByISBN;
 import org.uet.library_management.services.api.search.SearchByTitle;
 import org.uet.library_management.services.api.search.SearchContext;
 
@@ -24,7 +25,7 @@ public class HomeController {
 
         SearchContext test = new SearchContext();
         test.setStrategy(new SearchByTitle());
-        List<Book> searchTest2 = test.executeSearch("classroom of the elite");
+        List<Book> searchTest2 = test.executeSearch("d");
 
         for (Book book : searchTest2) {
             VBox vbox = new VBox();

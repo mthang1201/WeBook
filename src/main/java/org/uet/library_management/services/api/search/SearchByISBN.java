@@ -24,7 +24,6 @@ public class SearchByISBN implements SearchStrategy{
         try {
             Books books = booksApiService.createQuery();
             String query = "isbn:" + ISBN;
-
             Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
             volumesList.setMaxResults(5L);
 
