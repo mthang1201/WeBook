@@ -33,7 +33,8 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
 
         Scene scene = new Scene(fxmlLoader.load(), 1000, 530);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
