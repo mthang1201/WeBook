@@ -1,4 +1,4 @@
-package org.uet.library_management.services.core;
+package org.uet.library_management.services;
 
 import org.uet.library_management.entities.User;
 import org.uet.library_management.repositories.UserRepository;
