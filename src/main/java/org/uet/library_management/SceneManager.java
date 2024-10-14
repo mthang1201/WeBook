@@ -35,6 +35,7 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
         Scene scene = new Scene(fxmlLoader.load(), 1000, 530);
+        scene.getStylesheets().add(getClass().getResource("styles/auth.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());
 

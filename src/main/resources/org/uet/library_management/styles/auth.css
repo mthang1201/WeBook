@@ -1,0 +1,29 @@
+.auth {
+    /*-fx-background-color: #f0f4f8c;*/
+}
+
+.auth-pane {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 800;
+    -fx-pref-height: 400;
+    -fx-background-radius: 10;
+}
+
+.title-label {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: #ffffff;*/
+}
+
+.text-field, .password-field {
+    /*-fx-background-color: #333333;*/
+    -fx-text-fill: #4b4d4c;
+}
+
+.button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+}
+
+.login-button {
+}
