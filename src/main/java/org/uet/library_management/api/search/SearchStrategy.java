@@ -1,6 +1,6 @@
 package org.uet.library_management.api.search;
 
-import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.core.entities.documents.Book;
 
 import java.util.List;
 

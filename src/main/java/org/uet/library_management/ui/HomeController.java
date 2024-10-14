@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
 

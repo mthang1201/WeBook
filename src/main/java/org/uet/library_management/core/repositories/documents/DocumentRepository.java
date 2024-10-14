@@ -1,10 +1,10 @@
-package org.uet.library_management.repositories.documents;
+package org.uet.library_management.core.repositories.documents;
 
 import org.uet.library_management.ConnectJDBC;
-import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.entities.documents.Document;
-import org.uet.library_management.entities.documents.Thesis;
-import org.uet.library_management.repositories.MySQLRepository;
+import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.entities.documents.Document;
+import org.uet.library_management.core.entities.documents.Thesis;
+import org.uet.library_management.core.repositories.MySQLRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

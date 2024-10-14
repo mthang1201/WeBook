@@ -1,7 +1,7 @@
-package org.uet.library_management.services;
+package org.uet.library_management.core.services;
 
-import org.uet.library_management.entities.User;
-import org.uet.library_management.repositories.UserRepository;
+import org.uet.library_management.core.entities.User;
+import org.uet.library_management.core.repositories.UserRepository;
 
 import java.util.List;
 

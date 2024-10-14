@@ -1,7 +1,7 @@
-package org.uet.library_management.services.documents;
+package org.uet.library_management.core.services.documents;
 
-import org.uet.library_management.entities.documents.Thesis;
-import org.uet.library_management.repositories.documents.ThesisRepository;
+import org.uet.library_management.core.entities.documents.Thesis;
+import org.uet.library_management.core.repositories.documents.ThesisRepository;
 
 public class ThesisService extends DocumentService<Thesis> {
     public ThesisService() {

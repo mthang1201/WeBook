@@ -1,11 +1,8 @@
-package org.uet.library_management.entities.documents;
+package org.uet.library_management.core.entities.documents;
 
-import com.google.api.services.books.v1.model.Volume;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

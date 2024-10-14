@@ -1,10 +1,8 @@
-package org.uet.library_management.entities.documents;
+package org.uet.library_management.core.entities.documents;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

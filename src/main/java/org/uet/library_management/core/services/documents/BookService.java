@@ -1,7 +1,7 @@
-package org.uet.library_management.services.documents;
+package org.uet.library_management.core.services.documents;
 
-import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.repositories.documents.BookRepository;
+import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.repositories.documents.BookRepository;
 
 public class BookService extends DocumentService<Book> {
     public BookService() {

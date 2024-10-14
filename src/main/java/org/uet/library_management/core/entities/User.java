@@ -1,4 +1,4 @@
-package org.uet.library_management.entities;
+package org.uet.library_management.core.entities;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;

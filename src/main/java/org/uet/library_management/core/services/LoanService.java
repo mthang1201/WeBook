@@ -1,7 +1,7 @@
-package org.uet.library_management.services;
+package org.uet.library_management.core.services;
 
-import org.uet.library_management.entities.Loan;
-import org.uet.library_management.repositories.LoanRepository;
+import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.repositories.LoanRepository;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package org.uet.library_management.services.documents;
+package org.uet.library_management.core.services.documents;
 
-import org.uet.library_management.entities.documents.Document;
-import org.uet.library_management.repositories.documents.DocumentRepository;
+import org.uet.library_management.core.entities.documents.Document;
+import org.uet.library_management.core.repositories.documents.DocumentRepository;
 
 import java.util.List;
 

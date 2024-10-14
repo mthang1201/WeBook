@@ -2,7 +2,7 @@ package org.uet.library_management.api.search;
 import com.google.api.services.books.v1.Books;
 import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
-import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.BooksApiService;
 
 import java.io.IOException;

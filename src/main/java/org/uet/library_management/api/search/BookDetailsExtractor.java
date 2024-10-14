@@ -1,7 +1,7 @@
 package org.uet.library_management.api.search;
 
 import com.google.api.services.books.v1.model.Volume;
-import org.uet.library_management.entities.documents.Book;
+import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.image.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.uet.library_management.repositories;
+package org.uet.library_management.core.repositories;
 
 import java.util.List;
 

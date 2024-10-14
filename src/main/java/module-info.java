@@ -11,18 +11,18 @@ module org.uet.library_management {
 
     opens org.uet.library_management to javafx.fxml;
     exports org.uet.library_management;
-    exports org.uet.library_management.repositories;
-    opens org.uet.library_management.repositories to javafx.fxml;
-    exports org.uet.library_management.entities;
-    opens org.uet.library_management.entities to javafx.fxml;
-    exports org.uet.library_management.entities.documents;
-    opens org.uet.library_management.entities.documents to javafx.fxml;
+    exports org.uet.library_management.core.repositories;
+    opens org.uet.library_management.core.repositories to javafx.fxml;
+    exports org.uet.library_management.core.entities;
+    opens org.uet.library_management.core.entities to javafx.fxml;
+    exports org.uet.library_management.core.entities.documents;
+    opens org.uet.library_management.core.entities.documents to javafx.fxml;
     exports org.uet.library_management.ui;
     opens org.uet.library_management.ui to javafx.fxml;
-    exports org.uet.library_management.repositories.documents;
-    opens org.uet.library_management.repositories.documents to javafx.fxml;
-    exports org.uet.library_management.services.documents;
-    opens org.uet.library_management.services.documents to javafx.fxml;
-    exports org.uet.library_management.services;
-    opens org.uet.library_management.services to javafx.fxml;
+    exports org.uet.library_management.core.repositories.documents;
+    opens org.uet.library_management.core.repositories.documents to javafx.fxml;
+    exports org.uet.library_management.core.services.documents;
+    opens org.uet.library_management.core.services.documents to javafx.fxml;
+    exports org.uet.library_management.core.services;
+    opens org.uet.library_management.core.services to javafx.fxml;
 }

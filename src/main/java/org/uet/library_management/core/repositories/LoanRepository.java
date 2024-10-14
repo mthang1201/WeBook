@@ -1,7 +1,7 @@
-package org.uet.library_management.repositories;
+package org.uet.library_management.core.repositories;
 
 import org.uet.library_management.ConnectJDBC;
-import org.uet.library_management.entities.Loan;
+import org.uet.library_management.core.entities.Loan;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
