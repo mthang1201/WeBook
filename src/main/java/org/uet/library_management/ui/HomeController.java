@@ -8,9 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.services.api.search.SearchByISBN;
-import org.uet.library_management.services.api.search.SearchByTitle;
-import org.uet.library_management.services.api.search.SearchContext;
+import org.uet.library_management.api.search.SearchByTitle;
+import org.uet.library_management.api.search.SearchContext;
 
 import java.util.List;
 

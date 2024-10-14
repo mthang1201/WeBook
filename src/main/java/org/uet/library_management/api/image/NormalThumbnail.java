@@ -1,19 +1,20 @@
-package org.uet.library_management.services.api.image;
+package org.uet.library_management.api.image;
 
 import com.google.api.services.books.v1.model.Volume;
 
-public class Medium implements ImageURLGenerator {
+public class NormalThumbnail implements ImageURLGenerator {
     private Volume volume;
 
-    public Medium(Volume volume) {
+    public NormalThumbnail(Volume volume) {
         this.volume = volume;
     }
 
     @Override
     public String processImageURL() {
         if (volume.getVolumeInfo().getImageLinks() != null) {
-            return volume.getVolumeInfo().getImageLinks().getMedium();
+            return volume.getVolumeInfo().getImageLinks().getThumbnail();
         }
         return null;
     }
 }
+

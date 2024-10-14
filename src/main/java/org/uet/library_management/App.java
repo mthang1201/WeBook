@@ -2,16 +2,8 @@ package org.uet.library_management;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.apache.commons.text.similarity.FuzzyScore;
-import org.uet.library_management.entities.documents.Book;
-import org.uet.library_management.services.api.search.SearchByISBN;
-import org.uet.library_management.services.api.search.SearchByTitle;
-import org.uet.library_management.services.api.search.SearchContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class App extends Application {
     @Override

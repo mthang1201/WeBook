@@ -1,4 +1,4 @@
-package org.uet.library_management.services.api.search;
+package org.uet.library_management.api.search;
 
 import org.uet.library_management.entities.documents.Book;
 
