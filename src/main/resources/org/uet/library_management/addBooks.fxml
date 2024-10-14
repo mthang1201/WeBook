@@ -5,8 +5,7 @@
 <?import javafx.scene.control.Label?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.AddBooksController"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="org.uet.library_management.ui.AddBooksController">
     <top>
         <Label styleClass="head-label" text="Thêm sách" />
     </top>
