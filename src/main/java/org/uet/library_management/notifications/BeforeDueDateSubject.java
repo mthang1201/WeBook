@@ -1,4 +1,4 @@
-package org.uet.library_management.services.notifications;
+package org.uet.library_management.notifications;
 
 import org.uet.library_management.entities.Loan;
 

@@ -1,6 +1,4 @@
-package org.uet.library_management.services.notifications;
-
-import org.uet.library_management.entities.User;
+package org.uet.library_management.notifications;
 
 public class LoanManager extends BeforeDueDateSubject {
     public void checkDueDates() {
