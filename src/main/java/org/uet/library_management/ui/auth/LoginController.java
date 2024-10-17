@@ -10,9 +10,18 @@ public class LoginController {
     @FXML
     public Button loginButton;
 
+    @FXML
+    public Button registerButton;
+
     @SneakyThrows
     @FXML
     public void handleLoginButton() {
         SceneManager.getInstance().setScene("main.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
+    public void handleRegisterButton(ActionEvent actionEvent) {
+        SceneManager.getInstance().setScene("auth/register.fxml");
     }
 }

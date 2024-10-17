@@ -3,11 +3,17 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.Label?>
-<BorderPane xmlns="http://javafx.com/javafx"
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.RegisterController"
-            styleClass="register">
-    <center>
-        <Label>Register</Label>
-    </center>
-</BorderPane>
+            styleClass="auth">
+    <AnchorPane layoutX="100.0" layoutY="65.0" styleClass="auth-pane">
+        <Label fx:id="titleLabel" styleClass="title-label" layoutX="214.0" layoutY="14.0" text="Library Management" />
+        <TextField fx:id="emailField" layoutX="359.0" layoutY="241.0" promptText="Email" />
+        <PasswordField fx:id="passwordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
+        <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Register" />
+    </AnchorPane>
+</AnchorPane>
