@@ -4,6 +4,7 @@ import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
     private final UserRepository repository;
@@ -26,6 +27,10 @@ public class UserService {
 
     public List<User> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     public void add(User user) {

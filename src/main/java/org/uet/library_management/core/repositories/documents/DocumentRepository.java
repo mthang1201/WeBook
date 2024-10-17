@@ -120,7 +120,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, title)) {
             while(rs.next()) {
                 documents.add(populateDocument(rs));
             }
@@ -135,7 +135,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE authors LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, authors)) {
             while(rs.next()) {
                 documents.add(populateDocument(rs));
             }

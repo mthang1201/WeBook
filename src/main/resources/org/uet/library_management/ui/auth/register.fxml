@@ -19,14 +19,14 @@
         <TextField fx:id="emailField" layoutX="359.0" layoutY="121.0" promptText="Email" />
         <TextField fx:id="addressField" layoutX="359.0" layoutY="161.0" promptText="Address" />
         <ChoiceBox fx:id="membershipStatusBox" layoutX="359.0" layoutY="201.0">
-            <String fx:value="Option 1"/>
-            <String fx:value="Option 2"/>
+            <String fx:value="Active"/>
+            <String fx:value="Inactive"/>
             <String fx:value="Option 3"/>
         </ChoiceBox>
         <ChoiceBox fx:id="privilegesBox" layoutX="359.0" layoutY="241.0">
-            <String fx:value="Option 3"/>
-            <String fx:value="Option 4"/>
-            <String fx:value="Option 5"/>
+            <String fx:value="Standard"/>
+            <String fx:value="Premium"/>
+            <String fx:value="Admin"/>
         </ChoiceBox>
         <PasswordField fx:id="passewordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
         <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Register" />

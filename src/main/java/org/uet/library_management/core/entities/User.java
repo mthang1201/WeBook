@@ -24,4 +24,6 @@ public class User {
     private String membershipStatus;
     
     private String privileges;
+
+    private String passwordHash;
 }
