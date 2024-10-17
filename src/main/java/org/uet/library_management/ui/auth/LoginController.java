@@ -8,7 +8,7 @@ import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
-//import org.mindrot.jbcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
 
@@ -44,11 +44,9 @@ public class LoginController {
             return;
         }
 
-        String storedPassword = user.get().getPasswordHash();
+        String storedPasswordHash = user.get().getPasswordHash();
 
-//        if (!BCrypt.checkpw(password, storedPasswordHash))
-
-        if (!password.equals(storedPassword)) {
+        if (!BCrypt.checkpw(password, storedPasswordHash)) {
             System.out.println("Invalid credentials. Please try again.");
             return;
         }

@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class RegisterController {
     @FXML
@@ -57,10 +58,9 @@ public class RegisterController {
             return;
         }
 
-//        String passwordHash = BCrypt.hashpw("password", BCrypt.gensalt());
-        String passwordHash = "";
+        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        User newUser = new User(name, phoneNumber, email, address, membershipStatus, privileges, password);
+        User newUser = new User(name, phoneNumber, email, address, membershipStatus, privileges, passwordHash);
 
         UserService userService = new UserService();
         userService.add(newUser);

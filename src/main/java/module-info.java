@@ -8,6 +8,7 @@ module org.uet.library_management {
     requires com.google.api.services.books;
     requires com.google.api.client.json.gson;
     requires org.apache.commons.text;
+    requires jbcrypt;
 
     opens org.uet.library_management to javafx.fxml;
     opens org.uet.library_management.ui to javafx.fxml;
