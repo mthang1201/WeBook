@@ -114,14 +114,18 @@ public class UserRepository implements MySQLRepository<User> {
 
     @Override
     public void add(User user) {
-        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges) VALUES (?, ?, ?, ?, ?, ?)";
-        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges());
+        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(),
+                user.getAddress(), user.getMembershipStatus(), user.getPrivileges(),
+                user.getPasswordHash());
     }
 
     @Override
     public void update(User user) {
-        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ? WHERE userId = ?";
-        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges(), user.getUserId());
+        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ?, passwordHash = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(),
+                user.getAddress(), user.getMembershipStatus(), user.getPrivileges(),
+                user.getPasswordHash(), user.getUserId());
     }
 
     @Override

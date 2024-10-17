@@ -21,14 +21,13 @@
         <ChoiceBox fx:id="membershipStatusBox" layoutX="359.0" layoutY="201.0">
             <String fx:value="Active"/>
             <String fx:value="Inactive"/>
-            <String fx:value="Option 3"/>
         </ChoiceBox>
         <ChoiceBox fx:id="privilegesBox" layoutX="359.0" layoutY="241.0">
             <String fx:value="Standard"/>
             <String fx:value="Premium"/>
             <String fx:value="Admin"/>
         </ChoiceBox>
-        <PasswordField fx:id="passewordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
+        <PasswordField fx:id="passwordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
         <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Register" />
     </AnchorPane>
 </AnchorPane>

@@ -1,6 +1,5 @@
 package org.uet.library_management.ui.auth;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -9,6 +8,7 @@ import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
+//import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
 
@@ -45,6 +45,8 @@ public class LoginController {
         }
 
         String storedPassword = user.get().getPasswordHash();
+
+//        if (!BCrypt.checkpw(password, storedPasswordHash))
 
         if (!password.equals(storedPassword)) {
             System.out.println("Invalid credentials. Please try again.");

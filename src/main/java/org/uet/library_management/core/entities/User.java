@@ -26,4 +26,14 @@ public class User {
     private String privileges;
 
     private String passwordHash;
+
+    public User(String name, String phoneNumber, String email, String address, String membershipStatus, String privileges, String passwordHash) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.membershipStatus = membershipStatus;
+        this.privileges = privileges;
+        this.passwordHash = passwordHash;
+    }
 }
