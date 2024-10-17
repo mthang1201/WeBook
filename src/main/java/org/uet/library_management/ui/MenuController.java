@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.tools.Mediator;
 
 public class MenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
@@ -30,6 +31,7 @@ public class MenuController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
                 if (!newValue.isEmpty()) {
+                    Mediator.getInstance().setText(searchTextField.getText());
                     SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
                 } else {
                     SceneManager.getInstance().setSubScene("search/search.fxml");

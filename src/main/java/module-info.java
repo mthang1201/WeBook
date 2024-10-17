@@ -29,6 +29,8 @@ module org.uet.library_management {
     exports org.uet.library_management.core.repositories.documents;
     exports org.uet.library_management.core.services;
     exports org.uet.library_management.core.services.documents;
+    exports org.uet.library_management.ui.search;
+    opens org.uet.library_management.ui.search to javafx.fxml;
 
 
 }
