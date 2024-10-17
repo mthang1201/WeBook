@@ -1,0 +1,38 @@
+.on-search-label {
+    -fx-background-color: #f8f8f8;
+    -fx-text-fill: #4d4d4d;
+    -fx-pref-width: 800;
+    -fx-pref-height: 53;
+    -fx-padding: 10 10 10 10;
+    -fx-font-size: 14px;
+    -fx-font-weight: BOLD;
+}
+
+.suggestions-pane {
+    -fx-pref-height: 270;
+}
+
+.suggestions-label {
+    -fx-padding: 35 0 0 40;
+    -fx-font-size: 16px;
+    -fx-font-weight: BOLD;
+}
+
+.in-your-library-label {
+    -fx-background-color: #ececec;
+    -fx-pref-height: 200;
+}
+
+.top-results-label {
+    -fx-padding: 35 0 0 40;
+    -fx-font-size: 16px;
+    -fx-font-weight: BOLD;
+}
+
+.top-results-vbox {
+    -fx-padding: 0 0 0 40;
+}
+
+.separator {
+    -fx-padding: 10 40 10 40;
+}

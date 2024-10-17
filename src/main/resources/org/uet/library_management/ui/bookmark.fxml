@@ -5,9 +5,13 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.BookmarkController">
+            fx:controller="org.uet.library_management.ui.BookmarkController"
+            styleClass="content-pane">
     <top>
-        <Label styleClass="head-label" text="Muốn đọc" />
+        <VBox>
+            <Label styleClass="head-label" text="Muốn đọc" />
+            <Separator styleClass="separator" />
+        </VBox>
     </top>
     <center>
         <FlowPane fx:id="flowPane" styleClass="flow-pane" />

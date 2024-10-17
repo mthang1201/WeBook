@@ -6,11 +6,22 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.search.SuggestSearchController"
-            prefHeight="400.0" prefWidth="600.0">
-    <top>
-        <Label fx:id="onSearchLabel" text="Đang hiển thị gợi ý liên quan đến " />
-    </top>
+            styleClass="content-pane">
     <center>
-        <VBox />
+        <VBox>
+            <Label fx:id="onSearchLabel" styleClass="on-search-label" text="Đang hiển thị gợi ý liên quan đến " />
+<!--                <Label text="Suggestions" />-->
+<!--            <Separator styleClass="separator" />-->
+<!--                <VBox spacing="5">-->
+
+<!--                </VBox>-->
+<!--                <Label styleClass="in-your-library-label" text="In Your Library" />-->
+<!--                <HBox spacing="5">-->
+
+<!--                </HBox>-->
+            <Label styleClass="top-results-label" text="Top Results" />
+            <Separator styleClass="separator" />
+            <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />
+        </VBox>
     </center>
 </BorderPane>
