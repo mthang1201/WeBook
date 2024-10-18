@@ -10,10 +10,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ImageCacheManager {
-    private static Map<Integer, Image> imageCache = new HashMap<>();
+    private static final int MAX_CACHE_SIZE = 1000;
+
+    private static Map<Integer, Image> imageCache;
 
     private static String cacheDir;
 
@@ -27,6 +30,14 @@ public class ImageCacheManager {
     }
 
     public ImageCacheManager() {
+        imageCache = new LinkedHashMap<Integer, Image>(MAX_CACHE_SIZE, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Integer, Image> eldest) {
+                System.out.println("Remove" + eldest.getKey());
+                return size() > MAX_CACHE_SIZE;
+            }
+        };
+
         cacheDir = "cache/";
         File dir = new File(cacheDir);
         if (!dir.exists()) {
@@ -35,6 +46,9 @@ public class ImageCacheManager {
     }
 
     public Image loadImage(int documentId, String imageLinks) {
+        if (imageLinks.equals("null&fife=w800&format=webp")) {
+            return new Image("/org/uet/library_management/placeholder/165x249.png", true);
+        }
         File cacheFile = new File(cacheDir + documentId + ".jpeg");
 
         if (cacheFile.exists()) {
