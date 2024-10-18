@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
 
 import java.util.List;
@@ -31,7 +32,10 @@ public class SuggestSearchController {
 
     private Timer timer;
 
+    BookService service;
+
     public void initialize() {
+        service = new BookService();
 
         String searchText = Mediator.getInstance().getText();
         if (timer != null) {
@@ -60,6 +64,7 @@ public class SuggestSearchController {
             SearchContext searchContext = new SearchContext();
             searchContext.setStrategy(new SearchByTitle());
             return searchContext.executeSearch(searchText);
+//            return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateResults(books);
@@ -69,7 +74,9 @@ public class SuggestSearchController {
 
     private void updateResults(List<Book> books) {
         topResultsVbox.getChildren().clear();
+
         for (Book book : books) {
+            service.add(book);
             HBox hbox = new HBox();
             hbox.setSpacing(10);
 
