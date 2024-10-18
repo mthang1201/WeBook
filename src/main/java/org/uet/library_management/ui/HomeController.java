@@ -17,6 +17,7 @@ import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.api.sort.SortByNewest;
 import org.uet.library_management.api.sort.SortByOldest;
 import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.tools.ImageCacheManager;
 
 import java.util.List;
 
@@ -27,27 +28,35 @@ public class HomeController {
     @FXML
     public FlowPane flowPane;
 
+//    private ImageCacheManager imageCacheManager;
+
     @FXML
     public void initialize() {
-        scrollpane.setContent(flowPane);
-        scrollpane.setFitToWidth(true);
-        scrollpane.setPannable(true);
+//        imageCacheManager = new ImageCacheManager("cache/home/");
+
+//        scrollpane.setContent(flowPane);
+//        scrollpane.setFitToWidth(true);
+//        scrollpane.setPannable(true);
 
         flowPane.setPadding(new Insets(10,10,10,10));
 
         Book book1 = new Book();
 
-        SearchContext test = new SearchContext();
-        test.setStrategy(new SearchByAuthor());
-        List<Book> searchTest2 = test.executeSearch("python");
-        searchTest2.sort(new SortByAvgRating());
+//        SearchContext test = new SearchContext();
+//        test.setStrategy(new SearchByAuthor());
+//        List<Book> searchTest2 = test.executeSearch("python");
+//        searchTest2.sort(new SortByAvgRating());
 
         BookService service = new BookService();
         List<Book> books = service.findAll();
 
         for (Book book : books) {
             VBox vbox = new VBox();
-            ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
+
+            Image image = ImageCacheManager.getInstance().loadImage(book.getDocumentId(), book.getImageLinks());
+//            Image image = new Image(book.getImageLinks(), true);
+
+            ImageView imageView = new ImageView(image);
             imageView.setFitWidth(200);
             imageView.setFitHeight(300);
 

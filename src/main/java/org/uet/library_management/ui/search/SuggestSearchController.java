@@ -29,6 +29,9 @@ public class SuggestSearchController {
     @FXML
     public VBox topResultsVbox;
 
+    @FXML
+    public TextField searchField;
+
     private Timer timer;
 
     BookService service;
