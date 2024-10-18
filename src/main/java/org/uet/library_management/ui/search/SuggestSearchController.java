@@ -89,7 +89,7 @@ public class SuggestSearchController {
             ExecutorService executor = Executors.newFixedThreadPool(5);
 
             CompletableFuture.supplyAsync(() -> {
-                Image image = ImageCacheManager.getInstance().loadImage(book.getDocumentId(), book.getImageLinks());
+                Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn10(), book.getImageLinks());
 //                String imageUrl = book.getImageLinks();
 //                if (imageUrl.equals("null&fife=w800&format=webp")) {
 //                    imageUrl = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();

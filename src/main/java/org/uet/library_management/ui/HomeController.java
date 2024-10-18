@@ -53,7 +53,7 @@ public class HomeController {
         for (Book book : books) {
             VBox vbox = new VBox();
 
-            Image image = ImageCacheManager.getInstance().loadImage(book.getDocumentId(), book.getImageLinks());
+            Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn10(), book.getImageLinks());
 //            Image image = new Image(book.getImageLinks(), true);
 
             ImageView imageView = new ImageView(image);

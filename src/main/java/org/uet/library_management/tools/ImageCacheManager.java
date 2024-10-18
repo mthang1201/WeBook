@@ -16,7 +16,7 @@ import java.util.Map;
 public class ImageCacheManager {
     private static final int MAX_CACHE_SIZE = 1000;
 
-    private static Map<Integer, Image> imageCache;
+    private static Map<String, Image> imageCache;
 
     private static String cacheDir;
 
@@ -30,9 +30,9 @@ public class ImageCacheManager {
     }
 
     public ImageCacheManager() {
-        imageCache = new LinkedHashMap<Integer, Image>(MAX_CACHE_SIZE, 0.75f, true) {
+        imageCache = new LinkedHashMap<String, Image>(MAX_CACHE_SIZE, 0.75f, true) {
             @Override
-            protected boolean removeEldestEntry(Map.Entry<Integer, Image> eldest) {
+            protected boolean removeEldestEntry(Map.Entry<String, Image> eldest) {
                 System.out.println("Remove" + eldest.getKey());
                 return size() > MAX_CACHE_SIZE;
             }
@@ -45,20 +45,20 @@ public class ImageCacheManager {
         }
     }
 
-    public Image loadImage(int documentId, String imageLinks) {
+    public Image loadImage(String isbn10, String imageLinks) {
         if (imageLinks.equals("null&fife=w800&format=webp")) {
             return new Image("/org/uet/library_management/placeholder/165x249.png", true);
         }
-        File cacheFile = new File(cacheDir + documentId + ".jpeg");
+        File cacheFile = new File(cacheDir + isbn10 + ".jpeg");
 
         if (cacheFile.exists()) {
             return new Image(cacheFile.toURI().toString(), true);
-        } else if (imageCache.containsKey(documentId)) {
-            return imageCache.get(documentId);
+        } else if (imageCache.containsKey(isbn10)) {
+            return imageCache.get(isbn10);
         } else {
             Image image = new Image(imageLinks, true);
 
-            imageCache.put(documentId, image);
+            imageCache.put(isbn10, image);
 //            saveImageToCache(documentId, image);
 
             return image;
