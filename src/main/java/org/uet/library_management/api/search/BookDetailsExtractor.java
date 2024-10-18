@@ -61,7 +61,7 @@ public class BookDetailsExtractor {
         if (thumbnailUrl.equals("null&fife=w800")) {
             thumbnailUrl = "https://via.placeholder.com/150";
         }
-
+        System.out.println("title = " +title + "\n");
         Book newBook = new Book(
                 title,
                 str_authors,

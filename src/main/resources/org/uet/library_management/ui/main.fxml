@@ -9,6 +9,6 @@
         <fx:include source="menu.fxml" />
     </left>
     <center>
-        <BorderPane styleClass="content-pane" fx:id="contentPane" />
+        <BorderPane fx:id="contentPane" />
     </center>
 </BorderPane>

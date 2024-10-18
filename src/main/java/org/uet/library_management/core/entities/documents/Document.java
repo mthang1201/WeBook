@@ -15,7 +15,6 @@ public abstract class Document {
     private String description;
     private String categories;
     private String language;
-    private int availableCopies;
 
     /**
      * API constructor(not including ID)

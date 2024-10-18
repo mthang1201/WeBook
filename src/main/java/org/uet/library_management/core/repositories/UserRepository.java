@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepository implements MySQLRepository<User> {
     private String db_table;
@@ -18,29 +19,31 @@ public class UserRepository implements MySQLRepository<User> {
         db_table = "users";
     }
 
+    private User populateUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setUserId(rs.getInt("userId"));
+        user.setName(rs.getString("name"));
+        user.setPhoneNumber(rs.getString("phoneNumber"));
+        user.setEmail(rs.getString("email"));
+        user.setAddress(rs.getString("address"));
+        user.setMembershipStatus(rs.getString("membershipStatus"));
+        user.setPrivileges(rs.getString("privileges"));
+        user.setPasswordHash(rs.getString("passwordHash"));
+
+        return user;
+    }
+
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-
         String query = "SELECT * FROM " + db_table;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                User user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("name"));
-                user.setPhoneNumber(rs.getString("phoneNumber"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
-                user.setMembershipStatus(rs.getString("membershipStatus"));
-                user.setPrivileges(rs.getString("privileges"));
 
-                users.add(user);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while (rs.next()) {
+                users.add(populateUser(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return users;
@@ -51,24 +54,13 @@ public class UserRepository implements MySQLRepository<User> {
         List<User> users = new ArrayList<>();
         int offset = (page - 1) * pageSize;
         String query = "SELECT * FROM " + db_table + " LIMIT " + pageSize + " OFFSET " + offset;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                User user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("name"));
-                user.setPhoneNumber(rs.getString("phoneNumber"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
-                user.setMembershipStatus(rs.getString("membershipStatus"));
-                user.setPrivileges(rs.getString("privileges"));
 
-                users.add(user);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while (rs.next()) {
+                users.add(populateUser(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return users;
@@ -92,40 +84,48 @@ public class UserRepository implements MySQLRepository<User> {
 
     public List<User> findByName(String name) {
         List<User> users = new ArrayList<>();
-
         String query = "SELECT * FROM " + db_table + " WHERE name LIKE ?";
-        ResultSet rs = connectJDBC.executeQueryWithParams(query, name);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                User user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setName(rs.getString("name"));
-                user.setPhoneNumber(rs.getString("phoneNumber"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
-                user.setMembershipStatus(rs.getString("membershipStatus"));
-                user.setPrivileges(rs.getString("privileges"));
 
-                users.add(user);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, name)) {
+            while (rs.next()) {
+                users.add(populateUser(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
         return users;
+    }
+
+    public Optional<User> findByEmail(String email) {
+        User user = null;
+        String query = "SELECT * FROM " + db_table + " WHERE email = ?";
+
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, email)) {
+            while (rs.next()) {
+                user = populateUser(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Optional.ofNullable(user);
     }
 
     @Override
     public void add(User user) {
-        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges) VALUES (?, ?, ?, ?, ?, ?)";
-        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges());
+        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(),
+                user.getAddress(), user.getMembershipStatus(), user.getPrivileges(),
+                user.getPasswordHash());
     }
 
     @Override
     public void update(User user) {
-        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ? WHERE userId = ?";
-        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(), user.getMembershipStatus(), user.getPrivileges(), user.getUserId());
+        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ?, passwordHash = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(),
+                user.getAddress(), user.getMembershipStatus(), user.getPrivileges(),
+                user.getPasswordHash(), user.getUserId());
     }
 
     @Override

@@ -38,6 +38,7 @@ public class SceneManager {
         scene.getStylesheets().add(getClass().getResource("styles/auth.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles/search.css").toExternalForm());
 
         stage.setTitle("Library Management");
         stage.setScene(scene);
@@ -49,6 +50,7 @@ public class SceneManager {
     }
 
     public void setSubScene(String sceneName) {
+//        sceneName = "search/suggestSearch.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
             BorderPane pageContent = loader.load();

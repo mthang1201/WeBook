@@ -14,6 +14,7 @@
         <Label fx:id="titleLabel" styleClass="title-label" layoutX="214.0" layoutY="14.0" text="Library Management" />
         <TextField fx:id="emailField" layoutX="359.0" layoutY="241.0" promptText="Email" />
         <PasswordField fx:id="passwordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
+        <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="361.0" layoutY="314.0" mnemonicParsing="false" text="Register" />
         <Button fx:id="loginButton" styleClass="login-button" onAction="#handleLoginButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Log In" />
     </AnchorPane>
 </AnchorPane>

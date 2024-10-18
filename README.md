@@ -28,12 +28,13 @@ A library management application written from scratch in Java using the JavaFX d
 
 
 ## List of features
-- Borrow books
+- CRUD
+- Authentication
 
 
 ## Features to add
 - QRcode
-- Authentication
+- Suggestion
 - Notification
 - Comments
 - Elasticsearch

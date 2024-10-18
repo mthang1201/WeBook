@@ -57,11 +57,10 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         document.setDocumentId(rs.getInt("documentId"));
         document.setTitle(rs.getString("title"));
         document.setAuthors(rs.getString("authors"));
-        document.setPublishedDate(String.valueOf(rs.getDate("publishedDate")));
+        document.setPublishedDate(rs.getString("publishedDate"));
         document.setDescription(rs.getString("description"));
         document.setCategories(rs.getString("categories"));
         document.setLanguage(rs.getString("language"));
-        document.setAvailableCopies(rs.getInt("availableCopies"));
 
         populateSpecificAttributes(document, rs);
         return (T) document;
@@ -120,7 +119,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, title)) {
             while(rs.next()) {
                 documents.add(populateDocument(rs));
             }
@@ -135,7 +134,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE authors LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, authors)) {
             while(rs.next()) {
                 documents.add(populateDocument(rs));
             }
@@ -148,20 +147,10 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
 
     @Override
     public void add(Document document) {
-        String query = "INSERT INTO " + db_table + " (title, authors, publishedDate, description, categories, language, availableCopies) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
-                document.getPublishedDate(), document.getDescription(),
-                document.getCategories(), document.getLanguage(),
-                document.getAvailableCopies());
     }
 
     @Override
     public void update(Document document) {
-        String query = "UPDATE " + db_table + " SET title = ?, authors = ?, publishedDate = ?, description = ?, categories = ?, language = ?, availableCopies = ? WHERE documentId = ?";
-        connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
-                document.getPublishedDate(), document.getDescription(),
-                document.getCategories(), document.getLanguage(),
-                document.getAvailableCopies(), document.getDocumentId());
     }
 
     @Override

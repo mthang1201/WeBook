@@ -16,6 +16,7 @@ import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.api.sort.SortByNewest;
 import org.uet.library_management.api.sort.SortByOldest;
+import org.uet.library_management.core.services.documents.BookService;
 
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class HomeController {
         List<Book> searchTest2 = test.executeSearch("python");
         searchTest2.sort(new SortByAvgRating());
 
-        for (Book book : searchTest2) {
+        BookService service = new BookService();
+        List<Book> books = service.findAll();
+
+        for (Book book : books) {
             VBox vbox = new VBox();
             ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
             imageView.setFitWidth(200);

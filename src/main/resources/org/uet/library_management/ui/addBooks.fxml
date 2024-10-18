@@ -3,11 +3,16 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.AddBooksController">
+            fx:controller="org.uet.library_management.ui.AddBooksController"
+            styleClass="content-pane">
     <top>
-        <Label styleClass="head-label" text="Thêm sách" />
+        <VBox>
+            <Label styleClass="head-label" text="Thêm sách" />
+            <Separator styleClass="separator" />
+        </VBox>
     </top>
     <center>
         <VBox />

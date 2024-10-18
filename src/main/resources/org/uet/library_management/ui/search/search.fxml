@@ -5,10 +5,11 @@
 <?import javafx.scene.control.Label?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.SearchController"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="org.uet.library_management.ui.search.SearchController"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="content-pane">
     <top>
-        <Label text="Xu hướng" />
+        <Label styleClass="on-search-label" text="Xu hướng" />
     </top>
     <center>
         <HBox>
