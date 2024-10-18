@@ -1,5 +1,6 @@
 package org.uet.library_management.ui;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -10,6 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.tools.Mediator;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
@@ -25,17 +29,30 @@ public class MenuController {
     public ImageView addBooksImageView;
     public ImageView usernameImageView;
 
+    private Timer timer;
+
     @FXML
     public void initialize() {
         searchTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                if (!newValue.isEmpty()) {
-                    Mediator.getInstance().setText(searchTextField.getText());
-                    SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
-                } else {
-                    SceneManager.getInstance().setSubScene("search/search.fxml");
+                if (timer != null) {
+                    timer.cancel();
                 }
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(() -> {
+                            if (!newValue.isEmpty()) {
+                                Mediator.getInstance().setText(searchTextField.getText());
+                                SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
+                            } else {
+                                SceneManager.getInstance().setSubScene("search/search.fxml");
+                            }
+                        });
+                    }
+                }, 300);
             }
         });
 

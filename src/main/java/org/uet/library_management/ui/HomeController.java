@@ -15,6 +15,7 @@ import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.api.sort.SortByNewest;
 import org.uet.library_management.api.sort.SortByOldest;
+import org.uet.library_management.core.services.documents.BookService;
 
 import java.util.List;
 
@@ -28,11 +29,15 @@ public class HomeController {
         Book book1 = new Book();
 
         SearchContext test = new SearchContext();
-        test.setStrategy(new SearchByAuthor());
-        List<Book> searchTest2 = test.executeSearch("Eto Mori");
+        test.setStrategy(new SearchByTitle());
+        List<Book> searchTest2 = test.executeSearch("classroom of the elite");
         searchTest2.sort(new SortByAvgRating());
 
+        BookService service = new BookService();
+
         for (Book book : searchTest2) {
+            service.add(book);
+
             VBox vbox = new VBox();
             ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
             imageView.setFitWidth(200);

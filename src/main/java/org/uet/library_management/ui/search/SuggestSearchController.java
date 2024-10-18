@@ -1,8 +1,10 @@
 package org.uet.library_management.ui.search;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -10,10 +12,12 @@ import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.CompletableFuture;
 
 public class SuggestSearchController {
     @FXML
@@ -23,17 +27,48 @@ public class SuggestSearchController {
     public VBox topResultsVbox;
 
     @FXML
+    public TextField searchField;
+
+    private Timer timer;
+
     public void initialize() {
+
         String searchText = Mediator.getInstance().getText();
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    performSearch(searchText);
+                });
+            }
+        }, 200);
+    }
+
+    private void performSearch(String searchText) {
+        if (searchText.isEmpty()) {
+            topResultsVbox.getChildren().clear();
+            return;
+        }
+
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
-//        BookService bookService = new BookService();
-//        List<Book> books = bookService.findByTitle(searchText);
+        CompletableFuture.supplyAsync(() -> {
+            SearchContext searchContext = new SearchContext();
+            searchContext.setStrategy(new SearchByTitle());
+            return searchContext.executeSearch(searchText);
+        }).thenAccept(books -> {
+            Platform.runLater(() -> {
+                updateResults(books);
+            });
+        });
+    }
 
-        SearchContext searchContext = new SearchContext();
-        searchContext.setStrategy(new SearchByTitle());
-        List<Book> books = searchContext.executeSearch(searchText);
-
+    private void updateResults(List<Book> books) {
+        topResultsVbox.getChildren().clear();
         for (Book book : books) {
             HBox hbox = new HBox();
             hbox.setSpacing(10);
@@ -54,14 +89,12 @@ public class SuggestSearchController {
             Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
             Button addToBookmarkButton = new Button("Get");
             addToBookmarkButton.setOnAction(e -> {
-//                BookmarkService bookmarkService = new BookmarkService();
-//                bookmarkSerivce.add(Book);
+//               BookmarkService bookmarkService = new BookmarkService();
+//               bookmarkSerivce.add(Book);
             });
 
             vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
-
             hbox.getChildren().add(vbox);
-
             topResultsVbox.getChildren().add(hbox);
         }
     }
