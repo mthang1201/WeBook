@@ -30,19 +30,7 @@ public class BookDetailsExtractor {
 
         //solve imgLinks//
         ImageURLContext imageURLContext = new ImageURLContext();
-        imageURLContext.setImageURLGenerator(new ExtraLarge(volume));
-        if (imageURLContext.getImageURL() == null) {
-            imageURLContext.setImageURLGenerator(new Large(volume));
-        }
-        if (imageURLContext.getImageURL() == null) {
-            imageURLContext.setImageURLGenerator(new Medium(volume));
-        }
-        if (imageURLContext.getImageURL() == null) {
-            imageURLContext.setImageURLGenerator(new Small(volume));
-        }
-        if (imageURLContext.getImageURL() == null) {
-            imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
-        }
+        imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
         if (imageURLContext.getImageURL() == null) {
             imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
         }
@@ -57,11 +45,8 @@ public class BookDetailsExtractor {
         String maturityRating = volume.getVolumeInfo().getMaturityRating() != null ? volume.getVolumeInfo().getMaturityRating() : "Không có đánh giá trưởng thành";
         String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
         String language = volume.getVolumeInfo().getLanguage() != null ? volume.getVolumeInfo().getLanguage() : "Không có ngôn ngữ";
-        String thumbnailUrl = imageURLContext.getImageURL() + "&fife=w800";
-        if (thumbnailUrl.equals("null&fife=w800")) {
-            thumbnailUrl = "https://via.placeholder.com/150";
-        }
-        System.out.println("title = " +title + "\n");
+        String thumbnailUrl = imageURLContext.getImageURL() + "&fife=w800&format=webp";
+
         Book newBook = new Book(
                 title,
                 str_authors,

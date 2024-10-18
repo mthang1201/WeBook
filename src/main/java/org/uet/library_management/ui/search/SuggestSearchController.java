@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SuggestSearchController {
     @FXML
@@ -26,9 +28,6 @@ public class SuggestSearchController {
 
     @FXML
     public VBox topResultsVbox;
-
-    @FXML
-    public TextField searchField;
 
     private Timer timer;
 
@@ -76,13 +75,26 @@ public class SuggestSearchController {
         topResultsVbox.getChildren().clear();
 
         for (Book book : books) {
-            service.add(book);
+            //service.add(book);
             HBox hbox = new HBox();
             hbox.setSpacing(10);
 
-            ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
-            imageView.setFitWidth(55);
-            imageView.setFitHeight(83);
+            ImageView imageView = new ImageView();
+            ExecutorService executor = Executors.newFixedThreadPool(5);
+
+            CompletableFuture.supplyAsync(() -> {
+                String imageUrl = book.getImageLinks();
+                if (imageUrl.equals("null&fife=w800&format=webp")) {
+                    imageUrl = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();
+                }
+                return new Image(imageUrl, true);
+            }, executor).thenAccept(image -> {
+                Platform.runLater(() -> {
+                    imageView.setImage(image);
+                    imageView.setFitWidth(55);
+                    imageView.setFitHeight(83);
+                });
+            });
 
             hbox.getChildren().add(imageView);
 
