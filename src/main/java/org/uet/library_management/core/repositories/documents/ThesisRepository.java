@@ -22,7 +22,7 @@ public class ThesisRepository extends DocumentRepository<Thesis> {
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
                 document.getPublishedDate(), thesis.getInstitution(), thesis.getDegree(),
                 document.getDescription(), document.getCategories(), document.getLanguage(),
-                thesis.getCitationCount(), document.getAvailableCopies());
+                thesis.getCitationCount());
     }
 
     @Override
@@ -34,7 +34,6 @@ public class ThesisRepository extends DocumentRepository<Thesis> {
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
                 document.getPublishedDate(), thesis.getInstitution(), thesis.getDegree(),
                 document.getDescription(), document.getCategories(), document.getLanguage(),
-                thesis.getCitationCount(), document.getAvailableCopies(),
-                document.getDocumentId());
+                thesis.getCitationCount(), document.getDocumentId());
     }
 }

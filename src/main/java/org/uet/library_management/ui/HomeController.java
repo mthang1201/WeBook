@@ -34,10 +34,9 @@ public class HomeController {
         searchTest2.sort(new SortByAvgRating());
 
         BookService service = new BookService();
+        List<Book> books = service.findAll();
 
-        for (Book book : searchTest2) {
-            service.add(book);
-
+        for (Book book : books) {
             VBox vbox = new VBox();
             ImageView imageView = new ImageView(new Image(book.getImageLinks(), true));
             imageView.setFitWidth(200);
