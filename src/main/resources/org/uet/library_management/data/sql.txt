@@ -18,8 +18,7 @@ CREATE TABLE books (
     imageLinks TEXT,
     language VARCHAR(10),  -- document
     maturityRating VARCHAR(50),
-    printType VARCHAR(50),
-    availableCopies INT  -- document
+    printType VARCHAR(50)
 );
 
 CREATE TABLE theses (
@@ -32,8 +31,7 @@ CREATE TABLE theses (
     description TEXT,
     categories TEXT,
     language VARCHAR(10),
-    citationCount INT,
-    availableCopies INT
+    citationCount INT
 );
 
 CREATE TABLE users (

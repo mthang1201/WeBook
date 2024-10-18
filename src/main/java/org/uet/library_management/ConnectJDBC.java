@@ -3,13 +3,14 @@ package org.uet.library_management;
 import java.sql.*;
 
 public class ConnectJDBC {
+    private static final String ENDPOINT = "database-1.cfwaak8q6v1w.ap-southeast-2.rds.amazonaws.com";
 
     public Connection connect() {
         Connection conn;
         try {
-            String url = "jdbc:mysql://localhost:3306/library_db";
-            String username = "root";
-            String password = "root";
+            String url = "jdbc:mysql://" + ENDPOINT + ":3306/library_db";
+            String username = "admin";
+            String password = "admin123";
             conn = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
