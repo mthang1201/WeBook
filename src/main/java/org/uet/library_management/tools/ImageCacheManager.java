@@ -45,20 +45,20 @@ public class ImageCacheManager {
         }
     }
 
-    public Image loadImage(String isbn10, String imageLinks) {
+    public Image loadImage(String imageId, String imageLinks) {
         if (imageLinks.equals("null&fife=w800&format=webp")) {
-            return new Image("/org/uet/library_management/placeholder/165x249.png", true);
+            return new Image(getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm(), true);
         }
-        File cacheFile = new File(cacheDir + isbn10 + ".jpeg");
+        File cacheFile = new File(cacheDir + imageId + ".jpeg");
 
         if (cacheFile.exists()) {
             return new Image(cacheFile.toURI().toString(), true);
-        } else if (imageCache.containsKey(isbn10)) {
-            return imageCache.get(isbn10);
+        } else if (imageCache.containsKey(imageId)) {
+            return imageCache.get(imageId);
         } else {
             Image image = new Image(imageLinks, true);
 
-            imageCache.put(isbn10, image);
+            imageCache.put(imageId, image);
 //            saveImageToCache(documentId, image);
 
             return image;

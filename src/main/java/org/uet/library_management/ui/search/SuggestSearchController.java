@@ -64,11 +64,11 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
-//            SearchContext searchContext = new SearchContext();
-//            searchContext.setStrategy(new SearchByTitle());
-//            return searchContext.executeSearch(searchText);
-            BookService service = new BookService();
-            return service.findByTitle(searchText);
+            SearchContext searchContext = new SearchContext();
+            searchContext.setStrategy(new SearchByTitle());
+            return searchContext.executeSearch(searchText);
+//            BookService service = new BookService();
+//            return service.findByTitle(searchText);
 //            return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
@@ -89,7 +89,7 @@ public class SuggestSearchController {
             ExecutorService executor = Executors.newFixedThreadPool(5);
 
             CompletableFuture.supplyAsync(() -> {
-                Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn10(), book.getImageLinks());
+                Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getImageLinks());
 //                String imageUrl = book.getImageLinks();
 //                if (imageUrl.equals("null&fife=w800&format=webp")) {
 //                    imageUrl = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();
