@@ -28,15 +28,11 @@ public class HomeController {
     @FXML
     public FlowPane flowPane;
 
-//    private ImageCacheManager imageCacheManager;
-
     @FXML
     public void initialize() {
-//        imageCacheManager = new ImageCacheManager("cache/home/");
-
-//        scrollpane.setContent(flowPane);
-//        scrollpane.setFitToWidth(true);
-//        scrollpane.setPannable(true);
+        scrollpane.setContent(flowPane);
+        scrollpane.setFitToWidth(true);
+        scrollpane.setPannable(true);
 
         flowPane.setPadding(new Insets(10,10,10,10));
 
@@ -52,8 +48,7 @@ public class HomeController {
 
         for (Book book : books) {
             VBox vbox = new VBox();
-
-            Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn10(), book.getImageLinks());
+            Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getTitle(), book.getImageLinks());
 //            Image image = new Image(book.getImageLinks(), true);
 
             ImageView imageView = new ImageView(image);
