@@ -64,11 +64,11 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
-//            SearchContext searchContext = new SearchContext();
-//            searchContext.setStrategy(new SearchByTitle());
-//            return searchContext.executeSearch(searchText);
-            BookService service = new BookService();
-            return service.findByTitle(searchText);
+            SearchContext searchContext = new SearchContext();
+            searchContext.setStrategy(new SearchByTitle());
+            return searchContext.executeSearch(searchText);
+//            BookService service = new BookService();
+//            return service.findByTitle(searchText);
 //            return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
@@ -89,8 +89,12 @@ public class SuggestSearchController {
             ExecutorService executor = Executors.newFixedThreadPool(5);
 
             CompletableFuture.supplyAsync(() -> {
-
-                Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getTitle(), book.getImageLinks());
+                Image image = ImageCacheManager.getInstance().loadImage(
+                  book.getIsbn13(),
+                  book.getTitle(),
+                  book.getImageLinks()
+                );
+              
                 return image;
             }, executor).thenAccept(image -> {
                 Platform.runLater(() -> {

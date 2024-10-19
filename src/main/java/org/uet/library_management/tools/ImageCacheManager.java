@@ -60,8 +60,10 @@ public class ImageCacheManager {
             return imageCache.get(cacheKey);
         } else {
             Image image = new Image(imageLinks, true);
+          
             imageCache.put(cacheKey, image);
             //saveImageToCache(cacheKey, image);
+          
             return image;
         }
     }
