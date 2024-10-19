@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class ImageCacheManager {
         imageCache = new LinkedHashMap<String, Image>(MAX_CACHE_SIZE, 0.75f, true) {
             @Override
             protected boolean removeEldestEntry(Map.Entry<String, Image> eldest) {
-                System.out.println("Remove" + eldest.getKey());
+                //System.out.println("Remove" + eldest.getKey());
                 return size() > MAX_CACHE_SIZE;
             }
         };
@@ -45,33 +44,36 @@ public class ImageCacheManager {
         }
     }
 
-    public Image loadImage(String imageId, String imageLinks) {
-        if (imageLinks.equals("null&fife=w800&format=webp")) {
-            return new Image(getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm(), true);
+    public Image loadImage(String isbn13, String title, String imageLinks) {
+        String cacheKey = isbn13 + "_" + title;
+
+        if (imageLinks == null || imageLinks.equals("null&fife=w800&format=webp") || imageLinks.equals("https://via.placeholder.com/150")) {
+            imageLinks = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();
+            return new Image(imageLinks, true);
         }
-        File cacheFile = new File(cacheDir + imageId + ".jpeg");
+
+        File cacheFile = new File(cacheDir + cacheKey + ".jpeg");
 
         if (cacheFile.exists()) {
             return new Image(cacheFile.toURI().toString(), true);
-        } else if (imageCache.containsKey(imageId)) {
-            return imageCache.get(imageId);
+        } else if (imageCache.containsKey(cacheKey)) {
+            return imageCache.get(cacheKey);
         } else {
             Image image = new Image(imageLinks, true);
-
-            imageCache.put(imageId, image);
-//            saveImageToCache(documentId, image);
-
+          
+            imageCache.put(cacheKey, image);
+            //saveImageToCache(cacheKey, image);
+          
             return image;
         }
     }
 
-    private void saveImageToCache(int imageId, Image image) {
-        File newFile = new File(cacheDir + imageId + ".jpeg");
+    private void saveImageToCache(String cacheKey, Image image) {
+        File newFile = new File(cacheDir + cacheKey.replaceAll("[|]", "_") + ".jpeg");
         try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image,
-                    null), "jpeg", newFile);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "jpeg", newFile);
             System.out.println("Image saved at: " + newFile.getAbsolutePath());
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
