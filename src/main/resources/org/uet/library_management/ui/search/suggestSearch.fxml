@@ -16,14 +16,17 @@
 <!--                        Suggestions-->
                         <Label styleClass="suggestions-label" text="Suggestions" />
                         <Separator styleClass="separator" />
-                        <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" spacing="5" />
+                        <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" />
+                        <Pane style="-fx-pref-height: 20" />
 
 <!--                        In Your Library-->
-                        <Label styleClass="in-your-library-label" text="In Your Library" />
-                        <Separator styleClass="separator" />
-                        <ScrollPane fx:id="horizontalScrollpane" styleClass="horizontal-scroll-pane" fitToWidth="true" pannable="true">
-                            <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox" spacing="5" />
-                        </ScrollPane>
+                        <VBox styleClass="in-your-library-pane">
+                            <Label styleClass="in-your-library-label" text="In Your Library" />
+                            <Separator styleClass="in-your-library-separator" />
+                            <ScrollPane fx:id="horizontalScrollpane" styleClass="horizontal-scroll-pane" fitToWidth="true" pannable="true">
+                                <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox"/>
+                            </ScrollPane>
+                        </VBox>
 
 <!--                        Top Results-->
                         <Label styleClass="top-results-label" text="Top Results" />

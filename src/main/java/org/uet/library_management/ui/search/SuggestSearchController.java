@@ -73,6 +73,7 @@ public class SuggestSearchController {
 //            searchContext.setStrategy(new SearchByTitle());
 //            return searchContext.executeSearch(searchText);
             BookService service = new BookService();
+
             return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
@@ -82,10 +83,20 @@ public class SuggestSearchController {
     }
 
     private void updateUI(List<Book> books) {
+        BookService service = new BookService();
+
+        suggestionsVbox.getChildren().clear();
+
+        suggestionsVbox.getChildren().addAll(
+                UIBuilder.generateSuggestions(
+                        service.suggest("searchText")
+                )
+        );
+
         inYourLibraryHbox.getChildren().clear();
 
         inYourLibraryHbox.getChildren().addAll(
-                UIBuilder.generateInYourLibrary(books)
+                UIBuilder.generateInYourLibrary(books.subList(0, 15))
         );
 
         topResultsVbox.getChildren().clear();

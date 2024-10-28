@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -42,8 +43,44 @@ public class UIBuilder {
         return flowPane;
     }
 
+    public static VBox generateSuggestions(List<String> keywords) {
+        VBox suggestionsVbox = new VBox();
+
+        for (String keyword : keywords) {
+            HBox hbox = new HBox();
+            hbox.setSpacing(10);
+
+            if (!suggestionsVbox.getChildren().isEmpty()) {
+                Separator separator = new Separator();
+                separator.getStyleClass().add("sub-separator");
+                suggestionsVbox.getChildren().add(separator);
+            }
+
+            ImageView searchImageView = new ImageView();
+            searchImageView.setImage(
+                    new Image(
+                            UIBuilder.class.getResourceAsStream(
+                                    "/org/uet/library_management/icons/search.png"
+                            )
+                    )
+            );
+            searchImageView.setFitWidth(16);
+            searchImageView.setFitHeight(16);
+
+            Label label = new Label(keyword);
+            label.setPadding(new Insets(0, 0, 5, 0));
+
+            hbox.getChildren().addAll(searchImageView, label);
+
+            suggestionsVbox.getChildren().add(hbox);
+        }
+
+        return suggestionsVbox;
+    }
+
     public static HBox generateInYourLibrary(List<Book> books) {
         HBox inYourLibraryHbox = new HBox();
+        inYourLibraryHbox.setSpacing(20);
 
         for (Book book : books) {
             ImageView imageView = new ImageView();

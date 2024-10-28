@@ -18,21 +18,19 @@
     -fx-padding: 0 0 0 40;
 }
 
+.suggestions-button {
+
+}
+
 .in-your-library-label {
-    -fx-background-color: #ececec;
-    -fx-pref-width: 800;
-
-
-    -fx-padding: 0 0 0 40;
+    -fx-padding: 20 0 0 40;
     -fx-font-size: 16px;
     -fx-font-weight: BOLD;
 }
 
 .in-your-library-hbox {
     -fx-background-color: #ececec;
-    -fx-pref-height: 155;
-
-    -fx-padding: 0 0 0 40;
+    -fx-padding: 20 0 20 40;
 }
 
 .top-results-label {
@@ -47,4 +45,16 @@
 
 .separator {
     -fx-padding: 10 40 10 40;
+}
+
+.sub-separator {
+    -fx-padding: 10 40 10 0;
+}
+
+.in-your-library-separator {
+    -fx-padding: 10 40 10 20;
+}
+
+.in-your-library-pane {
+    -fx-background-color: #ececec;
 }

@@ -8,7 +8,7 @@
 .horizontal-scroll-pane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-hbar-policy: AS_NEEDED;  /* Hide horizontal scrollbar */
+    -fx-hbar-policy: NEVER;  /* Hide horizontal scrollbar */
     -fx-vbar-policy: NEVER;  /* Hide vertical scrollbar */
 }
 
