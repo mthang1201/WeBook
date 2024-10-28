@@ -36,32 +36,6 @@ public class HomeController {
 
         flowPane.setPadding(new Insets(10,10,10,10));
 
-        Book book1 = new Book();
 
-//        SearchContext test = new SearchContext();
-//        test.setStrategy(new SearchByAuthor());
-//        List<Book> searchTest2 = test.executeSearch("python");
-//        searchTest2.sort(new SortByAvgRating());
-
-        BookService service = new BookService();
-        List<Book> books = service.findAll();
-
-        for (Book book : books) {
-            VBox vbox = new VBox();
-
-            Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getTitle(), book.getImageLinks());
-//            Image image = new Image(book.getImageLinks(), true);
-
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(300);
-
-            Label titleLabel = new Label(book.getTitle());
-            Label authorsLabel = new Label(book.getAuthors());
-
-            vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
-
-            flowPane.getChildren().add(vbox);
-        }
     }
 }
