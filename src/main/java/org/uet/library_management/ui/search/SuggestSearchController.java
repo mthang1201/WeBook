@@ -15,6 +15,7 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.ImageCacheManager;
 import org.uet.library_management.tools.Mediator;
+import org.uet.library_management.tools.UIBuilder;
 
 import java.util.List;
 import java.util.Timer;
@@ -32,6 +33,7 @@ public class SuggestSearchController {
 
     @FXML
     public TextField searchField;
+    public VBox suggestionsVbox;
 
     private Timer timer;
 
@@ -64,12 +66,11 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
-            SearchContext searchContext = new SearchContext();
-            searchContext.setStrategy(new SearchByTitle());
-            return searchContext.executeSearch(searchText);
-//            BookService service = new BookService();
-//            return service.findByTitle(searchText);
-//            return service.findByTitle(searchText);
+//            SearchContext searchContext = new SearchContext();
+//            searchContext.setStrategy(new SearchByTitle());
+//            return searchContext.executeSearch(searchText);
+            BookService service = new BookService();
+            return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateResults(books);
@@ -80,49 +81,8 @@ public class SuggestSearchController {
     private void updateResults(List<Book> books) {
         topResultsVbox.getChildren().clear();
 
-        for (Book book : books) {
-            //service.add(book);
-            HBox hbox = new HBox();
-            hbox.setSpacing(10);
-
-            ImageView imageView = new ImageView();
-            ExecutorService executor = Executors.newFixedThreadPool(5);
-
-            CompletableFuture.supplyAsync(() -> {
-                Image image = ImageCacheManager.getInstance().loadImage(
-                  book.getIsbn13(),
-                  book.getTitle(),
-                  book.getImageLinks()
-                );
-              
-                return image;
-            }, executor).thenAccept(image -> {
-                Platform.runLater(() -> {
-                    imageView.setImage(image);
-                    imageView.setFitWidth(55);
-                    imageView.setFitHeight(83);
-                });
-            });
-
-            hbox.getChildren().add(imageView);
-
-            VBox vbox = new VBox();
-            vbox.setPrefWidth(665);
-            vbox.setPrefHeight(83);
-
-            Label titleLabel = new Label(book.getTitle());
-            titleLabel.setStyle("-fx-font-weight: bold");
-            Label authorsLabel = new Label(book.getAuthors());
-            Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
-            Button addToBookmarkButton = new Button("Get");
-            addToBookmarkButton.setOnAction(e -> {
-//               BookmarkService bookmarkService = new BookmarkService();
-//               bookmarkSerivce.add(Book);
-            });
-
-            vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
-            hbox.getChildren().add(vbox);
-            topResultsVbox.getChildren().add(hbox);
-        }
+        topResultsVbox.getChildren().addAll(
+                UIBuilder.generateResults(books).getChildren()
+        );
     }
 }

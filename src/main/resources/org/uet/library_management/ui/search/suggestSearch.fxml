@@ -10,15 +10,20 @@
     <center>
         <VBox>
             <Label fx:id="onSearchLabel" styleClass="on-search-label" text="Đang hiển thị gợi ý liên quan đến " />
-<!--                <Label text="Suggestions" />-->
-<!--            <Separator styleClass="separator" />-->
+
+            <Label styleClass="suggestions-label" text="Suggestions" />
+            <Separator styleClass="separator" />
+            <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" spacing="5" />
 <!--                <VBox spacing="5">-->
 
 <!--                </VBox>-->
-<!--                <Label styleClass="in-your-library-label" text="In Your Library" />-->
+
+            <Label styleClass="in-your-library-label" text="In Your Library" />
+            <Separator styleClass="separator" />
 <!--                <HBox spacing="5">-->
 
 <!--                </HBox>-->
+
             <Label styleClass="top-results-label" text="Top Results" />
             <Separator styleClass="separator" />
             <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />

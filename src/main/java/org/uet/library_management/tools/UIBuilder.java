@@ -1,14 +1,20 @@
 package org.uet.library_management.tools;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.core.entities.documents.Book;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class UIBuilder {
 
@@ -34,5 +40,55 @@ public class UIBuilder {
         }
 
         return flowPane;
+    }
+
+    public static VBox generateResults(List<Book> books) {
+        VBox topResultsVbox = new VBox();
+
+        for (Book book : books) {
+            //service.add(book);
+            HBox hbox = new HBox();
+            hbox.setSpacing(10);
+
+            ImageView imageView = new ImageView();
+            ExecutorService executor = Executors.newFixedThreadPool(5);
+
+            CompletableFuture.supplyAsync(() -> {
+                Image image = ImageCacheManager.getInstance().loadImage(
+                        book.getIsbn13(),
+                        book.getTitle(),
+                        book.getImageLinks()
+                );
+
+                return image;
+            }, executor).thenAccept(image -> {
+                Platform.runLater(() -> {
+                    imageView.setImage(image);
+                    imageView.setFitWidth(55);
+                    imageView.setFitHeight(83);
+                });
+            });
+
+            hbox.getChildren().add(imageView);
+
+            VBox vbox = new VBox();
+            vbox.setPrefWidth(665);
+            vbox.setPrefHeight(83);
+
+            Label titleLabel = new Label(book.getTitle());
+            titleLabel.setStyle("-fx-font-weight: bold");
+            Label authorsLabel = new Label(book.getAuthors());
+            Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
+            Button addToBookmarkButton = new Button("Get");
+            addToBookmarkButton.setOnAction(e -> {
+//               BookmarkService bookmarkService = new BookmarkService();
+//               bookmarkSerivce.add(Book);
+            });
+
+            vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
+            hbox.getChildren().add(vbox);
+            topResultsVbox.getChildren().add(hbox);
+        }
+        return topResultsVbox;
     }
 }
