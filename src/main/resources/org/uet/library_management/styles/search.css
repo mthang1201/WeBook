@@ -21,7 +21,7 @@
 .in-your-library-label {
     -fx-background-color: #ececec;
     -fx-pref-width: 800;
-    -fx-pref-height: 200;
+
 
     -fx-padding: 0 0 0 40;
     -fx-font-size: 16px;
@@ -29,6 +29,9 @@
 }
 
 .in-your-library-hbox {
+    -fx-background-color: #ececec;
+    -fx-pref-height: 155;
+
     -fx-padding: 0 0 0 40;
 }
 

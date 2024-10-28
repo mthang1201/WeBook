@@ -10,20 +10,22 @@
     <center>
         <VBox>
             <Label fx:id="onSearchLabel" styleClass="on-search-label" text="Đang hiển thị gợi ý liên quan đến " />
-            <ScrollPane fx:id="scrollpane" styleClass="scroll-pane" fitToWidth="true" pannable="true">
+            <ScrollPane fx:id="verticalScrollpane" styleClass="vertical-scroll-pane" fitToWidth="true" pannable="true">
                 <content>
                     <VBox styleClass="vbox">
+<!--                        Suggestions-->
                         <Label styleClass="suggestions-label" text="Suggestions" />
                         <Separator styleClass="separator" />
                         <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" spacing="5" />
 
+<!--                        In Your Library-->
                         <Label styleClass="in-your-library-label" text="In Your Library" />
                         <Separator styleClass="separator" />
-                        <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox" spacing="5" />
-                        <!--                <HBox spacing="5">-->
+                        <ScrollPane fx:id="horizontalScrollpane" styleClass="horizontal-scroll-pane" fitToWidth="true" pannable="true">
+                            <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox" spacing="5" />
+                        </ScrollPane>
 
-                        <!--                </HBox>-->
-
+<!--                        Top Results-->
                         <Label styleClass="top-results-label" text="Top Results" />
                         <Separator styleClass="separator" />
                         <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />

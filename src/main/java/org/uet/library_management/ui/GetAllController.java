@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GetAllController {
     @FXML
-    public ScrollPane scrollpane;
+    public ScrollPane verticalScrollpane;
 
     @FXML
     public FlowPane flowPane;

@@ -26,21 +26,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SuggestSearchController {
-    @FXML public ScrollPane scrollpane;
+    @FXML public ScrollPane verticalScrollpane;
 
     @FXML public Label onSearchLabel;
     //    @FXML public TextField searchField;
 
     @FXML public VBox suggestionsVbox;
+
     @FXML public HBox inYourLibraryHbox;
+    @FXML public ScrollPane horizontalScrollpane;
+
     @FXML public VBox topResultsVbox;
 
     private Timer timer;
 
     @FXML
     public void initialize() {
-        scrollpane.setFitToWidth(true);
-        scrollpane.setPannable(true);
+        verticalScrollpane.setFitToWidth(true);
+        verticalScrollpane.setPannable(true);
         
         String searchText = Mediator.getInstance().getText();
         if (timer != null) {
