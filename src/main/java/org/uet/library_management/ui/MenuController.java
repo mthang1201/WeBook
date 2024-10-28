@@ -18,16 +18,24 @@ import java.util.TimerTask;
 public class MenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
 
-    public TextField searchTextField;
-    public Button homeButton;
-    public Button getAllButton;
-    public Button addBooksButton;
-    public Button usernameButton;
+    @FXML public TextField searchTextField;
+    @FXML public Button homeButton;
+    @FXML public Button bookshelfButton;
+    @FXML public Button getAllButton;
+    @FXML public Button bookmarkButton;
+    @FXML public Button finishedButton;
+    @FXML public Button booksButton;
+    @FXML public Button addBooksButton;
+    @FXML public Button usernameButton;
 
-    public ImageView homeImageView;
-    public ImageView getAllImageView;
-    public ImageView addBooksImageView;
-    public ImageView usernameImageView;
+    @FXML public ImageView homeImageView;
+    @FXML public ImageView getAllImageView;
+    @FXML public ImageView bookshelfImageView;
+    @FXML public ImageView bookmarkImageView;
+    @FXML public ImageView finishedImageView;
+    @FXML public ImageView booksImageView;
+    @FXML public ImageView addBooksImageView;
+    @FXML public ImageView usernameImageView;
 
     private Timer timer;
 
@@ -62,8 +70,20 @@ public class MenuController {
         homeButton.setOnMouseEntered(this::handleHomeButtonMouseEnter);
         homeButton.setOnMouseExited(this::handleHomeButtonMouseExit);
 
+        bookshelfButton.setOnMouseEntered(this::handleBookshelfButtonMouseEnter);
+        bookshelfButton.setOnMouseExited(this::handleBookshelfButtonMouseExit);
+
         getAllButton.setOnMouseEntered(this::handleGetAllButtonMouseEnter);
         getAllButton.setOnMouseExited(this::handleGetAllButtonMouseExit);
+
+        bookmarkButton.setOnMouseEntered(this::handleBookmarkButtonMouseEnter);
+        bookmarkButton.setOnMouseExited(this::handleBookmarkButtonMouseExit);
+
+        finishedButton.setOnMouseEntered(this::handleFinishedButtonMouseEnter);
+        finishedButton.setOnMouseExited(this::handleFinishedButtonMouseExit);
+
+        booksButton.setOnMouseEntered(this::handleBooksButtonMouseEnter);
+        booksButton.setOnMouseExited(this::handleBooksButtonMouseExit);
 
         addBooksButton.setOnMouseEntered(this::handleAddBooksButtonMouseEnter);
         addBooksButton.setOnMouseExited(this::handleAddBooksButtonMouseExit);
@@ -81,12 +101,44 @@ public class MenuController {
         homeImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "home.png")));
     }
 
+    private void handleBookshelfButtonMouseEnter(MouseEvent mouseEvent) {
+        bookshelfImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookshelf-white.png")));
+    }
+
+    private void handleBookshelfButtonMouseExit(MouseEvent mouseEvent) {
+        bookshelfImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookshelf.png")));
+    }
+
     private void handleGetAllButtonMouseEnter(MouseEvent event) {
         getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll-white.png")));
     }
 
     private void handleGetAllButtonMouseExit(MouseEvent event) {
         getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll.png")));
+    }
+
+    private void handleBookmarkButtonMouseEnter(MouseEvent mouseEvent) {
+        bookmarkImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookmark-white.png")));
+    }
+
+    private void handleBookmarkButtonMouseExit(MouseEvent mouseEvent) {
+        bookmarkImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookmark.png")));
+    }
+
+    private void handleFinishedButtonMouseEnter(MouseEvent mouseEvent) {
+        finishedImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "finished-white.png")));
+    }
+
+    private void handleFinishedButtonMouseExit(MouseEvent mouseEvent) {
+        finishedImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "finished.png")));
+    }
+
+    private void handleBooksButtonMouseEnter(MouseEvent mouseEvent) {
+        booksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "books-white.png")));
+    }
+
+    private void handleBooksButtonMouseExit(MouseEvent mouseEvent) {
+        booksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "books.png")));
     }
 
     private void handleAddBooksButtonMouseEnter(MouseEvent event) {
@@ -103,7 +155,7 @@ public class MenuController {
     }
 
     @FXML
-    private void handleBookShelfMenu() {
+    private void handleBookshelfMenu() {
         SceneManager.getInstance().setSubScene("bookshelf.fxml");
     }
 

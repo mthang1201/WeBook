@@ -15,6 +15,8 @@
         <VBox styleClass="search-pane">
             <TextField fx:id="searchTextField" styleClass="search-text-field" promptText="Tìm kiếm" />
         </VBox>
+
+<!--        Sách-->
         <Label styleClass="menu-label" text="Sách" />
         <Button fx:id="homeButton" styleClass="menu-button" onAction="#handleHomeMenu" text="Trang chủ">
             <graphic>
@@ -23,7 +25,16 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button styleClass="menu-button" onAction="#handleBookShelfMenu" text="Giá sách" />
+
+        <Button fx:id="bookshelfButton" styleClass="menu-button" onAction="#handleBookshelfMenu" text="Giá sách">
+            <graphic>
+                <ImageView fx:id="bookshelfImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@../icons/bookshelf.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
+<!--        Thư viện-->
         <Label styleClass="menu-label" text="Thư viện" />
         <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
             <graphic>
@@ -32,9 +43,31 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button styleClass="menu-button" onAction="#handleBookmarkMenu" text="Muốn đọc" />
-        <Button styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong" />
-        <Button styleClass="menu-button" onAction="#handleBooksMenu" text="Sách" />
+
+        <Button fx:id="bookmarkButton" styleClass="menu-button" onAction="#handleBookmarkMenu" text="Muốn đọc">
+            <graphic>
+                <ImageView fx:id="bookmarkImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@../icons/bookmark.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="finishedButton" styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong">
+            <graphic>
+                <ImageView fx:id="finishedImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@../icons/finished.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="booksButton" styleClass="menu-button" onAction="#handleBooksMenu" text="Sách">
+            <graphic>
+                <ImageView fx:id="booksImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@../icons/books.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
         <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
             <graphic>
                 <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">
@@ -42,6 +75,8 @@
                 </ImageView>
             </graphic>
         </Button>
+
+<!--        Bộ sưu tập của tôi-->
         <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
         <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
     </VBox>
