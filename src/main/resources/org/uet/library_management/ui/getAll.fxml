@@ -14,8 +14,10 @@
         </VBox>
     </top>
     <center>
-        <ScrollPane fx:id="scrollpane" styleClass="scroll-pane">
-            <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+        <ScrollPane fx:id="scrollpane" styleClass="scroll-pane" fitToWidth="true" pannable="true">
+            <content>
+                <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+            </content>
         </ScrollPane>
     </center>
 </BorderPane>

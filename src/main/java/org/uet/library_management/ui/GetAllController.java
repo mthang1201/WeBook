@@ -19,10 +19,6 @@ public class GetAllController {
 
     @FXML
     public void initialize() {
-        scrollpane.setContent(flowPane);
-        scrollpane.setFitToWidth(true);
-        scrollpane.setPannable(true);
-
         flowPane.setPadding(new Insets(10,10,10,10));
 
 //        SearchContext test = new SearchContext();

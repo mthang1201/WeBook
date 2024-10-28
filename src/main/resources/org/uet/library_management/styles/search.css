@@ -15,10 +15,6 @@
 }
 
 .suggestions-vbox {
-    -fx-background-color: #ececec;
-    -fx-pref-width: 800;
-    -fx-pref-height: 200;
-
     -fx-padding: 0 0 0 40;
 }
 
@@ -27,9 +23,13 @@
     -fx-pref-width: 800;
     -fx-pref-height: 200;
 
-    -fx-padding: 10 0 0 40;
+    -fx-padding: 0 0 0 40;
     -fx-font-size: 16px;
     -fx-font-weight: BOLD;
+}
+
+.in-your-library-hbox {
+    -fx-padding: 0 0 0 40;
 }
 
 .top-results-label {

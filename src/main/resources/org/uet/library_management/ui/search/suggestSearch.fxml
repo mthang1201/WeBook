@@ -10,23 +10,27 @@
     <center>
         <VBox>
             <Label fx:id="onSearchLabel" styleClass="on-search-label" text="Đang hiển thị gợi ý liên quan đến " />
+            <ScrollPane fx:id="scrollpane" styleClass="scroll-pane" fitToWidth="true" pannable="true">
+                <content>
+                    <VBox styleClass="vbox">
+                        <Label styleClass="suggestions-label" text="Suggestions" />
+                        <Separator styleClass="separator" />
+                        <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" spacing="5" />
 
-            <Label styleClass="suggestions-label" text="Suggestions" />
-            <Separator styleClass="separator" />
-            <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" spacing="5" />
-<!--                <VBox spacing="5">-->
+                        <Label styleClass="in-your-library-label" text="In Your Library" />
+                        <Separator styleClass="separator" />
+                        <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox" spacing="5" />
+                        <!--                <HBox spacing="5">-->
 
-<!--                </VBox>-->
+                        <!--                </HBox>-->
 
-            <Label styleClass="in-your-library-label" text="In Your Library" />
-            <Separator styleClass="separator" />
-<!--                <HBox spacing="5">-->
+                        <Label styleClass="top-results-label" text="Top Results" />
+                        <Separator styleClass="separator" />
+                        <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />
+                    </VBox>
+                </content>
+            </ScrollPane>
 
-<!--                </HBox>-->
-
-            <Label styleClass="top-results-label" text="Top Results" />
-            <Separator styleClass="separator" />
-            <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />
         </VBox>
     </center>
 </BorderPane>

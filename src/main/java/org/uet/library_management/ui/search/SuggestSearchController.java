@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,23 +26,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SuggestSearchController {
-    @FXML
-    public Label onSearchLabel;
+    @FXML public ScrollPane scrollpane;
 
-    @FXML
-    public VBox topResultsVbox;
+    @FXML public Label onSearchLabel;
+    //    @FXML public TextField searchField;
 
-    @FXML
-    public TextField searchField;
-    public VBox suggestionsVbox;
+    @FXML public VBox suggestionsVbox;
+    @FXML public HBox inYourLibraryHbox;
+    @FXML public VBox topResultsVbox;
 
     private Timer timer;
 
-    BookService service;
-
+    @FXML
     public void initialize() {
-        service = new BookService();
-
+        scrollpane.setFitToWidth(true);
+        scrollpane.setPannable(true);
+        
         String searchText = Mediator.getInstance().getText();
         if (timer != null) {
             timer.cancel();
@@ -73,16 +73,22 @@ public class SuggestSearchController {
             return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
-                updateResults(books);
+                updateUI(books);
             });
         });
     }
 
-    private void updateResults(List<Book> books) {
+    private void updateUI(List<Book> books) {
+        inYourLibraryHbox.getChildren().clear();
+
+        inYourLibraryHbox.getChildren().addAll(
+                UIBuilder.generateInYourLibrary(books)
+        );
+
         topResultsVbox.getChildren().clear();
 
         topResultsVbox.getChildren().addAll(
-                UIBuilder.generateResults(books).getChildren()
+                UIBuilder.generateTopResults(books).getChildren()
         );
     }
 }

@@ -42,7 +42,36 @@ public class UIBuilder {
         return flowPane;
     }
 
-    public static VBox generateResults(List<Book> books) {
+    public static HBox generateInYourLibrary(List<Book> books) {
+        HBox inYourLibraryHbox = new HBox();
+
+        for (Book book : books) {
+            ImageView imageView = new ImageView();
+            ExecutorService executor = Executors.newFixedThreadPool(5);
+
+            CompletableFuture.supplyAsync(() -> {
+                Image image = ImageCacheManager.getInstance().loadImage(
+                        book.getIsbn13(),
+                        book.getTitle(),
+                        book.getImageLinks()
+                );
+
+                return image;
+            }, executor).thenAccept(image -> {
+                Platform.runLater(() -> {
+                    imageView.setImage(image);
+                    imageView.setFitWidth(75);
+                    imageView.setFitHeight(100);
+                });
+            });
+
+            inYourLibraryHbox.getChildren().add(imageView);
+        }
+
+        return inYourLibraryHbox;
+    }
+
+    public static VBox generateTopResults(List<Book> books) {
         VBox topResultsVbox = new VBox();
 
         for (Book book : books) {
