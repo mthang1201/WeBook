@@ -8,6 +8,7 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.UIBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllController {
@@ -16,6 +17,8 @@ public class GetAllController {
 
     @FXML
     public FlowPane flowPane;
+
+//    private static List<Book> booksCache = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -27,6 +30,11 @@ public class GetAllController {
 //        searchTest2.sort(new SortByAvgRating());
 
         BookService service = new BookService();
+
+//        if (booksCache.isEmpty()) {
+//            booksCache = service.findAll();
+//        }
+//        List<Book> books = booksCache;
         List<Book> books = service.findAll();
 
         flowPane.getChildren().addAll(

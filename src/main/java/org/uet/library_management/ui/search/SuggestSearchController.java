@@ -18,9 +18,7 @@ import org.uet.library_management.tools.ImageCacheManager;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.UIBuilder;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,6 +37,8 @@ public class SuggestSearchController {
     @FXML public VBox topResultsVbox;
 
     private Timer timer;
+
+//    private static final Map<String, List<Book>> booksCache = new LinkedHashMap<>();
 
     @FXML
     public void initialize() {
@@ -74,6 +74,10 @@ public class SuggestSearchController {
 //            return searchContext.executeSearch(searchText);
             BookService service = new BookService();
 
+//            if (!booksCache.containsKey(searchText)) {
+//                booksCache.put(searchText, service.findByTitle(searchText));
+//            }
+//            return booksCache.get(searchText);
             return service.findByTitle(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {

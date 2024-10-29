@@ -10,7 +10,9 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditController {
     @FXML
@@ -18,6 +20,8 @@ public class EditController {
 
     private BookService bookService;
     private static final int PAGE_SIZE = 6;
+
+//    private static final Map<Integer, List<Book>> booksCache = new LinkedHashMap<>();
 
     @FXML
     private void initialize() {
@@ -44,6 +48,10 @@ public class EditController {
     }
 
     private void reloadPage(int pageIndex, GridPane pageGrid) {
+//        if (!booksCache.containsKey(pageIndex)) {
+//            booksCache.put(pageIndex, bookService.findAllByPage(pageIndex + 1, PAGE_SIZE));
+//        }
+//        List<Book> books = booksCache.get(pageIndex);
         List<Book> books = bookService.findAllByPage(pageIndex + 1, PAGE_SIZE);
 
         addLabelToGridPane(pageGrid, "Title", 1, 0);
