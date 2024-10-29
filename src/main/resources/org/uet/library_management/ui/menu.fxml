@@ -76,6 +76,14 @@
             </graphic>
         </Button>
 
+        <Button fx:id="editButton" styleClass="menu-button" onAction="#handleEditMenu" text="Sửa sách">
+            <graphic>
+                <ImageView fx:id="editImageView" fitHeight="16" fitWidth="16">
+                    <Image url="@../icons/edit.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
 <!--        Bộ sưu tập của tôi-->
         <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
         <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />

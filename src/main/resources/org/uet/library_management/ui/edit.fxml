@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.uet.library_management.ui.EditController"
+            styleClass="content-pane">
+    <top>
+        <VBox>
+            <Label styleClass="head-label" text="Sửa sách" />
+            <Separator styleClass="separator" />
+        </VBox>
+    </top>
+    <center>
+        <VBox styleClass="vbox">
+            <Pagination fx:id="pagination" />
+            <Pane style="-fx-pref-height: 10" />
+            <HBox alignment="TOP_CENTER" spacing="10">
+                <Button onAction="#moveToFirstPage" prefHeight="20.0" prefWidth="42.0" styleClass="edit-button" text="First" />
+
+                <Button onAction="#skipPre" prefHeight="20.0" prefWidth="20.0">
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/previous.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button onAction="#skipNext" prefHeight="20.0" prefWidth="20.0">
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/nextPage.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button onAction="#moveToLastPage" prefHeight="20.0" prefWidth="42.0" styleClass="edit-button" text="Last" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

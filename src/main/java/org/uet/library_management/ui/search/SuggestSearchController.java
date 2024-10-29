@@ -45,7 +45,7 @@ public class SuggestSearchController {
         verticalScrollpane.setFitToWidth(true);
         verticalScrollpane.setPannable(true);
         
-        String searchText = Mediator.getInstance().getText();
+        String searchText = Mediator.text;
         if (timer != null) {
             timer.cancel();
         }

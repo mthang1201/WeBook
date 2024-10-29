@@ -36,6 +36,9 @@
 
 .vbox {
     -fx-background-color: #ffffff;
+    /*-fx-hgap: 25;*/
+    /*-fx-vgap: 40;*/
+    -fx-padding: 0 0 0 40;
 }
 
 .flow-pane {

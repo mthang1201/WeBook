@@ -1,7 +1,11 @@
 package org.uet.library_management.tools;
 
+import org.uet.library_management.core.entities.documents.Book;
+
 public class Mediator {
-    private static String text;
+    public static String text;
+
+    public static Book book;
 
     private static Mediator instance;
 
@@ -20,5 +24,13 @@ public class Mediator {
 
     public void setText(String text) {
         Mediator.text = text;
+    }
+
+    public Book getCachedBook() {
+        return book;
+    }
+
+    public void setCachedBook(Book book) {
+        Mediator.book = book;
     }
 }

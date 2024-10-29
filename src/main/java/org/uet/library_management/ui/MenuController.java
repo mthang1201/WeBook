@@ -26,6 +26,7 @@ public class MenuController {
     @FXML public Button finishedButton;
     @FXML public Button booksButton;
     @FXML public Button addBooksButton;
+    @FXML public Button editButton;
     @FXML public Button usernameButton;
 
     @FXML public ImageView homeImageView;
@@ -35,6 +36,7 @@ public class MenuController {
     @FXML public ImageView finishedImageView;
     @FXML public ImageView booksImageView;
     @FXML public ImageView addBooksImageView;
+    @FXML public ImageView editImageView;
     @FXML public ImageView usernameImageView;
 
     private Timer timer;
@@ -53,7 +55,7 @@ public class MenuController {
                     public void run() {
                         Platform.runLater(() -> {
                             if (!newValue.isEmpty()) {
-                                Mediator.getInstance().setText(searchTextField.getText());
+                                Mediator.text = searchTextField.getText();
                                 SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
                             } else {
                                 SceneManager.getInstance().setSubScene("search/search.fxml");
@@ -67,86 +69,69 @@ public class MenuController {
         // Set mouse event handlers
         searchTextField.setOnMouseClicked(this::handleSearchTextFieldMouseClick);
 
-        homeButton.setOnMouseEntered(this::handleHomeButtonMouseEnter);
-        homeButton.setOnMouseExited(this::handleHomeButtonMouseExit);
+        homeButton.setOnMouseEntered(event ->
+                handleButtonHover("home-white", homeImageView)
+        );
+        homeButton.setOnMouseExited(event ->
+                handleButtonHover("home", homeImageView)
+        );
 
-        bookshelfButton.setOnMouseEntered(this::handleBookshelfButtonMouseEnter);
-        bookshelfButton.setOnMouseExited(this::handleBookshelfButtonMouseExit);
+        bookshelfButton.setOnMouseEntered(event ->
+                handleButtonHover("bookshelf-white", bookshelfImageView)
+        );
+        bookshelfButton.setOnMouseExited(event ->
+                handleButtonHover("bookshelf", bookshelfImageView)
+        );
 
-        getAllButton.setOnMouseEntered(this::handleGetAllButtonMouseEnter);
-        getAllButton.setOnMouseExited(this::handleGetAllButtonMouseExit);
+        getAllButton.setOnMouseEntered(event ->
+                handleButtonHover("getAll-white", getAllImageView)
+        );
+        getAllButton.setOnMouseExited(event ->
+                handleButtonHover("getAll", getAllImageView)
+        );
 
-        bookmarkButton.setOnMouseEntered(this::handleBookmarkButtonMouseEnter);
-        bookmarkButton.setOnMouseExited(this::handleBookmarkButtonMouseExit);
+        bookmarkButton.setOnMouseEntered(event ->
+                handleButtonHover("bookmark-white", bookmarkImageView)
+        );
+        bookmarkButton.setOnMouseExited(event ->
+                handleButtonHover("bookmark", bookmarkImageView)
+        );
 
-        finishedButton.setOnMouseEntered(this::handleFinishedButtonMouseEnter);
-        finishedButton.setOnMouseExited(this::handleFinishedButtonMouseExit);
+        finishedButton.setOnMouseEntered(event ->
+                handleButtonHover("finished-white", finishedImageView)
+        );
+        finishedButton.setOnMouseExited(event ->
+                handleButtonHover("finished", finishedImageView)
+        );
 
-        booksButton.setOnMouseEntered(this::handleBooksButtonMouseEnter);
-        booksButton.setOnMouseExited(this::handleBooksButtonMouseExit);
+        booksButton.setOnMouseEntered(event ->
+                handleButtonHover("books-white", booksImageView)
+        );
+        booksButton.setOnMouseExited(event ->
+                handleButtonHover("books", booksImageView)
+        );
 
-        addBooksButton.setOnMouseEntered(this::handleAddBooksButtonMouseEnter);
-        addBooksButton.setOnMouseExited(this::handleAddBooksButtonMouseExit);
+        addBooksButton.setOnMouseEntered(event ->
+                handleButtonHover("upload-white", addBooksImageView)
+        );
+        addBooksButton.setOnMouseExited(event ->
+                handleButtonHover("upload", addBooksImageView)
+        );
+
+        editButton.setOnMouseEntered(event ->
+                handleButtonHover("edit-white", editImageView)
+        );
+        editButton.setOnMouseExited(event ->
+                handleButtonHover("edit", editImageView)
+        );
+    }
+
+    private void handleButtonHover(String imageName, ImageView imageView) {
+        imageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + imageName + ".png")));
     }
 
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
         SceneManager.getInstance().setSubScene("search/search.fxml");
-    }
-
-    private void handleHomeButtonMouseEnter(MouseEvent event) {
-        homeImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "home-white.png")));
-    }
-
-    private void handleHomeButtonMouseExit(MouseEvent event) {
-        homeImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "home.png")));
-    }
-
-    private void handleBookshelfButtonMouseEnter(MouseEvent mouseEvent) {
-        bookshelfImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookshelf-white.png")));
-    }
-
-    private void handleBookshelfButtonMouseExit(MouseEvent mouseEvent) {
-        bookshelfImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookshelf.png")));
-    }
-
-    private void handleGetAllButtonMouseEnter(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll-white.png")));
-    }
-
-    private void handleGetAllButtonMouseExit(MouseEvent event) {
-        getAllImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "getAll.png")));
-    }
-
-    private void handleBookmarkButtonMouseEnter(MouseEvent mouseEvent) {
-        bookmarkImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookmark-white.png")));
-    }
-
-    private void handleBookmarkButtonMouseExit(MouseEvent mouseEvent) {
-        bookmarkImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "bookmark.png")));
-    }
-
-    private void handleFinishedButtonMouseEnter(MouseEvent mouseEvent) {
-        finishedImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "finished-white.png")));
-    }
-
-    private void handleFinishedButtonMouseExit(MouseEvent mouseEvent) {
-        finishedImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "finished.png")));
-    }
-
-    private void handleBooksButtonMouseEnter(MouseEvent mouseEvent) {
-        booksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "books-white.png")));
-    }
-
-    private void handleBooksButtonMouseExit(MouseEvent mouseEvent) {
-        booksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "books.png")));
-    }
-
-    private void handleAddBooksButtonMouseEnter(MouseEvent event) {
-        addBooksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "upload-white.png")));
-    }
-
-    private void handleAddBooksButtonMouseExit(MouseEvent event) {
-        addBooksImageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + "upload.png")));
     }
 
     @FXML
@@ -182,5 +167,10 @@ public class MenuController {
     @FXML
     private void handleAddBooksMenu() {
         SceneManager.getInstance().setSubScene("addBooks.fxml");
+    }
+
+    @FXML
+    private void handleEditMenu() {
+        SceneManager.getInstance().setSubScene("edit.fxml");
     }
 }
