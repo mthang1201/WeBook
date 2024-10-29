@@ -16,7 +16,7 @@
         </VBox>
     </top>
     <center>
-        <VBox styleClass="vbox">
+        <VBox styleClass="vbox-padding">
             <Pagination fx:id="pagination" />
             <Pane style="-fx-pref-height: 10" />
             <HBox alignment="TOP_CENTER" spacing="10">

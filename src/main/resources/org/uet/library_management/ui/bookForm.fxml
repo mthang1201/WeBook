@@ -14,7 +14,7 @@
         </VBox>
     </top>
     <center>
-        <VBox styleClass="vbox">
+        <VBox styleClass="vbox-padding">
             <GridPane hgap="10">
                 <Label text="Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <TextField fx:id="titleField" prefHeight="25.0" prefWidth="353.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />

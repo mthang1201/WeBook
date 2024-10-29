@@ -9,7 +9,7 @@
             styleClass="content-pane">
     <top>
         <VBox>
-            <Label styleClass="head-label" text="Đang mượn" />
+            <Label styleClass="head-label" text="Tất cả" />
             <Separator styleClass="separator" />
         </VBox>
     </top>
