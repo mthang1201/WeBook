@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 
 public class AdminMenuController {
@@ -18,12 +19,14 @@ public class AdminMenuController {
     @FXML public Button loanButton;
     @FXML public Button editButton;
     @FXML public Button usernameButton;
+    @FXML public Button logoutButton;
 
     @FXML public ImageView homeImageView;
     @FXML public ImageView userImageView;
     @FXML public ImageView loanImageView;
     @FXML public ImageView editImageView;
     @FXML public ImageView usernameImageView;
+    @FXML public ImageView logoutImageView;
 
     @FXML
     public void initialize() {
@@ -79,5 +82,11 @@ public class AdminMenuController {
     @FXML
     private void handleEditMenu() {
         SceneManager.getInstance().setSubScene("admin/edit.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
+    private void handleLogoutMenu() {
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

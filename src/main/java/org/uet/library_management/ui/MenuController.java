@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.tools.Mediator;
 
@@ -27,6 +28,7 @@ public class MenuController {
     @FXML public Button booksButton;
     @FXML public Button addBooksButton;
     @FXML public Button usernameButton;
+    @FXML public Button logoutButton;
 
     @FXML public ImageView homeImageView;
     @FXML public ImageView getAllImageView;
@@ -36,6 +38,7 @@ public class MenuController {
     @FXML public ImageView booksImageView;
     @FXML public ImageView addBooksImageView;
     @FXML public ImageView usernameImageView;
+    @FXML public ImageView logoutImageView;
 
     private Timer timer;
 
@@ -158,5 +161,11 @@ public class MenuController {
     @FXML
     private void handleAddBooksMenu() {
         SceneManager.getInstance().setSubScene("addBooks.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
+    private void handleLogoutMenu() {
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

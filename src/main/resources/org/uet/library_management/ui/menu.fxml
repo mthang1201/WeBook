@@ -80,11 +80,22 @@
         <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
         <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
     </VBox>
-    <Button fx:id="usernameButton" styleClass="username-button" text="Anonymous">
-        <graphic>
-            <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
-                <Image url="@../icons/avatar-male.png" />
-            </ImageView>
-        </graphic>
-    </Button>
+
+    <HBox>
+        <Button fx:id="usernameButton" styleClass="username-button" text="Anonymous">
+            <graphic>
+                <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
+                    <Image url="@../icons/avatar-male.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="logoutButton" styleClass="logout-button" onAction="#handleLogoutMenu">
+            <graphic>
+                <ImageView fx:id="logoutImageView" fitHeight="40" fitWidth="40">
+                    <Image url="@../icons/logout.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
 </VBox>
