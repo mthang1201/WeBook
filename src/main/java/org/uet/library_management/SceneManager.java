@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneManager {
+    private static final int SCREEN_WIDTH = 1000;
+
+    private static final int SCREEN_HEIGHT = 530;
+
     private static final String PREFIX_URL = "ui/";
 
     @FXML
@@ -34,7 +38,7 @@ public class SceneManager {
     public void setScene(String sceneName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 530);
+        Scene scene = new Scene(fxmlLoader.load(), SCREEN_WIDTH, SCREEN_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("styles/auth.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());

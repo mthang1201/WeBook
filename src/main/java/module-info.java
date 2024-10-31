@@ -13,6 +13,7 @@ module org.uet.library_management {
 
     opens org.uet.library_management to javafx.fxml;
     opens org.uet.library_management.ui to javafx.fxml;
+    opens org.uet.library_management.ui.admin to javafx.fxml;
 //    opens org.uet.library_management.ui.auth to javafx.fxml;
 //    opens org.uet.library_management.core.entities to javafx.fxml;
 //    opens org.uet.library_management.core.entities.documents to javafx.fxml;
@@ -23,6 +24,7 @@ module org.uet.library_management {
 
     exports org.uet.library_management;
     exports org.uet.library_management.ui;
+    exports org.uet.library_management.ui.admin;
     exports org.uet.library_management.ui.auth;
     exports org.uet.library_management.core.entities;
     exports org.uet.library_management.core.entities.documents;

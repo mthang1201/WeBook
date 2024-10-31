@@ -1,17 +1,18 @@
-package org.uet.library_management.ui;
+package org.uet.library_management.ui.admin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.uet.library_management.SceneManager;
-import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.tools.Mediator;
 
-public class BookFormController {
-    private BookService service;
+public class LoanFormController {
+    private LoanService service;
 
-    @FXML private TextField titleField;
+    @FXML
+    private TextField titleField;
     @FXML private TextField authorsField;
     @FXML private TextField isbn13Field;
     @FXML private TextField descriptionField;
@@ -23,16 +24,16 @@ public class BookFormController {
 
     @FXML
     private void initialize() {
-        service = new BookService();
+        service = new LoanService();
 
-        Book book = Mediator.book;
-        if (book != null) {
+        Loan loan = Mediator.loan;
+        if (loan != null) {
             createMethod = false;
-            titleField.setText(book.getTitle());
-            authorsField.setText(book.getAuthors());
-            isbn13Field.setText(book.getIsbn13());
-            descriptionField.setText(book.getDescription());
-            categoriesField.setText(book.getCategories());
+            titleField.setText(loan.getLoanDate());
+            authorsField.setText(loan.getDueDate());
+            isbn13Field.setText(loan.getStatus());
+            descriptionField.setText(loan.getDocumentId());
+            categoriesField.setText(loan.getUserId());
         }
     }
 
@@ -54,22 +55,23 @@ public class BookFormController {
     private void handleSaveForm() {
 //        if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
 
-        Book book = new Book();
+        Loan loan = new Loan();
 
-        book.setTitle(titleField.getText());
-        book.setAuthors(authorsField.getText());
-        book.setIsbn13(isbn13Field.getText());
-        book.setDescription(descriptionField.getText());
-        book.setCategories(categoriesField.getText());
+        loan.setLoanDate(titleField.getText());
+        loan.setDueDate(authorsField.getText());
+        loan.setStatus(isbn13Field.getText());
+        loan.setDocumentId(descriptionField.getText());
+        loan.setUserId(categoriesField.getText());
 
         if (createMethod) {
-            service.add(book);
+            service.add(loan);
         }
         else {
-            book.setDocumentId(Mediator.book.getDocumentId());
-            service.update(book);
+            loan.setDocumentId(Mediator.loan.getDocumentId());
+            service.update(loan);
         }
 
         returnToEdit();
     }
 }
+

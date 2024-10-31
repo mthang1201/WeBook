@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.uet.library_management.ui.admin.DashboardController"
+            styleClass="content-pane">
+    <top>
+        <VBox>
+            <Label styleClass="head-label" text="Dashboard" />
+            <Separator styleClass="separator" />
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane fx:id="scrollpane" styleClass="scroll-pane">
+            <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+        </ScrollPane>
+    </center>
+</BorderPane>
