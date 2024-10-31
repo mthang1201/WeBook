@@ -32,8 +32,8 @@ public class UserPageController {
     }
 
     private int calculatePageCount() {
-        int totalWords = service.countAll();
-        return (int) Math.ceil((double) totalWords / PAGE_SIZE);
+        int totalEntites = service.countAll();
+        return (int) Math.ceil((double) totalEntites / PAGE_SIZE);
     }
 
     private GridPane createPage(int pageIndex) {
@@ -113,8 +113,18 @@ public class UserPageController {
     }
 
     private void handleRemove(User user) {
+        int currentPageIndex = pagination.getCurrentPageIndex();
         service.remove(user);
+
+        int newPageCount = calculatePageCount();
+
+        if (currentPageIndex >= newPageCount) {
+            currentPageIndex = Math.max(currentPageIndex - 1, 0);
+        }
+
+        pagination.setPageCount(newPageCount);
         pagination.setPageFactory(this::createPage);
+        pagination.setCurrentPageIndex(currentPageIndex);
     }
 
     @FXML

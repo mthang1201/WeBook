@@ -14,8 +14,12 @@
         </VBox>
     </top>
     <center>
-        <FlowPane fx:id="flowPane" styleClass="flow-pane" />
-        <VBox alignment="CENTER" spacing="10">
+        <ScrollPane fx:id="verticalScrollpane" styleClass="vertical-scroll-pane" fitToWidth="true" pannable="true">
+            <content>
+                <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+            </content>
+        </ScrollPane>
+        <VBox fx:id="noBooksVbox" alignment="CENTER" spacing="10">
             <Label text="Không có sách" />
             <Label text="Để thêm vào bộ sưu tập này, hãy bấm vào bất kỳ sách nào trong giá sách và chọn Muốn đọc" />
         </VBox>

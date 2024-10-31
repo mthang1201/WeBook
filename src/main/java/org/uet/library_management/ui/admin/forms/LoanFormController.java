@@ -67,7 +67,7 @@ public class LoanFormController {
             service.add(loan);
         }
         else {
-            loan.setDocumentId(Mediator.loan.getDocumentId());
+            loan.setLoanId(Mediator.loan.getLoanId());
             service.update(loan);
         }
 

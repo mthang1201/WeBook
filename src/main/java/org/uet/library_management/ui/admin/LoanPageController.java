@@ -30,8 +30,8 @@ public class LoanPageController {
     }
 
     private int calculatePageCount() {
-        int totalWords = service.countAll();
-        return (int) Math.ceil((double) totalWords / PAGE_SIZE);
+        int totalEntites = service.countAll();
+        return (int) Math.ceil((double) totalEntites / PAGE_SIZE);
     }
 
     private GridPane createPage(int pageIndex) {
@@ -111,8 +111,18 @@ public class LoanPageController {
     }
 
     private void handleRemove(Loan loan) {
+        int currentPageIndex = pagination.getCurrentPageIndex();
         service.remove(loan);
+
+        int newPageCount = calculatePageCount();
+
+        if (currentPageIndex >= newPageCount) {
+            currentPageIndex = Math.max(currentPageIndex - 1, 0);
+        }
+
+        pagination.setPageCount(newPageCount);
         pagination.setPageFactory(this::createPage);
+        pagination.setCurrentPageIndex(currentPageIndex);
     }
 
     @FXML

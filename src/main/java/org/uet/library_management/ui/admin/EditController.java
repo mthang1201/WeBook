@@ -16,22 +16,22 @@ public class EditController {
     @FXML
     private Pagination pagination;
 
-    private BookService bookService;
+    private BookService service;
     private static final int PAGE_SIZE = 6;
 
 //    private static final Map<Integer, List<Book>> booksCache = new LinkedHashMap<>();
 
     @FXML
     private void initialize() {
-        bookService = new BookService();
+        service = new BookService();
 
         pagination.setPageCount(calculatePageCount());
         pagination.setPageFactory(this::createPage);
     }
 
     private int calculatePageCount() {
-        int totalWords = bookService.countAll();
-        return (int) Math.ceil((double) totalWords / PAGE_SIZE);
+        int totalEntites = service.countAll();
+        return (int) Math.ceil((double) totalEntites / PAGE_SIZE);
     }
 
     private GridPane createPage(int pageIndex) {
@@ -47,10 +47,10 @@ public class EditController {
 
     private void reloadPage(int pageIndex, GridPane pageGrid) {
 //        if (!booksCache.containsKey(pageIndex)) {
-//            booksCache.put(pageIndex, bookService.findAllByPage(pageIndex + 1, PAGE_SIZE));
+//            booksCache.put(pageIndex, service.findAllByPage(pageIndex + 1, PAGE_SIZE));
 //        }
 //        List<Book> books = booksCache.get(pageIndex);
-        List<Book> books = bookService.findAllByPage(pageIndex + 1, PAGE_SIZE);
+        List<Book> books = service.findAllByPage(pageIndex + 1, PAGE_SIZE);
 
         addLabelToGridPane(pageGrid, "Title", 1, 0);
         addLabelToGridPane(pageGrid, "Authors", 2, 0);
@@ -111,8 +111,18 @@ public class EditController {
     }
 
     private void handleRemove(Book book) {
-        bookService.remove(book);
+        int currentPageIndex = pagination.getCurrentPageIndex();
+        service.remove(book);
+
+        int newPageCount = calculatePageCount();
+
+        if (currentPageIndex >= newPageCount) {
+            currentPageIndex = Math.max(currentPageIndex - 1, 0);
+        }
+
+        pagination.setPageCount(newPageCount);
         pagination.setPageFactory(this::createPage);
+        pagination.setCurrentPageIndex(currentPageIndex);
     }
 
     @FXML

@@ -52,7 +52,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         }
     }
 
-    private T populateDocument(ResultSet rs) throws SQLException {
+    protected T populateDocument(ResultSet rs) throws SQLException {
         Document document = createDocument();
         document.setDocumentId(rs.getInt("documentId"));
         document.setTitle(rs.getString("title"));

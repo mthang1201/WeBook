@@ -52,7 +52,7 @@ public class LoginController {
         }
 
         if (user.get().getPrivileges().equals("Admin")) {
-            SceneManager.getInstance().setScene("admin.fxml");
+            SceneManager.getInstance().setScene("admin/admin.fxml");
         } else {
             SceneManager.getInstance().setScene("main.fxml");
         }
