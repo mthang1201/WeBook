@@ -104,7 +104,7 @@ public class UserPageController {
 
     private void openUserForm(User user) {
         Mediator.user = user;
-        SceneManager.getInstance().setSubScene("admin/userForm.fxml");
+        SceneManager.getInstance().setSubScene("admin/forms/userForm.fxml");
     }
 
     @FXML

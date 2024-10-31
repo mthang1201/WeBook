@@ -1,18 +1,17 @@
-package org.uet.library_management.ui.admin;
+package org.uet.library_management.ui.admin.forms;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.uet.library_management.SceneManager;
-import org.uet.library_management.core.entities.Loan;
-import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
 
-public class LoanFormController {
-    private LoanService service;
+public class BookFormController {
+    private BookService service;
 
-    @FXML
-    private TextField titleField;
+    @FXML private TextField titleField;
     @FXML private TextField authorsField;
     @FXML private TextField isbn13Field;
     @FXML private TextField descriptionField;
@@ -24,16 +23,16 @@ public class LoanFormController {
 
     @FXML
     private void initialize() {
-        service = new LoanService();
+        service = new BookService();
 
-        Loan loan = Mediator.loan;
-        if (loan != null) {
+        Book book = Mediator.book;
+        if (book != null) {
             createMethod = false;
-            titleField.setText(loan.getLoanDate());
-            authorsField.setText(loan.getDueDate());
-            isbn13Field.setText(loan.getStatus());
-            descriptionField.setText(loan.getDocumentId());
-            categoriesField.setText(loan.getUserId());
+            titleField.setText(book.getTitle());
+            authorsField.setText(book.getAuthors());
+            isbn13Field.setText(book.getIsbn13());
+            descriptionField.setText(book.getDescription());
+            categoriesField.setText(book.getCategories());
         }
     }
 
@@ -48,30 +47,29 @@ public class LoanFormController {
 
     @FXML
     private void returnToEdit() {
-        SceneManager.getInstance().setSubScene("edit.fxml");
+        SceneManager.getInstance().setSubScene("admin/edit.fxml");
     }
 
     @FXML
     private void handleSaveForm() {
 //        if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
 
-        Loan loan = new Loan();
+        Book book = new Book();
 
-        loan.setLoanDate(titleField.getText());
-        loan.setDueDate(authorsField.getText());
-        loan.setStatus(isbn13Field.getText());
-        loan.setDocumentId(descriptionField.getText());
-        loan.setUserId(categoriesField.getText());
+        book.setTitle(titleField.getText());
+        book.setAuthors(authorsField.getText());
+        book.setIsbn13(isbn13Field.getText());
+        book.setDescription(descriptionField.getText());
+        book.setCategories(categoriesField.getText());
 
         if (createMethod) {
-            service.add(loan);
+            service.add(book);
         }
         else {
-            loan.setDocumentId(Mediator.loan.getDocumentId());
-            service.update(loan);
+            book.setDocumentId(Mediator.book.getDocumentId());
+            service.update(book);
         }
 
         returnToEdit();
     }
 }
-

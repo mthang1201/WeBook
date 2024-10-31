@@ -5,7 +5,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.admin.UserFormController"
+            fx:controller="org.uet.library_management.ui.admin.forms.UserFormController"
             styleClass="content-pane">
     <top>
         <VBox>

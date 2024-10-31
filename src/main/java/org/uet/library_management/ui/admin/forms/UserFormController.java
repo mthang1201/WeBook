@@ -1,17 +1,18 @@
-package org.uet.library_management.ui;
+package org.uet.library_management.ui.admin.forms;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.uet.library_management.SceneManager;
-import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.core.entities.User;
+import org.uet.library_management.core.services.UserService;
 import org.uet.library_management.tools.Mediator;
 
-public class BookFormController {
-    private BookService service;
+public class UserFormController {
+    private UserService service;
 
-    @FXML private TextField titleField;
+    @FXML
+    private TextField titleField;
     @FXML private TextField authorsField;
     @FXML private TextField isbn13Field;
     @FXML private TextField descriptionField;
@@ -23,16 +24,16 @@ public class BookFormController {
 
     @FXML
     private void initialize() {
-        service = new BookService();
+        service = new UserService();
 
-        Book book = Mediator.book;
-        if (book != null) {
+        User user = Mediator.user;
+        if (user != null) {
             createMethod = false;
-            titleField.setText(book.getTitle());
-            authorsField.setText(book.getAuthors());
-            isbn13Field.setText(book.getIsbn13());
-            descriptionField.setText(book.getDescription());
-            categoriesField.setText(book.getCategories());
+            titleField.setText(user.getName());
+            authorsField.setText(user.getEmail());
+            isbn13Field.setText(user.getAddress());
+            descriptionField.setText(user.getMembershipStatus());
+            categoriesField.setText(user.getPrivileges());
         }
     }
 
@@ -47,29 +48,30 @@ public class BookFormController {
 
     @FXML
     private void returnToEdit() {
-        SceneManager.getInstance().setSubScene("edit.fxml");
+        SceneManager.getInstance().setSubScene("admin/userPage.fxml");
     }
 
     @FXML
     private void handleSaveForm() {
 //        if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
 
-        Book book = new Book();
+        User user = new User();
 
-        book.setTitle(titleField.getText());
-        book.setAuthors(authorsField.getText());
-        book.setIsbn13(isbn13Field.getText());
-        book.setDescription(descriptionField.getText());
-        book.setCategories(categoriesField.getText());
+        user.setName(titleField.getText());
+        user.setEmail(authorsField.getText());
+        user.setAddress(isbn13Field.getText());
+        user.setMembershipStatus(descriptionField.getText());
+        user.setPrivileges(categoriesField.getText());
 
         if (createMethod) {
-            service.add(book);
+            service.add(user);
         }
         else {
-            book.setDocumentId(Mediator.book.getDocumentId());
-            service.update(book);
+            user.setUserId(Mediator.user.getUserId());
+            service.update(user);
         }
 
         returnToEdit();
     }
 }
+

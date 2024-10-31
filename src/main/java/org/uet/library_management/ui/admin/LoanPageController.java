@@ -102,7 +102,7 @@ public class LoanPageController {
 
     private void openLoanForm(Loan loan) {
         Mediator.loan = loan;
-        SceneManager.getInstance().setSubScene("admin/loanForm.fxml");
+        SceneManager.getInstance().setSubScene("admin/forms/loanForm.fxml");
     }
 
     @FXML

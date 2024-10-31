@@ -26,7 +26,6 @@ public class MenuController {
     @FXML public Button finishedButton;
     @FXML public Button booksButton;
     @FXML public Button addBooksButton;
-    @FXML public Button editButton;
     @FXML public Button usernameButton;
 
     @FXML public ImageView homeImageView;
@@ -36,7 +35,6 @@ public class MenuController {
     @FXML public ImageView finishedImageView;
     @FXML public ImageView booksImageView;
     @FXML public ImageView addBooksImageView;
-    @FXML public ImageView editImageView;
     @FXML public ImageView usernameImageView;
 
     private Timer timer;
@@ -117,13 +115,6 @@ public class MenuController {
         addBooksButton.setOnMouseExited(event ->
                 handleButtonHover("upload", addBooksImageView)
         );
-
-        editButton.setOnMouseEntered(event ->
-                handleButtonHover("edit-white", editImageView)
-        );
-        editButton.setOnMouseExited(event ->
-                handleButtonHover("edit", editImageView)
-        );
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {
@@ -167,10 +158,5 @@ public class MenuController {
     @FXML
     private void handleAddBooksMenu() {
         SceneManager.getInstance().setSubScene("addBooks.fxml");
-    }
-
-    @FXML
-    private void handleEditMenu() {
-        SceneManager.getInstance().setSubScene("edit.fxml");
     }
 }

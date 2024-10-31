@@ -1,15 +1,15 @@
-package org.uet.library_management.ui.admin;
+package org.uet.library_management.ui.admin.forms;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.uet.library_management.SceneManager;
-import org.uet.library_management.core.entities.User;
-import org.uet.library_management.core.services.UserService;
+import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.tools.Mediator;
 
-public class UserFormController {
-    private UserService service;
+public class LoanFormController {
+    private LoanService service;
 
     @FXML
     private TextField titleField;
@@ -24,16 +24,16 @@ public class UserFormController {
 
     @FXML
     private void initialize() {
-        service = new UserService();
+        service = new LoanService();
 
-        User user = Mediator.user;
-        if (user != null) {
+        Loan loan = Mediator.loan;
+        if (loan != null) {
             createMethod = false;
-            titleField.setText(user.getName());
-            authorsField.setText(user.getEmail());
-            isbn13Field.setText(user.getAddress());
-            descriptionField.setText(user.getMembershipStatus());
-            categoriesField.setText(user.getPrivileges());
+            titleField.setText(loan.getLoanDate());
+            authorsField.setText(loan.getDueDate());
+            isbn13Field.setText(loan.getStatus());
+            descriptionField.setText(loan.getDocumentId());
+            categoriesField.setText(loan.getUserId());
         }
     }
 
@@ -48,27 +48,27 @@ public class UserFormController {
 
     @FXML
     private void returnToEdit() {
-        SceneManager.getInstance().setSubScene("edit.fxml");
+        SceneManager.getInstance().setSubScene("admin/loanPage.fxml");
     }
 
     @FXML
     private void handleSaveForm() {
 //        if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
 
-        User user = new User();
+        Loan loan = new Loan();
 
-        user.setName(titleField.getText());
-        user.setEmail(authorsField.getText());
-        user.setAddress(isbn13Field.getText());
-        user.setMembershipStatus(descriptionField.getText());
-        user.setPrivileges(categoriesField.getText());
+        loan.setLoanDate(titleField.getText());
+        loan.setDueDate(authorsField.getText());
+        loan.setStatus(isbn13Field.getText());
+        loan.setDocumentId(descriptionField.getText());
+        loan.setUserId(categoriesField.getText());
 
         if (createMethod) {
-            service.add(user);
+            service.add(loan);
         }
         else {
-            user.setUserId(Mediator.user.getUserId());
-            service.update(user);
+            loan.setDocumentId(Mediator.loan.getDocumentId());
+            service.update(loan);
         }
 
         returnToEdit();

@@ -5,11 +5,11 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.BookFormController"
+            fx:controller="org.uet.library_management.ui.admin.forms.LoanFormController"
             styleClass="content-pane">
     <top>
         <VBox>
-            <Label styleClass="head-label" text="BookForm" />
+            <Label styleClass="head-label" text="LoanForm" />
             <Separator styleClass="separator" />
         </VBox>
     </top>

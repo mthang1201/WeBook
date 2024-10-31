@@ -48,10 +48,10 @@
         </Button>
     </VBox>
 
-    <Button fx:id="usernameButton" styleClass="username-button" text="Anonymous">
+    <Button fx:id="usernameButton" styleClass="username-button" text="Admin">
         <graphic>
             <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
-                <Image url="@../../icons/avatar-male.png" />
+                <Image url="@../../icons/avatar-female.png" />
             </ImageView>
         </graphic>
     </Button>

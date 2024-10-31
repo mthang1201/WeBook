@@ -1,4 +1,4 @@
-package org.uet.library_management.ui;
+package org.uet.library_management.ui.admin;
 
 import org.uet.library_management.SceneManager;
 import javafx.fxml.FXML;
@@ -10,9 +10,7 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EditController {
     @FXML
@@ -104,7 +102,7 @@ public class EditController {
 
     private void openBookForm(Book book) {
         Mediator.book = book;
-        SceneManager.getInstance().setSubScene("bookForm.fxml");
+        SceneManager.getInstance().setSubScene("admin/forms/bookForm.fxml");
     }
 
     @FXML

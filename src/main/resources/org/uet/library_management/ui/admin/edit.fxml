@@ -7,7 +7,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.EditController"
+            fx:controller="org.uet.library_management.ui.admin.EditController"
             styleClass="content-pane">
     <top>
         <VBox>
@@ -26,7 +26,7 @@
                     <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/previous.png" />
+                                <Image url="@../../icons/previous.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -36,7 +36,7 @@
                     <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/nextPage.png" />
+                                <Image url="@../../icons/nextPage.png" />
                             </image>
                         </ImageView>
                     </graphic>

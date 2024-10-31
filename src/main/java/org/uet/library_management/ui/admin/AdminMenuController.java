@@ -78,6 +78,6 @@ public class AdminMenuController {
 
     @FXML
     private void handleEditMenu() {
-        SceneManager.getInstance().setSubScene("edit.fxml");
+        SceneManager.getInstance().setSubScene("admin/edit.fxml");
     }
 }
