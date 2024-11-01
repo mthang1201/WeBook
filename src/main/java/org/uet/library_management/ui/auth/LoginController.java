@@ -9,6 +9,7 @@ import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.uet.library_management.tools.SessionManager;
 
 import java.util.Optional;
 
@@ -50,6 +51,8 @@ public class LoginController {
             System.out.println("Invalid credentials. Please try again.");
             return;
         }
+
+        SessionManager.user = user.get();
 
         if (user.get().getPrivileges().equals("Admin")) {
             SceneManager.getInstance().setScene("admin/admin.fxml");

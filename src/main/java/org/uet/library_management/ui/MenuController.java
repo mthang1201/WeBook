@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.tools.Mediator;
+import org.uet.library_management.tools.SessionManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -118,6 +119,12 @@ public class MenuController {
         addBooksButton.setOnMouseExited(event ->
                 handleButtonHover("upload", addBooksImageView)
         );
+
+        if (SessionManager.user != null) {
+            usernameButton.setText(SessionManager.user.getName());
+        } else {
+            usernameButton.setText("Anonymous");
+        }
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {
@@ -163,9 +170,15 @@ public class MenuController {
         SceneManager.getInstance().setSubScene("addBooks.fxml");
     }
 
+    @FXML
+    private void handleSettingsMenu() {
+//        SceneManager.getInstance().setSubScene("settings.fxml");
+    }
+
     @SneakyThrows
     @FXML
     private void handleLogoutMenu() {
+        SessionManager.user = null;
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

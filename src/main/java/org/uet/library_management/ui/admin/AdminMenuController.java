@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.tools.SessionManager;
 
 public class AdminMenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
@@ -58,6 +59,12 @@ public class AdminMenuController {
         editButton.setOnMouseExited(event ->
                 handleButtonHover("edit", editImageView)
         );
+
+        if (SessionManager.user != null) {
+            usernameButton.setText(SessionManager.user.getName());
+        } else {
+            usernameButton.setText("Test");
+        }
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {
@@ -87,6 +94,7 @@ public class AdminMenuController {
     @SneakyThrows
     @FXML
     private void handleLogoutMenu() {
+        SessionManager.user = null;
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }
