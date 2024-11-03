@@ -2,26 +2,19 @@ package org.uet.library_management.ui.search;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
-import org.uet.library_management.tools.ImageCacheManager;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.UIBuilder;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class SuggestSearchController {
     @FXML public ScrollPane verticalScrollpane;
@@ -37,8 +30,6 @@ public class SuggestSearchController {
     @FXML public VBox topResultsVbox;
 
     private Timer timer;
-
-//    private static final Map<String, List<Book>> booksCache = new LinkedHashMap<>();
 
     @FXML
     public void initialize() {
@@ -69,16 +60,16 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
-//            SearchContext searchContext = new SearchContext();
-//            searchContext.setStrategy(new SearchByTitle());
-//            return searchContext.executeSearch(searchText);
             BookService service = new BookService();
+            List<Book> books = service.findByTitle(searchText);
 
-//            if (!booksCache.containsKey(searchText)) {
-//                booksCache.put(searchText, service.findByTitle(searchText));
-//            }
-//            return booksCache.get(searchText);
-            return service.findByTitle(searchText);
+            if (!books.isEmpty()) {
+                return books;
+            } else {
+                SearchContext searchContext = new SearchContext();
+                searchContext.setStrategy(new SearchByTitle());
+                return searchContext.executeSearch(searchText);
+            }
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateUI(books);
