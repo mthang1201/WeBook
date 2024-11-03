@@ -63,7 +63,7 @@ public class LoanPageController {
             addLabelToGridPane(pageGrid, loan.getLoanDate(), 1, rowIndex);
             addLabelToGridPane(pageGrid, loan.getDueDate(), 2, rowIndex);
             addLabelToGridPane(pageGrid, loan.getStatus(), 3, rowIndex);
-            addLabelToGridPane(pageGrid, loan.getDocumentId(), 4, rowIndex);
+            addLabelToGridPane(pageGrid, loan.getIsbn13(), 4, rowIndex);
             addLabelToGridPane(pageGrid, loan.getUserId(), 5, rowIndex);
 
             Button editButton = new Button("Edit");

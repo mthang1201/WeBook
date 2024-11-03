@@ -2,6 +2,7 @@ package org.uet.library_management.core.repositories;
 
 import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.entities.Loan;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,29 +19,31 @@ public class LoanRepository implements MySQLRepository<Loan> {
         db_table = "loans";
     }
 
+    private Loan populateLoan(ResultSet rs) throws SQLException {
+        Loan loan = new Loan();
+        loan.setLoanId(rs.getInt("loanId"));
+        loan.setLoanDate(rs.getString("loanDate"));
+        loan.setDueDate(rs.getString("dueDate"));
+        loan.setReturnDate(rs.getString("returnDate"));
+        loan.setStatus(rs.getString("status"));
+        loan.setIsbn13(rs.getString("isbn13"));
+        loan.setTitle(rs.getString("title"));
+        loan.setUserId(rs.getString("userId"));
+
+        return loan;
+    }
+
     @Override
     public List<Loan> findAll() {
         List<Loan> loans = new ArrayList<>();
-
         String query = "SELECT * FROM " + db_table;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Loan loan = new Loan();
-                loan.setLoanId(rs.getInt("loanId"));
-                loan.setLoanDate(rs.getString("loanDate"));
-                loan.setDueDate(rs.getString("dueDate"));
-                loan.setReturnDate(rs.getString("returnDate"));
-                loan.setStatus(rs.getString("status"));
-                loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("userId"));
 
-                loans.add(loan);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while (rs.next()) {
+                loans.add(populateLoan(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return loans;
@@ -51,24 +54,13 @@ public class LoanRepository implements MySQLRepository<Loan> {
         List<Loan> loans = new ArrayList<>();
         int offset = (page - 1) * pageSize;
         String query = "SELECT * FROM " + db_table + " LIMIT " + pageSize + " OFFSET " + offset;
-        ResultSet rs = connectJDBC.executeQuery(query);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Loan loan = new Loan();
-                loan.setLoanId(rs.getInt("loanId"));
-                loan.setLoanDate(rs.getString("loanDate"));
-                loan.setDueDate(rs.getString("dueDate"));
-                loan.setReturnDate(rs.getString("returnDate"));
-                loan.setStatus(rs.getString("status"));
-                loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("userId"));
 
-                loans.add(loan);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            while (rs.next()) {
+                loans.add(populateLoan(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return loans;
@@ -92,26 +84,14 @@ public class LoanRepository implements MySQLRepository<Loan> {
 
     public List<Loan> findById(int id) {
         List<Loan> loans = new ArrayList<>();
-
         String query = "SELECT * FROM " + db_table + " WHERE id LIKE ?";
-        ResultSet rs = connectJDBC.executeQueryWithParams(query, id);
-        while (true) {
-            try {
-                if (!rs.next()) break;
-                Loan loan = new Loan();
-                loan.setLoanId(rs.getInt("loanId"));
-                loan.setLoanDate(rs.getString("loanDate"));
-                loan.setDueDate(rs.getString("dueDate"));
-                loan.setReturnDate(rs.getString("returnDate"));
-                loan.setStatus(rs.getString("status"));
-                loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("userId"));
 
-                loans.add(loan);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+            while (rs.next()) {
+                loans.add(populateLoan(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return loans;
@@ -121,17 +101,17 @@ public class LoanRepository implements MySQLRepository<Loan> {
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +
                 "comments, userId) VALUES (?, ?, ?, ?, ?, ?)";
-        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
-                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getUserId());
+//        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
+//                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getLoanId());
     }
 
     @Override
     public void update(Loan loan) {
         String query = "UPDATE " + db_table + " SET loanDate = ?, dueDate = ?, returnDate = ?, " +
                 "status = ?, comments = ?, userId = ? WHERE loanId = ?";
-        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
-                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getUserId(),
-                loan.getLoanId());
+//        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
+//                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getLoanId(),
+//                loan.getLoanId());
     }
 
     @Override
