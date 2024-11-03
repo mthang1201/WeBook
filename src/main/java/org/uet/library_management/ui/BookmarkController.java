@@ -40,7 +40,7 @@ public class BookmarkController {
         List<Bookmark> bookmarks = bookmarkService.findByUserId(SessionManager.user.getUserId());
         List<Book> books = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
-            Optional<Book> book = bookService.findById(bookmark.getDocumentId());
+            Optional<Book> book = bookService.findById(bookmark.getIsbn13());
 
             book.ifPresent(books::add);
         }

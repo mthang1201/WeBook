@@ -152,7 +152,7 @@ public class UIBuilder {
             addToBookmarkButton.setOnAction(e -> {
                Bookmark bookmark = new Bookmark(
                        SessionManager.user.getUserId(),
-                       book.getDocumentId()
+                       book.getIsbn13()
                );
                bookmarkService.add(bookmark);
             });

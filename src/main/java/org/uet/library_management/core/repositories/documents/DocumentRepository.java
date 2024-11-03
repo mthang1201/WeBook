@@ -116,11 +116,11 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return count;
     }
 
-    public Optional<T> findById(int documentId) {
+    public Optional<T> findById(String isbn13) {
         T document = null;
-        String query = "SELECT * FROM " + db_table + " WHERE documentId LIKE ?";
+        String query = "SELECT * FROM " + db_table + " WHERE isbn13 LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, documentId)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {
             while(rs.next()) {
                 document = populateDocument(rs);
             }

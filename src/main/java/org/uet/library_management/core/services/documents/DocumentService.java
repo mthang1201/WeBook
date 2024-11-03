@@ -28,8 +28,8 @@ public class DocumentService<T extends Document> {
         return repository.countAll();
     }
 
-    public Optional<T> findById(int documentId) {
-        return repository.findById(documentId);
+    public Optional<T> findById(String isbn13) {
+        return repository.findById(isbn13);
     }
 
     public List<T> findByTitle(String title) {

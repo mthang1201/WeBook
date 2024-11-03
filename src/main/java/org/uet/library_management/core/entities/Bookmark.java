@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class Bookmark {
     private int userId;
 
-    private int documentId;
+    private String isbn13;
 }

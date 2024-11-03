@@ -21,7 +21,7 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
     private Bookmark populateBookmark(ResultSet rs) throws SQLException {
         Bookmark bookmark = new Bookmark();
         bookmark.setUserId(rs.getInt("userId"));
-        bookmark.setDocumentId(rs.getInt("documentId"));
+        bookmark.setIsbn13(rs.getString("isbn13"));
 
         return bookmark;
     }
@@ -107,20 +107,20 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
 
     @Override
     public void add(Bookmark bookmark) {
-        String query = "INSERT INTO " + db_table + " (userId, documentId) VALUES (?, ?)";
-        connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getDocumentId());
+        String query = "INSERT INTO " + db_table + " (userId, isbn13) VALUES (?, ?)";
+        connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getIsbn13());
     }
 
     @Override
     public void update(Bookmark bookmark) {
-        String query = "UPDATE " + db_table + " SET documentId = ? WHERE userId = ?";
-        connectJDBC.executeUpdate(query, bookmark.getDocumentId(), bookmark.getUserId());
+        String query = "UPDATE " + db_table + " SET isbn13 = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query, bookmark.getIsbn13(), bookmark.getUserId());
     }
 
     @Override
     public void remove(Bookmark bookmark) {
-        String query = "DELETE FROM " + db_table + " WHERE userId = ? AND documentId = ?";
-        connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getDocumentId());
+        String query = "DELETE FROM " + db_table + " WHERE userId = ? AND isbn13 = ?";
+        connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getIsbn13());
     }
 
     @Override
