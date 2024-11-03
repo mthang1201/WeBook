@@ -13,7 +13,9 @@ import javafx.scene.layout.VBox;
 import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
+import org.uet.library_management.core.services.PreferenceService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -113,6 +115,7 @@ public class UIBuilder {
     public static VBox generateTopResults(List<Book> books) {
         VBox topResultsVbox = new VBox();
         BookmarkService bookmarkService = new BookmarkService();
+        PreferenceService preferenceService = new PreferenceService();
 
         for (Book book : books) {
             //service.add(book);
@@ -155,6 +158,10 @@ public class UIBuilder {
                        book.getIsbn13()
                );
                bookmarkService.add(bookmark);
+
+               //add category
+                List<String> bookCategory = Arrays.asList(book.getCategories().split(",\\s*"));
+                preferenceService.addPreferenceForUser(bookmark.getUserId(), bookCategory);
             });
 
             vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
