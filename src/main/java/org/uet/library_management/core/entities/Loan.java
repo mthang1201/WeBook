@@ -21,9 +21,9 @@ public class Loan {
 
     private String status;
 
-    private String comments;
+    private String isbn13;
 
-    private String documentId;
+    private String title;
 
     private String userId;
 }

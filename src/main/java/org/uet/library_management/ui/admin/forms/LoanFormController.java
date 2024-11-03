@@ -32,7 +32,7 @@ public class LoanFormController {
             titleField.setText(loan.getLoanDate());
             authorsField.setText(loan.getDueDate());
             isbn13Field.setText(loan.getStatus());
-            descriptionField.setText(loan.getDocumentId());
+            descriptionField.setText(loan.getIsbn13());
             categoriesField.setText(loan.getUserId());
         }
     }
@@ -60,7 +60,7 @@ public class LoanFormController {
         loan.setLoanDate(titleField.getText());
         loan.setDueDate(authorsField.getText());
         loan.setStatus(isbn13Field.getText());
-        loan.setDocumentId(descriptionField.getText());
+        loan.setIsbn13(descriptionField.getText());
         loan.setUserId(categoriesField.getText());
 
         if (createMethod) {
