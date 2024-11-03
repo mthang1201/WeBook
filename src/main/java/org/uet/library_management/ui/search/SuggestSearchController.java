@@ -91,7 +91,7 @@ public class SuggestSearchController {
         inYourLibraryHbox.getChildren().clear();
 
         inYourLibraryHbox.getChildren().addAll(
-                UIBuilder.generateInYourLibrary(books.subList(0, 15))
+                UIBuilder.generateInYourLibrary(books)
         );
 
         topResultsVbox.getChildren().clear();
