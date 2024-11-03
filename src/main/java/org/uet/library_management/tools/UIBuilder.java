@@ -161,7 +161,7 @@ public class UIBuilder {
 
                //add category
                 List<String> bookCategory = Arrays.asList(book.getCategories().split(",\\s*"));
-                preferenceService.addPreferenceForUser(bookmark.getUserId(), bookCategory);
+                preferenceService.addPreferenceForUser(SessionManager.user.getUserId(), bookCategory);
             });
 
             vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
@@ -170,4 +170,42 @@ public class UIBuilder {
         }
         return topResultsVbox;
     }
+
+    public static FlowPane generateRecommendation(List<Book> books) {
+        FlowPane flowPane = new FlowPane();
+        flowPane.setPadding(new Insets(10, 10, 10, 10)); // Set padding for the FlowPane
+        flowPane.setHgap(10);
+        flowPane.setVgap(10);
+        flowPane.setPrefWrapLength(600); // Adjust as needed
+
+        ExecutorService executor = Executors.newFixedThreadPool(5); // Thread pool for asynchronous loading
+
+        for (Book book : books) {
+            VBox vbox = new VBox();
+
+            ImageView imageView = new ImageView();
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(300);
+
+            // Load the image asynchronously
+            CompletableFuture.supplyAsync(() -> ImageCacheManager.getInstance().loadImage(
+                    book.getIsbn13(),
+                    book.getTitle(),
+                    book.getImageLinks()
+            ), executor).thenAccept(image -> {
+                Platform.runLater(() -> {
+                    imageView.setImage(image);
+                });
+            });
+
+            Label titleLabel = new Label(book.getTitle());
+            Label authorsLabel = new Label(book.getAuthors());
+
+            vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
+            flowPane.getChildren().add(vbox);
+        }
+
+        return flowPane;
+    }
+
 }

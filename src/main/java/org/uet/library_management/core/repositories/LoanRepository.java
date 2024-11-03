@@ -34,7 +34,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
                 loan.setReturnDate(rs.getString("returnDate"));
                 loan.setStatus(rs.getString("status"));
                 loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("loanId"));
+                loan.setUserId(rs.getString("userId"));
 
                 loans.add(loan);
 
@@ -62,7 +62,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
                 loan.setReturnDate(rs.getString("returnDate"));
                 loan.setStatus(rs.getString("status"));
                 loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("loanId"));
+                loan.setUserId(rs.getString("userId"));
 
                 loans.add(loan);
 
@@ -105,7 +105,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
                 loan.setReturnDate(rs.getString("returnDate"));
                 loan.setStatus(rs.getString("status"));
                 loan.setComments(rs.getString("comments"));
-                loan.setUserId(rs.getString("loanId"));
+                loan.setUserId(rs.getString("userId"));
 
                 loans.add(loan);
 

@@ -1,5 +1,6 @@
 package org.uet.library_management.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
@@ -10,8 +11,8 @@ import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.SessionManager;
 import org.uet.library_management.tools.UIBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class BookshelfController {
     @FXML
@@ -20,29 +21,26 @@ public class BookshelfController {
     @FXML
     public FlowPane flowPane;
 
-//    private static List<Book> booksCache = new ArrayList<>();
 
     @FXML
     public void initialize() {
         flowPane.setPadding(new Insets(10,10,10,10));
 
-//        SearchContext test = new SearchContext();
-//        test.setStrategy(new SearchByAuthor());
-//        List<Book> searchTest2 = test.executeSearch("python");
-//        searchTest2.sort(new SortByAvgRating());
-
-        BookService service = new BookService();
-
-//        if (booksCache.isEmpty()) {
-//            booksCache = service.findAll();
-//        }
-//        List<Book> books = booksCache;
-        RecommendationService recommendationService = new RecommendationService();
-        List<Book> books = recommendationService.getRecommendationForUsers(SessionManager.user.getUserId());
-
-        flowPane.getChildren().addAll(
-                UIBuilder.createFlowPane(books).getChildren()
-        );
+        CompletableFuture.supplyAsync(() -> {
+            RecommendationService recommendationService = new RecommendationService();
+            return recommendationService.getRecommendationForUsers(SessionManager.user.getUserId());
+        }).thenAccept(books -> {
+            Platform.runLater(() -> {
+                updateUI(books);
+            });
+        });
 
     }
+    private void updateUI(List<Book> books) {
+        flowPane.getChildren().clear();
+        flowPane.getChildren().addAll(
+                UIBuilder.generateRecommendation(books).getChildren()
+        );
+    }
+
 }
