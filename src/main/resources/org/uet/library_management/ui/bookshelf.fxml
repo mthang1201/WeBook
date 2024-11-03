@@ -4,6 +4,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.BookshelfController"
@@ -15,6 +16,10 @@
         </VBox>
     </top>
     <center>
-        <VBox />
+        <ScrollPane fx:id="verticalScrollpane" styleClass="vertical-scroll-pane" fitToWidth="true" pannable="true">
+            <content>
+                <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+            </content>
+        </ScrollPane>
     </center>
 </BorderPane>
