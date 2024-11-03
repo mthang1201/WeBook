@@ -22,7 +22,14 @@ public class RecommendationService {
         searchByCategory.setStrategy(new SearchByCategory());
         String maxCategory = preferenceService.getMaxCategory(userId);
         if (maxCategory != null) {
-            return searchByCategory.executeSearch(maxCategory);
+            List<Book> books = searchByCategory.executeSearch(maxCategory);
+            if (books.size() < 3) {
+                searchByCategory.setStrategy(new SearchByTopRated());
+                return searchByCategory.executeSearch("fiction");
+            }
+            else {
+                return books;
+            }
         } else {
             searchByCategory.setStrategy(new SearchByTopRated());
             return searchByCategory.executeSearch("fiction");
