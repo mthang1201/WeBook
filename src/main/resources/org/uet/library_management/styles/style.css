@@ -34,6 +34,9 @@
     -fx-padding: 40 0 0 40;
 }
 
+.stack-pane {
+}
+
 .vbox {
     -fx-background-color: #ffffff;
 }

@@ -10,7 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.services.BookmarkService;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -110,6 +112,7 @@ public class UIBuilder {
 
     public static VBox generateTopResults(List<Book> books) {
         VBox topResultsVbox = new VBox();
+        BookmarkService bookmarkService = new BookmarkService();
 
         for (Book book : books) {
             //service.add(book);
@@ -147,8 +150,11 @@ public class UIBuilder {
             Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
             Button addToBookmarkButton = new Button("Get");
             addToBookmarkButton.setOnAction(e -> {
-//               BookmarkService bookmarkService = new BookmarkService();
-//               bookmarkSerivce.add(Book);
+               Bookmark bookmark = new Bookmark(
+                       SessionManager.user.getUserId(),
+                       book.getDocumentId()
+               );
+               bookmarkService.add(bookmark);
             });
 
             vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);

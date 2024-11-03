@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserRepository implements MySQLRepository<User> {
-    private String db_table;
+    private final String db_table;
 
     private final ConnectJDBC connectJDBC;
 

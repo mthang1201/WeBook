@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class DocumentRepository<T extends Document> implements MySQLRepository<T> {
     protected String db_table;
@@ -113,6 +114,21 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         }
 
         return count;
+    }
+
+    public Optional<T> findById(int documentId) {
+        T document = null;
+        String query = "SELECT * FROM " + db_table + " WHERE documentId LIKE ?";
+
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, documentId)) {
+            while(rs.next()) {
+                document = populateDocument(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Optional.ofNullable(document);
     }
 
     public List<T> findByTitle(String title) {

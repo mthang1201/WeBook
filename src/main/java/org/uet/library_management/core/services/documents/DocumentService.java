@@ -4,6 +4,7 @@ import org.uet.library_management.core.entities.documents.Document;
 import org.uet.library_management.core.repositories.documents.DocumentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DocumentService<T extends Document> {
     protected DocumentRepository repository;
@@ -25,6 +26,10 @@ public class DocumentService<T extends Document> {
 
     public int countAll() {
         return repository.countAll();
+    }
+
+    public Optional<T> findById(int documentId) {
+        return repository.findById(documentId);
     }
 
     public List<T> findByTitle(String title) {
