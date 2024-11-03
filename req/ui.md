@@ -99,4 +99,42 @@ This document outlines the UI structure and component details for both user and 
 
 ---
 
+## Authentication Pages
+
+### Login
+- **Description**: Page for users to log into the app.
+- **Components**:
+    - **Username Field**: Input field for the username
+        - Width: `80%`
+        - Padding: `10px`
+    - **Password Field**: Input field for password
+        - Width: `80%`
+        - Padding: `10px`
+    - **Login Button**: Button to submit login details
+        - Width: `60%`
+        - Background Color: `#4CAF50`
+    - **Forgot Password Link**: Link to reset password
+- **Preferred Width**: `500px`
+- **Background Color**: `#FFFFFF`
+
+### Register
+- **Description**: Page for new users to create an account.
+- **Components**:
+    - **Username Field**: Input field for the username
+        - Width: `80%`
+        - Padding: `10px`
+    - **Password Field**: Input field for password
+        - Width: `80%`
+        - Padding: `10px`
+    - **Confirm Password Field**: Input field to confirm password
+        - Width: `80%`
+        - Padding: `10px`
+    - **Register Button**: Button to submit registration details
+        - Width: `60%`
+        - Background Color: `#2196F3`
+- **Preferred Width**: `500px`
+- **Background Color**: `#FFFFFF`
+
+---
+
 > Each component is structured with `FlowPane` and `VBox` for layouts, ensuring consistency across the app's pages.
