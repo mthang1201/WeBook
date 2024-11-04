@@ -1,0 +1,33 @@
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.uet.library_management.ui.BookDetailController">
+    <center>
+        <VBox fx:id="bookDetailBox" >
+            <Button fx:id="backButton" text="back" onAction="#onBackButtonClicked"/>
+            <HBox fx:id = "bookInfoBox"  prefHeight="400" prefWidth="600" alignment="CENTER_LEFT">
+                <ImageView fx:id="bookCover" fitWidth="200" fitHeight="400" preserveRatio="true"/>
+                <VBox fx:id="mainDetailBox"  fillWidth="true">
+                    <Label fx:id="title" />
+                    <Label fx:id="author"/>
+                    <HBox fx:id="rateCategoryBox" alignment="CENTER_LEFT">
+                        <Label fx:id="rates" styleClass="ratesAndCategories"/>
+                        <Label fx:id="categories" styleClass="ratesAndCategories"/>
+                    </HBox>
+                    <Button text="Borrow" fx:id="borrowButton" onAction="#onBorrowButtonClicked"/>
+                </VBox>
+            </HBox>
+            <VBox fx:id="descriptionAndCommentBox" prefHeight="200" prefWidth="300">
+                <VBox fx:id="descriptionBox" >
+                    <Label fx:id="descriptionLabel"/>
+                    <Label fx:id="descriptionText"/>
+                    <Button fx:id="moreButton" text="...More" onAction="#onMoreButtonClicked" visible="false"/>
+                </VBox>
+            </VBox>
+        </VBox>
+</center></BorderPane>

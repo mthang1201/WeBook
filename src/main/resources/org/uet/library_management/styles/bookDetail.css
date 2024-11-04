@@ -1,0 +1,87 @@
+
+.ratesAndCategories {
+    -fx-font-size: 12px;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-font-family: "Montserrat";
+}
+#backButton {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-opacity: 1;
+    -fx-transition: 0.3s ease;
+    -fx-font-family: "Montserrat";
+}
+#backButton:hover {
+    -fx-background-color: #005A9E;
+}
+#bookDetailBox {
+    -fx-padding: 50 0 0 0px;
+    -fx-spacing: 10px;
+}
+#bookInfoBox {
+    -fx-background-color: #7CB9E8;
+    -fx-padding: 0 0 0 50px;
+    -fx-spacing: 10px;
+}
+
+#mainDetailBox {
+    -fx-padding: 55 0 0 20px;
+    -fx-spacing: 10px;
+}
+#title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Montserrat";
+}
+#author {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat";
+}
+#rateCategoryBox {
+    -fx-spacing: 5px;
+}
+#borrowButton {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-opacity: 1;
+    -fx-transition: 0.3s ease;
+    -fx-font-family: "Montserrat";
+}
+
+#borrowButton:hover {
+    -fx-background-color: #005A9E;
+}
+#descriptionAndCommentBox {
+     -fx-background-color: white;
+     -fx-spacing: 10px;
+}
+#descriptionBox {
+    -fx-spacing: 10px;
+}
+#descriptionLabel {
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-padding: 20 0 0 10;
+}
+#descriptionText {
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: black;
+    -fx-opacity: 0.6;
+    -fx-font-size: 14px;
+    -fx-padding: 0 0 0 10;
+    -fx-wrap-text: true;
+}
+#moreButton {
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-spacing: 0;
+}
+#moreButton:hover {
+     -fx-underline: true;
+     -fx-cursor: hand;
+}

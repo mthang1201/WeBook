@@ -1,7 +1,10 @@
 package org.uet.library_management.tools;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -10,11 +13,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.PreferenceService;
+import org.uet.library_management.ui.BookDetailController;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -162,6 +170,7 @@ public class UIBuilder {
                //add category
                 List<String> bookCategory = Arrays.asList(book.getCategories().split(",\\s*"));
                 preferenceService.addPreferenceForUser(SessionManager.user.getUserId(), bookCategory);
+                openBookDetailPage(book);
             });
 
             vbox.getChildren().addAll(titleLabel, authorsLabel, averageRatingLabel, addToBookmarkButton);
@@ -208,4 +217,8 @@ public class UIBuilder {
         return flowPane;
     }
 
+    public static void openBookDetailPage(Book book) {
+        Mediator.bookDetail = book;
+        SceneManager.getInstance().setSubScene("bookDetailPage.fxml");
+    }
 }

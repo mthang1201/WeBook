@@ -9,6 +9,8 @@ public class Mediator {
 
     public static Book book;
 
+    public static Book bookDetail;
+
     public static User user;
 
     public static Loan loan;
