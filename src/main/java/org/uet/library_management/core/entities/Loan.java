@@ -25,5 +25,15 @@ public class Loan {
 
     private String title;
 
-    private String userId;
+    private int userId;
+
+    public Loan(String loanDate, String dueDate, String returnDate, String status, String isbn13, String title, int userId) {
+        this.loanDate = loanDate;
+        this.dueDate = dueDate;
+        this.returnDate = returnDate;
+        this.status = status;
+        this.isbn13 = isbn13;
+        this.title = title;
+        this.userId = userId;
+    }
 }

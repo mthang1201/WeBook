@@ -33,7 +33,7 @@ public class LoanFormController {
             authorsField.setText(loan.getDueDate());
             isbn13Field.setText(loan.getStatus());
             descriptionField.setText(loan.getIsbn13());
-            categoriesField.setText(loan.getUserId());
+            categoriesField.setText(String.valueOf(loan.getUserId()));
         }
     }
 
@@ -61,7 +61,7 @@ public class LoanFormController {
         loan.setDueDate(authorsField.getText());
         loan.setStatus(isbn13Field.getText());
         loan.setIsbn13(descriptionField.getText());
-        loan.setUserId(categoriesField.getText());
+        loan.setUserId(Integer.parseInt(categoriesField.getText()));
 
         if (createMethod) {
             service.add(loan);

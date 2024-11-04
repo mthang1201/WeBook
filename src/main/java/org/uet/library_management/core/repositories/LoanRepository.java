@@ -28,7 +28,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
         loan.setStatus(rs.getString("status"));
         loan.setIsbn13(rs.getString("isbn13"));
         loan.setTitle(rs.getString("title"));
-        loan.setUserId(rs.getString("userId"));
+        loan.setUserId(rs.getInt("userId"));
 
         return loan;
     }
@@ -100,9 +100,9 @@ public class LoanRepository implements MySQLRepository<Loan> {
     @Override
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +
-                "comments, userId) VALUES (?, ?, ?, ?, ?, ?)";
-//        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
-//                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getLoanId());
+                "isbn13, userId) VALUES (?, ?, ?, ?, ?, ?)";
+        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
+                loan.getReturnDate(), loan.getStatus(), loan.getIsbn13(), loan.getUserId());
     }
 
     @Override

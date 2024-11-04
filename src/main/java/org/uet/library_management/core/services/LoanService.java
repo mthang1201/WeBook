@@ -28,8 +28,8 @@ public class LoanService {
         return repository.findById(id);
     }
 
-    public void add(Loan user) {
-        repository.add(user);
+    public void add(Loan loan) {
+        repository.add(loan);
     }
 
     public void update(Loan user) {
