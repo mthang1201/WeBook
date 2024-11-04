@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: library_db
 -- ------------------------------------------------------
--- Server version	8.0.40
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `bookmarks` (
 
 LOCK TABLES `bookmarks` WRITE;
 /*!40000 ALTER TABLE `bookmarks` DISABLE KEYS */;
-INSERT INTO `bookmarks` VALUES (12,'9781685798147'),(12,'9781685798147');
+INSERT INTO `bookmarks` VALUES (12,'9781685798147'),(12,'9781685798147'),(12,'9781107632349');
 /*!40000 ALTER TABLE `bookmarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,9 +97,8 @@ CREATE TABLE `loans` (
   PRIMARY KEY (`loanId`),
   KEY `fk_loans_theses` (`isbn13`),
   KEY `fk_loans_users` (`userId`),
-  CONSTRAINT `fk_loans_books` FOREIGN KEY (`isbn13`) REFERENCES `books` (`isbn13`),
   CONSTRAINT `fk_loans_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +107,7 @@ CREATE TABLE `loans` (
 
 LOCK TABLES `loans` WRITE;
 /*!40000 ALTER TABLE `loans` DISABLE KEYS */;
+INSERT INTO `loans` VALUES (4,'2004-04-04','2033-03-03','2005-01-01','returned','9781107632349',12);
 /*!40000 ALTER TABLE `loans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +133,7 @@ CREATE TABLE `preferences` (
 
 LOCK TABLES `preferences` WRITE;
 /*!40000 ALTER TABLE `preferences` DISABLE KEYS */;
-INSERT INTO `preferences` VALUES (1,'Young Adult Fiction',1),(12,'Comics & Graphic Novels',1);
+INSERT INTO `preferences` VALUES (1,'Young Adult Fiction',1),(12,'Comics & Graphic Novels',1),(12,'Literary Criticism',1);
 /*!40000 ALTER TABLE `preferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,4 +209,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-03 18:55:12
+-- Dump completed on 2024-11-04 14:26:19
