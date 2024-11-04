@@ -44,10 +44,7 @@ public class ImageCacheManager {
     public Image loadImage(String isbn13, String title, String imageLinks) {
         String cacheKey = isbn13 + "_" + title;
 
-        if (imageLinks == null || imageLinks.equals("null&fife=w800&format=webp") || imageLinks.equals("https://via.placeholder.com/150")) {
-            imageLinks = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();
-            return new Image(imageLinks, true);
-        }
+        imageLinks = ImageLoaderUtil.resolveImageUrl(imageLinks);
 
         File cacheFile = new File(cacheDir + cacheKey + ".jpeg");
 
