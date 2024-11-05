@@ -1,33 +1,75 @@
-<?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Button?>
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.BookDetailController">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uet.library_management.ui.BookDetailController">
     <center>
-        <VBox fx:id="bookDetailBox" >
-            <Button fx:id="backButton" text="back" onAction="#onBackButtonClicked"/>
-            <HBox fx:id = "bookInfoBox"  prefHeight="400" prefWidth="600" alignment="CENTER_LEFT">
-                <ImageView fx:id="bookCover" fitWidth="200" fitHeight="400" preserveRatio="true"/>
-                <VBox fx:id="mainDetailBox"  fillWidth="true">
-                    <Label fx:id="title" />
-                    <Label fx:id="author"/>
-                    <HBox fx:id="rateCategoryBox" alignment="CENTER_LEFT">
-                        <Label fx:id="rates" styleClass="ratesAndCategories"/>
-                        <Label fx:id="categories" styleClass="ratesAndCategories"/>
-                    </HBox>
-                    <Button text="Borrow" fx:id="borrowButton" onAction="#onBorrowButtonClicked"/>
-                </VBox>
-            </HBox>
-            <VBox fx:id="descriptionAndCommentBox" prefHeight="200" prefWidth="300">
-                <VBox fx:id="descriptionBox" >
-                    <Label fx:id="descriptionLabel"/>
-                    <Label fx:id="descriptionText"/>
-                    <Button fx:id="moreButton" text="...More" onAction="#onMoreButtonClicked" visible="false"/>
+        <ScrollPane fx:id="detailScroll"  fitToWidth="true" pannable="true" vbarPolicy="ALWAYS">
+            <VBox fx:id="bookDetailBox">
+                <Button fx:id="backButton" onAction="#onBackButtonClicked" text="back" />
+                <HBox fx:id="bookInfoBox" alignment="CENTER_LEFT" prefHeight="400" prefWidth="600">
+                    <ImageView fx:id="bookCover" fitHeight="400" fitWidth="200" preserveRatio="true" />
+                    <VBox fx:id="mainDetailBox" fillWidth="true">
+                        <Label fx:id="title" />
+                        <Label fx:id="author" />
+                        <HBox fx:id="rateCategoryBox" alignment="CENTER_LEFT">
+                            <Label fx:id="rates" styleClass="ratesAndCategories" />
+                            <Label fx:id="categories" styleClass="ratesAndCategories" />
+                        </HBox>
+                        <Button fx:id="borrowButton" onAction="#onBorrowButtonClicked" text="Borrow" />
+                    </VBox>
+                </HBox>
+
+                <VBox fx:id="descriptionAndCommentBox" alignment="CENTER_LEFT" >
+                    <VBox fx:id="descriptionBox" alignment="CENTER_LEFT" >
+                        <Label styleClass="section" text="Description" />
+                        <Label fx:id="descriptionText" styleClass="normalText"/>
+                        <Button fx:id="moreButton" onAction="#onMoreButtonClicked" text="...More" visible="false" />
+                    </VBox>
+
+                    <VBox fx:id="bookInformationBox" >
+                        <Label styleClass="section" text="Book Information" />
+                        <HBox fx:id="publisherBox">
+                            <Label fx:id="publisherLabel" styleClass="boldText" text="Publisher: " />
+                            <Label fx:id="publisherName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="publishedDateBox">
+                            <Label fx:id="publishedDateLabel" styleClass="boldText" text="Published Date: " />
+                            <Label fx:id="publishedDateName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="languageBox">
+                            <Label fx:id="languageLabel" styleClass="boldText" text="Language: " />
+                            <Label fx:id="languageName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="isbn10Box">
+                            <Label fx:id="isbn10Label" styleClass="boldText" text="ISBN-10: " />
+                            <Label fx:id="isbn10Name" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="isbn13Box">
+                            <Label fx:id="isbn13Label" styleClass="boldText" text="ISBN-13: " />
+                            <Label fx:id="isbn13Name" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="pageCountBox">
+                            <Label fx:id="pageCountLabel" styleClass="boldText" text="Page Count: " />
+                            <Label fx:id="pageCountName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="ratingCountBox">
+                            <Label fx:id="ratingCountLabel" styleClass="boldText" text="Rating Count: " />
+                            <Label fx:id="ratingCountName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="printTypeBox">
+                            <Label fx:id="printTypeLabel" styleClass="boldText" text="Print Type: " />
+                            <Label fx:id="printTypeName" styleClass="normalText" />
+                        </HBox>
+                        <HBox fx:id="maturityRatingsBox">
+                            <Label fx:id="maturityRatingsLabel" styleClass="boldText" text="Maturity Ratings: " />
+                            <Label fx:id="maturityRatingsName" styleClass="normalText" />
+                        </HBox>
+                    </VBox>
                 </VBox>
             </VBox>
-        </VBox>
-</center></BorderPane>
+        </ScrollPane>
+    </center>
+</BorderPane>

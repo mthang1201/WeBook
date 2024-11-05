@@ -22,10 +22,19 @@ public class BookDetailController {
     @FXML private Label author;
     @FXML private Label rates;
     @FXML private Label categories;
-    @FXML private Label descriptionLabel;
     @FXML private Label descriptionText;
     @FXML private Button borrowButton;
     @FXML private Button moreButton;
+
+    @FXML private Label publisherName;
+    @FXML private Label languageName;
+    @FXML private Label publishedDateName;
+    @FXML private Label isbn10Name;
+    @FXML private Label isbn13Name;
+    @FXML private Label pageCountName;
+    @FXML private Label ratingCountName;
+    @FXML private Label printTypeName;
+    @FXML private Label maturityRatingsName;
 
     private boolean moreClicked = false;
 
@@ -36,14 +45,24 @@ public class BookDetailController {
         categories.setText(book.getCategories());
         descriptionText.setText(book.getDescription());
 
-        if (book.getImageLinks() != null && !book.getImageLinks().isEmpty()) {
-            bookCover.setImage(new Image(book.getImageLinks()));
-        } else {
+        publisherName.setText(book.getPublisher());
+        languageName.setText(book.getLanguage());
+        publishedDateName.setText(book.getPublishedDate());
+        isbn10Name.setText(book.getIsbn10());
+        isbn13Name.setText(book.getIsbn13());
+        pageCountName.setText(String.valueOf(book.getPageCount()));
+        ratingCountName.setText(String.valueOf(book.getRatingsCount()));
+        printTypeName.setText(book.getPrintType());
+        maturityRatingsName.setText(book.getMaturityRating());
+
+        if (book.getImageLinks().equals("null&fife=w800&format=webp") || book.getImageLinks().equals("https://via.placeholder.com/150")) {
             bookCover.setImage(getPlaceholder());
+        } else {
+            bookCover.setImage(new Image(book.getImageLinks()));
         }
 
-        if (book.getDescription().length() > 150) {
-            descriptionText.setText(book.getDescription().substring(0, 150) + "...");
+        if (book.getDescription().length() > 300) {
+            descriptionText.setText(book.getDescription().substring(0, 300) + "...");
             moreButton.setVisible(true);
         } else {
             moreButton.setVisible(false);
@@ -57,8 +76,17 @@ public class BookDetailController {
         author.setText("N/A");
         rates.setText("N/A");
         categories.setText("N/A");
-        descriptionLabel.setText("Description");
         descriptionText.setText("N/A");
+
+        publisherName.setText("N/A");
+        languageName.setText("N/A");
+        publishedDateName.setText("N/A");
+        isbn10Name.setText("N/A");
+        isbn13Name.setText("N/A");
+        pageCountName.setText("N/A");
+        ratingCountName.setText("N/A");
+        printTypeName.setText("N/A");
+        maturityRatingsName.setText("N/A");
 
         loadBookDetails(Mediator.bookDetail);
         addHoverEffect(borrowButton);
