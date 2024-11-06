@@ -141,9 +141,10 @@ public class BookDetailController {
         dueDateDialog.showAndWait().ifPresent(response -> {
             LocalDate dueDate = dueDatePicker.getValue();
             if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
-                showErrorDialog("Invalid Date", "Please select a future date");
+                showErrorDialog("Invalid Date!", "Please select a future date!");
                 dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
             } else {
+                showSuccessDialog("Success!", "Your changes have been saved successfully!");
                 Book book = Mediator.bookDetail;
                 Loan loan = new Loan(
                         LocalDate.now().toString(),
@@ -161,6 +162,13 @@ public class BookDetailController {
         });
     }
 
+    private void showSuccessDialog(String title, String content) {
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle(title);
+        successAlert.setHeaderText(null);
+        successAlert.setContentText(content);
+        successAlert.showAndWait();
+    }
     private void showErrorDialog(String title, String content) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle(title);
