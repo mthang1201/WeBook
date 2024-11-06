@@ -8,10 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import org.uet.library_management.FontManager;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.tools.ImageLoaderUtil;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
 
@@ -56,12 +58,7 @@ public class BookDetailController {
         ratingCountName.setText(String.valueOf(book.getRatingsCount()));
         printTypeName.setText(book.getPrintType());
         maturityRatingsName.setText(book.getMaturityRating());
-
-        if (book.getImageLinks().equals("null&fife=w800&format=webp") || book.getImageLinks().equals("https://via.placeholder.com/150")) {
-            bookCover.setImage(getPlaceholder());
-        } else {
-            bookCover.setImage(new Image(book.getImageLinks()));
-        }
+        bookCover.setImage(new Image(ImageLoaderUtil.resolveImageUrl(book.getImageLinks())));
 
         if (book.getDescription().length() > 300) {
             descriptionText.setText(book.getDescription().substring(0, 300) + "...");
