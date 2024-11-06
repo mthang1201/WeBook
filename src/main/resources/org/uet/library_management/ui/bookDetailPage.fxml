@@ -25,11 +25,11 @@
                 <VBox fx:id="descriptionAndCommentBox" alignment="CENTER_LEFT" >
                     <VBox fx:id="descriptionBox" alignment="CENTER_LEFT" >
                         <Label styleClass="section" text="Description" />
-                        <Label fx:id="descriptionText" styleClass="normalText"/>
+                        <Label fx:id="descriptionText" />
                         <Button fx:id="moreButton" onAction="#onMoreButtonClicked" text="...More" visible="false" />
                     </VBox>
 
-                    <VBox fx:id="bookInformationBox" >
+                    <VBox fx:id="bookInformationBox">
                         <Label styleClass="section" text="Book Information" />
                         <HBox fx:id="publisherBox">
                             <Label fx:id="publisherLabel" styleClass="boldText" text="Publisher: " />

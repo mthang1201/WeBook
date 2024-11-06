@@ -2,21 +2,20 @@
 .ratesAndCategories {
     -fx-font-size: 12px;
     -fx-text-fill: rgba(255, 255, 255, 0.7);
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Light";
     -fx-padding: 0 0 0 10;
 }
 .boldText {
-    -fx-font-weight: bold;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Semibold";
     -fx-padding: 0 0 0 10;
     -fx-font-size: 18px;
 }
 .normalText {
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Light";
         -fx-text-fill: black;
         -fx-opacity: 0.6;
-        -fx-font-size: 18px;
-        -fx-padding: 0 0 0 10;
+        -fx-font-size: 16px;
+        -fx-padding: 2 0 0 0;
 }
 #backButton {
     -fx-text-fill: white;
@@ -36,7 +35,7 @@
 
 }
 #bookInfoBox {
-    -fx-background-color: #7CB9E8;
+    -fx-background-color: linear-gradient(to bottom right, #0093E9, #80D0C7);
     -fx-padding: 0 0 0 50px;
     -fx-spacing: 10px;
 }
@@ -48,13 +47,12 @@
 #title {
     -fx-font-size: 24px;
     -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Extrabold";
 }
 #author {
     -fx-font-size: 20px;
     -fx-text-fill: white;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Medium";
 }
 #rateCategoryBox {
     -fx-spacing: 5px;
@@ -79,16 +77,15 @@
     -fx-spacing: 10px;
 }
 .section {
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Extrabold";
     -fx-text-fill: black;
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-padding: 20 0 0 10;
 }
 #descriptionText {
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Montserrat Light";
     -fx-text-fill: black;
-    -fx-opacity: 0.6;
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
     -fx-padding: 0 0 0 10;
     -fx-wrap-text: true;
 }
@@ -102,4 +99,7 @@
 #moreButton:hover {
      -fx-underline: true;
      -fx-cursor: hand;
+}
+#bookInformationBox {
+    -fx-spacing: 10px;
 }

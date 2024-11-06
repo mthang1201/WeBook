@@ -3,10 +3,10 @@ package org.uet.library_management.ui;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.Loan;
@@ -14,6 +14,8 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
+
+import java.time.LocalDate;
 
 public class BookDetailController {
 
@@ -120,20 +122,53 @@ public class BookDetailController {
     }
 
     private void handleBorrowButton() {
-        Book book = Mediator.bookDetail;
-        Loan loan = new Loan(
-                "2004-04-04",
-                "2033-03-03",
-                "2005-01-01",
-                "returned",
-                book.getIsbn13(),
-                book.getTitle(),
-                SessionManager.user.getUserId()
-        );
+        DatePicker dueDatePicker = new DatePicker();
+        dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
 
-        LoanService loanService = new LoanService();
-        loanService.add(loan);
+        // Disable direct text input
+        dueDatePicker.getEditor().setDisable(true);
+
+        // Create a dialog for borrowing
+        Alert dueDateDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        dueDateDialog.setTitle("Select Due Date");
+        dueDateDialog.setHeaderText("Please select a due date for borrowing the book:");
+        dueDateDialog.setGraphic(null);
+
+        VBox dueDateContent = new VBox(10);
+        dueDateContent.getChildren().add(dueDatePicker);
+        dueDateDialog.getDialogPane().setContent(dueDateContent);
+
+        dueDateDialog.showAndWait().ifPresent(response -> {
+            LocalDate dueDate = dueDatePicker.getValue();
+            if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+                showErrorDialog("Invalid Date", "Please select a future date");
+                dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
+            } else {
+                Book book = Mediator.bookDetail;
+                Loan loan = new Loan(
+                        LocalDate.now().toString(),
+                        dueDate.toString(),
+                        null,
+                        "borrowed",
+                        book.getIsbn13(),
+                        book.getTitle(),
+                        SessionManager.user.getUserId()
+                );
+
+                LoanService loanService = new LoanService();
+                loanService.add(loan);
+            }
+        });
     }
+
+    private void showErrorDialog(String title, String content) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(content);
+        errorAlert.showAndWait();
+    }
+
 
     private void addHoverEffect(Button button) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(300), button);
