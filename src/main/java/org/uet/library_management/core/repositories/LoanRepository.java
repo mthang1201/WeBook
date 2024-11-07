@@ -2,15 +2,9 @@ package org.uet.library_management.core.repositories;
 
 import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.core.entities.Loan;
-import org.uet.library_management.core.entities.Loan;
-import org.uet.library_management.core.services.LoanService;
-import org.uet.library_management.tools.AlertUtil;
-import org.uet.library_management.tools.SessionManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,11 +81,11 @@ public class LoanRepository implements MySQLRepository<Loan> {
         return count;
     }
 
-    public List<Loan> findById(int id) {
+    public List<Loan> findByUserId(int userId) {
         List<Loan> loans = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE userId LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, id)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId)) {
             while (rs.next()) {
                 loans.add(populateLoan(rs));
             }
