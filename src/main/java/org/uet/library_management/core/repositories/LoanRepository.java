@@ -3,9 +3,14 @@ package org.uet.library_management.core.repositories;
 import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.tools.AlertUtil;
+import org.uet.library_management.tools.SessionManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,9 +89,9 @@ public class LoanRepository implements MySQLRepository<Loan> {
 
     public List<Loan> findById(int id) {
         List<Loan> loans = new ArrayList<>();
-        String query = "SELECT * FROM " + db_table + " WHERE id LIKE ?";
+        String query = "SELECT * FROM " + db_table + " WHERE userId LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, id)) {
             while (rs.next()) {
                 loans.add(populateLoan(rs));
             }
@@ -100,15 +105,15 @@ public class LoanRepository implements MySQLRepository<Loan> {
     @Override
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +
-                "isbn13, userId) VALUES (?, ?, ?, ?, ?, ?)";
+                "isbn13, title, userId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
-                loan.getReturnDate(), loan.getStatus(), loan.getIsbn13(), loan.getUserId());
+                loan.getReturnDate(), loan.getStatus(), loan.getIsbn13(), loan.getTitle(), loan.getUserId());
     }
 
     @Override
     public void update(Loan loan) {
         String query = "UPDATE " + db_table + " SET loanDate = ?, dueDate = ?, returnDate = ?, " +
-                "status = ?, comments = ?, userId = ? WHERE loanId = ?";
+                "status = ?, userId = ?, title = ?, WHERE loanId = ?";
 //        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
 //                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getLoanId(),
 //                loan.getLoanId());
@@ -125,4 +130,5 @@ public class LoanRepository implements MySQLRepository<Loan> {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);
     }
+
 }
