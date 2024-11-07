@@ -111,6 +111,7 @@ public class BookDetailController {
                 "Please select a due date for borrowing the book:",
                 null
         );
+
         VBox dueDateContent = new VBox(10);
         dueDateContent.getChildren().add(dueDatePicker);
         dueDateDialog.getDialogPane().setContent(dueDateContent);

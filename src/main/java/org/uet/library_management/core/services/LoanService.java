@@ -48,33 +48,4 @@ public class LoanService {
         repository.removeAll();
     }
 
-    public static void checkDueDate() {
-        LoanService loanService = new LoanService();
-        List<Loan> loans = loanService.findByUserId(SessionManager.user.getUserId());
-        LocalDate today = LocalDate.now();
-        for (Loan loan : loans) {
-            String status = loan.getStatus();
-            if (status.equals("returned")) {
-                continue;
-            } else {
-                LocalDate dueDate = LocalDate.parse(loan.getDueDate());
-
-                if (status.equals("borrowed") && ChronoUnit.DAYS.between(today, dueDate) == 2) {
-                    AlertUtil.showWarningAlert(
-                            "Reminder",
-                            "Your loan for " + loan.getTitle() + " is due soon! (2 days left)",
-                            null,
-                            null
-                    );
-                } else if (status.equals("borrowed") && today.isAfter(dueDate)) {
-                    AlertUtil.showWarningAlert(
-                            "Overdue",
-                            "Your loan for " + loan.getTitle() + " is overdue!",
-                            "Please return " + loan.getTitle() + " as soon as possible or you will be fined!",
-                            null
-                    );
-                }
-            }
-        }
-    }
 }

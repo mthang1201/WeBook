@@ -10,6 +10,7 @@ import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.core.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.uet.library_management.notifications.Notification;
 import org.uet.library_management.tools.SessionManager;
 
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class LoginController {
             SceneManager.getInstance().setScene("main.fxml");
         }
 
-        LoanService.checkDueDate();
+        Notification.checkDueDate();
     }
 
     @SneakyThrows
