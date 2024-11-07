@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import org.uet.library_management.FontManager;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.tools.AlertUtil;
 import org.uet.library_management.tools.ImageLoaderUtil;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
@@ -70,23 +70,6 @@ public class BookDetailController {
 
     @FXML
     private void initialize() {
-        bookCover.setImage(getPlaceholder());
-        title.setText("N/A");
-        author.setText("N/A");
-        rates.setText("N/A");
-        categories.setText("N/A");
-        descriptionText.setText("N/A");
-
-        publisherName.setText("N/A");
-        languageName.setText("N/A");
-        publishedDateName.setText("N/A");
-        isbn10Name.setText("N/A");
-        isbn13Name.setText("N/A");
-        pageCountName.setText("N/A");
-        ratingCountName.setText("N/A");
-        printTypeName.setText("N/A");
-        maturityRatingsName.setText("N/A");
-
         loadBookDetails(Mediator.bookDetail);
         addHoverEffect(borrowButton);
     }
@@ -113,11 +96,6 @@ public class BookDetailController {
         moreClicked = !moreClicked;
     }
 
-    private Image getPlaceholder() {
-        String imageLinks = getClass().getResource("/org/uet/library_management/placeholder/165x249.png").toExternalForm();
-        return new Image(imageLinks, true);
-    }
-
     private void handleBorrowButton() {
         DatePicker dueDatePicker = new DatePicker();
         dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
@@ -126,54 +104,48 @@ public class BookDetailController {
         dueDatePicker.getEditor().setDisable(true);
 
         // Create a dialog for borrowing
-        Alert dueDateDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        dueDateDialog.setTitle("Select Due Date");
-        dueDateDialog.setHeaderText("Please select a due date for borrowing the book:");
-        dueDateDialog.setGraphic(null);
 
+        Alert dueDateDialog = AlertUtil.createInformationDialog(
+                "Select Due Date",
+                null,
+                "Please select a due date for borrowing the book:",
+                null
+        );
         VBox dueDateContent = new VBox(10);
         dueDateContent.getChildren().add(dueDatePicker);
         dueDateDialog.getDialogPane().setContent(dueDateContent);
 
         dueDateDialog.showAndWait().ifPresent(response -> {
             LocalDate dueDate = dueDatePicker.getValue();
-            if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
-                showErrorDialog("Invalid Date!", "Please select a future date!");
-                dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
-            } else {
-                showSuccessDialog("Success!", "Your changes have been saved successfully!");
-                Book book = Mediator.bookDetail;
-                Loan loan = new Loan(
-                        LocalDate.now().toString(),
-                        dueDate.toString(),
-                        null,
-                        "borrowed",
-                        book.getIsbn13(),
-                        book.getTitle(),
-                        SessionManager.user.getUserId()
-                );
+            if (response == ButtonType.OK) {
+                if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+                    AlertUtil.showErrorAlert("Invalid Date!",
+                            null,
+                            "Please select a future date!",
+                            null);
+                    dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
+                } else {
+                    AlertUtil.showInformationsDialog("Success!",
+                            null,
+                            "Your changes have been saved successfully!",
+                            null);
+                    Book book = Mediator.bookDetail;
+                    Loan loan = new Loan(
+                            LocalDate.now().toString(),
+                            dueDate.toString(),
+                            null,
+                            "borrowed",
+                            book.getIsbn13(),
+                            book.getTitle(),
+                            SessionManager.user.getUserId()
+                    );
 
-                LoanService loanService = new LoanService();
-                loanService.add(loan);
+                    LoanService loanService = new LoanService();
+                    loanService.add(loan);
+                }
             }
         });
     }
-
-    private void showSuccessDialog(String title, String content) {
-        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setTitle(title);
-        successAlert.setHeaderText(null);
-        successAlert.setContentText(content);
-        successAlert.showAndWait();
-    }
-    private void showErrorDialog(String title, String content) {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setTitle(title);
-        errorAlert.setHeaderText(null);
-        errorAlert.setContentText(content);
-        errorAlert.showAndWait();
-    }
-
 
     private void addHoverEffect(Button button) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(300), button);

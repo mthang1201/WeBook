@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
+import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.core.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.uet.library_management.tools.SessionManager;
@@ -59,6 +60,8 @@ public class LoginController {
         } else {
             SceneManager.getInstance().setScene("main.fxml");
         }
+
+        LoanService.checkDueDate();
     }
 
     @SneakyThrows
@@ -70,4 +73,5 @@ public class LoginController {
     private boolean validate(String email, String password) {
         return true;
     }
+
 }
