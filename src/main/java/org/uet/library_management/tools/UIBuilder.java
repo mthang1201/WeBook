@@ -204,10 +204,17 @@ public class UIBuilder {
             ), executor).thenAccept(image -> {
                 Platform.runLater(() -> {
                     imageView.setImage(image);
+                    imageView.setOnMouseClicked(event -> {
+                        openBookDetailPage(book);
+                    });
                 });
             });
 
             Label titleLabel = new Label(book.getTitle());
+            titleLabel.setOnMouseClicked(event -> {
+                openBookDetailPage(book);
+            });
+
             Label authorsLabel = new Label(book.getAuthors());
 
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
@@ -219,6 +226,6 @@ public class UIBuilder {
 
     public static void openBookDetailPage(Book book) {
         Mediator.bookDetail = book;
-        SceneManager.getInstance().setSubScene("bookDetailPage.fxml");
+        SceneManager.getInstance().pushSubScene("bookDetailPage.fxml");
     }
 }

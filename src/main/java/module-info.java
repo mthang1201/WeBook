@@ -36,6 +36,10 @@ module org.uet.library_management {
     opens org.uet.library_management.ui.search to javafx.fxml;
     exports org.uet.library_management.ui.admin.forms;
     opens org.uet.library_management.ui.admin.forms to javafx.fxml;
+    exports org.uet.library_management.tools;
+    opens org.uet.library_management.tools to javafx.fxml;
+    exports org.uet.library_management.ui.settings;
+    opens org.uet.library_management.ui.settings to javafx.fxml;
 
 
 }

@@ -1,0 +1,58 @@
+.settings-window {
+    -fx-background-color: #f2f3f7;
+    -fx-pref-width: 450;
+    -fx-pref-height: 450;
+    -fx-font-size: 14px;
+    /*-fx-alignment: LEFT;*/
+    -fx-padding: 20 20 20 20;
+}
+
+.user-section {
+    -fx-background-color: white;
+    -fx-pref-width: 410;
+    -fx-pref-height: 72;
+    -fx-alignment: CENTER;
+}
+
+.spacing-pane {
+    -fx-pref-height: 20;
+}
+
+.username-label {
+    -fx-pref-width: 410;
+    -fx-font-size: 16px;
+}
+
+.email-label {
+    -fx-pref-width: 410;
+    -fx-font-size: 12px;
+    -fx-text-fill: gray;
+}
+
+.settings-label {
+    -fx-text-fill: gray;
+    -fx-pref-width: 170;
+    -fx-font-size: 14px;
+    -fx-padding: 0 0 5 20;
+}
+
+.settings-button {
+    -fx-background-color: white;
+    -fx-text-fill: #262626;
+    -fx-pref-width: 410;
+    -fx-pref-height: 30;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.settings-button:hover {
+    -fx-background-color: #262626;
+    -fx-text-fill: #eeeeee;
+}
+
+.note-label {
+    -fx-alignment: TOP_LEFT;
+    -fx-text-fill: gray;
+    -fx-font-size: 12px;
+    -fx-font-weight: BOLD;
+    -fx-padding: 5 0 0 20;
+}

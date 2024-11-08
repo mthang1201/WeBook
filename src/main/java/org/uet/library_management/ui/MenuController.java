@@ -58,9 +58,10 @@ public class MenuController {
                         Platform.runLater(() -> {
                             if (!newValue.isEmpty()) {
                                 Mediator.text = searchTextField.getText();
-                                SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
+                                SceneManager.getInstance().pushSubScene("search/suggestSearch.fxml");
                             } else {
-                                SceneManager.getInstance().setSubScene("search/search.fxml");
+                                SceneManager.getInstance().clearStack();
+                                SceneManager.getInstance().pushSubScene("search/search.fxml");
                             }
                         });
                     }
@@ -132,53 +133,55 @@ public class MenuController {
     }
 
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
-        SceneManager.getInstance().setSubScene("search/search.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("search/search.fxml");
     }
 
     @FXML
     private void handleHomeMenu() {
-        SceneManager.getInstance().setSubScene("home.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("home.fxml");
     }
 
     @FXML
     private void handleBookshelfMenu() {
-        SceneManager.getInstance().setSubScene("bookshelf.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("bookshelf.fxml");
     }
 
     @FXML
     private void handleGetAllMenu() {
-        SceneManager.getInstance().setSubScene("getAll.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("getAll.fxml");
     }
 
     @FXML
     private void handleBookmarkMenu() {
-        SceneManager.getInstance().setSubScene("bookmark.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("bookmark.fxml");
     }
 
     @FXML
     private void handleFinishedMenu() {
-        SceneManager.getInstance().setSubScene("finished.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("finished.fxml");
     }
 
     @FXML
     private void handleBooksMenu() {
-        SceneManager.getInstance().setSubScene("home.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("home.fxml");
     }
 
     @FXML
     private void handleAddBooksMenu() {
-        SceneManager.getInstance().setSubScene("addBooks.fxml");
-    }
-
-    @FXML
-    private void handleSettingsMenu() {
-//        SceneManager.getInstance().setSubScene("settings.fxml");
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("addBooks.fxml");
     }
 
     @SneakyThrows
     @FXML
-    private void handleLogoutMenu() {
-        SessionManager.user = null;
-        SceneManager.getInstance().setScene("auth/login.fxml");
+    private void handleSettingsMenu() {
+        SceneManager.getInstance().showNewWindow("settings/settings.fxml");
     }
 }
