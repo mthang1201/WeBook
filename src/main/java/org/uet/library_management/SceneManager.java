@@ -87,26 +87,25 @@ public class SceneManager {
         }
     }
 
-    public void showNewWindow(String sceneName, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
-            BorderPane windowContent = loader.load();
+    public void showNewWindow(String sceneName, String title) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
-            // Create a new stage (window)
-            Stage popupStage = new Stage();
-            popupStage.setTitle(title);
+        Scene scene = new Scene(fxmlLoader.load(), 450, 450);
+        scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles/settings.css").toExternalForm());
+
+        // Create a new stage (window)
+        Stage popupStage = new Stage();
+        popupStage.setTitle(title);
 //            popupStage.initModality(Modality.APPLICATION_MODAL); // Make it a modal window
 //            popupStage.initStyle(StageStyle.UNDECORATED); // Remove the default window borders
-            popupStage.setScene(new Scene(windowContent));
+        popupStage.setScene(scene);
 
-            // Optional: Style the window content
-            windowContent.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95); "
-                    + "-fx-padding: 20px; -fx-border-radius: 10px; "
-                    + "-fx-background-radius: 10px;");
+        // Optional: Style the window content
+//        windowContent.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95); "
+//                + "-fx-padding: 20px; -fx-border-radius: 10px; "
+//                + "-fx-background-radius: 10px;");
 
-            popupStage.showAndWait(); // Show the new window and wait until it’s closed
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        popupStage.showAndWait(); // Show the new window and wait until it’s closed
     }
 }

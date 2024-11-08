@@ -179,15 +179,9 @@ public class MenuController {
         SceneManager.getInstance().pushSubScene("addBooks.fxml");
     }
 
+    @SneakyThrows
     @FXML
     private void handleSettingsMenu() {
         SceneManager.getInstance().showNewWindow("settings.fxml", "Settings");
-    }
-
-    @SneakyThrows
-    @FXML
-    private void handleLogoutMenu() {
-        SessionManager.user = null;
-        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

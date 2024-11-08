@@ -89,13 +89,5 @@
                 </ImageView>
             </graphic>
         </Button>
-
-        <Button fx:id="logoutButton" styleClass="logout-button" onAction="#handleLogoutMenu">
-            <graphic>
-                <ImageView fx:id="logoutImageView" fitHeight="40" fitWidth="40">
-                    <Image url="@../icons/logout.png" />
-                </ImageView>
-            </graphic>
-        </Button>
     </HBox>
 </VBox>
