@@ -14,6 +14,10 @@ public class SceneManager {
 
     private static final int SCREEN_HEIGHT = 530;
 
+    private static final int SETTINGS_WIDTH = 450;
+
+    private static final int SETTINGS_HEIGHT = 450;
+
     private static final String PREFIX_URL = "ui/";
 
     @FXML
@@ -22,6 +26,8 @@ public class SceneManager {
     private static Stage stage;
 
     private static SceneManager instance;
+
+    private static Stage settingsStage;
 
     private Stack<String> subSceneStack = new Stack<>();
 
@@ -87,25 +93,20 @@ public class SceneManager {
         }
     }
 
-    public void showNewWindow(String sceneName, String title) throws IOException {
+    public void showNewWindow(String sceneName) throws IOException {
+        settingsStage = new Stage();
+        setSettingsScene(sceneName);
+    }
+
+    public void setSettingsScene(String sceneName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
-        Scene scene = new Scene(fxmlLoader.load(), 450, 450);
+        Scene scene = new Scene(fxmlLoader.load(), SETTINGS_WIDTH, SETTINGS_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("styles/style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/settings.css").toExternalForm());
 
-        // Create a new stage (window)
-        Stage popupStage = new Stage();
-        popupStage.setTitle(title);
-//            popupStage.initModality(Modality.APPLICATION_MODAL); // Make it a modal window
-//            popupStage.initStyle(StageStyle.UNDECORATED); // Remove the default window borders
-        popupStage.setScene(scene);
-
-        // Optional: Style the window content
-//        windowContent.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95); "
-//                + "-fx-padding: 20px; -fx-border-radius: 10px; "
-//                + "-fx-background-radius: 10px;");
-
-        popupStage.showAndWait(); // Show the new window and wait until it’s closed
+        settingsStage.setTitle("Settings");
+        settingsStage.setScene(scene);
+        settingsStage.show();
     }
 }

@@ -1,9 +1,8 @@
-package org.uet.library_management.ui;
+package org.uet.library_management.ui.settings;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
@@ -20,7 +19,16 @@ public class SettingsController {
         userEmail.setText(SessionManager.user.getEmail());
     }
 
+    @SneakyThrows
+    @FXML
+    public void handleNotifications(ActionEvent actionEvent) {
+        SceneManager.getInstance().setSettingsScene("settings/notifications.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
     public void handleAccountSettings() {
+        SceneManager.getInstance().setSettingsScene("settings/accountSettings.fxml");
     }
 
     @SneakyThrows

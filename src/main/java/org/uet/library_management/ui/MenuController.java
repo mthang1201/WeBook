@@ -182,6 +182,6 @@ public class MenuController {
     @SneakyThrows
     @FXML
     private void handleSettingsMenu() {
-        SceneManager.getInstance().showNewWindow("settings.fxml", "Settings");
+        SceneManager.getInstance().showNewWindow("settings/settings.fxml");
     }
 }

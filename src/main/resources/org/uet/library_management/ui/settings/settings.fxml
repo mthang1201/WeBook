@@ -8,11 +8,11 @@
 <?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.uet.library_management.ui.SettingsController"
+      fx:controller="org.uet.library_management.ui.settings.SettingsController"
       styleClass="settings-window">
     <HBox styleClass="user-section" spacing="10">
         <ImageView fx:id="avatar" fitHeight="40" fitWidth="40">
-            <Image url="@../icons/avatar-male.png" />
+            <Image url="@../../icons/avatar-male.png" />
         </ImageView>
         <VBox>
             <Label fx:id="userName" styleClass="username-label" />
@@ -27,7 +27,7 @@
     <Button fx:id="homeButton" styleClass="settings-button" text="Updates">
         <graphic>
             <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
-                <Image url="@../icons/home.png" />
+                <Image url="@../../icons/home.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -35,7 +35,7 @@
     <Button fx:id="getAllButton" styleClass="settings-button" text="Books">
         <graphic>
             <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
-                <Image url="@../icons/getAll.png" />
+                <Image url="@../../icons/getAll.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -43,14 +43,14 @@
     <Button fx:id="bookmarkButton" styleClass="settings-button" text="Muốn đọc">
         <graphic>
             <ImageView fx:id="bookmarkImageView" fitHeight="16" fitWidth="16">
-                <Image url="@../icons/bookmark.png" />
+                <Image url="@../../icons/bookmark.png" />
             </ImageView>
         </graphic>
     </Button>
 
     <Pane styleClass="spacing-pane" />
 <!--        -->
-    <Button fx:id="notificationsButton" styleClass="settings-button" text="Thông báo" />
+    <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông báo" />
 
     <Pane styleClass="spacing-pane" />
 <!--        -->
