@@ -71,7 +71,7 @@ public class BookDetailController {
 
     @FXML
     private void initialize() {
-
+        backButton.setDisable(false);
         loadBookDetails(Mediator.bookDetail);
         addHoverEffect(borrowButton);
     }

@@ -28,8 +28,8 @@ public class App extends Application {
 //        SceneManager.getInstance().setScene("admin/admin.fxml");
         UserService userService = new UserService();
         SessionManager.user = userService.findByName("abc").get(0);
-//        SceneManager.getInstance().setScene("main.fxml");
-        SceneManager.getInstance().setScene("auth/login.fxml");
+        SceneManager.getInstance().setScene("main.fxml");
+//        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
     public static void main(String[] args) {
