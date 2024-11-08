@@ -12,22 +12,31 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.RegisterController"
             styleClass="auth">
-    <AnchorPane layoutX="100.0" layoutY="65.0" styleClass="auth-pane">
-        <Label fx:id="titleLabel" styleClass="title-label" layoutX="14.0" layoutY="14.0" text="Library Management" />
-        <TextField fx:id="nameField" layoutX="359.0" layoutY="41.0" promptText="Name" />
-        <TextField fx:id="phoneNumberField" layoutX="359.0" layoutY="81.0" promptText="Phone number" />
-        <TextField fx:id="emailField" layoutX="359.0" layoutY="121.0" promptText="Email" />
-        <TextField fx:id="addressField" layoutX="359.0" layoutY="161.0" promptText="Address" />
-        <ChoiceBox fx:id="membershipStatusBox" layoutX="359.0" layoutY="201.0">
-            <String fx:value="Active"/>
-            <String fx:value="Inactive"/>
-        </ChoiceBox>
-        <ChoiceBox fx:id="privilegesBox" layoutX="359.0" layoutY="241.0">
-            <String fx:value="Standard"/>
-            <String fx:value="Premium"/>
-            <String fx:value="Admin"/>
-        </ChoiceBox>
-        <PasswordField fx:id="passwordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
-        <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Register" />
+    <AnchorPane styleClass="auth-pane" AnchorPane.topAnchor="50" AnchorPane.rightAnchor="50"
+                AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="50">
+        <VBox alignment="CENTER" spacing="20"
+              AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label fx:id="titleLabel" styleClass="title-label" text="Register" />
+        <TextField fx:id="nameField" promptText="Name" minWidth="300" maxWidth="300" />
+        <TextField fx:id="phoneNumberField" promptText="Phone number" minWidth="300" maxWidth="300" />
+        <TextField fx:id="emailField" promptText="Email" minWidth="300" maxWidth="300" />
+        <TextField fx:id="addressField" promptText="Address" minWidth="300" maxWidth="300" />
+            <HBox alignment = "CENTER" spacing = "50">
+                <ChoiceBox fx:id="membershipStatusBox">
+                    <String fx:value="Active"/>
+                    <String fx:value="Inactive"/>
+                </ChoiceBox>
+
+                <ChoiceBox fx:id="privilegesBox" >
+                    <String fx:value="Standard"/>
+                    <String fx:value="Premium"/>
+                    <String fx:value="Admin"/>
+                </ChoiceBox>
+            </HBox>
+
+            <PasswordField fx:id="passwordField" promptText="Password" minWidth="300" maxWidth="300" />
+            <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
+        </VBox>
     </AnchorPane>
 </AnchorPane>

@@ -5,16 +5,38 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.Region?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.LoginController"
             styleClass="auth">
-    <AnchorPane layoutX="100.0" layoutY="65.0" styleClass="auth-pane">
-        <Label fx:id="titleLabel" styleClass="title-label" layoutX="214.0" layoutY="14.0" text="Library Management" />
-        <TextField fx:id="emailField" layoutX="359.0" layoutY="241.0" promptText="Email" />
-        <PasswordField fx:id="passwordField" layoutX="359.0" layoutY="279.0" promptText="Password" />
-        <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" layoutX="361.0" layoutY="314.0" mnemonicParsing="false" text="Register" />
-        <Button fx:id="loginButton" styleClass="login-button" onAction="#handleLoginButton" layoutX="461.0" layoutY="314.0" mnemonicParsing="false" text="Log In" />
-    </AnchorPane>
+
+    <Region style="-fx-background-color: rgba(218, 236, 245, 0.5);"
+            AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+            AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <effect>
+            <GaussianBlur radius="10"/>
+        </effect>
+    </Region>
+
+    <StackPane AnchorPane.leftAnchor="50" AnchorPane.bottomAnchor="50"
+               AnchorPane.rightAnchor="50" AnchorPane.topAnchor="50"
+               styleClass="auth-pane">
+
+        <VBox spacing="30" alignment="CENTER" >
+            <Label fx:id="titleLabel" styleClass="title-label" text="Library Management" />
+            <TextField fx:id="emailField" promptText="Email" minWidth="300" maxWidth="300"/>
+            <PasswordField fx:id="passwordField" promptText="Password" minWidth="300" maxWidth="300"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
+                <Button fx:id="loginButton" styleClass="login-button" onAction="#handleLoginButton" mnemonicParsing="false" text="Log In" />
+            </HBox>
+        </VBox>
+    </StackPane>
 </AnchorPane>

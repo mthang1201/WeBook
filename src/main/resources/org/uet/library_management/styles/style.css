@@ -12,9 +12,9 @@
     -fx-vbar-policy: NEVER;  /* Hide vertical scrollbar */
 }
 
-/*.scroll-pane .scroll-bar:vertical {*/
-/*    -fx-background-color: #dbdbda;*/
-/*}*/
+/*.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #EFFBFF;
+}*/
 
 /*.scroll-pane .scroll-bar:vertical .thumb {*/
 /*    -fx-background-color: #b4b4b4; !* Color of the scrollbar thumb (the draggable part) *!*/
@@ -22,7 +22,7 @@
 /*}*/
 
 .content-pane {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #EFFBFF;
     -fx-pref-width: 800;
     -fx-pref-height: 530;
     /*-fx-padding: 40 40 40 40;*/
@@ -38,18 +38,18 @@
 }
 
 .vbox {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #EFFBFF;
 }
 
 .vbox-padding {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #EFFBFF;
     /*-fx-hgap: 25;*/
     /*-fx-vgap: 40;*/
     -fx-padding: 0 0 0 40;
 }
 
 .flow-pane {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #EFFBFF;
     -fx-hgap: 25;
     -fx-vgap: 40;
     -fx-padding: 0 0 0 40;
