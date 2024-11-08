@@ -21,6 +21,7 @@ import java.time.LocalDate;
 
 public class BookDetailController {
 
+    @FXML public Button backButton;
     @FXML private ImageView bookCover;
     @FXML private Label title;
     @FXML private Label author;
@@ -70,6 +71,7 @@ public class BookDetailController {
 
     @FXML
     private void initialize() {
+
         loadBookDetails(Mediator.bookDetail);
         addHoverEffect(borrowButton);
     }
