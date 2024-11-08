@@ -1,23 +1,28 @@
 .auth {
-    /*-fx-background-color: #f0f4f8c;*/
+    -fx-background-color: #daecf5;
+    /*-fx-background-color: transparent;*/
+
 }
 
 .auth-pane {
-    -fx-background-color: #ffffff;
-    -fx-pref-width: 800;
-    -fx-pref-height: 400;
+    -fx-background-color: linear-gradient(to bottom, #E8F6FC50, #ADEBFF50);
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
     -fx-background-radius: 10;
+    -fx-padding: 40 40 40 40;
 }
 
 .title-label {
     -fx-font-size: 36px;
     -fx-font-weight: bold;
     /*-fx-text-fill: #ffffff;*/
+    -fx-padding: 20 20 20 20
 }
 
 .text-field, .password-field {
     /*-fx-background-color: #333333;*/
     -fx-text-fill: #4b4d4c;
+    -fx-pref-width: 50;
 }
 
 .button {
@@ -26,7 +31,9 @@
 }
 
 .login-button {
+    -fx-background-color: linear-gradient(to bottom, #aac9f1, #73a2e1);
 }
 
 .register-button {
+    -fx-background-color: linear-gradient(to bottom, #aac9f1, #73a2e1);
 }
