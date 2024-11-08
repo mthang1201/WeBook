@@ -19,6 +19,7 @@
                             <Label fx:id="categories" styleClass="ratesAndCategories" />
                         </HBox>
                         <Button fx:id="borrowButton" onAction="#onBorrowButtonClicked" text="Borrow" />
+                        <Button fx:id="returnButton" onAction="#onReturnButtonClicked" text="Return"/>
                     </VBox>
                 </HBox>
 

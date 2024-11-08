@@ -2,11 +2,7 @@ package org.uet.library_management.core.services;
 
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.repositories.LoanRepository;
-import org.uet.library_management.tools.AlertUtil;
-import org.uet.library_management.tools.SessionManager;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class LoanService {
@@ -32,16 +28,22 @@ public class LoanService {
         return repository.findByUserId(userId);
     }
 
+    public Loan findById(int userId, String isbn13) {
+        return repository.findById(userId, isbn13);
+    }
+
+
+
     public void add(Loan loan) {
         repository.add(loan);
     }
 
-    public void update(Loan user) {
-        repository.update(user);
+    public void update(Loan loan) {
+        repository.update(loan);
     }
 
-    public void remove(Loan user) {
-        repository.remove(user);
+    public void remove(Loan loan) {
+        repository.remove(loan);
     }
 
     public void removeAll() {
