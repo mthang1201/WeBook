@@ -71,13 +71,16 @@ public class BookDetailController {
 
     @FXML
     private void initialize() {
-        backButton.setDisable(false);
+//        backButton.setDisable(false);
+        backButton.setOnMouseClicked(event -> {
+            onBackButtonClicked();
+        });
         loadBookDetails(Mediator.bookDetail);
         addHoverEffect(borrowButton);
     }
 
     @FXML
-    private void onBackButtonClicked(ActionEvent event) {
+    private void onBackButtonClicked() {
 //        SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
         SceneManager.getInstance().popSubScene();
     }

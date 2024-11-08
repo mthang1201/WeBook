@@ -8,7 +8,7 @@
     <center>
         <ScrollPane fitToWidth="true" pannable="true" vbarPolicy="ALWAYS">
             <VBox fx:id="bookDetailBox">
-                <Button fx:id="backButton" onAction="#onBackButtonClicked" text="back" />
+                <Button fx:id="backButton" text="back" />
                 <HBox fx:id="bookInfoBox" alignment="CENTER_LEFT" prefHeight="400" prefWidth="600">
                     <ImageView fx:id="bookCover" fitHeight="400" fitWidth="200" preserveRatio="true" />
                     <VBox fx:id="mainDetailBox" fillWidth="true">
