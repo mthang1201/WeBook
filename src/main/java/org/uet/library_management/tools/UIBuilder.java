@@ -20,6 +20,7 @@ import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.PreferenceService;
+import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.ui.BookDetailController;
 
 import java.io.IOException;
@@ -43,8 +44,10 @@ public class UIBuilder {
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(200);
             imageView.setFitHeight(300);
+            imageView.setOnMouseClicked(event -> { openBookDetailPage(book); });
 
             Label titleLabel = new Label(book.getTitle());
+            titleLabel.setOnMouseClicked(event -> { openBookDetailPage(book); });
             Label authorsLabel = new Label(book.getAuthors());
 
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
@@ -111,6 +114,7 @@ public class UIBuilder {
                     imageView.setImage(image);
                     imageView.setFitWidth(75);
                     imageView.setFitHeight(100);
+                    imageView.setOnMouseClicked(event -> { openBookDetailPage(book); });
                 });
             });
 
@@ -146,6 +150,9 @@ public class UIBuilder {
                     imageView.setImage(image);
                     imageView.setFitWidth(55);
                     imageView.setFitHeight(83);
+                    imageView.setOnMouseClicked(event -> {
+                        openBookDetailPage(book);
+                    });
                 });
             });
 
@@ -156,6 +163,8 @@ public class UIBuilder {
             vbox.setPrefHeight(83);
 
             Label titleLabel = new Label(book.getTitle());
+            titleLabel.setOnMouseClicked(event -> { openBookDetailPage(book); });
+
             titleLabel.setStyle("-fx-font-weight: bold");
             Label authorsLabel = new Label(book.getAuthors());
             Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
@@ -166,6 +175,9 @@ public class UIBuilder {
                        book.getIsbn13()
                );
                bookmarkService.add(bookmark);
+
+               BookService service = new BookService();
+               service.add(book);
 
                //add category
                 List<String> bookCategory = Arrays.asList(book.getCategories().split(",\\s*"));

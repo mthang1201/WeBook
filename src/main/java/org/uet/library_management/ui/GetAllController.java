@@ -8,6 +8,7 @@ import org.uet.library_management.api.search.SearchByAuthor;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.repositories.documents.BookRepository;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.UIBuilder;
 
@@ -25,15 +26,8 @@ public class GetAllController {
     public void initialize() {
         flowPane.setPadding(new Insets(10,10,10,10));
 
-        BookService service = new BookService();
-        List<Book> books = service.findAll();
-
-        if (books.isEmpty()) {
-            SearchContext test = new SearchContext();
-            test.setStrategy(new SearchByAuthor());
-            books = test.executeSearch("python");
-            books.sort(new SortByAvgRating());
-        }
+        BookRepository repository = new BookRepository();
+        List<Book> books = repository.getBooksFromLoans();
 
         flowPane.getChildren().addAll(
                 UIBuilder.createFlowPane(books).getChildren()

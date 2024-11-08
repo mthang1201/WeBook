@@ -2,6 +2,8 @@ package org.uet.library_management.core.repositories;
 
 import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.core.entities.Loan;
+import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.tools.SessionManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,5 +126,4 @@ public class LoanRepository implements MySQLRepository<Loan> {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);
     }
-
 }
