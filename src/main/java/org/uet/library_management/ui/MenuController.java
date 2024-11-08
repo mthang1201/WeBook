@@ -58,7 +58,7 @@ public class MenuController {
                         Platform.runLater(() -> {
                             if (!newValue.isEmpty()) {
                                 Mediator.text = searchTextField.getText();
-                                SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
+                                SceneManager.getInstance().pushSubScene("search/suggestSearch.fxml");
                             } else {
                                 SceneManager.getInstance().setSubScene("search/search.fxml");
                             }
@@ -142,7 +142,7 @@ public class MenuController {
 
     @FXML
     private void handleBookshelfMenu() {
-        SceneManager.getInstance().setSubScene("bookshelf.fxml");
+        SceneManager.getInstance().pushSubScene("bookshelf.fxml");
     }
 
     @FXML

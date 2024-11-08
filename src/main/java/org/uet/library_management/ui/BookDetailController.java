@@ -76,7 +76,8 @@ public class BookDetailController {
 
     @FXML
     private void onBackButtonClicked(ActionEvent event) {
-        SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
+//        SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
+        SceneManager.getInstance().popSubScene();
     }
 
     @FXML

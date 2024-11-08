@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class SceneManager {
     private static final int SCREEN_WIDTH = 1000;
@@ -21,6 +22,8 @@ public class SceneManager {
     private static Stage stage;
 
     private static SceneManager instance;
+
+    private Stack<String> subSceneStack = new Stack<>();
 
     private SceneManager() {}
 
@@ -50,12 +53,31 @@ public class SceneManager {
         stage.show();
     }
 
+    public void pushSubScene(String sceneName) {
+        subSceneStack.push(sceneName);
+        setSubScene(sceneName);
+    }
+
+    public void popSubScene() {
+        if (!subSceneStack.isEmpty()) {
+            subSceneStack.pop();
+            if (!subSceneStack.isEmpty()) {
+                String sceneName = subSceneStack.peek();
+                subSceneStack.clear();
+                setSubScene(sceneName);
+            }
+        }
+    }
+
+    public void clearStack() {
+        subSceneStack.clear();
+    }
+
     public void setContentPane(BorderPane contentPane) {
         this.contentPane = contentPane;
     }
 
     public void setSubScene(String sceneName) {
-//        sceneName = "search/suggestSearch.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
             BorderPane pageContent = loader.load();
