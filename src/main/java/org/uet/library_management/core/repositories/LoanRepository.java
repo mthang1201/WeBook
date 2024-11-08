@@ -98,6 +98,19 @@ public class LoanRepository implements MySQLRepository<Loan> {
         return loans;
     }
 
+    public Loan findById(int userId, String isbn13) {
+        Loan loan = null;
+        String query = "SELECT * FROM " + db_table + " WHERE userId = ? AND isbn13 = ?";
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId, isbn13)) {
+            if (rs.next()) {
+                loan = populateLoan(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return loan;
+    }
     @Override
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +

@@ -62,13 +62,20 @@
 #borrowButton {
     -fx-text-fill: white;
     -fx-background-color: black;
-    -fx-opacity: 1;
-    -fx-transition: 0.3s ease;
     -fx-font-family: "Montserrat";
 }
-
 #borrowButton:hover {
-    -fx-background-color: #005A9E;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+#returnButton {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+    -fx-font-family: "Montserrat";
+}
+#borrowButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: red;
 }
 #descriptionAndCommentBox {
      -fx-background-color: white;

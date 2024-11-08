@@ -21,7 +21,6 @@ import java.time.LocalDate;
 
 public class BookDetailController {
 
-    @FXML public Button backButton;
     @FXML private ImageView bookCover;
     @FXML private Label title;
     @FXML private Label author;
@@ -30,6 +29,8 @@ public class BookDetailController {
     @FXML private Label descriptionText;
     @FXML private Button borrowButton;
     @FXML private Button moreButton;
+    @FXML private Button returnButton;
+    @FXML public Button backButton;
 
     @FXML private Label publisherName;
     @FXML private Label languageName;
@@ -42,6 +43,7 @@ public class BookDetailController {
     @FXML private Label maturityRatingsName;
 
     private boolean moreClicked = false;
+    private boolean isBorrowed = false;
 
     public void loadBookDetails(Book book) {
         title.setText(book.getTitle());
@@ -72,7 +74,21 @@ public class BookDetailController {
     @FXML
     private void initialize() {
         loadBookDetails(Mediator.bookDetail);
+        isBorrowed = checkBorrowed();
+        if (isBorrowed == true) {
+            borrowButton.setDisable(true);
+            isBorrowed = true;
+
+            returnButton.setDisable(false);
+            isBorrowed = true;
+        } else {
+            borrowButton.setDisable(false);
+
+            returnButton.setDisable(true);
+            isBorrowed = false;
+        }
         addHoverEffect(borrowButton);
+        addHoverEffect(returnButton);
     }
 
     @FXML
@@ -98,56 +114,88 @@ public class BookDetailController {
         moreClicked = !moreClicked;
     }
 
+    @FXML
+    private void onReturnButtonClicked(ActionEvent event) {
+        handleReturnButton();
+    }
+
     private void handleBorrowButton() {
-        DatePicker dueDatePicker = new DatePicker();
-        dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
+        if (isBorrowed == false) {
+            DatePicker dueDatePicker = new DatePicker();
+            dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
 
-        // Disable direct text input
-        dueDatePicker.getEditor().setDisable(true);
+            // Disable direct text input
+            dueDatePicker.getEditor().setDisable(true);
 
-        // Create a dialog for borrowing
+            // Create a dialog for borrowing
 
-        Alert dueDateDialog = AlertUtil.createInformationDialog(
-                "Select Due Date",
-                null,
-                "Please select a due date for borrowing the book:",
-                null
-        );
+            Alert dueDateDialog = AlertUtil.createInformationDialog(
+                    "Select Due Date",
+                    null,
+                    "Please select a due date for borrowing the book:",
+                    null
+            );
 
-        VBox dueDateContent = new VBox(10);
-        dueDateContent.getChildren().add(dueDatePicker);
-        dueDateDialog.getDialogPane().setContent(dueDateContent);
+            VBox dueDateContent = new VBox(10);
+            dueDateContent.getChildren().add(dueDatePicker);
+            dueDateDialog.getDialogPane().setContent(dueDateContent);
 
-        dueDateDialog.showAndWait().ifPresent(response -> {
-            LocalDate dueDate = dueDatePicker.getValue();
-            if (response == ButtonType.OK) {
-                if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
-                    AlertUtil.showErrorAlert("Invalid Date!",
-                            null,
-                            "Please select a future date!",
-                            null);
-                    dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
-                } else {
-                    AlertUtil.showInformationsDialog("Success!",
-                            null,
-                            "Your changes have been saved successfully!",
-                            null);
-                    Book book = Mediator.bookDetail;
-                    Loan loan = new Loan(
-                            LocalDate.now().toString(),
-                            dueDate.toString(),
-                            null,
-                            "borrowed",
-                            book.getIsbn13(),
-                            book.getTitle(),
-                            SessionManager.user.getUserId()
-                    );
+            dueDateDialog.showAndWait().ifPresent(response -> {
+                LocalDate dueDate = dueDatePicker.getValue();
+                if (response == ButtonType.OK) {
+                    if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+                        AlertUtil.showErrorAlert("Invalid Date!",
+                                null,
+                                "Please select a future date!",
+                                null);
+                        dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
+                    } else {
+                        AlertUtil.showInformationsDialog("Success!",
+                                null,
+                                "Your changes have been saved successfully!",
+                                null);
+                        Book book = Mediator.bookDetail;
+                        Loan loan = new Loan(
+                                LocalDate.now().toString(),
+                                dueDate.toString(),
+                                null,
+                                "borrowed",
+                                book.getIsbn13(),
+                                book.getTitle(),
+                                SessionManager.user.getUserId()
+                        );
 
-                    LoanService loanService = new LoanService();
-                    loanService.add(loan);
+                        LoanService loanService = new LoanService();
+                        loanService.add(loan);
+
+                        borrowButton.setDisable(true);
+                        isBorrowed = true;
+
+                        returnButton.setDisable(false);
+                        isBorrowed = true;
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+
+    private void handleReturnButton() {
+        if (isBorrowed == true) {
+            LoanService loanService = new LoanService();
+            Loan deleteLoan = loanService.findById(SessionManager.user.getUserId(), Mediator.bookDetail.getIsbn13());
+            AlertUtil.showInformationsDialog(
+                    "Success!",
+                    null,
+                    "You have returned " + deleteLoan.getTitle() + " successfully!",
+                    null
+            );
+            loanService.remove(deleteLoan);
+
+            borrowButton.setDisable(false);
+
+            returnButton.setDisable(true);
+            isBorrowed = false;
+        }
     }
 
     private void addHoverEffect(Button button) {
@@ -161,5 +209,15 @@ public class BookDetailController {
 
         button.setOnMouseEntered(event -> scaleUp.playFromStart());
         button.setOnMouseExited(event -> scaleDown.playFromStart());
+    }
+
+    private boolean checkBorrowed() {
+        LoanService loanService = new LoanService();
+        Loan loan = loanService.findById(SessionManager.user.getUserId(), Mediator.bookDetail.getIsbn13());
+        if (loan == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
