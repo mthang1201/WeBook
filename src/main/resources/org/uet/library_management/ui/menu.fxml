@@ -60,14 +60,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="booksButton" styleClass="menu-button" onAction="#handleBooksMenu" text="Sách">
-            <graphic>
-                <ImageView fx:id="booksImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@../icons/books.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-
         <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
             <graphic>
                 <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">

@@ -69,7 +69,6 @@ public class SceneManager {
             subSceneStack.pop();
             if (!subSceneStack.isEmpty()) {
                 String sceneName = subSceneStack.peek();
-                subSceneStack.clear();
                 setSubScene(sceneName);
             }
         }

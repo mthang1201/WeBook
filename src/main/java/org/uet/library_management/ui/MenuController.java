@@ -26,20 +26,16 @@ public class MenuController {
     @FXML public Button getAllButton;
     @FXML public Button bookmarkButton;
     @FXML public Button finishedButton;
-    @FXML public Button booksButton;
     @FXML public Button addBooksButton;
     @FXML public Button usernameButton;
-    @FXML public Button logoutButton;
 
     @FXML public ImageView homeImageView;
     @FXML public ImageView getAllImageView;
     @FXML public ImageView bookshelfImageView;
     @FXML public ImageView bookmarkImageView;
     @FXML public ImageView finishedImageView;
-    @FXML public ImageView booksImageView;
     @FXML public ImageView addBooksImageView;
     @FXML public ImageView usernameImageView;
-    @FXML public ImageView logoutImageView;
 
     private Timer timer;
 
@@ -107,13 +103,6 @@ public class MenuController {
                 handleButtonHover("finished", finishedImageView)
         );
 
-        booksButton.setOnMouseEntered(event ->
-                handleButtonHover("books-white", booksImageView)
-        );
-        booksButton.setOnMouseExited(event ->
-                handleButtonHover("books", booksImageView)
-        );
-
         addBooksButton.setOnMouseEntered(event ->
                 handleButtonHover("upload-white", addBooksImageView)
         );
@@ -165,12 +154,6 @@ public class MenuController {
     private void handleFinishedMenu() {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("finished.fxml");
-    }
-
-    @FXML
-    private void handleBooksMenu() {
-        SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("home.fxml");
     }
 
     @FXML
