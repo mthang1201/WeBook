@@ -181,8 +181,7 @@ public class MenuController {
 
     @FXML
     private void handleSettingsMenu() {
-//        SceneManager.getInstance().clearStack();
-//        SceneManager.getInstance().pushSubScene("settings.fxml");
+        SceneManager.getInstance().showNewWindow("settings.fxml", "Settings");
     }
 
     @SneakyThrows
