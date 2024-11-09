@@ -4,6 +4,8 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.AddBooksController"
@@ -15,6 +17,10 @@
         </VBox>
     </top>
     <center>
-        <VBox />
+        <VBox>
+            <TextField fx:id="isbn10TextField" styleClass="isbn-text-field" promptText="ISBN 10" />
+            <TextField fx:id="isbn13TextField" styleClass="isbn-text-field" promptText="ISBN 13" />
+            <Button fx:id="addButton" onAction="#handleAddButton" text="Add" />
+        </VBox>
     </center>
 </BorderPane>

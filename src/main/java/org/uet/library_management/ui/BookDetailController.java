@@ -115,7 +115,7 @@ public class BookDetailController {
     }
 
     @FXML
-    private void onReturnButtonClicked(ActionEvent event) {
+    private void onReturnButtonClicked() {
         handleReturnButton();
     }
 
