@@ -139,4 +139,9 @@ public class UserRepository implements MySQLRepository<User> {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);
     }
+
+    public void changePassword(String passwordHash, int userId) {
+        String query = "UPDATE " + db_table + " SET passwordHash = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query, passwordHash, userId);
+    }
 }

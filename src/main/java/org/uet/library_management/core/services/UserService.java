@@ -2,6 +2,7 @@ package org.uet.library_management.core.services;
 
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.repositories.UserRepository;
+import org.uet.library_management.tools.SessionManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +48,9 @@ public class UserService {
 
     public void removeAll() {
         repository.removeAll();
+    }
+
+    public void changePassword(String passwordHash, int userId) {
+        repository.changePassword(passwordHash, SessionManager.user.getUserId());
     }
 }
