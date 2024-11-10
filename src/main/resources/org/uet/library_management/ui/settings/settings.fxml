@@ -40,7 +40,7 @@
         </graphic>
     </Button>
 
-    <Button fx:id="bookmarkButton" styleClass="settings-button" text="">
+    <Button fx:id="bookmarkButton" styleClass="settings-button" text="Email">
         <graphic>
             <ImageView fx:id="bookmarkImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/bookmark.png" />
