@@ -2,7 +2,6 @@ module org.uet.library_management {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
-    requires java.sql;
     requires google.api.client;
     requires com.google.api.client;
     requires com.google.api.services.books;
@@ -10,6 +9,7 @@ module org.uet.library_management {
     requires org.apache.commons.text;
     requires jbcrypt;
     requires javafx.swing;
+    requires java.sql.rowset;
 
     opens org.uet.library_management to javafx.fxml;
     opens org.uet.library_management.ui to javafx.fxml;

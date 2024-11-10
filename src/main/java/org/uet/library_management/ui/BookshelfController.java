@@ -37,6 +37,11 @@ public class BookshelfController {
 
     }
     private void updateUI(List<Book> books) {
+//        BookService bookService = new BookService();
+//        for (Book book : books) {
+//            bookService.add(book);
+//        }
+
         flowPane.getChildren().clear();
         flowPane.getChildren().addAll(
                 UIBuilder.generateRecommendation(books).getChildren()
