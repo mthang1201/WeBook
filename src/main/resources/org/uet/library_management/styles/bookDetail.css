@@ -15,7 +15,19 @@
         -fx-text-fill: black;
         -fx-opacity: 0.6;
         -fx-font-size: 16px;
-        -fx-padding: 2 0 0 0;
+}
+.noteText {
+    -fx-font-family: "Montserrat Light";
+    -fx-opacity: 0.5;
+    -fx-font-size: 12px;
+}
+.starButton {
+     -fx-background-color: transparent;
+     -fx-background-size: contain;
+     -fx-border-color: transparent;
+}
+.starButton:hover {
+     -fx-background-image: url('/org/uet/library_management/icons/filled-star.png');
 }
 #backButton {
     -fx-text-fill: white;
@@ -113,4 +125,24 @@
 #bookInformationBox {
     -fx-spacing: 10px;
     -fx-background-color: #EFFBFF;
+}
+#RateAndReviewBox {
+    -fx-spacing: 10px;
+}
+#rateHeader {
+    -fx-font-family: "Montserrat Extrabold";
+    -fx-text-fill: black;
+    -fx-font-size: 22px;
+}
+#reviewArea {
+    -fx-font-family: "Montserrat Light";
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+    -fx-background-color: #EFFBFF;
+}
+#postButton {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+    -fx-font-family: "Montserrat";
 }

@@ -69,6 +69,36 @@
                             <Label fx:id="maturityRatingsName" styleClass="normalText" />
                         </HBox>
                     </VBox>
+
+                    <VBox fx:id="RateAndReviewBox" alignment="CENTER_LEFT">
+                        <Label fx:id="rateHeader" text="Rate and review" />
+                        <Label fx:id="reviewRate" styleClass="noteText" text="Ratings (0/5)"/>
+
+                        <HBox fx:id="starsBox" spacing="10" prefWidth="50" prefHeight="50">
+                            <ToggleButton fx:id="star1" styleClass="starButton" onAction="#on1starButtonClicked" />
+                            <ToggleButton fx:id="star2" styleClass="starButton" onAction="#on2starButtonClicked" />
+                            <ToggleButton fx:id="star3" styleClass="starButton" onAction="#on3starButtonClicked" />
+                            <ToggleButton fx:id="star4" styleClass="starButton" onAction="#on4starButtonClicked" />
+                            <ToggleButton fx:id="star5" styleClass="starButton" onAction="#on5starButtonClicked" />
+
+                        </HBox>
+
+                        <Label styleClass="noteText" text="Review"/>
+                        <HBox alignment="CENTER_LEFT">
+                            <TextArea fx:id="reviewArea" promptText="What do you think about this book?" prefWidth="500" prefRowCount="5"/>
+                        </HBox>
+                        <Button fx:id="postButton" text="Post" onAction="#onPostCommentClicked" />
+                    </VBox>
+
+                    <VBox fx:id="existingReviewBox">
+                        <Label fx:id="yourReviewLabel" text="Your review: " styleClass="section"/>
+                    </VBox>
+                    <Button fx:id="editReviewButton" text="Edit Review" onAction="#onEditReviewClicked" />
+                    <VBox fx:id="reviewsListBox">
+                        <Label fx:id="Reviews" text="Reviews" styleClass="section"/>
+                        <VBox fx:id="reviewBox" spacing="30"/>
+                    </VBox>
+
                 </VBox>
             </VBox>
         </ScrollPane>

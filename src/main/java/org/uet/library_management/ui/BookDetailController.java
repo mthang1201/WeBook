@@ -9,15 +9,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.core.entities.DocumentEvaluation;
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.LoanService;
-import org.uet.library_management.tools.AlertUtil;
-import org.uet.library_management.tools.ImageLoaderUtil;
-import org.uet.library_management.tools.Mediator;
-import org.uet.library_management.tools.SessionManager;
+import org.uet.library_management.tools.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookDetailController {
 
@@ -31,6 +33,8 @@ public class BookDetailController {
     @FXML private Button moreButton;
     @FXML private Button returnButton;
     @FXML public Button backButton;
+    @FXML private Button postButton;
+    @FXML private Button editReviewButton;
 
     @FXML private Label publisherName;
     @FXML private Label languageName;
@@ -41,9 +45,26 @@ public class BookDetailController {
     @FXML private Label ratingCountName;
     @FXML private Label printTypeName;
     @FXML private Label maturityRatingsName;
+    //@FXML private ListView<String> commentListView;
+    @FXML private Label reviewRate;
+    @FXML private TextArea reviewArea;
+    @FXML private ToggleButton star1;
+    @FXML private ToggleButton star2;
+    @FXML private ToggleButton star3;
+    @FXML private ToggleButton star4;
+    @FXML private ToggleButton star5;
+    @FXML private VBox RateAndReviewBox;
+    @FXML private VBox existingReviewBox;
+
+    private boolean hasEvaluated;
+    @FXML private VBox reviewBox;
+
 
     private boolean moreClicked = false;
     private boolean isBorrowed = false;
+    private int stars;
+
+    //private ObservableList<String> comments;
 
     public void loadBookDetails(Book book) {
         title.setText(book.getTitle());
@@ -73,20 +94,22 @@ public class BookDetailController {
 
     @FXML
     private void initialize() {
+        LayoutUtils.setVboxMargin(RateAndReviewBox, 0, 0 ,0, 10);
+
         loadBookDetails(Mediator.bookDetail);
-        isBorrowed = checkBorrowed();
-        if (isBorrowed == true) {
-            borrowButton.setDisable(true);
-            isBorrowed = true;
+        List<ImageView> starImageViews = LayoutUtils.createListImageViews(
+                ImageLoaderUtil.getStarImages(0), 50, 50, true);
 
-            returnButton.setDisable(false);
-            isBorrowed = true;
-        } else {
-            borrowButton.setDisable(false);
+        star1.setGraphic(starImageViews.get(0));
+        star2.setGraphic(starImageViews.get(1));
+        star3.setGraphic(starImageViews.get(2));
+        star4.setGraphic(starImageViews.get(3));
+        star5.setGraphic(starImageViews.get(4));
 
-            returnButton.setDisable(true);
-            isBorrowed = false;
-        }
+        checkReviewed();
+        displayReviews();
+
+        checkBorrowed();
         addHoverEffect(borrowButton);
         addHoverEffect(returnButton);
     }
@@ -119,6 +142,40 @@ public class BookDetailController {
         handleReturnButton();
     }
 
+    @FXML
+    private void on1starButtonClicked(ActionEvent event) {
+        handleRating(1);
+    }
+
+    @FXML
+    private void on2starButtonClicked(ActionEvent event) {
+        handleRating(2);
+    }
+
+    @FXML
+    private void on3starButtonClicked(ActionEvent event) {
+        handleRating(3);
+    }
+
+    @FXML
+    private void on4starButtonClicked(ActionEvent event) {
+        handleRating(4);
+    }
+
+    @FXML
+    private void on5starButtonClicked(ActionEvent event) {
+        handleRating(5);
+    }
+
+    @FXML
+    private void onPostCommentClicked(ActionEvent event) {
+        handlePostCommentButton(stars);
+    }
+
+    @FXML
+    private void onEditReviewClicked(ActionEvent event) {
+
+    }
     private void handleBorrowButton() {
         if (isBorrowed == false) {
             DatePicker dueDatePicker = new DatePicker();
@@ -197,7 +254,67 @@ public class BookDetailController {
             isBorrowed = false;
         }
     }
+    private void handleRating(int stars) {
+        this.stars = stars;
+        List<ImageView> starImageViews = LayoutUtils.createListImageViews(
+                ImageLoaderUtil.getStarImages(stars),
+                50, 50, true);
 
+        star1.setGraphic(starImageViews.get(0));
+        star2.setGraphic(starImageViews.get(1));
+        star3.setGraphic(starImageViews.get(2));
+        star4.setGraphic(starImageViews.get(3));
+        star5.setGraphic(starImageViews.get(4));
+        reviewRate.setText("Ratings: " + stars + "/5");
+
+    }
+
+    private void handlePostCommentButton(int stars) {
+        String comment = reviewArea.getText().trim();
+
+        if (!comment.isEmpty()) {
+            DocumentEvaluation docEvaluation = new DocumentEvaluation(
+                    Mediator.bookDetail.getIsbn13(),
+                    SessionManager.user.getUserId(),
+                    stars,
+                    comment,
+                    new Timestamp(System.currentTimeMillis())
+            );
+
+            DocumentEvaluationService evaluationService = new DocumentEvaluationService();
+            evaluationService.add(docEvaluation);
+
+            AlertUtil.showInformationsDialog("Review Posted!",
+                    null,
+                    "Your review has been posted successfully.",
+                    null);
+
+            reviewArea.clear();
+            displayReviews();
+            checkReviewed();
+        } else {
+            AlertUtil.showErrorAlert("Empty Comment!",
+                    null,
+                    "Please write a comment before posting.",
+                    null);
+        }
+    }
+
+    private void displayReviews() {
+        reviewBox.getChildren().clear();
+        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
+
+        List<DocumentEvaluation> reviews = evaluationService.findByIsbn13(Mediator.bookDetail.getIsbn13());
+        if (reviews == null || reviews.isEmpty()) {
+            Label noReviewLabel = new Label("No reviews yet.");
+            noReviewLabel.setStyle("-fx-font-style: italic; -fx-text-fill: #777;");
+            reviewBox.getChildren().add(noReviewLabel);
+        } else {
+            for (DocumentEvaluation review : reviews) {
+                reviewBox.getChildren().add(LayoutUtils.createReviewBox(review));
+            }
+        }
+    }
     private void addHoverEffect(Button button) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(300), button);
         scaleUp.setToX(1.1);
@@ -211,13 +328,50 @@ public class BookDetailController {
         button.setOnMouseExited(event -> scaleDown.playFromStart());
     }
 
-    private boolean checkBorrowed() {
+    private void checkBorrowed() {
         LoanService loanService = new LoanService();
         Loan loan = loanService.findById(SessionManager.user.getUserId(), Mediator.bookDetail.getIsbn13());
         if (loan == null) {
-            return false;
+            isBorrowed = false;
         } else {
-            return true;
+            isBorrowed = true;
+        }
+        if (isBorrowed == true) {
+            borrowButton.setDisable(true);
+            isBorrowed = true;
+
+            returnButton.setDisable(false);
+            isBorrowed = true;
+        } else {
+            borrowButton.setDisable(false);
+
+            returnButton.setDisable(true);
+            isBorrowed = false;
+        }
+    }
+
+    private void checkReviewed() {
+        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
+        hasEvaluated = evaluationService.hasEvaluated(Mediator.bookDetail.getIsbn13(),
+                SessionManager.user.getUserId());
+        if (hasEvaluated) {
+            RateAndReviewBox.setVisible(false);
+            RateAndReviewBox.setManaged(false);
+            existingReviewBox.getChildren().add(LayoutUtils.createReviewBox(
+                    evaluationService.getUserReview(Mediator.bookDetail.getIsbn13(), SessionManager.user.getUserId())
+            ));
+            existingReviewBox.setVisible(true);
+            existingReviewBox.setManaged(true);
+            editReviewButton.setVisible(true);
+            editReviewButton.setManaged(true);
+
+        } else {
+            RateAndReviewBox.setVisible(true);
+            RateAndReviewBox.setManaged(true);
+            existingReviewBox.setVisible(false);
+            existingReviewBox.setManaged(false);
+            editReviewButton.setVisible(false);
+            editReviewButton.setManaged(false);
         }
     }
 }
