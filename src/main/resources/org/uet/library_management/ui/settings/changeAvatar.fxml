@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.uet.library_management.ui.settings.ChangeAvatarController"
+      styleClass="changes-vbox">
+    <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
+
+    <Pane styleClass="spacing-pane" />
+
+    <Label text="Avatar" />
+
+    <Pane styleClass="spacing-pane" />
+
+    <ImageView fx:id="imageView" fitWidth="300" preserveRatio="true"/>
+    <Button text="Upload Image" onAction="#uploadImage"/>
+
+    <Pane styleClass="spacing-pane" />
+
+    <Button fx:id="changeAvatarButton" styleClass="changes-button" text="Change Avatar" />
+</VBox>

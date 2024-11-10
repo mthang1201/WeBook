@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.core.repositories.UserAvatarRepository;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
 
@@ -110,11 +111,35 @@ public class MenuController {
                 handleButtonHover("upload", addBooksImageView)
         );
 
-        if (SessionManager.user != null) {
-            usernameButton.setText(SessionManager.user.getName());
-        } else {
+        if (SessionManager.user == null) {
             usernameButton.setText("Anonymous");
+
+            usernameImageView.setImage(
+                    new Image(
+                            getClass().getResourceAsStream(PREFIX_ICONS + "avatar-male.png")
+                    )
+            );
+        } else {
+            usernameButton.setText(SessionManager.user.getName());
+
+            UserAvatarRepository repository = new UserAvatarRepository();
+            Image image;
+            image = repository.findByUserId(SessionManager.user.getUserId());
+
+            if (image == null) {
+                image = new Image(
+                        getClass().getResourceAsStream(PREFIX_ICONS + "avatar-male.png")
+                );
+            }
+
+            usernameImageView.setImage(image);
         }
+
+        SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
+            if (newImage != null) {
+                usernameImageView.setImage(newImage);  // Update ImageView when the image changes
+            }
+        });
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {

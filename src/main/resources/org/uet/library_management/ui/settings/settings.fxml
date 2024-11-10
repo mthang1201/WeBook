@@ -23,8 +23,8 @@
     <Pane styleClass="spacing-pane" />
 
     <!--        Sách-->
-    <Label styleClass="settings-label" text="My purchases" />
-    <Button fx:id="homeButton" styleClass="settings-button" text="Updates">
+    <Label styleClass="settings-label" text="Thông tin cá nhân" />
+    <Button fx:id="homeButton" onAction="#handleAvatarButton" styleClass="settings-button" text="Avatar">
         <graphic>
             <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/home.png" />
@@ -32,7 +32,7 @@
         </graphic>
     </Button>
 
-    <Button fx:id="getAllButton" styleClass="settings-button" text="Books">
+    <Button fx:id="getAllButton" onAction="#handleNameButton" styleClass="settings-button" text="Họ và Tên">
         <graphic>
             <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/getAll.png" />
@@ -40,10 +40,21 @@
         </graphic>
     </Button>
 
-    <Button fx:id="bookmarkButton" styleClass="settings-button" text="Muốn đọc">
+    <Button fx:id="bookmarkButton" styleClass="settings-button" text="">
         <graphic>
             <ImageView fx:id="bookmarkImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/bookmark.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Pane styleClass="spacing-pane" />
+
+    <Label styleClass="settings-label" text="Bảo mật" />
+    <Button fx:id="getAllButton" onAction="#handlePassword" styleClass="settings-button" text="Mật khẩu">
+        <graphic>
+            <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
+                <Image url="@../../icons/getAll.png" />
             </ImageView>
         </graphic>
     </Button>

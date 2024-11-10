@@ -79,7 +79,7 @@
         <Button fx:id="usernameButton" styleClass="username-button" onAction="#handleSettingsMenu" prefWidth="40" prefHeight="20">
             <graphic>
                 <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
-                    <Image url="@../icons/avatar-male.png" />
+<!--                    <Image url="@../icons/avatar-male.png" />-->
                 </ImageView>
             </graphic>
         </Button>
