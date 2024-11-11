@@ -307,7 +307,7 @@ public class BookDetailController {
         List<DocumentEvaluation> reviews = evaluationService.findByIsbn13(Mediator.bookDetail.getIsbn13());
         if (reviews == null || reviews.isEmpty()) {
             Label noReviewLabel = new Label("No reviews yet.");
-            noReviewLabel.setStyle("-fx-font-style: italic; -fx-text-fill: #777;");
+            noReviewLabel.setStyle("-fx-font-style: italic; -fx-text-fill: #777; -fx-padding: 0 0 0 10;");
             reviewBox.getChildren().add(noReviewLabel);
         } else {
             for (DocumentEvaluation review : reviews) {

@@ -108,4 +108,9 @@ public class SceneManager {
         settingsStage.setScene(scene);
         settingsStage.show();
     }
+
+    public void closeSettingsWindows() {
+        settingsStage.close();
+    }
 }
+

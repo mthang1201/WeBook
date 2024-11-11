@@ -64,6 +64,7 @@ public class SettingsController {
     @FXML
     private void handleSignOut() {
         SessionManager.user = null;
+        SceneManager.getInstance().closeSettingsWindows();
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 

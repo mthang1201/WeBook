@@ -10,6 +10,7 @@ module org.uet.library_management {
     requires org.apache.commons.text;
     requires jbcrypt;
     requires javafx.swing;
+    requires java.sql.rowset;
 
     opens org.uet.library_management to javafx.fxml;
     opens org.uet.library_management.ui to javafx.fxml;

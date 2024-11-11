@@ -60,16 +60,9 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
-            BookService service = new BookService();
-            List<Book> books = service.findByTitle(searchText);
-
-            if (!books.isEmpty()) {
-                return books;
-            } else {
-                SearchContext searchContext = new SearchContext();
-                searchContext.setStrategy(new SearchByTitle());
-                return searchContext.executeSearch(searchText);
-            }
+            SearchContext searchContext = new SearchContext();
+            searchContext.setStrategy(new SearchByTitle());
+            return searchContext.executeSearch(searchText);
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateUI(books);
