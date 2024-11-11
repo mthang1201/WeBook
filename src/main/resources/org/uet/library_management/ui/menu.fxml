@@ -36,7 +36,7 @@
 
 <!--        Thư viện-->
         <Label styleClass="menu-label" text="Thư viện" />
-        <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
+        <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Đã mượn">
             <graphic>
                 <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../icons/getAll.png" />
