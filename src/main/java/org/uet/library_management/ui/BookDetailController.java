@@ -95,6 +95,7 @@ public class BookDetailController {
     @FXML
     private void initialize() {
         LayoutUtils.setVboxMargin(RateAndReviewBox, 0, 0 ,0, 10);
+        LayoutUtils.setButtonMargin(editReviewButton, 0, 0, 0 ,10);
 
         loadBookDetails(Mediator.bookDetail);
         List<ImageView> starImageViews = LayoutUtils.createListImageViews(
@@ -174,7 +175,7 @@ public class BookDetailController {
 
     @FXML
     private void onEditReviewClicked(ActionEvent event) {
-
+        handleEditReviewButton();
     }
     private void handleBorrowButton() {
         if (isBorrowed == false) {
@@ -300,6 +301,19 @@ public class BookDetailController {
         }
     }
 
+    private void handleEditReviewButton() {
+        //onbuttonclicked -> hasEvaluated->false;
+        //update
+        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
+        DocumentEvaluation userEvaluation = evaluationService.getUserReview(
+                Mediator.bookDetail.getIsbn13(),
+                SessionManager.user.getUserId()
+        );
+        evaluationService.remove(userEvaluation);
+        checkReviewed();
+        displayReviews();
+    }
+
     private void displayReviews() {
         reviewBox.getChildren().clear();
         DocumentEvaluationService evaluationService = new DocumentEvaluationService();
@@ -354,6 +368,8 @@ public class BookDetailController {
         DocumentEvaluationService evaluationService = new DocumentEvaluationService();
         hasEvaluated = evaluationService.hasEvaluated(Mediator.bookDetail.getIsbn13(),
                 SessionManager.user.getUserId());
+        existingReviewBox.getChildren().clear();
+
         if (hasEvaluated) {
             RateAndReviewBox.setVisible(false);
             RateAndReviewBox.setManaged(false);

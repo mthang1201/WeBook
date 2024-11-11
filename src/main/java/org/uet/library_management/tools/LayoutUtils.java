@@ -2,6 +2,7 @@ package org.uet.library_management.tools;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LayoutUtils {
+
+    public static void setButtonMargin(Button button, double top, double right, double bottom, double left) {
+        VBox.setMargin(button, new Insets(top, right, bottom, left));
+    }
 
     public static void setVboxMargin(VBox vbox, double top, double right, double bottom, double left) {
         for (Node node : vbox.getChildren()) {
