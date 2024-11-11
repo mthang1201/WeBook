@@ -9,4 +9,8 @@ public class SessionManager {
     public static User user;
 
     public static final ObjectProperty<Image> currentAvatar = new SimpleObjectProperty<>();
+
+    public static final ObjectProperty<String> currentName = new SimpleObjectProperty<>();
+
+    public static final ObjectProperty<String> currentEmail = new SimpleObjectProperty<>();
 }

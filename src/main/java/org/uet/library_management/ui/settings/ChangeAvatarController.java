@@ -59,6 +59,8 @@ public class ChangeAvatarController {
         }
     }
 
+    @SneakyThrows
+    @FXML
     private void handleChangeAvatarButton(File file) {
         byte[] avatar = null;
         try {
@@ -80,6 +82,8 @@ public class ChangeAvatarController {
                     null,
                     null
             );
+
+            SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

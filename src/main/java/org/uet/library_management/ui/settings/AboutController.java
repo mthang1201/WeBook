@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 
-public class AccountSettingsController {
+public class AboutController {
     @SneakyThrows
     @FXML
     public void handleBackButton() {

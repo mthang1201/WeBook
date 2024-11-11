@@ -9,8 +9,8 @@ import org.uet.library_management.core.services.UserService;
 import org.uet.library_management.tools.AlertUtil;
 import org.uet.library_management.tools.SessionManager;
 
-public class ChangeNameController {
-    public TextField nameField;
+public class ChangeEmailController {
+    public TextField emailField;
 
     @SneakyThrows
     @FXML
@@ -20,18 +20,18 @@ public class ChangeNameController {
 
     @SneakyThrows
     @FXML
-    public void handleChangeName() {
-        String newName = nameField.getText();
-        SessionManager.user.setName(newName);
+    public void handleChangeEmail() {
+        String newEmail = emailField.getText();
+        SessionManager.user.setEmail(newEmail);
 
         UserService service = new UserService();
         service.update(SessionManager.user);
 
-        SessionManager.currentName.set(newName);
+        SessionManager.currentEmail.set(newEmail);
 
         AlertUtil.showWarningAlert(
-                "Change name",
-                "You have changed your name successfully.",
+                "Change email",
+                "You have changed your email successfully.",
                 null,
                 null
         );

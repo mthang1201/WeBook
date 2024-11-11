@@ -26,7 +26,6 @@ public class MenuController {
     @FXML public Button bookshelfButton;
     @FXML public Button getAllButton;
     @FXML public Button bookmarkButton;
-    @FXML public Button finishedButton;
     @FXML public Button addBooksButton;
     @FXML public Button usernameButton;
 
@@ -34,7 +33,6 @@ public class MenuController {
     @FXML public ImageView getAllImageView;
     @FXML public ImageView bookshelfImageView;
     @FXML public ImageView bookmarkImageView;
-    @FXML public ImageView finishedImageView;
     @FXML public ImageView addBooksImageView;
     @FXML public ImageView usernameImageView;
 
@@ -97,13 +95,6 @@ public class MenuController {
                 handleButtonHover("bookmark", bookmarkImageView)
         );
 
-        finishedButton.setOnMouseEntered(event ->
-                handleButtonHover("finished-white", finishedImageView)
-        );
-        finishedButton.setOnMouseExited(event ->
-                handleButtonHover("finished", finishedImageView)
-        );
-
         addBooksButton.setOnMouseEntered(event ->
                 handleButtonHover("upload-white", addBooksImageView)
         );
@@ -133,13 +124,19 @@ public class MenuController {
             }
 
             usernameImageView.setImage(image);
-        }
 
-        SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
-            if (newImage != null) {
-                usernameImageView.setImage(newImage);  // Update ImageView when the image changes
-            }
-        });
+            SessionManager.currentName.addListener((observable, oldText, newText) -> {
+                if (newText != null) {
+                    usernameButton.setText(newText);
+                }
+            });
+
+            SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
+                if (newImage != null) {
+                    usernameImageView.setImage(newImage);  // Update ImageView when the image changes
+                }
+            });
+        }
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {

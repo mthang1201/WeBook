@@ -36,7 +36,7 @@
 
 <!--        Thư viện-->
         <Label styleClass="menu-label" text="Thư viện" />
-        <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Tất cả">
+        <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Đã mượn">
             <graphic>
                 <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../icons/getAll.png" />
@@ -52,14 +52,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="finishedButton" styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong">
-            <graphic>
-                <ImageView fx:id="finishedImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@../icons/finished.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-
         <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
             <graphic>
                 <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">
@@ -67,10 +59,6 @@
                 </ImageView>
             </graphic>
         </Button>
-
-<!--        Bộ sưu tập của tôi-->
-        <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
-        <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
     </VBox>
 
     <AnchorPane xmlns="http://javafx.com/javafx"
