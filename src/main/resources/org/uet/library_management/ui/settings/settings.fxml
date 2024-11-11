@@ -50,7 +50,6 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Label styleClass="settings-label" text="Bảo mật" />
     <Button fx:id="getAllButton" onAction="#handlePassword" styleClass="settings-button" text="Mật khẩu">
         <graphic>
             <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
@@ -60,17 +59,18 @@
     </Button>
 
     <Pane styleClass="spacing-pane" />
-<!--        -->
+
     <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông báo" />
 
     <Pane styleClass="spacing-pane" />
-<!--        -->
-    <Button fx:id="jhjh" styleClass="settings-button" text="Manage Hidden Purchases" />
-    <Label fx:id="noteLabel" styleClass="note-label" text="Unhide books you have hidden." />
 
-    <Pane styleClass="spacing-pane" />
-
-    <Button fx:id="accountSettingsButton" onAction="#handleAccountSettings" styleClass="settings-button" text="Account Settings" />
+    <Button fx:id="getAllButton" onAction="#handlePassword" styleClass="settings-button" text="About">
+        <graphic>
+            <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
+                <Image url="@../../icons/getAll.png" />
+            </ImageView>
+        </graphic>
+    </Button>
 
     <Pane styleClass="spacing-pane" />
 
