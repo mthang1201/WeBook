@@ -52,14 +52,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="finishedButton" styleClass="menu-button" onAction="#handleFinishedMenu" text="Đã đọc xong">
-            <graphic>
-                <ImageView fx:id="finishedImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@../icons/finished.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-
         <Button fx:id="addBooksButton" styleClass="menu-button" onAction="#handleAddBooksMenu" text="Thêm sách">
             <graphic>
                 <ImageView fx:id="addBooksImageView" fitHeight="16" fitWidth="16">
