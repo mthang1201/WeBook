@@ -59,10 +59,6 @@
                 </ImageView>
             </graphic>
         </Button>
-
-<!--        Bộ sưu tập của tôi-->
-        <Label styleClass="menu-label" text="Bộ sưu tập của tôi" />
-        <Button styleClass="menu-button" onAction="#handleHomeMenu" text="My Books" />
     </VBox>
 
     <AnchorPane xmlns="http://javafx.com/javafx"
