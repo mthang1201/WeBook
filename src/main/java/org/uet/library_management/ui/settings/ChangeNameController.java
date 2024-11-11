@@ -18,6 +18,8 @@ public class ChangeNameController {
         SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 
+    @SneakyThrows
+    @FXML
     public void handleChangeName() {
         String newName = nameField.getText();
         SessionManager.user.setName(newName);
@@ -33,5 +35,7 @@ public class ChangeNameController {
                 null,
                 null
         );
+
+        SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 }

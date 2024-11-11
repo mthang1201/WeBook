@@ -18,6 +18,8 @@ public class ChangeEmailController {
         SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 
+    @SneakyThrows
+    @FXML
     public void handleChangeEmail() {
         String newEmail = emailField.getText();
         SessionManager.user.setEmail(newEmail);
@@ -33,5 +35,7 @@ public class ChangeEmailController {
                 null,
                 null
         );
+
+        SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 }

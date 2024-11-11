@@ -19,6 +19,8 @@ public class ChangePasswordController {
         SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 
+    @SneakyThrows
+    @FXML
     public void handleChangePasswordButton() {
         String newPassword = newPasswordField.getText();
         String passwordHash = BCrypt.hashpw(newPassword, BCrypt.gensalt());
@@ -34,5 +36,7 @@ public class ChangePasswordController {
                 null,
                 null
         );
+
+        SceneManager.getInstance().setSettingsScene("settings/settings.fxml");
     }
 }
