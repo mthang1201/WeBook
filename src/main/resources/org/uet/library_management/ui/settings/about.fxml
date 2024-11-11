@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.settings.AccountSettingsController"
+            fx:controller="org.uet.library_management.ui.settings.AboutController"
             styleClass="settings-window">
     <top>
         <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
     </top>
     <center>
-        <Label styleClass="settings-label" text="Account Settings" />
+        <Label styleClass="settings-label" text="About" />
     </center>
 </BorderPane>

@@ -133,13 +133,19 @@ public class MenuController {
             }
 
             usernameImageView.setImage(image);
-        }
 
-        SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
-            if (newImage != null) {
-                usernameImageView.setImage(newImage);  // Update ImageView when the image changes
-            }
-        });
+            SessionManager.currentName.addListener((observable, oldText, newText) -> {
+                if (newText != null) {
+                    usernameButton.setText(newText);
+                }
+            });
+
+            SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
+                if (newImage != null) {
+                    usernameImageView.setImage(newImage);  // Update ImageView when the image changes
+                }
+            });
+        }
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {

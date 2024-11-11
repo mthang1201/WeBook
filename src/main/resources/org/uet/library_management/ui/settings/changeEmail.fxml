@@ -8,18 +8,18 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.uet.library_management.ui.settings.ChangeNameController"
+      fx:controller="org.uet.library_management.ui.settings.ChangeEmailController"
       styleClass="changes-vbox">
     <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
 
     <Pane styleClass="spacing-pane" />
 
-    <Label text="Change name" />
+    <Label text="Change email" />
 
     <Pane styleClass="spacing-pane" />
 
-    <TextField fx:id="nameField" promptText="Your new name" />
+    <TextField fx:id="emailField" promptText="Your new email" />
     <Pane styleClass="spacing-pane" />
 
-    <Button styleClass="changes-button" onAction="#handleChangeName" text="Change Name" />
+    <Button styleClass="changes-button" onAction="#handleChangeEmail" text="Change Email" />
 </VBox>

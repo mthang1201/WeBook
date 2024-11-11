@@ -49,8 +49,4 @@ public class UserService {
     public void removeAll() {
         repository.removeAll();
     }
-
-    public void changePassword(String passwordHash, int userId) {
-        repository.changePassword(passwordHash, SessionManager.user.getUserId());
-    }
 }

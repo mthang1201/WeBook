@@ -19,12 +19,18 @@ public class SettingsController {
 
     public void initialize() {
         if (SessionManager.user == null) {
+            userName.setText("Anonymous");
+            userEmail.setText("abc123@gmail.com");
+
             avatar.setImage(
                     new Image(
                             getClass().getResourceAsStream(PREFIX_ICONS + "avatar-male.png")
                     )
             );
         } else {
+            userName.setText(SessionManager.user.getName());
+            userEmail.setText(SessionManager.user.getEmail());
+
             UserAvatarRepository repository = new UserAvatarRepository();
             Image image;
             image = repository.findByUserId(SessionManager.user.getUserId());
@@ -36,16 +42,25 @@ public class SettingsController {
             }
 
             avatar.setImage(image);
+
+            SessionManager.currentName.addListener((observable, oldText, newText) -> {
+                if (newText != null) {
+                    userName.setText(newText);
+                }
+            });
+
+            SessionManager.currentEmail.addListener((observable, oldText, newText) -> {
+                if (newText != null) {
+                    userEmail.setText(newText);
+                }
+            });
+
+            SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
+                if (newImage != null) {
+                    avatar.setImage(newImage);
+                }
+            });
         }
-
-        SessionManager.currentAvatar.addListener((observable, oldImage, newImage) -> {
-            if (newImage != null) {
-                avatar.setImage(newImage);
-            }
-        });
-
-        userName.setText(SessionManager.user.getName());
-        userEmail.setText(SessionManager.user.getEmail());
     }
 
     @SneakyThrows
@@ -84,5 +99,17 @@ public class SettingsController {
     @FXML
     public void handlePassword() {
         SceneManager.getInstance().setSettingsScene("settings/changePassword.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
+    public void handleAbout() {
+        SceneManager.getInstance().setSettingsScene("settings/about.fxml");
+    }
+
+    @SneakyThrows
+    @FXML
+    public void handleEmailButton() {
+        SceneManager.getInstance().setSettingsScene("settings/changeEmail.fxml");
     }
 }
