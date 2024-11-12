@@ -93,7 +93,9 @@ public class SceneManager {
     }
 
     public void showNewWindow(String sceneName) throws IOException {
-        settingsStage = new Stage();
+        if (settingsStage == null) {
+            settingsStage = new Stage();
+        }
         setSettingsScene(sceneName);
     }
 

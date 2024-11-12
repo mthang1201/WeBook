@@ -1,6 +1,7 @@
 package org.uet.library_management.core.services;
 
 import org.uet.library_management.core.entities.Bookmark;
+import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.repositories.BookmarkRepository;
 
 import java.util.List;
