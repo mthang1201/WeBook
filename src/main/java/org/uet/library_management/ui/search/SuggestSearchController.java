@@ -6,8 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.uet.library_management.api.search.SearchByGeneral;
 import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
+import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
@@ -30,6 +32,7 @@ public class SuggestSearchController {
     @FXML public VBox topResultsVbox;
 
     private Timer timer;
+
 
     @FXML
     public void initialize() {
@@ -60,9 +63,37 @@ public class SuggestSearchController {
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
         CompletableFuture.supplyAsync(() -> {
+            BookService bookService = new BookService();
+            List<Book> topRatedBooks = bookService.getTopRatedSearchTermBooks(1.0, searchText);
+
             SearchContext searchContext = new SearchContext();
-            searchContext.setStrategy(new SearchByTitle());
-            return searchContext.executeSearch(searchText);
+            searchContext.setStrategy(new SearchByGeneral());
+            List<Book> generalSearchResults = searchContext.executeSearch(searchText);
+
+            Set<String> existingIsbns = new HashSet<>();
+            List<Book> combinedResults = new ArrayList<>();
+
+            for (Book book : topRatedBooks) {
+                double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+                book.setAverageRating(updatedAvgRating);
+                if (!existingIsbns.contains(book.getIsbn13())) {
+                    combinedResults.add(book);
+                    existingIsbns.add(book.getIsbn13());
+                }
+            }
+
+            for (Book book : generalSearchResults) {
+                double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+                book.setAverageRating(updatedAvgRating);
+                if (!existingIsbns.contains(book.getIsbn13())) {
+                    combinedResults.add(book);
+                    existingIsbns.add(book.getIsbn13());
+                }
+            }
+
+            combinedResults.sort(new SortByAvgRating());
+
+            return combinedResults;
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateUI(books);

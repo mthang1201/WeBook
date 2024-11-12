@@ -54,6 +54,19 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
         return false;
     }
 
+    public double getAvgRatings(String isbn13) {
+        String query = "SELECT AVG(rating) AS avgRating FROM " + db_table + " WHERE isbn13 = ?";
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {
+            if (rs.next()) {
+                return rs.getDouble("avgRating");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0.0;
+    }
+
+
     @Override
     public List<DocumentEvaluation> findAll() {
         String query = "SELECT * FROM " + db_table;

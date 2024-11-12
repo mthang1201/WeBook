@@ -11,6 +11,16 @@ public class BookService extends DocumentService<Book> {
         super();
     }
 
+    public double getUpdatedAverageRating(String isbn13) {
+        BookRepository bookRepository = (BookRepository) repository;
+        return bookRepository.getUpdatedAverageRating(isbn13);
+    }
+
+    public List<Book> getTopRatedSearchTermBooks(double minRating, String searchTerm) {
+        BookRepository bookRepository = (BookRepository) repository;
+        return bookRepository.getTopRatedSearchTermBooks(minRating, searchTerm);
+    }
+
     @Override
     protected void loadRepository() {
         repository = new BookRepository();

@@ -55,16 +55,67 @@ public class BookRepository extends DocumentRepository<Book> {
     public void update(Document document) {
         Book book = (Book) document;
         String query = "UPDATE " + db_table + " SET title = ?, authors = ?, publisher = ?, " +
-                "publishedDate = ?, description = ?, isbn = ?, pageCount = ?, " +
+                "publishedDate = ?, description = ?, isbn10 = ?, isbn13 = ?, pageCount = ?, " +
                 "categories = ?, averageRating = ?, ratingsCount = ?, imageLinks = ?, " +
                 "language = ?, maturityRating = ?, printType = ? " +
-                "WHERE documentId = ?";
-        connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
-                book.getPublisher(), document.getPublishedDate(), document.getDescription(),
-                book.getIsbn10(), book.getIsbn13(), book.getPageCount(), document.getCategories(),
-                book.getAverageRating(), book.getRatingsCount(), book.getImageLinks(),
-                document.getLanguage(), book.getMaturityRating(), book.getPrintType(),
-                document.getDocumentId());
+                "WHERE isbn13 = ?";
+        connectJDBC.executeUpdate(query,
+                document.getTitle(),
+                document.getAuthors(),
+                book.getPublisher(),
+                document.getPublishedDate(),
+                document.getDescription(),
+                book.getIsbn10(),
+                book.getIsbn13(),
+                book.getPageCount(),
+                document.getCategories(),
+                book.getAverageRating(),
+                book.getRatingsCount(),
+                book.getImageLinks(),
+                document.getLanguage(),
+                book.getMaturityRating(),
+                book.getPrintType(),
+                book.getIsbn13());
+    }
+
+    public List<Book> getTopRatedSearchTermBooks(double minRating, String searchTerm) {
+        String query = "SELECT b.* FROM " + db_table + " b " +
+                "JOIN documentEvaluations de ON b.isbn13 = de.isbn13 " +
+                "WHERE b.title LIKE ? OR b.authors LIKE ? OR b.description LIKE ? OR b.categories LIKE ? " +
+                "GROUP BY b.isbn13 " +
+                "HAVING AVG(de.rating) >= ?";
+
+        // Add wildcards to the search term for partial matching
+        String searchTermWithWildcards = "%" + searchTerm + "%";
+
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query,
+                searchTermWithWildcards,
+                searchTermWithWildcards,
+                searchTermWithWildcards,
+                searchTermWithWildcards,
+                minRating)) {
+            List<Book> books = new ArrayList<>();
+            while (rs.next()) {
+                books.add(populateDocument(rs));
+            }
+            return books;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public double getUpdatedAverageRating(String isbn13) {
+
+        String query = "SELECT AVG(rating) FROM documentEvaluations WHERE isbn13 = ?";
+
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0.0;
     }
 
     public List<Book> getBooksFromLoans() {

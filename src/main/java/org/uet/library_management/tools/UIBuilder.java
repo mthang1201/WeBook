@@ -19,6 +19,7 @@ import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
+import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.PreferenceService;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.ui.BookDetailController;
@@ -127,6 +128,7 @@ public class UIBuilder {
         VBox topResultsVbox = new VBox();
         BookmarkService bookmarkService = new BookmarkService();
         PreferenceService preferenceService = new PreferenceService();
+        BookService bookService = new BookService();
 
         for (Book book : books) {
             //service.add(book);
@@ -167,6 +169,10 @@ public class UIBuilder {
             titleLabel.setStyle("-fx-font-weight: bold");
             Label authorsLabel = new Label(book.getAuthors());
             Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
+            double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+            book.setAverageRating(updatedAvgRating);
+            averageRatingLabel.setText(String.format("%.1f", updatedAvgRating));
+
             Button addToBookmarkButton = new Button("Get");
             addToBookmarkButton.setOnAction(e -> {
                Bookmark bookmark = new Bookmark(

@@ -19,6 +19,12 @@ public class DocumentEvaluationService {
     public boolean hasEvaluated(String isbn13, int userId) {
         return repository.hasEvaluated(isbn13, userId);
     }
+
+    public double getAvgRatings(String isbn13) {
+        return repository.getAvgRatings(isbn13);
+    }
+
+
     public List<DocumentEvaluation> findAll() {
         return repository.findAll();
     }

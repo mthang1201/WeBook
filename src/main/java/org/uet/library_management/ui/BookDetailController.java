@@ -1,6 +1,8 @@
 package org.uet.library_management.ui;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +16,7 @@ import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.*;
 
 import java.sql.Timestamp;
@@ -64,12 +67,14 @@ public class BookDetailController {
     private boolean isBorrowed = false;
     private int stars;
 
+    private DocumentEvaluationService evaluationService = new DocumentEvaluationService();
+
     //private ObservableList<String> comments;
 
     public void loadBookDetails(Book book) {
         title.setText(book.getTitle());
         author.setText(book.getAuthors());
-        rates.setText(String.valueOf(book.getAverageRating()));
+        updateRatings();
         categories.setText(book.getCategories());
         descriptionText.setText(book.getDescription());
 
@@ -282,7 +287,6 @@ public class BookDetailController {
                     new Timestamp(System.currentTimeMillis())
             );
 
-            DocumentEvaluationService evaluationService = new DocumentEvaluationService();
             evaluationService.add(docEvaluation);
 
             AlertUtil.showInformationsDialog("Review Posted!",
@@ -293,6 +297,13 @@ public class BookDetailController {
             reviewArea.clear();
             displayReviews();
             checkReviewed();
+
+            BookService bookService = new BookService();
+            Mediator.bookDetail.setAverageRating(evaluationService.getAvgRatings(Mediator.bookDetail.getIsbn13()));
+            bookService.update(Mediator.bookDetail);
+
+            updateRatings();
+
         } else {
             AlertUtil.showErrorAlert("Empty Comment!",
                     null,
@@ -304,7 +315,6 @@ public class BookDetailController {
     private void handleEditReviewButton() {
         //onbuttonclicked -> hasEvaluated->false;
         //update
-        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
         DocumentEvaluation userEvaluation = evaluationService.getUserReview(
                 Mediator.bookDetail.getIsbn13(),
                 SessionManager.user.getUserId()
@@ -316,7 +326,6 @@ public class BookDetailController {
 
     private void displayReviews() {
         reviewBox.getChildren().clear();
-        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
 
         List<DocumentEvaluation> reviews = evaluationService.findByIsbn13(Mediator.bookDetail.getIsbn13());
         if (reviews == null || reviews.isEmpty()) {
@@ -342,6 +351,8 @@ public class BookDetailController {
         button.setOnMouseExited(event -> scaleDown.playFromStart());
     }
 
+
+
     private void checkBorrowed() {
         LoanService loanService = new LoanService();
         Loan loan = loanService.findById(SessionManager.user.getUserId(), Mediator.bookDetail.getIsbn13());
@@ -365,10 +376,24 @@ public class BookDetailController {
     }
 
     private void checkReviewed() {
-        DocumentEvaluationService evaluationService = new DocumentEvaluationService();
         hasEvaluated = evaluationService.hasEvaluated(Mediator.bookDetail.getIsbn13(),
                 SessionManager.user.getUserId());
         existingReviewBox.getChildren().clear();
+
+        if (Mediator.bookDetail.getIsbn13() == null) {
+            RateAndReviewBox.setVisible(false);
+            RateAndReviewBox.setManaged(false);
+            existingReviewBox.setVisible(false);
+            existingReviewBox.setManaged(false);
+            reviewBox.setVisible(true);
+            reviewBox.setManaged(true);
+            Label noReviewLabel = new Label("No reviews yet.");
+            noReviewLabel.setStyle("-fx-font-style: italic; -fx-text-fill: #777; -fx-padding: 0 0 0 10;");
+            reviewBox.getChildren().add(noReviewLabel);
+            editReviewButton.setVisible(false);
+            editReviewButton.setManaged(false);
+            return;
+        }
 
         if (hasEvaluated) {
             RateAndReviewBox.setVisible(false);
@@ -388,6 +413,14 @@ public class BookDetailController {
             existingReviewBox.setManaged(false);
             editReviewButton.setVisible(false);
             editReviewButton.setManaged(false);
+        }
+    }
+
+    private void updateRatings() {
+        if (evaluationService.getAvgRatings(Mediator.bookDetail.getIsbn13()) != 0.0) {
+            rates.setText(String.valueOf(evaluationService.getAvgRatings(Mediator.bookDetail.getIsbn13())));
+        } else {
+            rates.setText(String.valueOf(Mediator.bookDetail.getAverageRating()));
         }
     }
 }
