@@ -87,4 +87,25 @@ public class BookRepository extends DocumentRepository<Book> {
 
         return books;
     }
+
+    public List<Book> getBooksFromBookmarks() {
+        List<Book> books = new ArrayList<>();
+        String query = "select b.documentId, b.title, b.authors, b.publishedDate, b.description, b.categories, b.language, " +
+                "b.publisher, b.isbn10, b.isbn13, b.pageCount, b.averageRating, b.ratingsCount, b.imageLinks, b.maturityRating, " +
+                "b.printType " +
+                "from books b " +
+                "inner join bookmarks bm " +
+                "on b.isbn13 = bm.isbn13 " +
+                "where userId = ?";
+
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, SessionManager.user.getUserId())) {
+            while (rs.next()) {
+                books.add(populateDocument(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return books;
+    }
 }

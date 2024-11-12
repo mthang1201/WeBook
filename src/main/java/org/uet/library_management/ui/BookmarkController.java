@@ -7,6 +7,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.repositories.documents.BookRepository;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.SessionManager;
@@ -30,20 +31,8 @@ public class BookmarkController {
 
     @FXML
     public void initialize() {
-        BookmarkService bookmarkService = new BookmarkService();
-        BookService bookService = new BookService();
-
-//        if (booksCache.isEmpty()) {
-//            booksCache = service.findAll();
-//        }
-//        List<Book> books = booksCache;
-        List<Bookmark> bookmarks = bookmarkService.findByUserId(SessionManager.user.getUserId());
-        List<Book> books = new ArrayList<>();
-        for (Bookmark bookmark : bookmarks) {
-            Optional<Book> book = bookService.findById(bookmark.getIsbn13());
-
-            book.ifPresent(books::add);
-        }
+        BookRepository bookRepository = new BookRepository();
+        List<Book> books = bookRepository.getBooksFromBookmarks();
 
         if (books.isEmpty()) {
             verticalScrollpane.setVisible(false);
