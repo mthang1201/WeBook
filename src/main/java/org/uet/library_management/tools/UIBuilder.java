@@ -1,10 +1,9 @@
 package org.uet.library_management.tools;
 
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -13,18 +12,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.api.search.SearchContext;
+import org.uet.library_management.api.search.SearchStrategy;
 import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
-import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.PreferenceService;
 import org.uet.library_management.core.services.documents.BookService;
-import org.uet.library_management.ui.BookDetailController;
+import org.uet.library_management.ui.HomeController;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -199,12 +197,12 @@ public class UIBuilder {
 
     public static FlowPane generateRecommendation(List<Book> books) {
         FlowPane flowPane = new FlowPane();
-        flowPane.setPadding(new Insets(10, 10, 10, 10)); // Set padding for the FlowPane
+        flowPane.setPadding(new Insets(10, 10, 10, 10));
         flowPane.setHgap(10);
         flowPane.setVgap(10);
-        flowPane.setPrefWrapLength(600); // Adjust as needed
+        flowPane.setPrefWrapLength(600);
 
-        ExecutorService executor = Executors.newFixedThreadPool(5); // Thread pool for asynchronous loading
+        ExecutorService executor = Executors.newFixedThreadPool(5);
 
         for (Book book : books) {
             VBox vbox = new VBox();
@@ -213,7 +211,6 @@ public class UIBuilder {
             imageView.setFitWidth(200);
             imageView.setFitHeight(300);
 
-            // Load the image asynchronously
             CompletableFuture.supplyAsync(() -> ImageCacheManager.getInstance().loadImage(
                     book.getIsbn13(),
                     book.getTitle(),
@@ -237,9 +234,95 @@ public class UIBuilder {
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
             flowPane.getChildren().add(vbox);
         }
-
         return flowPane;
     }
+
+    public static VBox generateHorizontalRecommendation(String searchTerm, String header, SearchStrategy searchStrategy) {
+
+        SearchContext searchContext = new SearchContext();
+        VBox recommendBox = new VBox();
+        HBox titleAndArrowKeyBox = new HBox();
+        Label title = new Label();
+        Button arrowButton = new Button();
+        HBox recommendList = new HBox();
+        recommendBox.setStyle("-fx-padding: 5;");
+        title.setStyle(
+                "-fx-font-size: 24px;" +
+                "-fx-text-fill: black;" +
+                "-fx-font-family: 'Montserrat Extrabold';"
+        );
+
+        arrowButton.setStyle(
+                "-fx-background-color: transparent;" +
+                "-fx-border-color: transparent;"
+        );
+
+        recommendList.setStyle(
+                "-fx-spacing: 20;" +
+                "-fx-padding: 10 0 0 20;" +
+                "-fx-font-size: 14px;" +
+                "-fx-font-family: 'Montserrat SemiBold';" +
+                "-fx-text-overrun: ellipsis;" +  // Add this to truncate with ellipsis if the text doesn't fit
+                "-fx-max-width: 200px;"
+        );
+
+        searchContext.setStrategy(searchStrategy);
+
+        title.setText(header);
+        arrowButton.setGraphic(LayoutUtils.createImageView(ImageLoaderUtil.getArrowImage(),
+                20, 20, true));
+        LayoutUtils.setHBoxNodeMargin(title, 20, 0, 0, 23);
+        LayoutUtils.setHBoxNodeMargin(arrowButton, 21, 0, 0, 0);
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        List<Book> books;
+        if ("recommendation".equals(searchTerm) && searchStrategy == null) {
+            books = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+        }
+        else {
+            books = searchContext.executeSearch(searchTerm);
+        }
+        for (Book book : books) {
+            VBox bookBox = new VBox();
+            bookBox.setSpacing(10);
+            bookBox.setAlignment(Pos.CENTER);
+
+
+            ImageView bookImageView = new ImageView();
+            bookImageView.setCache(true);  // Bật chế độ cache
+            bookImageView.setCacheHint(CacheHint.SPEED);
+
+            bookImageView.setFitWidth(300);
+            bookImageView.setFitHeight(300);
+            bookImageView.setPreserveRatio(true);
+
+            CompletableFuture.supplyAsync(() -> ImageCacheManager.getInstance().loadImage(
+                    book.getIsbn13(),
+                    book.getTitle(),
+                    book.getImageLinks()
+            ), executor).thenAccept(bookImage -> {
+                Platform.runLater(() -> {
+                    bookImageView.setImage(bookImage);
+                    bookBox.setOnMouseClicked(event -> {
+                        openBookDetailPage(book);
+                    });
+                });
+            });
+
+
+            Label bookTitleLabel = new Label(book.getTitle());
+            bookTitleLabel.setAlignment(Pos.CENTER);
+
+            bookBox.getChildren().addAll(bookImageView, bookTitleLabel);
+
+            recommendList.getChildren().add(bookBox);
+        }
+        titleAndArrowKeyBox.getChildren().addAll(title, arrowButton);
+        recommendBox.getChildren().addAll(titleAndArrowKeyBox, recommendList);
+        return recommendBox;
+    }
+
+
 
     public static void openBookDetailPage(Book book) {
         Mediator.bookDetail = book;

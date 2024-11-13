@@ -5,9 +5,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import org.uet.library_management.api.display.RecommendationService;
 import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.tools.RecommendationGenerator;
 import org.uet.library_management.tools.SessionManager;
 import org.uet.library_management.tools.UIBuilder;
 
@@ -27,8 +26,7 @@ public class BookshelfController {
         flowPane.setPadding(new Insets(10,10,10,10));
 
         CompletableFuture.supplyAsync(() -> {
-            RecommendationService recommendationService = new RecommendationService();
-            return recommendationService.getRecommendationForUsers(SessionManager.user.getUserId());
+            return RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateUI(books);

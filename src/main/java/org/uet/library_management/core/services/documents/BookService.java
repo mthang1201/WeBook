@@ -5,6 +5,7 @@ import org.uet.library_management.core.repositories.documents.BookRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class BookService extends DocumentService<Book> {
     public BookService() {
@@ -14,6 +15,11 @@ public class BookService extends DocumentService<Book> {
     public double getUpdatedAverageRating(String isbn13) {
         BookRepository bookRepository = (BookRepository) repository;
         return bookRepository.getUpdatedAverageRating(isbn13);
+    }
+
+    public List<Book> getRandomTitlesFromBookmarks() {
+        BookRepository bookRepository = (BookRepository) repository;
+        return bookRepository.getRandomTitlesFromBookmarks();
     }
 
     public List<Book> getTopRatedSearchTermBooks(double minRating, String searchTerm) {

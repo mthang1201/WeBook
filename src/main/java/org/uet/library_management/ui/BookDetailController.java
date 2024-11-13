@@ -1,8 +1,6 @@
 package org.uet.library_management.ui;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,7 +19,6 @@ import org.uet.library_management.tools.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookDetailController {
@@ -100,7 +97,7 @@ public class BookDetailController {
     @FXML
     private void initialize() {
         LayoutUtils.setVboxMargin(RateAndReviewBox, 0, 0 ,0, 10);
-        LayoutUtils.setButtonMargin(editReviewButton, 0, 0, 0 ,10);
+        LayoutUtils.setVBoxNodeMargin(editReviewButton, 0, 0, 0 ,10);
 
         loadBookDetails(Mediator.bookDetail);
         List<ImageView> starImageViews = LayoutUtils.createListImageViews(

@@ -1,41 +1,84 @@
 package org.uet.library_management.ui;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import org.uet.library_management.api.search.*;
 import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.api.search.SearchByAuthor;
-import org.uet.library_management.api.search.SearchByGeneral;
-import org.uet.library_management.api.search.SearchByTitle;
-import org.uet.library_management.api.search.SearchContext;
-import org.uet.library_management.api.sort.SortByAvgRating;
-import org.uet.library_management.api.sort.SortByNewest;
-import org.uet.library_management.api.sort.SortByOldest;
-import org.uet.library_management.core.services.documents.BookService;
-import org.uet.library_management.tools.ImageCacheManager;
+import org.uet.library_management.tools.RecommendationGenerator;
+import org.uet.library_management.tools.UIBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeController {
     @FXML
-    public ScrollPane scrollpane;
+    private ScrollPane scrollpane;
 
     @FXML
-    public FlowPane flowPane;
+    private VBox recommendBox;
+
+    private boolean isLoading = false;
+    private int index = 0;
+    List<RecommendationGenerator> recommendationGeneratorList = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        scrollpane.setContent(flowPane);
-        scrollpane.setFitToWidth(true);
-        scrollpane.setPannable(true);
+        List<String> randomGenres = RecommendationGenerator.getRandomGenre();
+        List<Book> randomBooks = RecommendationGenerator.getRandomTitleFromBookmarks();
 
-        flowPane.setPadding(new Insets(10,10,10,10));
+        recommendationGeneratorList.add(new RecommendationGenerator("recommendation",
+                "Có thể bạn sẽ thích", null));
+       for (int i = 0; i < 5; i++) {
+           String genre = randomGenres.get(i);
+           recommendationGeneratorList.add(new RecommendationGenerator(
+                   genre,
+                   genre,
+                   new SearchByCategory()
+           ));
+       }
 
+       for (int i = 0; i < 3; i++) {
+            Book book = randomBooks.get(i);
+           recommendationGeneratorList.add(new RecommendationGenerator(
+                   book.getCategories(),
+                   "Tương tự " + book.getTitle(),
+                   new SearchByCategory())
+           );
+       }
 
+        recommendationGeneratorList.add(new RecommendationGenerator(
+                "e",
+                "New Releases",
+                new SearchByNewest()));
+
+        recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(
+                recommendationGeneratorList.get(0).getSearchTerm(),
+                recommendationGeneratorList.get(0).getTitle(),
+                recommendationGeneratorList.get(0).getSearchStrategy()));
+        index++;
+        recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(
+                recommendationGeneratorList.get(1).getSearchTerm(),
+                recommendationGeneratorList.get(1).getTitle(),
+                recommendationGeneratorList.get(1).getSearchStrategy()));
+        index++;
+
+        loadHorizontalRecommendation();
     }
+
+    private void loadHorizontalRecommendation() {
+        scrollpane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue.doubleValue() == 1.0 && !isLoading && index < recommendationGeneratorList.size()) {
+                isLoading = true;
+                RecommendationGenerator recommendationGenerator = recommendationGeneratorList.get(index);
+                recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(
+                        recommendationGenerator.getSearchTerm(),
+                        recommendationGenerator.getTitle(),
+                        recommendationGenerator.getSearchStrategy()));
+                index++;
+                isLoading = false;
+            }
+        });
+    }
+
 }

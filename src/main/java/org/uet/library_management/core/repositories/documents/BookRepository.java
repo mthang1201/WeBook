@@ -78,6 +78,23 @@ public class BookRepository extends DocumentRepository<Book> {
                 book.getIsbn13());
     }
 
+    public List<Book> getRandomTitlesFromBookmarks() {
+        String query = "SELECT b.* " +
+                "FROM " + db_table + " b " +
+                "JOIN bookmarks bm ON b.isbn13 = bm.isbn13 " +
+                "GROUP BY b.isbn13, b.title;";
+
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            List<Book> books = new ArrayList<>();
+            while (rs.next()) {
+                books.add(populateDocument(rs));
+            }
+            return books;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Book> getTopRatedSearchTermBooks(double minRating, String searchTerm) {
         String query = "SELECT b.* FROM " + db_table + " b " +
                 "JOIN documentEvaluations de ON b.isbn13 = de.isbn13 " +
@@ -85,7 +102,6 @@ public class BookRepository extends DocumentRepository<Book> {
                 "GROUP BY b.isbn13 " +
                 "HAVING AVG(de.rating) >= ?";
 
-        // Add wildcards to the search term for partial matching
         String searchTermWithWildcards = "%" + searchTerm + "%";
 
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query,

@@ -53,6 +53,7 @@ public class SceneManager {
         scene.getStylesheets().add(getClass().getResource("styles/menu.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/search.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("styles/bookDetail.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles/home.css").toExternalForm());
 
         stage.setTitle("Library Management");
         stage.setScene(scene);

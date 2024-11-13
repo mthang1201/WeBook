@@ -1,0 +1,25 @@
+.head-label {
+    -fx-font-family: "Montserrat Extrabold";
+}
+#recommendBox {
+    -fx-padding: 5;
+}
+#titleAndArrowKeyBox {
+
+}
+.title {
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+    -fx-font-family: "Montserrat Extrabold";
+
+}
+#arrowButton {
+     -fx-background-color: transparent;
+     -fx-border-color: transparent;
+}
+#recommendList {
+    -fx-spacing: 20;
+    -fx-padding: 10 0 0 20;
+    -fx-font-size: 14px;
+    -fx-font-family: "Montserrat SemiBold";
+}
