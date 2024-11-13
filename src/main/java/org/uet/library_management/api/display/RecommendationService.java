@@ -9,15 +9,41 @@ import org.uet.library_management.core.services.PreferenceService;
 
 import java.util.List;
 
+/**
+ * Service class responsible for providing book recommendations for users
+ * based on their reading preferences.
+ */
 public class RecommendationService {
     private PreferenceService preferenceService;
     private SearchContext searchByCategory;
 
+    /**
+     * Constructs a new RecommendationService instance.
+     * Initializes the preference service and search context used for generating book recommendations.
+     */
     public RecommendationService() {
         this.preferenceService = new PreferenceService();
         this.searchByCategory = new SearchContext();
     }
 
+    /**
+     * Constructs a new RecommendationService instance.
+     * Initializes the preference service and search context used for generating book recommendations.
+     *
+     * @param preferenceService the service responsible for managing user reading preferences
+     * @param searchContext the context used for performing the book search based on different strategies
+     */
+    public RecommendationService(PreferenceService preferenceService, SearchContext searchContext) {
+        this.preferenceService = preferenceService;
+        this.searchByCategory = searchContext;
+    }
+
+    /**
+     * Provides book recommendations for a given user based on their reading preferences.
+     *
+     * @param userId the ID of the user for whom book recommendations are to be generated
+     * @return a list of recommended books tailored to the user's preferences
+     */
     public List<Book> getRecommendationForUsers(int userId) {
         searchByCategory.setStrategy(new SearchByCategory());
         String maxCategory = preferenceService.getMaxCategory(userId);

@@ -9,7 +9,18 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * The Notification class provides functionality to check due dates of loans
+ * and alert the user when a loan is due soon or overdue.
+ */
 public class Notification {
+    /**
+     * Checks the due dates of all loans for the currently logged-in user and triggers warnings
+     * if any loan is due in 2 days or is overdue.
+     *
+     * This method retrieves all loans for the user from the LoanService, compares the due dates
+     * with today's date, and uses the AlertUtil to show warning alerts accordingly.
+     */
     public static void checkDueDate() {
         LoanService loanService = new LoanService();
         List<Loan> loans = loanService.findByUserId(SessionManager.user.getUserId());

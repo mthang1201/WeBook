@@ -5,9 +5,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.*;
 
+/**
+ * The ConnectJDBC class provides methods to establish a connection with a MySQL database and execute
+ * SQL queries and updates. It encapsulates the JDBC logic to connect to the database, execute queries,
+ * and handle SQL exceptions.
+ */
 public class ConnectJDBC {
     private static final String ENDPOINT = "database-1.cfwaak8q6v1w.ap-southeast-2.rds.amazonaws.com";
 
+    /**
+     * Establishes a connection to the MySQL database using the JDBC driver.
+     *
+     * @return a Connection object representing the connection to the database
+     * @throws RuntimeException if a database access error occurs
+     */
     public Connection connect() {
         Connection conn;
         try {
@@ -22,6 +33,13 @@ public class ConnectJDBC {
         return conn;
     }
 
+    /**
+     * Executes the given SQL query and returns the resulting ResultSet.
+     *
+     * @param query the SQL query to execute
+     * @return the resulting ResultSet from executing the query
+     * @throws RuntimeException if a database access error occurs
+     */
     public ResultSet executeQuery(String query) {
         Statement statement;
         ResultSet rs;
@@ -34,6 +52,14 @@ public class ConnectJDBC {
         return rs;
     }
 
+    /**
+     * Executes a SQL query with specified parameters and returns a ResultSet containing the results.
+     *
+     * @param query the SQL query to execute. It can include placeholders for parameters.
+     * @param params the parameters to be set in the query's placeholders.
+     * @return the resulting ResultSet from executing the query.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public ResultSet executeQueryWithParams(String query, Object... params) {
         PreparedStatement statement;
         ResultSet rs;
@@ -53,6 +79,14 @@ public class ConnectJDBC {
         }
         return rs;
     }
+
+    /**
+     * Executes a SQL update statement (such as INSERT, UPDATE, or DELETE) with the given parameters.
+     *
+     * @param query the SQL query to execute. It can include placeholders for parameters.
+     * @param params the parameters to be set in the query's placeholders.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public void executeUpdate(String query, Object... params) {
         PreparedStatement statement;
         try {

@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Stack;
 
+/**
+ * Singleton class responsible for managing scenes and stages within the application.
+ * Provides methods to switch between different scenes and manage sub-scenes and settings windows.
+ */
 public class SceneManager {
     private static final int SCREEN_WIDTH = 1000;
 
@@ -44,6 +48,12 @@ public class SceneManager {
         SceneManager.stage = stage;
     }
 
+    /**
+     * Changes the current scene of the application to the specified scene.
+     *
+     * @param sceneName the name of the FXML file representing the new scene
+     * @throws IOException if the FXML file cannot be loaded
+     */
     public void setScene(String sceneName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PREFIX_URL + sceneName));
 
@@ -59,6 +69,12 @@ public class SceneManager {
         stage.show();
     }
 
+    /**
+     * Pushes a sub-scene onto the sub-scene stack and sets it as the current sub-scene.
+     * This is useful for maintaining a history of sub-scenes that can be navigated back and forth.
+     *
+     * @param sceneName the name of the sub-scene to be pushed onto the stack and set as the current sub-scene
+     */
     public void pushSubScene(String sceneName) {
         subSceneStack.push(sceneName);
         setSubScene(sceneName);

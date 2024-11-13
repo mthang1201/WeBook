@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Bookmark.
+ * The Bookmark class represents a bookmark in the system.
+ * It contains information about the user who created the bookmark
+ * and the identifier (ISBN-13) of the document that is bookmarked.
  */
 @Data
 @AllArgsConstructor
