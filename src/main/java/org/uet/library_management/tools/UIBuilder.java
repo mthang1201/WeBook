@@ -320,7 +320,10 @@ public class UIBuilder {
 
         List<Book> books;
         if ("recommendation".equals(searchTerm) && searchStrategy == null) {
-            books = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+            if (SessionManager.defaultRecommendBooks.isEmpty()) {
+                SessionManager.defaultRecommendBooks = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+            }
+            books = SessionManager.defaultRecommendBooks;
         } else if (SessionManager.cacheBooks.containsKey(cacheKey)) {
             books = SessionManager.cacheBooks.get(cacheKey);
         } else {

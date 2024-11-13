@@ -27,4 +27,6 @@ public class SessionManager {
     public static List<Book> recommendedBooks = new ArrayList<>();
 
     public static Map<String, List<Book>> cacheBooks = new LinkedHashMap<>();
+
+    public static List<Book> defaultRecommendBooks = new ArrayList<>();
 }
