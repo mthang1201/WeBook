@@ -110,6 +110,13 @@ public class UIBuilder {
         return suggestionsVbox;
     }
 
+    /**
+     * Generates an HBox containing images and click handlers for each book in the provided list.
+     * Each book is represented by an ImageView displaying the cover image. Clicking on the image opens the book detail page.
+     *
+     * @param books the list of books to be displayed in the HBox
+     * @return an HBox containing the images of the books
+     */
     public static HBox generateInYourLibrary(List<Book> books) {
         HBox inYourLibraryHbox = new HBox();
         inYourLibraryHbox.setSpacing(20);
@@ -141,6 +148,13 @@ public class UIBuilder {
         return inYourLibraryHbox;
     }
 
+    /**
+     * Generates a VBox containing the top results from a provided list of books. Each book is represented by an HBox
+     * containing its cover image, title, authors, average rating, and a button to add it to bookmarks.
+     *
+     * @param books the list of books to be displayed in the VBox
+     * @return a VBox containing the top results of books
+     */
     public static VBox generateTopResults(List<Book> books) {
         VBox topResultsVbox = new VBox();
         BookmarkService bookmarkService = new BookmarkService();
@@ -214,6 +228,13 @@ public class UIBuilder {
         return topResultsVbox;
     }
 
+    /**
+     * Generates a FlowPane populated with book details. Each book is represented as a VBox containing its cover image,
+     * title, and authors. The cover image and title are clickable to open the book detail page.
+     *
+     * @param books the list of books to be displayed in the flow pane
+     * @return a FlowPane object populated with the book details
+     */
     public static FlowPane generateRecommendation(List<Book> books) {
         FlowPane flowPane = new FlowPane();
         flowPane.setPadding(new Insets(10, 10, 10, 10));
@@ -343,6 +364,11 @@ public class UIBuilder {
 
 
 
+    /**
+     * Opens the book detail page for the specified book.
+     *
+     * @param book the book object for which the detail page is to be opened
+     */
     public static void openBookDetailPage(Book book) {
         Mediator.bookDetail = book;
         SceneManager.getInstance().pushSubScene("bookDetailPage.fxml");

@@ -18,6 +18,10 @@ import org.uet.library_management.tools.SessionManager;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Controller class for managing the menu actions and search functionality
+ * within the library management system's user interface.
+ */
 public class MenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
 
@@ -38,6 +42,17 @@ public class MenuController {
 
     private Timer timer;
 
+    /**
+     * Initializes the MenuController.
+     * This method sets up various event listeners and handles the UI state
+     * based on the current user's session.
+     *
+     * Key functionalities:
+     * - Adds a ChangeListener to the searchTextField to handle text input changes with a debounce effect.
+     * - Sets up mouse event handlers for various buttons to change their images on hover.
+     * - Updates the UI elements based on the user's session, including the username and avatar image.
+     * - Initializes a timer to delay actions on text input change, updating the UI based on the content.
+     */
     @FXML
     public void initialize() {
         searchTextField.textProperty().addListener(new ChangeListener<String>() {

@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The UserRepository class implements the MySQLRepository interface for the User entity,
+ * providing CRUD operations and additional methods to interact with the "users" table in a MySQL database.
+ * It uses the ConnectJDBC class to execute SQL queries and manage database connections.
+ */
 public class UserRepository implements MySQLRepository<User> {
     private final String db_table;
 

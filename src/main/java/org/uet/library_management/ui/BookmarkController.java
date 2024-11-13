@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The BookmarkController class is a JavaFX controller responsible for managing the UI components
+ * and behavior for bookmarks within the application. It initializes the bookmark view based
+ * on the user's bookmarked books.
+ */
 public class BookmarkController {
     @FXML
     public ScrollPane verticalScrollpane;

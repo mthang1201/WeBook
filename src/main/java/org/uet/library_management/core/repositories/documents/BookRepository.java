@@ -87,6 +87,15 @@ public class BookRepository extends DocumentRepository<Book> {
                 book.getIsbn13());
     }
 
+    /**
+     * Retrieves a list of Books that have been bookmarked by the user.
+     * This method executes a SQL query to fetch books from the bookmarks table,
+     * joins the books and bookmarks tables based on the ISBN-13 value,
+     * and groups the results by ISBN-13 and title.
+     *
+     * @return a list of Book objects representing the bookmarks, or an empty list if no bookmarks are found.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public List<Book> getRandomTitlesFromBookmarks() {
         String query = "SELECT b.* " +
                 "FROM " + db_table + " b " +
@@ -104,6 +113,14 @@ public class BookRepository extends DocumentRepository<Book> {
         }
     }
 
+    /**
+     * Retrieves a list of books that match a given search term and have an average rating
+     * equal to or greater than the specified minimum rating.
+     *
+     * @param minRating The minimum average rating a book must have to be included in the results.
+     * @param searchTerm The search term to filter books by title, authors, description, or categories.
+     * @return A list of books that match the search criteria and have an average rating meeting the minimum threshold.
+     */
     public List<Book> getTopRatedSearchTermBooks(double minRating, String searchTerm) {
         String query = "SELECT b.* FROM " + db_table + " b " +
                 "JOIN documentEvaluations de ON b.isbn13 = de.isbn13 " +
@@ -129,6 +146,12 @@ public class BookRepository extends DocumentRepository<Book> {
         }
     }
 
+    /**
+     * Retrieves the updated average rating for a book specified by its ISBN-13.
+     *
+     * @param isbn13 The ISBN-13 identifier of the book.
+     * @return The updated average rating of the book, or 0.0 if no ratings are found.
+     */
     public double getUpdatedAverageRating(String isbn13) {
 
         String query = "SELECT AVG(rating) FROM documentEvaluations WHERE isbn13 = ?";
@@ -143,6 +166,13 @@ public class BookRepository extends DocumentRepository<Book> {
         return 0.0;
     }
 
+    /**
+     * Retrieves a list of books that have been borrowed by the current user.
+     * Executes a query that joins the books and loans tables based on the ISBN-13 value,
+     * filtered by the user ID from the current session.
+     *
+     * @return a list of Book objects representing the borrowed books.
+     */
     public List<Book> getBooksFromLoans() {
         List<Book> books = new ArrayList<>();
         String query = "select b.documentId, b.title, b.authors, b.publishedDate, b.description, b.categories, b.language, " +
@@ -164,6 +194,13 @@ public class BookRepository extends DocumentRepository<Book> {
         return books;
     }
 
+    /**
+     * Retrieves a list of books that have been bookmarked by the current user.
+     * Executes a query that joins the books and bookmarks tables based on the ISBN-13 value,
+     * filtered by the user ID from the current session.
+     *
+     * @return a list of Book objects representing the bookmarked books.
+     */
     public List<Book> getBooksFromBookmarks() {
         List<Book> books = new ArrayList<>();
         String query = "select b.documentId, b.title, b.authors, b.publishedDate, b.description, b.categories, b.language, " +

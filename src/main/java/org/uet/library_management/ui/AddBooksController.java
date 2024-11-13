@@ -11,6 +11,10 @@ import org.uet.library_management.tools.AlertUtil;
 
 import java.util.List;
 
+/**
+ * Controller class responsible for handling the addition of books via the GUI.
+ * It interacts with text fields for ISBN input and an add button to initiate the process.
+ */
 public class AddBooksController {
     @FXML
     public TextField isbn10TextField;

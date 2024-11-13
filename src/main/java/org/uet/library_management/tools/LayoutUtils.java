@@ -14,6 +14,9 @@ import org.uet.library_management.core.repositories.UserAvatarRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class providing several static methods for managing layout and creating UI components.
+ */
 public class LayoutUtils {
 
     public static void setVBoxNodeMargin(Node node, double top, double right, double bottom, double left) {

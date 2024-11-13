@@ -18,6 +18,11 @@ import org.uet.library_management.tools.UIBuilder;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Controller class for handling search suggestions and search-related functionalities
+ * in the application. It manages the UI components related to search suggestions
+ * and search results, and performs asynchronous searches to update the UI accordingly.
+ */
 public class SuggestSearchController {
     @FXML public ScrollPane verticalScrollpane;
 

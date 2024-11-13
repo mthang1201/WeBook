@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The `PreferenceRepository` class provides methods to manipulate user preferences stored in a MySQL database.
+ * It implements the `MySQLRepository` interface, providing concrete implementations for common database operations.
+ */
 public class PreferenceRepository implements MySQLRepository<Preference> {
     private final String db_table;
 

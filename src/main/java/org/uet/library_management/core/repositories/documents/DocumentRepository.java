@@ -12,20 +12,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Abstract class representing a document repository.
+ * Provides common database operations for documents, such as finding,
+ * adding, updating, and removing documents.
+ *
+ * @param <T> a type parameter that extends the Document class.
+ */
 public abstract class DocumentRepository<T extends Document> implements MySQLRepository<T> {
     protected String db_table;
 
     protected final ConnectJDBC connectJDBC;
 
+    /**
+     * Constructs a new DocumentRepository instance.
+     *
+     * This constructor initializes the repository by establishing a JDBC connection
+     * and loading the database table name. It performs the following actions:
+     * 1. Creates a new instance of ConnectJDBC to manage database connections.
+     * 2. Calls the loadDatabase() method to set the appropriate table name for the repository.
+     */
     public DocumentRepository() {
         connectJDBC = new ConnectJDBC();
         loadDatabase();
     }
 
+    /**
+     * Initializes the database table name for the repository.
+     *
+     * This method sets the table name used by the repository to "documents".
+     * It is typically called during the instantiation of the repository to
+     * ensure that the correct table is being used for subsequent database operations.
+     */
     protected void loadDatabase() {
         db_table = "documents";
     }
 
+    /**
+     * Creates a new Document instance based on the value of the `db_table` field.
+     *
+     * @return a new instance of either Book or Thesis, depending on the value of `db_table`.
+     * @throws IllegalArgumentException if `db_table` is not recognized.
+     */
     private Document createDocument() {
         if (db_table.equals("books")) {
             return new Book();
@@ -103,6 +131,13 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return documents;
     }
 
+    /**
+     * Retrieves a paginated list of all documents from the database.
+     *
+     * @param page the page number to retrieve, starting from 1
+     * @param pageSize the number of documents to retrieve per page
+     * @return a list of documents for the specified page and page size
+     */
     @Override
     public List<T> findAllByPage(int page, int pageSize) {
         List<T> documents = new ArrayList<>();
@@ -120,6 +155,11 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return documents;
     }
 
+    /**
+     * Counts the total number of records in the database table associated with this repository.
+     *
+     * @return the total count of records in the associated database table
+     */
     @Override
     public int countAll() {
         String query = "SELECT COUNT(*) AS total FROM " + db_table;
@@ -136,6 +176,12 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return count;
     }
 
+    /**
+     * Retrieves a document by its ISBN-13 identifier from the database.
+     *
+     * @param isbn13 The ISBN-13 identifier of the document to be retrieved.
+     * @return An Optional containing the found document if it exists, or an empty Optional if not.
+     */
     public Optional<T> findById(String isbn13) {
         T document = null;
         String query = "SELECT * FROM " + db_table + " WHERE isbn13 LIKE ?";
@@ -151,6 +197,13 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return Optional.ofNullable(document);
     }
 
+    /**
+     * Finds and retrieves a list of documents from the database that match the specified title.
+     *
+     * @param title The title or partial title to search for in the database.
+     * @return A list of documents that match the specified title.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public List<T> findByTitle(String title) {
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
@@ -166,6 +219,13 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return documents;
     }
 
+    /**
+     * Finds and retrieves a list of documents from the database that match the specified authors.
+     *
+     * @param authors The authors or partial authors to search for in the database.
+     * @return A list of documents that match the specified authors.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public List<T> findByAuthors(String authors) {
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE authors LIKE ?";
@@ -189,12 +249,29 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
     public void update(Document document) {
     }
 
+    /**
+     * Removes the specified document from the database.
+     *
+     * This method constructs and executes an SQL DELETE statement to remove the
+     * document with the specified document ID from the database table.
+     *
+     * @param document the Document object to be removed from the database.
+     */
     @Override
     public void remove(Document document) {
         String query = "DELETE FROM " + db_table + " WHERE documentId = ?";
         connectJDBC.executeUpdate(query, document.getDocumentId());
     }
 
+    /**
+     * Removes all records from the database table associated with this repository.
+     *
+     * This method constructs an SQL DELETE statement to remove all entries from
+     * the designated table and executes the statement using the JDBC connection.
+     *
+     * It does not return any result and should be used with caution as it will
+     * permanently delete all data from the specified table.
+     */
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;

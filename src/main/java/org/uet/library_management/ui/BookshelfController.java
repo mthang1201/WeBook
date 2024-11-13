@@ -13,6 +13,11 @@ import org.uet.library_management.tools.UIBuilder;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * BookshelfController is responsible for managing the UI interactions
+ * and data flow related to the bookshelf view. This class handles the
+ * initialization of the UI components and updates the UI with book recommendations.
+ */
 public class BookshelfController {
     @FXML
     public ScrollPane verticalScrollpane;

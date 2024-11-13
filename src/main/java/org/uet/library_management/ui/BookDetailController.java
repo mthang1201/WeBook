@@ -21,6 +21,12 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The BookDetailController class is responsible for handling the UI interactions and
+ * displaying details of a selected book in the graphical user interface.
+ * It manages various elements such as the book cover, title, author, ratings,
+ * and allows users to borrow the book, post reviews, and view more details.
+ */
 public class BookDetailController {
 
     @FXML private ImageView bookCover;

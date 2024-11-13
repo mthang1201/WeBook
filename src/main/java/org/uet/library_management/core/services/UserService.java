@@ -7,6 +7,10 @@ import org.uet.library_management.tools.SessionManager;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The UserService class provides various methods to manage users in the system.
+ * It uses a UserRepository object to interact with the data source.
+ */
 public class UserService {
     private final UserRepository repository;
 

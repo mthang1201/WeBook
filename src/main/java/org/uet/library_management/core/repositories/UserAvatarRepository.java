@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * UserAvatarRepository is responsible for managing user avatars in the database.
+ * It provides methods to find, add, update, and remove user avatars.
+ */
 public class UserAvatarRepository {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
 

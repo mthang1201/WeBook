@@ -10,6 +10,11 @@ import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.tools.SessionManager;
 
+/**
+ * The AdminMenuController class is responsible for managing the admin menu interface in the library
+ * management system. It handles user interactions with the menu buttons and manages the display of
+ * different user interface components based on these interactions.
+ */
 public class AdminMenuController {
     private static final String PREFIX_ICONS = "/org/uet/library_management/icons/";
 

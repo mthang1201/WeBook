@@ -15,6 +15,11 @@ import org.uet.library_management.tools.UIBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The GetAllController class is responsible for initializing the UI by populating a FlowPane
+ * with a list of books obtained from the BookRepository.
+ * It manages interactions involving the verticalScrollpane and flowPane UI components.
+ */
 public class GetAllController {
     @FXML
     public ScrollPane verticalScrollpane;

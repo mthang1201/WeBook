@@ -5,6 +5,10 @@ import org.uet.library_management.core.repositories.LoanRepository;
 
 import java.util.List;
 
+/**
+ * Service class to handle the business logic for loans.
+ * This class interacts with the LoanRepository to perform various loan-related operations.
+ */
 public class LoanService {
     private final LoanRepository repository;
 

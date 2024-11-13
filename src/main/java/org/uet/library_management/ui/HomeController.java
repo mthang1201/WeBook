@@ -11,6 +11,11 @@ import org.uet.library_management.tools.UIBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The HomeController class is responsible for initializing the UI components
+ * and dynamically loading content based on user interaction with the scroll pane.
+ * It uses recommendation generators to fill the UI with book recommendations.
+ */
 public class HomeController {
     @FXML
     private ScrollPane scrollpane;

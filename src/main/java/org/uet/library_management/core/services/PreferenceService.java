@@ -6,6 +6,10 @@ import org.uet.library_management.core.repositories.PreferenceRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Handles user preferences by interacting with the PreferenceRepository.
+ * Supports adding, retrieving, updating, and removing user preferences.
+ */
 public class PreferenceService {
     private final PreferenceRepository repository;
 

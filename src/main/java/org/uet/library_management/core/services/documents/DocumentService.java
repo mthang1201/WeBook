@@ -6,6 +6,11 @@ import org.uet.library_management.core.repositories.documents.DocumentRepository
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class responsible for handling operations related to documents.
+ *
+ * @param <T> The type of Document being managed by this service.
+ */
 public class DocumentService<T extends Document> {
     protected DocumentRepository repository;
 
