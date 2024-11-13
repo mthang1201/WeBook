@@ -25,39 +25,38 @@ public class HomeController {
 
     private boolean isLoading = false;
     private int index = 0;
-    private static List<RecommendationGenerator> recommendationGeneratorList = new ArrayList<>();
+    private List<RecommendationGenerator> recommendationGeneratorList;
 
     @FXML
     public void initialize() {
-        if (recommendationGeneratorList.isEmpty()) {
-            List<String> randomGenres = RecommendationGenerator.getRandomGenre();
-            List<Book> randomBooks = RecommendationGenerator.getRandomTitleFromBookmarks();
+        recommendationGeneratorList = new ArrayList<>();
+        List<String> randomGenres = RecommendationGenerator.getRandomGenre();
+        List<Book> randomBooks = RecommendationGenerator.getRandomTitleFromBookmarks();
 
-            recommendationGeneratorList.add(new RecommendationGenerator("recommendation",
-                    "Có thể bạn sẽ thích", null));
-            for (int i = 0; i < 5; i++) {
-                String genre = randomGenres.get(i);
-                recommendationGeneratorList.add(new RecommendationGenerator(
-                        genre,
-                        genre,
-                        new SearchByCategory()
-                ));
-            }
-
-            for (int i = 0; i < 3; i++) {
-                Book book = randomBooks.get(i);
-                recommendationGeneratorList.add(new RecommendationGenerator(
-                        book.getCategories(),
-                        "Tương tự " + book.getTitle(),
-                        new SearchByCategory())
-                );
-            }
-
+        recommendationGeneratorList.add(new RecommendationGenerator("recommendation",
+                "Có thể bạn sẽ thích", null));
+        for (int i = 0; i < 5; i++) {
+            String genre = randomGenres.get(i);
             recommendationGeneratorList.add(new RecommendationGenerator(
-                    "e",
-                    "New Releases",
-                    new SearchByNewest()));
+                    genre,
+                    genre,
+                    new SearchByCategory()
+            ));
         }
+
+        for (int i = 0; i < 3; i++) {
+            Book book = randomBooks.get(i);
+            recommendationGeneratorList.add(new RecommendationGenerator(
+                    book.getCategories(),
+                    "Tương tự " + book.getTitle(),
+                    new SearchByCategory())
+            );
+        }
+
+        recommendationGeneratorList.add(new RecommendationGenerator(
+                "e",
+                "New Releases",
+                new SearchByNewest()));
 
         recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(
                 recommendationGeneratorList.get(0).getSearchTerm(),
