@@ -288,22 +288,22 @@ public class UIBuilder {
         recommendBox.setStyle("-fx-padding: 5;");
         title.setStyle(
                 "-fx-font-size: 24px;" +
-                "-fx-text-fill: black;" +
-                "-fx-font-family: 'Montserrat Extrabold';"
+                        "-fx-text-fill: black;" +
+                        "-fx-font-family: 'Montserrat Extrabold';"
         );
 
         arrowButton.setStyle(
                 "-fx-background-color: transparent;" +
-                "-fx-border-color: transparent;"
+                        "-fx-border-color: transparent;"
         );
 
         recommendList.setStyle(
                 "-fx-spacing: 20;" +
-                "-fx-padding: 10 0 0 20;" +
-                "-fx-font-size: 14px;" +
-                "-fx-font-family: 'Montserrat SemiBold';" +
-                "-fx-text-overrun: ellipsis;" +  // Add this to truncate with ellipsis if the text doesn't fit
-                "-fx-max-width: 200px;"
+                        "-fx-padding: 10 0 0 20;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-font-family: 'Montserrat SemiBold';" +
+                        "-fx-text-overrun: ellipsis;" +  // Add this to truncate with ellipsis if the text doesn't fit
+                        "-fx-max-width: 200px;"
         );
 
         searchContext.setStrategy(searchStrategy);
@@ -315,12 +315,17 @@ public class UIBuilder {
         LayoutUtils.setHBoxNodeMargin(arrowButton, 21, 0, 0, 0);
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        String cacheKey = searchTerm + header;
+
         List<Book> books;
         if ("recommendation".equals(searchTerm) && searchStrategy == null) {
             books = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
-        }
-        else {
+        } else if (SessionManager.cacheBooks.containsKey(cacheKey)) {
+            books = SessionManager.cacheBooks.get(cacheKey);
+        } else {
             books = searchContext.executeSearch(searchTerm);
+            SessionManager.cacheBooks.put(cacheKey, books);
         }
         for (Book book : books) {
             VBox bookBox = new VBox();

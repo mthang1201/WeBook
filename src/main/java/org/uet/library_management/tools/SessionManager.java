@@ -7,7 +7,9 @@ import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.entities.documents.Book;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The SessionManager class is a utility class responsible for managing the current session state.
@@ -23,4 +25,6 @@ public class SessionManager {
     public static final ObjectProperty<String> currentEmail = new SimpleObjectProperty<>();
 
     public static List<Book> recommendedBooks = new ArrayList<>();
+
+    public static Map<String, List<Book>> cacheBooks = new LinkedHashMap<>();
 }
