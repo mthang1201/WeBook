@@ -1,8 +1,14 @@
 package org.uet.library_management.core.repositories.documents;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.uet.library_management.core.entities.documents.Thesis;
 import org.uet.library_management.core.entities.documents.Document;
 
+/**
+ * ThesisRepository is a specialized repository for handling Thesis documents.
+ * It extends the DocumentRepository class with operations specific to Thesis entities.
+ */
 public class ThesisRepository extends DocumentRepository<Thesis> {
     public ThesisRepository() {
         super();

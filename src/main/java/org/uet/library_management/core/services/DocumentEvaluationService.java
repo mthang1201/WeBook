@@ -5,6 +5,12 @@ import org.uet.library_management.core.repositories.DocumentEvaluationRepository
 
 import java.util.List;
 
+/**
+ * Service class for handling operations related to DocumentEvaluation.
+ * This service class provides methods to interact with the
+ * DocumentEvaluationRepository to fetch, add, update, and remove
+ * document evaluations.
+ */
 public class DocumentEvaluationService {
     private final DocumentEvaluationRepository repository;
 

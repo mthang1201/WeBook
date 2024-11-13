@@ -7,6 +7,10 @@ import org.uet.library_management.core.repositories.BookmarkRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The BookmarkService class provides methods to manage bookmarks.
+ * It interacts with the BookmarkRepository to perform CRUD operations.
+ */
 public class BookmarkService {
     private final BookmarkRepository repository;
 

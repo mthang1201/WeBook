@@ -4,6 +4,12 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * An abstract class representing a document with common attributes such as
+ * document ID, title, authors, published date, description, categories, and language.
+ *
+ * This class provides constructors to create instances with or without an ID.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

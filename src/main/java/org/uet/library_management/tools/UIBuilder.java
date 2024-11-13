@@ -29,8 +29,20 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * The UIBuilder class provides static methods to create various JavaFX UI components
+ * based on book and keyword data. It assists in generating elements like FlowPane, VBox,
+ * and HBox to display books, suggestions, and library-related information.
+ */
 public class UIBuilder {
 
+    /**
+     * Creates a FlowPane populated with book details. Each book is represented as a VBox containing its cover image,
+     * title, and authors. The cover image and title are clickable to open the book detail page.
+     *
+     * @param books the list of books to be displayed in the flow pane
+     * @return a FlowPane object populated with the book details
+     */
     public static FlowPane createFlowPane(List<Book> books) {
         FlowPane flowPane = new FlowPane();
 
@@ -56,6 +68,13 @@ public class UIBuilder {
         return flowPane;
     }
 
+    /**
+     * Generates a VBox containing a list of suggestions based on the provided keywords.
+     * Each suggestion is represented by an HBox containing an icon and a keyword label.
+     *
+     * @param keywords A list of keywords to generate suggestions for.
+     * @return A VBox containing the generated suggestions.
+     */
     public static VBox generateSuggestions(List<String> keywords) {
         VBox suggestionsVbox = new VBox();
 

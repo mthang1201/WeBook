@@ -7,6 +7,11 @@ import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.entities.documents.Book;
 
+/**
+ * The Mediator class serves as a centralized point for managing static references
+ * to various objects such as text, Book, User, and Loan instances in the system.
+ * This can be particularly useful for sharing data among different parts of an application.
+ */
 public class Mediator {
     public static String text;
 

@@ -35,6 +35,13 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         throw new IllegalArgumentException("Unknown db_table: " + db_table);
     }
 
+    /**
+     * Populates specific attributes for a given Document type from a ResultSet.
+     *
+     * @param document the Document to populate. Can be an instance of either Book or Thesis.
+     * @param rs       the ResultSet containing the data to populate the document's attributes.
+     * @throws SQLException if a database access error occurs or the ResultSet is not properly structured.
+     */
     private void populateSpecificAttributes(Document document, ResultSet rs) throws SQLException {
         if (document instanceof Book book) {
             book.setPublisher(rs.getString("publisher"));
@@ -53,6 +60,13 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         }
     }
 
+    /**
+     * Populates a Document object with data from a ResultSet.
+     *
+     * @param rs the ResultSet containing the data to populate the Document.
+     * @return the populated Document object.
+     * @throws SQLException if a database access error occurs or the ResultSet is not properly structured.
+     */
     protected T populateDocument(ResultSet rs) throws SQLException {
         Document document = createDocument();
         document.setDocumentId(rs.getInt("documentId"));
@@ -67,6 +81,12 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         return (T) document;
     }
 
+    /**
+     * Retrieves all documents from the database.
+     *
+     * @return a list of all documents found in the database.
+     * @throws RuntimeException if a database access error occurs.
+     */
     @Override
     public List<T> findAll() {
         List<T> documents = new ArrayList<>();

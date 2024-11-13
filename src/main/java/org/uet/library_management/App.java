@@ -13,6 +13,10 @@ import javafx.scene.effect.GaussianBlur;
 
 import java.io.IOException;
 
+/**
+ * The App class extends the Application class and serves as the main entry point for the JavaFX application.
+ * It initializes the primary stage, sets its dimensions, and loads the initial scene.
+ */
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {

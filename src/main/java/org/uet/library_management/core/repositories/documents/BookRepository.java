@@ -9,16 +9,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The BookRepository class is responsible for interacting with the books table in the database.
+ * It extends the DocumentRepository class and provides specific implementations for
+ * handling Book entities.
+ */
 public class BookRepository extends DocumentRepository<Book> {
     public BookRepository() {
         super();
     }
 
+    /**
+     * Overrides the loadDatabase method to set the database table to "books".
+     * This method is called during the initialization of the BookRepository to
+     * ensure it interacts with the correct database table specific to book entities.
+     */
     @Override
     protected void loadDatabase() {
         db_table = "books";
     }
 
+    /**
+     * Adds a new Document to the repository. If the document is an instance of Book,
+     * it inserts the book's properties into the database table if the book does not already exist.
+     *
+     * @param document The Document to be added. This should be an instance of Book.
+     */
     @Override
     public void add(Document document) {
         Book book = (Book) document;
@@ -36,21 +52,14 @@ public class BookRepository extends DocumentRepository<Book> {
                 document.getLanguage(), book.getMaturityRating(), book.getPrintType());
     }
 
-//    public void addUsingIsbn(String isbn) {
-//        Document document = BooksApiService.find(isbn);
-//        Book book = (Book) document;
-//        String query = "INSERT INTO " + db_table + " (title, authors, publisher, " +
-//                "publishedDate, description, isbn, pageCount, categories, averageRating, " +
-//                "ratingsCount, imageLinks, language, maturityRating, printType, " +
-//                "availableCopies) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
-//                book.getPublisher(), document.getPublishedDate(), document.getDescription(),
-//                book.getIsbn(), book.getPageCount(), document.getCategories(),
-//                book.getAverageRating(), book.getRatingsCount(), book.getImageLinks(),
-//                document.getLanguage(), book.getMaturityRating(), book.getPrintType(),
-//                document.getAvailableCopies());
-//    }
-
+    /**
+     * Updates the details of an existing book in the database.
+     * This method takes a Document object, casts it to a Book, and updates the
+     * book's attributes in the database table identified by `db_table`,
+     * with a match on the book's ISBN-13.
+     *
+     * @param document The Document to be updated. This should be an instance of Book.
+     */
     @Override
     public void update(Document document) {
         Book book = (Book) document;

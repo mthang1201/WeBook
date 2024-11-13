@@ -19,6 +19,11 @@ import java.util.stream.Collectors;
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
 public class SearchByAuthor implements SearchStrategy {
+    /**
+     * An instance of BooksApiService used to interact with the Books API.
+     * It provides functionality for creating queries to search for books based on various criteria.
+     * This instance is used to fetch book data from an external API and is initialized as a singleton.
+     */
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
     public List<Book> search(String authorName) {
