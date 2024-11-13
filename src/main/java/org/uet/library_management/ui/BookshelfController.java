@@ -31,7 +31,10 @@ public class BookshelfController {
         flowPane.setPadding(new Insets(10,10,10,10));
 
         CompletableFuture.supplyAsync(() -> {
-            return RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+            if (SessionManager.recommendedBooks.isEmpty()) {
+                SessionManager.recommendedBooks = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+            }
+            return SessionManager.recommendedBooks;
         }).thenAccept(books -> {
             Platform.runLater(() -> {
                 updateUI(books);

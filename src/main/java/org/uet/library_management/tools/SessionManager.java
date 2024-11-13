@@ -4,6 +4,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import org.uet.library_management.core.entities.User;
+import org.uet.library_management.core.entities.documents.Book;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The SessionManager class is a utility class responsible for managing the current session state.
@@ -17,4 +21,6 @@ public class SessionManager {
     public static final ObjectProperty<String> currentName = new SimpleObjectProperty<>();
 
     public static final ObjectProperty<String> currentEmail = new SimpleObjectProperty<>();
+
+    public static List<Book> recommendedBooks = new ArrayList<>();
 }
