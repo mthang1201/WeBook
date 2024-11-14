@@ -39,14 +39,35 @@ public class FontManager {
         label.setFont(loadFont(myFont, size));
     }
 
+    /**
+     * Applies a custom font to a specified TextField.
+     *
+     * @param textField The TextField to which the font will be applied.
+     * @param myFont The path to the custom font file.
+     * @param size The size of the font to apply.
+     */
     public static void applyFontToTextField(TextField textField, String myFont, double size) {
         textField.setFont(loadFont(myFont, size));
     }
 
+    /**
+     * Applies a custom font to a specified PasswordField.
+     *
+     * @param passwordField The PasswordField to which the font will be applied.
+     * @param myFont The path to the custom font file.
+     * @param size The size of the font to apply.
+     */
     public static void applyFontToPasswordField(PasswordField passwordField, String myFont, double size) {
         passwordField.setFont(loadFont(myFont, size));
     }
 
+    /**
+     * Applies a custom font to a specified Button.
+     *
+     * @param button The Button to which the font will be applied.
+     * @param myFont The path to the custom font file.
+     * @param size The size of the font to apply.
+     */
     public static void applyFontToButton(Button button, String myFont, double size) {
         button.setFont(loadFont(myFont, size));
     }
