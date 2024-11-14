@@ -105,7 +105,7 @@ public class HomeController {
      */
     private void loadHorizontalRecommendation() {
         scrollpane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue.doubleValue() == 1.0 && !isLoading && index < recommendationGeneratorList.size()) {
+            if (newValue.doubleValue() >= 0.9 && !isLoading && index < recommendationGeneratorList.size()) {
                 isLoading = true;
                 RecommendationGenerator recommendationGenerator = recommendationGeneratorList.get(index);
                 recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(

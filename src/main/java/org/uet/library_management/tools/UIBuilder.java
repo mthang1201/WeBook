@@ -1,6 +1,7 @@
 package org.uet.library_management.tools;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
@@ -311,7 +312,7 @@ public class UIBuilder {
                         "-fx-padding: 10 0 0 20;" +
                         "-fx-font-size: 14px;" +
                         "-fx-font-family: 'Montserrat SemiBold';" +
-                        "-fx-text-overrun: ellipsis;" +  // Add this to truncate with ellipsis if the text doesn't fit
+                        "-fx-text-overrun: ellipsis;" +
                         "-fx-max-width: 200px;"
         );
 
@@ -339,6 +340,7 @@ public class UIBuilder {
             books = searchContext.executeSearch(searchTerm);
             SessionManager.cacheBooks.put(cacheKey, books);
         }
+
         for (Book book : books) {
             VBox bookBox = new VBox();
             bookBox.setSpacing(10);
@@ -346,25 +348,38 @@ public class UIBuilder {
 
 
             ImageView bookImageView = new ImageView();
-            bookImageView.setCache(true);  // Bật chế độ cache
+            bookImageView.setCache(true);
             bookImageView.setCacheHint(CacheHint.SPEED);
 
             bookImageView.setFitWidth(300);
             bookImageView.setFitHeight(300);
             bookImageView.setPreserveRatio(true);
 
-            CompletableFuture.supplyAsync(() -> ImageCacheManager.getInstance().loadImage(
-                    book.getIsbn13(),
-                    book.getTitle(),
-                    book.getImageLinks()
-            ), executor).thenAccept(bookImage -> {
-                Platform.runLater(() -> {
-                    bookImageView.setImage(bookImage);
-                    bookBox.setOnMouseClicked(event -> {
-                        openBookDetailPage(book);
-                    });
+            Task<Image> imageLoadingTask = new Task<Image>() {
+                @Override
+                protected Image call() throws Exception {
+                    return ImageCacheManager.getInstance().loadImage(
+                            book.getIsbn13(),
+                            book.getTitle(),
+                            book.getImageLinks()
+                    );
+                }
+            };
+
+            imageLoadingTask.setOnSucceeded(event -> {
+                Image bookImage = imageLoadingTask.getValue();
+                bookImageView.setImage(bookImage);
+                bookBox.setOnMouseClicked(event2 -> {
+                    openBookDetailPage(book);
                 });
             });
+
+            imageLoadingTask.setOnFailed(event -> {
+                Throwable exception = imageLoadingTask.getException();
+                exception.printStackTrace();
+            });
+
+            new Thread(imageLoadingTask).start();
 
 
             Label bookTitleLabel = new Label(book.getTitle());

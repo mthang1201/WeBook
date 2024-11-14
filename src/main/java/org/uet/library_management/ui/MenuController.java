@@ -182,8 +182,21 @@ public class MenuController {
      */
     @FXML
     private void handleHomeMenu() {
-        SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("home.fxml");
+//        if (timer != null) {
+//            timer.cancel();
+//        }
+//
+//        timer = new Timer();
+//
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(() -> {
+                    SceneManager.getInstance().clearStack();
+                    SceneManager.getInstance().pushSubScene("home.fxml");
+//                });
+//            }
+//        }, 300);
     }
 
     /**
