@@ -8,14 +8,14 @@
             fx:controller="org.uet.library_management.ui.HomeController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="head">
             <Label styleClass="head-label" text="Trang chủ" />
             <Separator styleClass="separator" />
         </VBox>
     </top>
     <center>
         <ScrollPane fx:id="scrollpane" styleClass="scroll-pane" fitToWidth="true" pannable="true" vbarPolicy="ALWAYS">
-            <VBox fx:id="recommendBox" />
+            <VBox fx:id="recommendBox" styleClass="scroll-pane" />
         </ScrollPane>
     </center>
 </BorderPane>

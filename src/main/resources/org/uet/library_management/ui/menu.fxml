@@ -64,7 +64,7 @@
     <AnchorPane xmlns="http://javafx.com/javafx"
                 xmlns:fx="http://javafx.com/fxml">
     <HBox AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0">
-        <Button fx:id="usernameButton" styleClass="username-button" onAction="#handleSettingsMenu" prefWidth="40" prefHeight="20">
+        <Button fx:id="usernameButton" styleClass="username-button" onAction="#handleSettingsMenu" prefWidth="200" prefHeight="20">
             <graphic>
                 <ImageView fx:id="usernameImageView" fitHeight="40" fitWidth="40">
 <!--                    <Image url="@../icons/avatar-male.png" />-->

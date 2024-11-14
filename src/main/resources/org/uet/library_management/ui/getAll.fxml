@@ -8,7 +8,7 @@
             fx:controller="org.uet.library_management.ui.GetAllController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="head">
             <Label styleClass="head-label" text="Đã mượn" />
             <Separator styleClass="separator" />
         </VBox>
@@ -16,7 +16,7 @@
     <center>
         <ScrollPane fx:id="verticalScrollpane" styleClass="vertical-scroll-pane" fitToWidth="true" pannable="true">
             <content>
-                <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+                <FlowPane fx:id="flowPane" styleClass="flow-pane" minHeight="999999" />
             </content>
         </ScrollPane>
     </center>

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.repositories.UserAvatarRepository;
+import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
 
@@ -151,7 +152,9 @@ public class MenuController {
                     usernameImageView.setImage(newImage);  // Update ImageView when the image changes
                 }
             });
+
         }
+        //FontManager.applyFontToLabel(label, "Nunito-Regular.ttf", 16);
     }
 
     private void handleButtonHover(String imageName, ImageView imageView) {

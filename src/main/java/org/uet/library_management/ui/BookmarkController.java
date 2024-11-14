@@ -48,9 +48,22 @@ public class BookmarkController {
             noBooksVbox.setManaged(false);
 
             flowPane.setPadding(new Insets(10,10,10,10));
-            flowPane.getChildren().addAll(
-                    UIBuilder.createFlowPane(books).getChildren()
-            );
+            FlowPane getFlowPane = UIBuilder.createFlowPane(truncateBook(books));
+            flowPane.getChildren().addAll(getFlowPane.getChildren());
+
         }
+    }
+
+    private List<Book> truncateBook(List<Book> books) {
+        for (Book book : books) {
+            if (book.getTitle() != null && book.getTitle().length() > 30) {
+                book.setTitle(book.getTitle().substring(0, 30) + "...");
+            }
+
+            if (book.getAuthors() != null && book.getAuthors().length() > 30){
+                book.setAuthors(book.getAuthors().substring(0, 30) + "...");
+            }
+        }
+        return books;
     }
 }

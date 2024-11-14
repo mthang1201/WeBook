@@ -10,7 +10,7 @@
             fx:controller="org.uet.library_management.ui.BookshelfController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="head">
             <Label styleClass="head-label" text="Giá sách" />
             <Separator styleClass="separator" />
         </VBox>
