@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.tools.SessionManager;
 
@@ -134,5 +135,15 @@ public class AdminMenuController {
     @FXML
     private void handleEditMenu() {
         SceneManager.getInstance().setSubScene("admin/edit.fxml");
+    }
+
+    /**
+     * Handles the event when the logout menu button is clicked.
+     * This method switches the current scene to the authentication login page defined in "auth/login.fxml".
+     */
+    @SneakyThrows
+    @FXML
+    public void handleLogoutMenu() {
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

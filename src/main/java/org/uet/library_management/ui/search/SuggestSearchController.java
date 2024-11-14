@@ -127,15 +127,15 @@ public class SuggestSearchController {
      * @param books A list of Book objects to be displayed in the UI.
      */
     private void updateUI(List<Book> books) {
-        BookService service = new BookService();
+//        BookService service = new BookService();
 
-        suggestionsVbox.getChildren().clear();
-
-        suggestionsVbox.getChildren().addAll(
-                UIBuilder.generateSuggestions(
-                        service.suggest("searchText")
-                )
-        );
+//        suggestionsVbox.getChildren().clear();
+//
+//        suggestionsVbox.getChildren().addAll(
+//                UIBuilder.generateSuggestions(
+//                        service.suggest("searchText")
+//                )
+//        );
 
         inYourLibraryHbox.getChildren().clear();
 

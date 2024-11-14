@@ -14,10 +14,10 @@
                 <content>
                     <VBox styleClass="vbox">
 <!--                        Suggestions-->
-                        <Label styleClass="suggestions-label" text="Suggestions" />
-                        <Separator styleClass="separator" />
-                        <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" />
-                        <Pane style="-fx-pref-height: 20" />
+<!--                        <Label styleClass="suggestions-label" text="Suggestions" />-->
+<!--                        <Separator styleClass="separator" />-->
+<!--                        <VBox fx:id="suggestionsVbox" styleClass="suggestions-vbox" />-->
+<!--                        <Pane style="-fx-pref-height: 20" />-->
 
 <!--                        In Your Library-->
                         <VBox styleClass="in-your-library-pane">
