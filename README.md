@@ -1,8 +1,10 @@
 # library_management
-A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like QRcode.
+A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like suggestions.
 
 
 ## Demo
+[Youtube](https://youtu.be/MMLVc350PXM)
+<img src="media/menuScreen.png" width = "310">
 ![Demo Video](/media/demo2.gif)
 
 
