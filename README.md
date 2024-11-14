@@ -5,7 +5,7 @@ A library management application written from scratch in Java using the JavaFX d
 ## Demo
 [Youtube](https://youtu.be/MMLVc350PXM)
 
-<img src="media/menuScreen.png" width = "310">
+<img src="media/menuScreen.png">
 <!--![Demo Video](/media/demo2.gif)-->
 
 
