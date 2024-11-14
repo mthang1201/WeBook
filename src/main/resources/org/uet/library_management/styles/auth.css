@@ -1,11 +1,11 @@
 .auth {
-    -fx-background-color: #daecf5;
+    -fx-background-color: #94c6f7;
     /*-fx-background-color: transparent;*/
 
 }
 
 .auth-pane {
-    -fx-background-color: linear-gradient(to bottom, #E8F6FC50, #ADEBFF50);
+    -fx-background-color: linear-gradient(to bottom, #EAF4FF, #C1E2FF);
     -fx-pref-width: 300;
     -fx-pref-height: 200;
     -fx-background-radius: 10;

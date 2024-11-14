@@ -1,5 +1,5 @@
 .settings-window {
-    -fx-background-color: #f2f3f7;
+    -fx-background-color: #e8f2ff;
     -fx-pref-width: 450;
     -fx-pref-height: 450;
     -fx-font-size: 14px;
@@ -8,7 +8,7 @@
 }
 
 .user-section {
-    -fx-background-color: white;
+    -linear-gradient(to right, #E4F2FD, #73a2e1);
     -fx-pref-width: 410;
     -fx-pref-height: 72;
     -fx-alignment: CENTER;
@@ -37,7 +37,7 @@
 }
 
 .settings-button {
-    -fx-background-color: white;
+    -fx-background-color : #C2E7FF;
     -fx-text-fill: #262626;
     -fx-pref-width: 410;
     -fx-pref-height: 30;
@@ -45,8 +45,8 @@
 }
 
 .settings-button:hover {
-    -fx-background-color: #262626;
-    -fx-text-fill: #eeeeee;
+    -fx-background-color: #81ccfc;
+    /*-fx-text-fill: #eeeeee;*/
 }
 
 .note-label {
@@ -58,7 +58,7 @@
 }
 
 .changes-vbox {
-    -fx-background-color: #f2f3f7;
+    -fx-background-color: #e8f2ff;
     -fx-pref-width: 450;
     -fx-pref-height: 450;
     -fx-font-size: 14px;

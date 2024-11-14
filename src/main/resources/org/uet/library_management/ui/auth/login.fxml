@@ -17,13 +17,15 @@
             fx:controller="org.uet.library_management.ui.auth.LoginController"
             styleClass="auth">
 
-    <Region style="-fx-background-color: rgba(218, 236, 245, 0.5);"
+    <!-- Transparent, blurred background layer -->
+<!--    <Region style="-fx-background-color: rgba(218, 236, 245, 0.5);"
             AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
             AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <effect>
             <GaussianBlur radius="10"/>
+
         </effect>
-    </Region>
+    </Region>-->
 
     <StackPane AnchorPane.leftAnchor="50" AnchorPane.bottomAnchor="50"
                AnchorPane.rightAnchor="50" AnchorPane.topAnchor="50"
@@ -40,3 +42,4 @@
         </VBox>
     </StackPane>
 </AnchorPane>
+

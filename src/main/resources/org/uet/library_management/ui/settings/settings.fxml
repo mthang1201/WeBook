@@ -9,12 +9,12 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.uet.library_management.ui.settings.SettingsController"
-      styleClass="settings-window">
-    <HBox styleClass="user-section" spacing="10">
+      styleClass="settings-window" alignment="CENTER">
+    <HBox styleClass="user-section" spacing="10" alignment="CENTER">
         <ImageView fx:id="avatar" fitHeight="40" fitWidth="40">
-            <Image url="@../../icons/avatar-male.png" />
+            <Image url="@../../icons/avatar-male.png"/>
         </ImageView>
-        <VBox>
+        <VBox alignment="CENTER">
             <Label fx:id="userName" styleClass="username-label" />
             <Label fx:id="userEmail" styleClass="email-label"/>
         </VBox>

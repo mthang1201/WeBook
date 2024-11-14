@@ -8,7 +8,7 @@
             fx:controller="org.uet.library_management.ui.BookmarkController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="head">
             <Label styleClass="head-label" text="Muốn đọc" />
             <Separator styleClass="separator" />
         </VBox>

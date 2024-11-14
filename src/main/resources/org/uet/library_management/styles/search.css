@@ -1,5 +1,4 @@
 .on-search-label {
-    -fx-background-color: #f8f8f8;
     -fx-text-fill: #4d4d4d;
     -fx-pref-width: 800;
     -fx-pref-height: 53;
@@ -22,14 +21,21 @@
 
 }
 
+/*.in-your-library-pane {
+    -fx-background-color: linear-gradient(to right, #effbff, #bbeafa);
+    -fx-padding: 0 0 0 0;
+}*/
+
+
 .in-your-library-label {
     -fx-padding: 20 0 0 40;
     -fx-font-size: 16px;
     -fx-font-weight: BOLD;
+    -fx-background-color: #e1f1fc;
+    -fx-pref-width: 1920;
 }
 
 .in-your-library-hbox {
-    -fx-background-color: #ececec;
     -fx-padding: 20 0 20 40;
 }
 
@@ -53,8 +59,13 @@
 
 .in-your-library-separator {
     -fx-padding: 10 40 10 20;
+    -fx-background-color: #e1f1fc;
 }
 
 .in-your-library-pane {
-    -fx-background-color: #ececec;
+    -fx-background-color: #e1f1fc;
+}
+
+.horizontal-scroll-pane {
+    -fx-background-color: #e1f1fc;
 }
