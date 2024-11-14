@@ -2,6 +2,8 @@ package org.uet.library_management.tools;
 
 import javafx.scene.text.Font;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
+
 /**
  * The FontManager class provides methods to manage and load custom fonts
  * for use in JavaFX applications. It includes functionalities to load a font
@@ -35,5 +37,17 @@ public class FontManager {
      */
     public static void applyFontToLabel(Label label, String myFont, double size) {
         label.setFont(loadFont(myFont, size));
+    }
+
+    public static void applyFontToTextField(TextField textField, String myFont, double size) {
+        textField.setFont(loadFont(myFont, size));
+    }
+
+    public static void applyFontToPasswordField(PasswordField passwordField, String myFont, double size) {
+        passwordField.setFont(loadFont(myFont, size));
+    }
+
+    public static void applyFontToButton(Button button, String myFont, double size) {
+        button.setFont(loadFont(myFont, size));
     }
 }
