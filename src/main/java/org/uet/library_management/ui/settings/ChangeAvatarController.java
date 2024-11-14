@@ -11,7 +11,6 @@ import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.repositories.UserAvatarRepository;
 import org.uet.library_management.tools.AlertUtil;
 import org.uet.library_management.tools.SessionManager;
-import org.uet.library_management.ui.MenuController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +18,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * The ChangeAvatarController class is responsible for managing the user interface and interactions related to changing a user's avatar.
+ * It includes methods for initializing the controller, uploading an image, handling avatar changes,
+ * and responding to button actions.
+ */
 public class ChangeAvatarController {
     @FXML
     public Button changeAvatarButton;
@@ -30,11 +34,28 @@ public class ChangeAvatarController {
 
     private UserAvatarRepository repository;
 
+    /**
+     * Initializes the controller by setting up the repository for managing user avatars.
+     * This method is automatically called after the FXML file has been loaded.
+     * It sets the repository instance to a new UserAvatarRepository, which will be used
+     * for database operations related to user avatars.
+     */
     @FXML
     public void initialize() {
         repository = new UserAvatarRepository();
     }
 
+    /**
+     * Uploads an image file selected by the user and sets it as the new avatar.
+     *
+     * This method opens a file chooser dialog to allow the user to select an image file.
+     * Supported image formats include PNG, JPG, JPEG, and GIF. Upon successful selection
+     * and loading of the image, the image is displayed in the ImageView component and
+     * the Change Avatar button is configured to trigger an avatar change.
+     *
+     * If the image file cannot be found or loaded, a FileNotFoundException is caught and its
+     * stack trace is printed.
+     */
     @FXML
     private void uploadImage() {
         FileChooser fileChooser = new FileChooser();
@@ -59,6 +80,13 @@ public class ChangeAvatarController {
         }
     }
 
+    /**
+     * Handles the action triggered when the 'Change Avatar' button is pressed.
+     * This method updates the user's avatar image in the repository and reflects
+     * the change in the session and UI.
+     *
+     * @param file the file containing the new avatar image to be set.
+     */
     @SneakyThrows
     @FXML
     private void handleChangeAvatarButton(File file) {
@@ -89,6 +117,13 @@ public class ChangeAvatarController {
         }
     }
 
+    /**
+     * Handles the action of the 'Back' button being pressed.
+     *
+     * <p>This method is triggered when the user presses the 'Back' button
+     * in the ChangeAvatarController. It changes the scene to the settings
+     * page by loading the specified FXML file.</p>
+     */
     @SneakyThrows
     @FXML
     public void handleBackButton() {

@@ -7,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.SearchByGeneral;
-import org.uet.library_management.api.search.SearchByTitle;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.core.entities.documents.Book;
@@ -39,6 +38,14 @@ public class SuggestSearchController {
     private Timer timer;
 
 
+    /**
+     * Initializes the controller class. This method is automatically called after the FXML file has been loaded.
+     *
+     * - Configures the vertical scroll pane to fit its width and be pannable.
+     * - Retrieves the search text from the Mediator class.
+     * - Cancels any ongoing timer if it exists.
+     * - Schedules a new timer task to perform a search after a fixed delay.
+     */
     @FXML
     public void initialize() {
         verticalScrollpane.setFitToWidth(true);
@@ -59,6 +66,13 @@ public class SuggestSearchController {
         }, 200);
     }
 
+    /**
+     * Searches for books based on the given search text, retrieves top rated book results
+     * and general search results, updates their ratings, combines the results,
+     * and sorts them by average rating, and finally updates the UI with the results.
+     *
+     * @param searchText The text to search for books.
+     */
     private void performSearch(String searchText) {
         if (searchText.isEmpty()) {
             topResultsVbox.getChildren().clear();
@@ -106,6 +120,12 @@ public class SuggestSearchController {
         });
     }
 
+    /**
+     * Updates the user interface with the provided list of books, including suggestions,
+     * books in the user's library, and top results.
+     *
+     * @param books A list of Book objects to be displayed in the UI.
+     */
     private void updateUI(List<Book> books) {
         BookService service = new BookService();
 

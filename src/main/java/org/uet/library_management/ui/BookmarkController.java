@@ -5,17 +5,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.repositories.documents.BookRepository;
-import org.uet.library_management.core.services.BookmarkService;
-import org.uet.library_management.core.services.documents.BookService;
-import org.uet.library_management.tools.SessionManager;
 import org.uet.library_management.tools.UIBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The BookmarkController class is a JavaFX controller responsible for managing the UI components
@@ -34,6 +28,16 @@ public class BookmarkController {
 
 //    private static List<Book> booksCache = new ArrayList<>();
 
+    /**
+     * Initializes the UI components of the BookmarkController class by loading bookmarked books
+     * and updating the view accordingly. If there are no bookmarked books, displays a message indicating
+     * that no books are available. If there are bookmarked books, populates the FlowPane with the book data.
+     *
+     * The method performs the following:
+     * - Fetches bookmarked books from the BookRepository.
+     * - Updates visibility of UI components based on whether books exist.
+     * - Adjusts padding and adds book information to the FlowPane for display.
+     */
     @FXML
     public void initialize() {
         BookRepository bookRepository = new BookRepository();
@@ -54,6 +58,13 @@ public class BookmarkController {
         }
     }
 
+    /**
+     * Truncates the title and authors fields of each Book object in the provided list if they exceed
+     * 30 characters, appending "..." to indicate truncation.
+     *
+     * @param books the list of Book objects to be truncated
+     * @return the modified list of Book objects with truncated title and authors fields if they exceeded 30 characters
+     */
     private List<Book> truncateBook(List<Book> books) {
         for (Book book : books) {
             if (book.getTitle() != null && book.getTitle().length() > 30) {

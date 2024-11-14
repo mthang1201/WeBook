@@ -14,6 +14,10 @@ public class MainController {
     @FXML
     private BorderPane contentPane;
 
+    /**
+     * Initializes the main content pane of the application and sets the initial sub-scene to "home.fxml".
+     * This method is automatically called after the FXML components have been loaded.
+     */
     @FXML
     private void initialize() {
         SceneManager.getInstance().setContentPane(contentPane);
