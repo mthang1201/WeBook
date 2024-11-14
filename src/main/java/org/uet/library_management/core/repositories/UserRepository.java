@@ -10,20 +10,31 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The UserRepository class implements the MySQLRepository interface for the User entity,
- * providing CRUD operations and additional methods to interact with the "users" table in a MySQL database.
- * It uses the ConnectJDBC class to execute SQL queries and manage database connections.
+ * UserRepository is a concrete implementation of the MySQLRepository interface
+ * providing CRUD operations for managing User entities in a MySQL database.
  */
 public class UserRepository implements MySQLRepository<User> {
     private final String db_table;
 
     private final ConnectJDBC connectJDBC;
 
+    /**
+     * The UserRepository class is responsible for managing user data in the
+     * database. It provides CRUD operations and uses the ConnectJDBC class
+     * to connect to the database and execute SQL queries.
+     */
     public UserRepository() {
         connectJDBC = new ConnectJDBC();
         db_table = "users";
     }
 
+    /**
+     * Populates a User object with data retrieved from a ResultSet.
+     *
+     * @param rs the ResultSet object containing user data retrieved from the database.
+     * @return a User object populated with data from the ResultSet.
+     * @throws SQLException if any SQL error occurs while retrieving data from the ResultSet.
+     */
     private User populateUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserId(rs.getInt("userId"));
@@ -38,6 +49,12 @@ public class UserRepository implements MySQLRepository<User> {
         return user;
     }
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return a list of all users retrieved from the database.
+     * @throws RuntimeException if a database access error occurs.
+     */
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
@@ -54,6 +71,13 @@ public class UserRepository implements MySQLRepository<User> {
         return users;
     }
 
+    /**
+     * Retrieves a paginated list of users from the database.
+     *
+     * @param page the page number to retrieve.
+     * @param pageSize the number of users per page.
+     * @return a list of users for the specified page.
+     */
     @Override
     public List<User> findAllByPage(int page, int pageSize) {
         List<User> users = new ArrayList<>();
@@ -71,6 +95,11 @@ public class UserRepository implements MySQLRepository<User> {
         return users;
     }
 
+    /**
+     * Counts the total number of records in the associated database table.
+     *
+     * @return the total count of records in the table
+     */
     @Override
     public int countAll() {
         String query = "SELECT COUNT(*) AS total FROM " + db_table;
@@ -87,6 +116,12 @@ public class UserRepository implements MySQLRepository<User> {
         return count;
     }
 
+    /**
+     * Retrieves a list of users whose names match the given name pattern.
+     *
+     * @param name the name pattern to match against user names in the database.
+     * @return a list of users whose names match the provided pattern.
+     */
     public List<User> findByName(String name) {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE name LIKE ?";
@@ -102,6 +137,12 @@ public class UserRepository implements MySQLRepository<User> {
         return users;
     }
 
+    /**
+     * Finds a user by their email address.
+     *
+     * @param email the email address of the user to find.
+     * @return an Optional containing the found User, or an empty Optional if no user was found.
+     */
     public Optional<User> findByEmail(String email) {
         User user = null;
         String query = "SELECT * FROM " + db_table + " WHERE email = ?";
@@ -117,6 +158,11 @@ public class UserRepository implements MySQLRepository<User> {
         return Optional.ofNullable(user);
     }
 
+    /**
+     * Adds a user to the database.
+     *
+     * @param user the User object containing data to be inserted into the database.
+     */
     @Override
     public void add(User user) {
         String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -125,6 +171,11 @@ public class UserRepository implements MySQLRepository<User> {
                 user.getPasswordHash());
     }
 
+    /**
+     * Updates the information of an existing user in the database.
+     *
+     * @param user the User object containing the updated information to be stored in the database.
+     */
     @Override
     public void update(User user) {
         String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ?, passwordHash = ? WHERE userId = ?";
@@ -133,12 +184,28 @@ public class UserRepository implements MySQLRepository<User> {
                 user.getPasswordHash(), user.getUserId());
     }
 
+    /**
+     * Removes a specified user from the database.
+     *
+     * @param user the User object to be removed from the database.
+     */
     @Override
     public void remove(User user) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ?";
         connectJDBC.executeUpdate(query, user.getUserId());
     }
 
+    /**
+     * Deletes all records from the associated database table.
+     *
+     * This method constructs a SQL DELETE statement to remove all
+     * rows from the table specified by the `db_table` field and
+     * executes the statement using the `connectJDBC` utility to
+     * interact with the database.
+     *
+     * @throws RuntimeException if a database access error occurs
+     *                          while executing the SQL statement.
+     */
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;

@@ -13,9 +13,19 @@ import java.util.List;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * A class implementing the SearchStrategy interface to search for books by their title.
+ * It uses the Google Books API to perform the search and retrieve the book details.
+ */
 public class SearchByTitle implements SearchStrategy{
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Searches for books by their title using the Google Books API.
+     *
+     * @param title The title of the book to search for.
+     * @return A list of books matching the search criteria or an empty list if no matches are found.
+     */
     public List<Book> search(String title) {
         try {
             Books books = booksApiService.createQuery();

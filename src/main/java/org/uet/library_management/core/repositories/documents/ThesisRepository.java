@@ -19,6 +19,11 @@ public class ThesisRepository extends DocumentRepository<Thesis> {
         db_table = "theses";
     }
 
+    /**
+     * Adds a Thesis document to the repository.
+     *
+     * @param document the document to be added, which must be an instance of Thesis.
+     */
     @Override
     public void add(Document document) {
         Thesis thesis = (Thesis) document;
@@ -31,6 +36,11 @@ public class ThesisRepository extends DocumentRepository<Thesis> {
                 thesis.getCitationCount());
     }
 
+    /**
+     * Updates an existing Thesis document in the repository.
+     *
+     * @param document the document to be updated, which must be an instance of Thesis.
+     */
     @Override
     public void update(Document document) {
         Thesis thesis = (Thesis) document;

@@ -12,9 +12,21 @@ import java.util.List;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * Implements the SearchStrategy interface to search for books using their ISBN.
+ * Utilizes the BooksApiService to interact with the Google Books API and fetch book
+ * details based on the provided ISBN number.
+ */
 public class SearchByISBN implements SearchStrategy{
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Searches for books using the provided ISBN and returns a list of matching books.
+     * Utilizes the Google Books API to fetch and extract book details based on the given ISBN number.
+     *
+     * @param ISBN The International Standard Book Number (ISBN) to search for.
+     * @return A list of books that match the given ISBN. If no books are found, returns an empty list.
+     */
     public List<Book> search(String ISBN) {
         try {
             Books books = booksApiService.createQuery();

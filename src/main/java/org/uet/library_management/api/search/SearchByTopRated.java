@@ -16,10 +16,25 @@ import java.util.HashSet;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * A class implementing the SearchStrategy interface to search for books by the top-rated category.
+ * This class provides functionality to search for books within a specified category, filtered by a
+ * minimum average rating of 4.0 or higher and based on non-duplicate ISBN numbers.
+ * It interacts with both an external Books API and a local book database.
+ */
 public class SearchByTopRated implements SearchStrategy {
     private BooksApiService booksApiService = BooksApiService.getInstance();
     private BookService bookService = new BookService(); // Assuming you have a BookService to interact with the database
 
+    /**
+     * Searches for top-rated books within a specified category and filters out books that have already
+     * been added to the local collection, ensuring non-duplicate entries based on ISBN-13.
+     *
+     * @param searchTerm The category term used for searching books.
+     * @return A list of top-rated books in the specified category, filtered by a minimum average rating of 4.0,
+     *         and not already present in the local collection. Returns an empty list if no such books are found
+     *         or if an error occurs during the search process.
+     */
     public List<Book> search(String searchTerm) {
         try {
             Books books = booksApiService.createQuery();

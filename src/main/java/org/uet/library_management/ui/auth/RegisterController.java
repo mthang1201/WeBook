@@ -1,6 +1,8 @@
 package org.uet.library_management.ui.auth;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
@@ -70,5 +72,11 @@ public class RegisterController {
 
     private boolean validate(String name, String phoneNumber, String email, String address, String password) {
         return true;
+    }
+
+    @SneakyThrows
+    @FXML
+    public void handleCancelButton() {
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

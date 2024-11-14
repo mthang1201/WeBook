@@ -277,6 +277,15 @@ public class UIBuilder {
         return flowPane;
     }
 
+    /**
+     * Generates a VBox containing a horizontal recommendation list based on the provided search term, header, and search strategy.
+     * The list is dynamically created and populated with book recommendations.
+     *
+     * @param searchTerm      the term used to search for book recommendations
+     * @param header          the header title displayed above the recommendation list
+     * @param searchStrategy  the strategy applied for searching the books
+     * @return a VBox containing the horizontal recommendation list
+     */
     public static VBox generateHorizontalRecommendation(String searchTerm, String header, SearchStrategy searchStrategy) {
 
         SearchContext searchContext = new SearchContext();

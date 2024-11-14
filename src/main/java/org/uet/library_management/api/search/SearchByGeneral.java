@@ -17,9 +17,20 @@ import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * A class that implements the SearchStrategy interface for conducting general searches
+ * using the Google Books API. This class utilizes a singleton BooksApiService to perform
+ * the search and returns a list of Book objects based on the given search term.
+ */
 public class SearchByGeneral implements SearchStrategy{
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Performs a search using the Google Books API based on the specified search term.
+     *
+     * @param searchTerm The term to search for in the Google Books database.
+     * @return A list of Book objects that match the search criteria, or an empty list if no matches are found or an error occurs.
+     */
     public List<Book> search(String searchTerm) {
         try {
             Books books = booksApiService.createQuery();

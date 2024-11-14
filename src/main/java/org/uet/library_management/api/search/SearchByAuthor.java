@@ -18,6 +18,10 @@ import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * The SearchByAuthor class implements the SearchStrategy interface and provides
+ * functionality to search for books by author name using the Google Books API.
+ */
 public class SearchByAuthor implements SearchStrategy {
     /**
      * An instance of BooksApiService used to interact with the Books API.
@@ -26,6 +30,12 @@ public class SearchByAuthor implements SearchStrategy {
      */
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Executes a search query to find books by a specific author using the Google Books API.
+     *
+     * @param authorName The name of the author whose books are to be searched.
+     * @return A list of books by the specified author, or an empty list if no books are found or if an error occurs.
+     */
     public List<Book> search(String authorName) {
         try {
             Books books = booksApiService.createQuery();
