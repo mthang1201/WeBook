@@ -11,7 +11,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.RegisterController"
-            styleClass="auth">
+            styleClass="register">
     <AnchorPane styleClass="auth-pane" AnchorPane.topAnchor="50" AnchorPane.rightAnchor="50"
                 AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="50">
         <VBox alignment="CENTER" spacing="20"

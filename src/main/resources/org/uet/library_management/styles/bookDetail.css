@@ -149,7 +149,7 @@
 #editReviewButton {
        -fx-border-color: black;
        -fx-border-width: 2px;
-        -fx-border-style: solid;
+       -fx-border-style: solid;
        -fx-text-fill: black;
        -fx-font-family: "Montserrat";
        -fx-background-color: white;

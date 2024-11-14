@@ -1,0 +1,62 @@
+.login {
+    -fx-background-color: #94c6f7;
+
+}
+
+.login-pane {
+    -fx-background-color: linear-gradient(to bottom, #EAF4FF, #C1E2FF);
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+    -fx-background-radius: 10;
+    -fx-padding: 40 40 40 40;
+}
+
+#titleLoginLabel {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-padding: 20 20 20 20;
+    -fx-font-family: "Kinetika Black";
+}
+
+#emailFieldBox, #passwordFieldBox {
+    -fx-background-color: #6495ED;
+    -fx-background-radius: 5px;
+}
+#emailLoginField, #passwordLoginField {
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+    -fx-font-family: "Kinetika Medium";
+    -fx-font-size: 12px;
+    -fx-pref-width: 50;
+    -fx-pref-height: 25;
+}
+
+
+#loginButton {
+    -fx-background-color: white;
+    -fx-text-fill: #007bff;
+    -fx-font-family: "Kinetika Black";
+    -fx-font-size: 18px;
+    -fx-background-radius: 15px;
+}
+#loginButton:hover {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+#askRegisterLabel {
+     -fx-font-family: "Kinetika Medium";
+}
+
+#openRegisterButton {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007bff;
+    -fx-font-size: 18px;
+    -fx-underline: true;
+}
+#openRegisterButton:hover {
+    -fx-text-fill: white;
+}

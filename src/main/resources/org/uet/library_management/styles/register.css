@@ -1,0 +1,39 @@
+.register {
+    -fx-background-color: #94c6f7;
+    /*-fx-background-color: transparent;*/
+
+}
+
+.auth-pane {
+    -fx-background-color: linear-gradient(to bottom, #EAF4FF, #C1E2FF);
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+    -fx-background-radius: 10;
+    -fx-padding: 40 40 40 40;
+}
+
+.title-label {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: #ffffff;*/
+    -fx-padding: 20 20 20 20
+}
+
+.text-field, .password-field {
+    /*-fx-background-color: #333333;*/
+    -fx-text-fill: #4b4d4c;
+    -fx-pref-width: 50;
+}
+
+.button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+}
+
+.login-button {
+    -fx-background-color: linear-gradient(to bottom, #aac9f1, #73a2e1);
+}
+
+.register-button {
+    -fx-background-color: linear-gradient(to bottom, #aac9f1, #73a2e1);
+}

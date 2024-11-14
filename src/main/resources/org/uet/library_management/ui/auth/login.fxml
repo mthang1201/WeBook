@@ -12,10 +12,11 @@
 
 <?import javafx.scene.layout.Region?>
 
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.LoginController"
-            styleClass="auth">
+            styleClass="login">
 
     <!-- Transparent, blurred background layer -->
 <!--    <Region style="-fx-background-color: rgba(218, 236, 245, 0.5);"
@@ -29,16 +30,27 @@
 
     <StackPane AnchorPane.leftAnchor="50" AnchorPane.bottomAnchor="50"
                AnchorPane.rightAnchor="50" AnchorPane.topAnchor="50"
-               styleClass="auth-pane">
+               styleClass="login-pane">
 
         <VBox spacing="30" alignment="CENTER" >
-            <Label fx:id="titleLabel" styleClass="title-label" text="Library Management" />
-            <TextField fx:id="emailField" promptText="Email" minWidth="300" maxWidth="300"/>
-            <PasswordField fx:id="passwordField" promptText="Password" minWidth="300" maxWidth="300"/>
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
-                <Button fx:id="loginButton" styleClass="login-button" onAction="#handleLoginButton" mnemonicParsing="false" text="Log In" />
+            <Label fx:id="titleLoginLabel" text="Sign In" />
+            <HBox fx:id="emailFieldBox" alignment="CENTER" minWidth="350" maxWidth="350" minHeight="35" maxHeight="35">
+                <ImageView fx:id="emailIcon" fitHeight="20" fitWidth="20" />
+                <TextField fx:id="emailLoginField" promptText="Email" minWidth="300" maxWidth="300"/>
             </HBox>
+            <HBox fx:id="passwordFieldBox" alignment="CENTER" minWidth="350" maxWidth="350" minHeight="35" maxHeight="35">
+                <ImageView fx:id="passwordIcon"  fitHeight="20" fitWidth="20" />
+                <PasswordField fx:id="passwordLoginField" promptText="Password" minWidth="300" maxWidth="300"/>
+            </HBox>
+
+            <Button fx:id="loginButton" onAction="#handleLoginButton" mnemonicParsing="false" text="LOGIN"
+                        minWidth="350" maxWidth="350" minHeight="35" maxHeight="35"/>
+            <HBox fx:id="registerBox" alignment="CENTER">
+                <Label fx:id="askRegisterLabel" text="Don't have an account?"/>
+                <Button fx:id="openRegisterButton" onAction="#handleOpenRegisterButton" mnemonicParsing="false" text="Register"
+                        />
+            </HBox>
+
         </VBox>
     </StackPane>
 </AnchorPane>

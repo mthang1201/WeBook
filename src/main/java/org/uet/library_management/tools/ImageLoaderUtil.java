@@ -19,6 +19,7 @@ public class ImageLoaderUtil {
     private static final String FILLED_STAR_PATH = "/org/uet/library_management/icons/filled-star.png";
     private static final String EMPTY_STAR_PATH = "/org/uet/library_management/icons/empty-star.png";
     private static final String ARROW_PATH = "/org/uet/library_management/icons/arrow.png";
+    private static final String PREFIX_URL = "/org/uet/library_management/icons/";
     private static final String INVALID_URL_1 = "null&fife=w800&format=webp";
     private static final String INVALID_URL_2 = "https://via.placeholder.com/150";
 
@@ -34,6 +35,10 @@ public class ImageLoaderUtil {
             return ImageLoaderUtil.class.getResource(PLACEHOLDER_PATH).toExternalForm();
         }
         return imageUrl;
+    }
+
+    public static Image getImage(String name) {
+        return new Image(ImageLoaderUtil.class.getResourceAsStream(PREFIX_URL + name));
     }
 
     public static Image getArrowImage() {
