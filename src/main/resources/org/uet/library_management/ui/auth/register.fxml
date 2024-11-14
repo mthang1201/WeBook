@@ -36,7 +36,11 @@
             </HBox>
 
             <PasswordField fx:id="passwordField" promptText="Password" minWidth="300" maxWidth="300" />
-            <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
+
+            <HBox style="-fx-alignment: CENTER" spacing="10">
+                <Button styleClass="register-button" onAction="#handleCancelButton" text="Cancel" />
+                <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
+            </HBox>
         </VBox>
     </AnchorPane>
 </AnchorPane>
