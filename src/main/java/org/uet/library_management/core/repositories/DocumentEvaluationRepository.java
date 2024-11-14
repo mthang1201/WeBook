@@ -31,8 +31,11 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     /**
      * Helper method to map the ResultSet to a DocumentEvaluation object.
      *
-     * @param rs*/
-    // Helper method to map the ResultSet to a DocumentEvaluation object
+     * @param rs the ResultSet containing the data to be mapped.
+     * @return a DocumentEvaluation object populated with the data from the ResultSet.
+     * @throws SQLException if a database access error occurs or this method is
+     * called on a closed result set
+     */
     private DocumentEvaluation populateDocumentEvaluation(ResultSet rs) throws SQLException {
         return new DocumentEvaluation(
                 rs.getInt("evaluationId"),

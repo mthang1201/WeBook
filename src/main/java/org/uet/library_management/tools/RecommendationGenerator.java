@@ -12,6 +12,10 @@ import org.uet.library_management.core.services.documents.BookService;
 
 import java.util.*;
 
+/**
+ * RecommendationGenerator is responsible for generating book recommendations
+ * based on various criteria such as genres, user preferences, and bookmarks.
+ */
 @AllArgsConstructor
 @Data
 public class RecommendationGenerator {
@@ -20,6 +24,11 @@ public class RecommendationGenerator {
     private SearchStrategy searchStrategy;
 
 
+    /**
+     * Returns a list of genres in random order.
+     *
+     * @return a list of randomly shuffled genres
+     */
     public static List<String> getRandomGenre() {
         List<String> genres = Arrays.asList(
                 "Adventure",
@@ -63,6 +72,12 @@ public class RecommendationGenerator {
         return genres;
     }
 
+    /**
+     * Retrieves a list of random book titles from the bookmarks.
+     * The list is shuffled to ensure the order of the books is random.
+     *
+     * @return a list of randomly shuffled books from the bookmarks.
+     */
     public static List<Book> getRandomTitleFromBookmarks() {
         BookService bookService = new BookService();
         List<Book> books = bookService.getRandomTitlesFromBookmarks();
@@ -70,6 +85,14 @@ public class RecommendationGenerator {
         return books;
     }
 
+    /**
+     * Generates a list of recommended books for a user based on their preferences.
+     * If the user's preferred category doesn't yield enough results,
+     * a fallback recommendation based on top-rated fiction books is provided.
+     *
+     * @param userId The unique identifier of the user for whom the recommendations are to be generated.
+     * @return A list of recommended books for the specified user.
+     */
     public static List<Book> getRecommendationForUsers(int userId) {
         PreferenceService preferenceService = new PreferenceService();
         SearchContext searchByCategory = new SearchContext();

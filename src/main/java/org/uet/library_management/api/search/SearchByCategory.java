@@ -19,9 +19,20 @@ import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * The SearchByCategory class implements the SearchStrategy interface to allow
+ * searching for books by their category using the Google Books API.
+ * It leverages the BooksApiService singleton to create and execute the API queries.
+ */
 public class SearchByCategory implements SearchStrategy {
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Searches for books based on the given category using the Google Books API and returns a list of matching books.
+     *
+     * @param category the category to search for books.
+     * @return a list of books matching the given category. If no books are found or an error occurs, returns an empty list.
+     */
     public List<Book> search(String category) {
         try {
             Books books = booksApiService.createQuery();

@@ -6,7 +6,19 @@ import org.uet.library_management.api.image.*;
 
 import java.util.List;
 
+/**
+ * The BookDetailsExtractor class is responsible for extracting detailed information from a
+ * Volume object and converting it into a Book object.
+ * This extraction process includes authors, categories, ISBNs, image links, and various
+ * other metadata about the book.
+ */
 public class BookDetailsExtractor {
+    /**
+     * Extracts the details of a book from a given Volume object and returns a corresponding Book instance.
+     *
+     * @param volume The Volume object containing the book's information.
+     * @return A Book instance populated with the details extracted from the Volume object.
+     */
     public static Book extractBookDetails (Volume volume) {
         //solve authors//
         List<String> authors = volume.getVolumeInfo().getAuthors();

@@ -27,11 +27,22 @@ public class UserAvatarRepository {
 
     private final ConnectJDBC connectJDBC;
 
+    /**
+     * Initializes a new instance of the UserAvatarRepository class.
+     * This constructor sets up the database connection and specifies the table used for storing user avatars.
+     */
     public UserAvatarRepository() {
         connectJDBC = new ConnectJDBC();
         db_table = "user_avatars";
     }
 
+    /**
+     * Retrieves the avatar image associated with a given user ID from the database.
+     *
+     * @param userId the ID of the user whose avatar image is to be retrieved.
+     * @return an Image object representing the user's avatar, or null if no avatar is found.
+     * @throws RuntimeException if a database access error occurs.
+     */
     public Image findByUserId(int userId) {
         Image image = null;
         String query = "SELECT avatar FROM " + db_table + " WHERE userId = ?";
@@ -52,21 +63,47 @@ public class UserAvatarRepository {
         return image;
     }
 
+    /**
+     * Adds a new user avatar to the database.
+     *
+     * @param userId the ID of the user to associate with the avatar
+     * @param avatar a byte array representing the user's avatar image
+     * @throws RuntimeException if a database access error occurs
+     */
     public void add(int userId, byte[] avatar) {
         String query = "INSERT INTO " + db_table + " (userId, avatar) VALUES (?, ?)";
         connectJDBC.executeUpdate(query, userId, avatar);
     }
 
+    /**
+     * Updates the avatar image for the specified user in the database.
+     *
+     * @param userId the ID of the user whose avatar is to be updated.
+     * @param avatar a byte array representing the new avatar image.
+     */
     public void update(int userId, byte[] avatar) {
         String query = "UPDATE " + db_table + " SET avatar = ? WHERE userId = ?";
         connectJDBC.executeUpdate(query, avatar, userId);
     }
 
+    /**
+     * Removes a user's avatar from the database based on the user ID.
+     *
+     * @param userId the ID of the user whose avatar is to be removed.
+     */
     public void remove(int userId) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ?";
         connectJDBC.executeUpdate(query, userId);
     }
 
+    /**
+     * Removes all user avatars from the database.
+     *
+     * This method deletes all records from the table specified in the db_table field,
+     * effectively clearing all user avatars stored in the database.
+     *
+     * @throws RuntimeException if a database access error occurs
+     */
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
         connectJDBC.executeUpdate(query);

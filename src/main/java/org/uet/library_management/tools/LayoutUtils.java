@@ -19,19 +19,55 @@ import java.util.List;
  */
 public class LayoutUtils {
 
+    /**
+     * Sets the margin around a Node within a VBox.
+     *
+     * @param node   the Node to which the margin will be applied
+     * @param top    the margin at the top of the Node
+     * @param right  the margin at the right of the Node
+     * @param bottom the margin at the bottom of the Node
+     * @param left   the margin at the left of the Node
+     */
     public static void setVBoxNodeMargin(Node node, double top, double right, double bottom, double left) {
         VBox.setMargin(node, new Insets(top, right, bottom, left));
     }
 
+    /**
+     * Sets the margin around a Node within an HBox.
+     *
+     * @param node   the Node to which the margin will be applied
+     * @param top    the margin at the top of the Node
+     * @param right  the margin at the right of the Node
+     * @param bottom the margin at the bottom of the Node
+     * @param left   the margin at the left of the Node
+     */
     public static void setHBoxNodeMargin(Node node, double top, double right, double bottom, double left) {
         HBox.setMargin(node, new Insets(top, right, bottom, left));
     }
+    /**
+     * Sets the margin around all child nodes within a VBox.
+     *
+     * @param vbox   the VBox whose children will have their margins set
+     * @param top    the margin at the top of each child node
+     * @param right  the margin at the right of each child node
+     * @param bottom the margin at the bottom of each child node
+     * @param left   the margin at the left of each child node
+     */
     public static void setVboxMargin(VBox vbox, double top, double right, double bottom, double left) {
         for (Node node : vbox.getChildren()) {
             VBox.setMargin(node, new Insets(top, right, bottom, left));
         }
     }
 
+    /**
+     * Sets the margin for all children nodes in a VBox starting from the second child.
+     *
+     * @param vbox   the VBox whose children (excluding the first) will have their margins set
+     * @param top    the margin at the top of each child node
+     * @param right  the margin at the right of each child node
+     * @param bottom the margin at the bottom of each child node
+     * @param left   the margin at the left of each child node
+     */
     public static void setVboxMarginAfterHeader(VBox vbox, double top, double right, double bottom, double left) {
         for (int i = 1; i < vbox.getChildren().size(); i++) {
             Node node = vbox.getChildren().get(i);
@@ -39,12 +75,30 @@ public class LayoutUtils {
         }
     }
 
+    /**
+     * Sets the margin around all child nodes within an HBox.
+     *
+     * @param hbox   the HBox whose children will have their margins set
+     * @param top    the margin at the top of each child node
+     * @param right  the margin at the right of each child node
+     * @param bottom the margin at the bottom of each child node
+     * @param left   the margin at the left of each child node
+     */
     public static void setHBoxMargin(HBox hbox, double top, double right, double bottom, double left) {
         for (Node node : hbox.getChildren()) {
             HBox.setMargin(node, new Insets(top, right, bottom, left));
         }
     }
 
+    /**
+     * Creates and configures an ImageView with the specified image and dimensions.
+     *
+     * @param image         the image to be displayed in the ImageView
+     * @param fitWidth      the width to fit the image to
+     * @param fitHeight     the height to fit the image to
+     * @param preserveRatio a boolean indicating whether to preserve the aspect ratio of the image
+     * @return a configured ImageView instance displaying the specified image
+     */
     public static ImageView createImageView(Image image, double fitWidth, double fitHeight, boolean preserveRatio) {
         ImageView imageView = new ImageView(image);
 
@@ -58,6 +112,16 @@ public class LayoutUtils {
         return imageView;
     }
 
+    /**
+     * Creates a list of ImageViews from the provided list of Images, configuring each ImageView
+     * with the specified dimensions and aspect ratio preservation setting.
+     *
+     * @param starImages    the list of images to be converted into ImageViews
+     * @param fitWidth      the width to fit each image to
+     * @param fitHeight     the height to fit each image to
+     * @param preserveRatio a boolean indicating whether to preserve the aspect ratio of each image
+     * @return a list of ImageView instances displaying the provided images
+     */
     public static List<ImageView> createListImageViews(List<Image> starImages, double fitWidth, double fitHeight, boolean preserveRatio) {
         List<ImageView> ImageViews = new ArrayList<>();
         for (Image starImage : starImages) {
@@ -66,6 +130,13 @@ public class LayoutUtils {
         return ImageViews;
     }
 
+    /**
+     * Creates a VBox containing a styled review box with user avatar, rating information,
+     * and comment based on the provided DocumentEvaluation.
+     *
+     * @param evaluation the DocumentEvaluation containing the user's review details
+     * @return a VBox containing the visual representation of the review
+     */
     public static VBox createReviewBox(DocumentEvaluation evaluation) {
         VBox reviewBox = new VBox(10);
         reviewBox.setPadding(new Insets(10));
@@ -103,7 +174,5 @@ public class LayoutUtils {
 
         return reviewBox;
     }
-
-
 }
 

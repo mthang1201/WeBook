@@ -10,10 +10,22 @@ import org.uet.library_management.core.repositories.documents.ThesisRepository;
  * Thesis-specific data.
  */
 public class ThesisService extends DocumentService<Thesis> {
+    /**
+     * Constructs a new instance of the ThesisService class.
+     * This class extends the DocumentService class specifically
+     * for Thesis documents and interacts with the ThesisRepository
+     * for data management operations.
+     */
     public ThesisService() {
         super();
     }
 
+    /**
+     * Initializes the repository instance to a new ThesisRepository.
+     * This method is invoked by the constructor to ensure that the
+     * ThesisService operates with the correct repository class for
+     * managing thesis-specific data.
+     */
     @Override
     protected void loadRepository() {
         repository = new ThesisRepository();

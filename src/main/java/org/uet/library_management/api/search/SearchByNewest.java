@@ -17,9 +17,23 @@ import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
+/**
+ * A class that implements the SearchStrategy interface to search for books using the Google Books API,
+ * specifically sorting the results to show the newest books first.
+ * The search term provided is used to query the Google Books API, limiting the results to 20,
+ * and ordering them by their published date in descending order.
+ */
 public class SearchByNewest implements SearchStrategy{
     private BooksApiService booksApiService = BooksApiService.getInstance();
 
+    /**
+     * Searches for books using the Google Books API with a given search term, limiting the results to 20
+     * and ordering them by the newest publication date.
+     *
+     * @param searchTerm the term used to search for books
+     * @return a list of books that match the search term, shuffled randomly;
+     *         an empty list if no books are found or in case of an error
+     */
     public List<Book> search(String searchTerm) {
         try {
             Books books = booksApiService.createQuery();
