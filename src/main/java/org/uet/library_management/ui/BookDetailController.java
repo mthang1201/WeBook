@@ -1,6 +1,7 @@
 package org.uet.library_management.ui;
 
 import javafx.animation.ScaleTransition;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -97,7 +98,17 @@ public class BookDetailController {
         ratingCountName.setText(String.valueOf(book.getRatingsCount()));
         printTypeName.setText(book.getPrintType());
         maturityRatingsName.setText(book.getMaturityRating());
-        bookCover.setImage(new Image(ImageLoaderUtil.resolveImageUrl(book.getImageLinks())));
+
+        Task<Image> loadingBookCover = new Task<Image>() {
+            @Override
+            protected Image call() throws Exception {
+                return new Image(ImageLoaderUtil.resolveImageUrl(book.getImageLinks()));
+            }
+        };
+        loadingBookCover.setOnSucceeded(event -> {
+            bookCover.setImage(loadingBookCover.getValue());
+        });
+        new Thread(loadingBookCover).start();
 
         if (book.getDescription().length() > 300) {
             descriptionText.setText(book.getDescription().substring(0, 300) + "...");
