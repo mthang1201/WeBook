@@ -35,6 +35,7 @@ import java.util.concurrent.Executors;
  * and HBox to display books, suggestions, and library-related information.
  */
 public class UIBuilder {
+    private static BookService bookService = new BookService();
 
     /**
      * Creates a FlowPane populated with book details. Each book is represented as a VBox containing its cover image,
@@ -48,6 +49,7 @@ public class UIBuilder {
 
         for (Book book : books) {
             VBox vbox = new VBox();
+            bookService.add(book);
 
             Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getTitle(), book.getImageLinks());
 
@@ -169,10 +171,9 @@ public class UIBuilder {
         VBox topResultsVbox = new VBox();
         BookmarkService bookmarkService = new BookmarkService();
         PreferenceService preferenceService = new PreferenceService();
-        BookService bookService = new BookService();
 
         for (Book book : books) {
-            //service.add(book);
+            bookService.add(book);
             HBox hbox = new HBox();
             hbox.setSpacing(10);
 
@@ -265,6 +266,7 @@ public class UIBuilder {
 
         for (Book book : books) {
             VBox vbox = new VBox();
+            bookService.add(book);
 
             ImageView imageView = new ImageView();
             imageView.setFitWidth(200);
@@ -363,6 +365,7 @@ public class UIBuilder {
         }
 
         for (Book book : books) {
+            bookService.add(book);
             VBox bookBox = new VBox();
             bookBox.setSpacing(10);
             bookBox.setAlignment(Pos.CENTER);
