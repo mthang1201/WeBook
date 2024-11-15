@@ -125,7 +125,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
      */
     public List<Loan> findByUserId(int userId) {
         List<Loan> loans = new ArrayList<>();
-        String query = "SELECT * FROM " + db_table + " WHERE userId LIKE ?";
+        String query = "SELECT * FROM " + db_table + " WHERE userId = ?";
 
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId)) {
             while (rs.next()) {
