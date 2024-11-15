@@ -1,14 +1,16 @@
 package org.uet.library_management.ui.search;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.SearchByGeneral;
 import org.uet.library_management.api.search.SearchContext;
-import org.uet.library_management.api.sort.SortByAvgRating;
+import org.uet.library_management.api.sort.*;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.Mediator;
@@ -35,8 +37,11 @@ public class SuggestSearchController {
 
     @FXML public VBox topResultsVbox;
 
+    @FXML public ChoiceBox sortBox;
+
     private Timer timer;
 
+    private List<Book> combinedResults;
 
     /**
      * Initializes the controller class. This method is automatically called after the FXML file has been loaded.
@@ -48,8 +53,30 @@ public class SuggestSearchController {
      */
     @FXML
     public void initialize() {
+        combinedResults = new ArrayList<>();
         verticalScrollpane.setFitToWidth(true);
         verticalScrollpane.setPannable(true);
+        sortBox.setValue("Sort By");
+        sortBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null && oldValue.equals("Sort by")) {
+                sortBox.getItems().remove("Sort by");
+            }
+        });
+
+        sortBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("Alphabet")) {
+                combinedResults.sort(new SortByAlphabet());
+            } else if (newValue.equals("AvgRating")) {
+                combinedResults.sort(new SortByAvgRating());
+            } else if (newValue.equals("Newest")) {
+                combinedResults.sort(new SortByNewest());
+            } else if (newValue.equals("Oldest")) {
+                combinedResults.sort(new SortByOldest());
+            } else {
+                combinedResults.sort(new SortByPopular());
+            }
+            updateUI(combinedResults);
+        });
         
         String searchText = Mediator.text;
         if (timer != null) {
@@ -61,6 +88,7 @@ public class SuggestSearchController {
             public void run() {
                 Platform.runLater(() -> {
                     performSearch(searchText);
+                    searchFromDb(searchText);
                 });
             }
         }, 200);
@@ -81,45 +109,63 @@ public class SuggestSearchController {
 
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
-        CompletableFuture.supplyAsync(() -> {
-            BookService bookService = new BookService();
-            List<Book> topRatedBooks = bookService.getTopRatedSearchTermBooks(1.0, searchText);
+        BookService bookService = new BookService();
+        List<Book> topRatedBooks = bookService.getTopRatedSearchTermBooks(1.0, searchText);
 
-            SearchContext searchContext = new SearchContext();
-            searchContext.setStrategy(new SearchByGeneral());
-            List<Book> generalSearchResults = searchContext.executeSearch(searchText);
+        SearchContext searchContext = new SearchContext();
+        searchContext.setStrategy(new SearchByGeneral());
+        List<Book> generalSearchResults = searchContext.executeSearch(searchText);
 
-            Set<String> existingIsbns = new HashSet<>();
-            List<Book> combinedResults = new ArrayList<>();
+        Set<String> existingIsbns = new HashSet<>();
 
-            for (Book book : topRatedBooks) {
-                double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
-                book.setAverageRating(updatedAvgRating);
-                if (!existingIsbns.contains(book.getIsbn13())) {
-                    combinedResults.add(book);
-                    existingIsbns.add(book.getIsbn13());
-                }
+
+        for (Book book : topRatedBooks) {
+            double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+            book.setAverageRating(updatedAvgRating);
+            if (!existingIsbns.contains(book.getIsbn13())) {
+                combinedResults.add(book);
+                existingIsbns.add(book.getIsbn13());
             }
+        }
 
-            for (Book book : generalSearchResults) {
-                double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
-                book.setAverageRating(updatedAvgRating);
-                if (!existingIsbns.contains(book.getIsbn13())) {
-                    combinedResults.add(book);
-                    existingIsbns.add(book.getIsbn13());
-                }
+        for (Book book : generalSearchResults) {
+            double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+            book.setAverageRating(updatedAvgRating);
+            if (!existingIsbns.contains(book.getIsbn13())) {
+                combinedResults.add(book);
+                existingIsbns.add(book.getIsbn13());
             }
+        }
 
-            combinedResults.sort(new SortByAvgRating());
+        combinedResults.sort(new SortByAvgRating());
 
-            return combinedResults;
-        }).thenAccept(books -> {
-            Platform.runLater(() -> {
-                updateUI(books);
-            });
-        });
+        updateUI(combinedResults);
     }
 
+
+    private void searchFromDb(String searchText) {
+        if (searchText.isEmpty()) {
+            inYourLibraryHbox.getChildren().clear();
+            return;
+        }
+
+        Task<List<Book>> loadingBooksFromDb = new Task<List<Book>>() {
+            @Override
+            protected List<Book> call() throws Exception {
+                BookService bookService = new BookService();
+                return bookService.findByTitle(searchText);
+            }
+        };
+
+        loadingBooksFromDb.setOnSucceeded(event -> {
+            List<Book> books = loadingBooksFromDb.getValue();
+            inYourLibraryHbox.getChildren().addAll(
+                    UIBuilder.generateInYourLibrary(books)
+            );
+        });
+        new Thread (loadingBooksFromDb).start();
+
+    }
     /**
      * Updates the user interface with the provided list of books, including suggestions,
      * books in the user's library, and top results.
@@ -137,11 +183,7 @@ public class SuggestSearchController {
 //                )
 //        );
 
-        inYourLibraryHbox.getChildren().clear();
 
-        inYourLibraryHbox.getChildren().addAll(
-                UIBuilder.generateInYourLibrary(books)
-        );
 
         topResultsVbox.getChildren().clear();
 

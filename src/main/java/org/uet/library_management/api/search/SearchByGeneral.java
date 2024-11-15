@@ -35,7 +35,7 @@ public class SearchByGeneral implements SearchStrategy{
         try {
             Books books = booksApiService.createQuery();
             Books.Volumes.List volumesList = books.volumes().list(searchTerm).setKey(getApiKey());
-            volumesList.setMaxResults(10L);
+            volumesList.setMaxResults(20L);
 
             Volumes volumes = volumesList.execute();
 

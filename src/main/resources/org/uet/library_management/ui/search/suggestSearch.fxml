@@ -3,6 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.search.SuggestSearchController"
@@ -29,7 +31,20 @@
                         </VBox>
 
 <!--                        Top Results-->
-                        <Label styleClass="top-results-label" text="Top Results" />
+                        <HBox fx:id="headerAndSortBox" >
+                            <Label styleClass="top-results-label" text="Top Results" />
+                            <ChoiceBox fx:id="sortBox">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Alphabet" />
+                                        <String fx:value="AvgRating" />
+                                        <String fx:value="Newest" />
+                                        <String fx:value="Oldest" />
+                                        <String fx:value="Popular" />
+                                    </FXCollections>
+                                </items>
+                            </ChoiceBox>
+                        </HBox>
                         <Separator styleClass="separator" />
                         <VBox fx:id="topResultsVbox" styleClass="top-results-vbox" spacing="5" />
                     </VBox>

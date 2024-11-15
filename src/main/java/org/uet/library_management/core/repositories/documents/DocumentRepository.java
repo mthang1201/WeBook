@@ -208,7 +208,7 @@ public abstract class DocumentRepository<T extends Document> implements MySQLRep
         List<T> documents = new ArrayList<>();
         String query = "SELECT * FROM " + db_table + " WHERE title LIKE ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, title)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, "%" + title + "%")) {
             while(rs.next()) {
                 documents.add(populateDocument(rs));
             }
