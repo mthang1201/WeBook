@@ -34,16 +34,24 @@ public class AdminMenuController {
     @FXML public ImageView usernameImageView;
     @FXML public ImageView logoutImageView;
 
+    /**
+     * Initializes the AdminMenuController. This method sets mouse event handlers for various buttons
+     * and updates the username button text based on the current session's user.
+     *
+     * This method performs the following actions:
+     * 1. Sets mouse enter and exit event handlers for `homeButton`, `userButton`, `loanButton`, and `editButton`.
+     * 2. Changes the image of the associated ImageView upon hover events by calling `handleButtonHover`.
+     * 3. Sets the `usernameButton` text to the name of the current user from the session, or defaults to "Test" if the user is null.
+     *
+     * Specific event handlers:
+     * - `homeButton`: Switches between "home-white" and "home" images.
+     * - `userButton`: Switches between "books-white" and "books" images.
+     * - `loanButton`: Switches between "upload-white" and "upload" images.
+     * - `editButton`: Switches between "edit-white" and "edit" images.
+     */
     @FXML
     public void initialize() {
         // Set mouse event handlers
-        homeButton.setOnMouseEntered(event ->
-                handleButtonHover("home-white", homeImageView)
-        );
-        homeButton.setOnMouseExited(event ->
-                handleButtonHover("home", homeImageView)
-        );
-
         userButton.setOnMouseEntered(event ->
                 handleButtonHover("books-white", userImageView)
         );
@@ -72,34 +80,63 @@ public class AdminMenuController {
         }
     }
 
+    /**
+     * Updates the image of the specified ImageView based on the provided image name.
+     *
+     * @param imageName the name of the image file (without extension) to be used for the ImageView.
+     * @param imageView the ImageView object whose image will be updated.
+     */
     private void handleButtonHover(String imageName, ImageView imageView) {
         imageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + imageName + ".png")));
     }
 
+    /**
+     * Handles the event when the home menu button is clicked.
+     * This method switches the current sub-scene to the admin dashboard page.
+     */
     @FXML
     private void handleHomeMenu() {
         SceneManager.getInstance().setSubScene("admin/dashboard.fxml");
     }
 
+    /**
+     * Handles the event when the user menu button is clicked.
+     * This method switches the current sub-scene to the user management page.
+     *
+     * @param actionEvent the event triggered by clicking the user menu button
+     */
     @FXML
     public void handleUserMenu(ActionEvent actionEvent) {
         SceneManager.getInstance().setSubScene("admin/userPage.fxml");
     }
 
+    /**
+     * Handles the event when the loan menu button is clicked.
+     * This method switches the current sub-scene to the loan management page.
+     *
+     * @param actionEvent the event triggered by clicking the loan menu button
+     */
     @FXML
     public void handleLoanMenu(ActionEvent actionEvent) {
         SceneManager.getInstance().setSubScene("admin/loanPage.fxml");
     }
 
+    /**
+     * Handles the event when the edit menu button is clicked.
+     * This method switches the current sub-scene to the "admin/edit.fxml" scene.
+     */
     @FXML
     private void handleEditMenu() {
         SceneManager.getInstance().setSubScene("admin/edit.fxml");
     }
 
+    /**
+     * Handles the event when the logout menu button is clicked.
+     * This method switches the current scene to the authentication login page defined in "auth/login.fxml".
+     */
     @SneakyThrows
     @FXML
-    private void handleLogoutMenu() {
-        SessionManager.user = null;
+    public void handleLogoutMenu() {
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 }

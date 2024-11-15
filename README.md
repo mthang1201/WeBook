@@ -1,9 +1,12 @@
 # library_management
-A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like QRcode.
+A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like suggestions.
 
 
 ## Demo
-![Demo Video](/media/demo.gif)
+[Youtube](https://youtu.be/MMLVc350PXM)
+
+<img src="media/menuScreen.png">
+<!--![Demo Video](/media/demo2.gif)-->
 
 
 ## Build Instructions
@@ -30,13 +33,13 @@ A library management application written from scratch in Java using the JavaFX d
 ## List of features
 - CRUD
 - Authentication
+- Suggestion
+- Notification
+- Comments
 
 
 ## Features to add
 - QRcode
-- Suggestion
-- Notification
-- Comments
 - Elasticsearch
 - CI/CD
 
@@ -52,7 +55,7 @@ A library management application written from scratch in Java using the JavaFX d
 This project is maintained by:
 
 - Bui Minh Thang (23020646@vnu.edu.vn)
-- Hoang Quoc Duong (jane.smith@example.com)
-- Vu Ngoc Duc (alice.johnson@example.com)
+- Hoang Quoc Duong (23020593@vnu.edu.vn)
+- Vu Ngoc Duc (23020602@vnu.edu.vn)
 
 Licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -25,6 +25,14 @@ public class AddBooksController {
     @FXML
     public Button addButton;
 
+    /**
+     * Handles the Add button click event to add a book based on the given ISBN input.
+     *
+     * Retrieves ISBN from either the isbn10TextField or isbn13TextField.
+     * If a valid ISBN is provided, it searches for the book using the SearchContext with SearchByISBN strategy.
+     * If the book is found, the first book from the search results is added to the library using the BookService.
+     * Displays a success message if the book is added successfully, otherwise shows a failure message.
+     */
     @FXML
     public void handleAddButton() {
         String isbn = "";
@@ -53,6 +61,13 @@ public class AddBooksController {
         }
     }
 
+    /**
+     * Displays a success message indicating that a book has been successfully added.
+     *
+     * This method triggers an alert with a predefined title and message,
+     * informing the user that a new book has been added to the library.
+     * It uses the `AlertUtil` class to show a warning alert with the specified text.
+     */
     private void printSuccessMessage() {
         AlertUtil.showWarningAlert(
                 "Successfully added Book",
@@ -62,6 +77,13 @@ public class AddBooksController {
         );
     }
 
+    /**
+     * Displays a failure message when the book addition process does not find the book in the library.
+     *
+     * This method triggers an alert with a predefined title and message,
+     * informing the user that the attempted book addition has failed because the book does not exist in the library.
+     * It uses the `AlertUtil` class to show a warning alert with the specified text.
+     */
     private void printFailedMessage() {
         AlertUtil.showWarningAlert(
                 "Failed to add Book",

@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
@@ -25,7 +24,10 @@ public class LoginController {
     public Label titleLoginLabel;
 
     @FXML
-    public ImageView logo;
+    public ImageView emailIcon;
+
+    @FXML
+    public ImageView passwordIcon;
 
     @FXML
     public Button loginButton;
@@ -39,12 +41,6 @@ public class LoginController {
     @FXML
     public PasswordField passwordLoginField;
 
-    @FXML
-    public ImageView emailIcon;
-
-    @FXML
-    public ImageView passwordIcon;
-
     @SneakyThrows
     @FXML
     public void initialize() {
@@ -53,7 +49,6 @@ public class LoginController {
         FontManager.applyFontToPasswordField(passwordLoginField, "Kinetika-Medium.ttf", 16);
         emailIcon.setImage(ImageLoaderUtil.getImage("email.png"));
         passwordIcon.setImage(ImageLoaderUtil.getImage("password.png"));
-
     }
     @FXML
     public void handleLoginButton() {

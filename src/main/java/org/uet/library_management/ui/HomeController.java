@@ -27,6 +27,24 @@ public class HomeController {
     private int index = 0;
     private List<RecommendationGenerator> recommendationGeneratorList;
 
+    /**
+     * Initializes the HomeController by setting up a list of book recommendations.
+     *
+     * This method populates the recommendationGeneratorList with various types of
+     * recommendations including general recommendations, genre-based recommendations,
+     * and recommendations based on titles from bookmarks. It then updates the UI
+     * with these recommendations.
+     *
+     * The following types of recommendations are added:
+     * - General recommendations
+     * - Genre-based recommendations for a limited set of random genres
+     * - Recommendations based on a small set of random bookmarked titles
+     * - New releases recommendations
+     *
+     * The method also handles updating the UI components to display the first
+     * few of these recommendations and calls the `loadHorizontalRecommendation`
+     * method to load additional recommendations.
+     */
     @FXML
     public void initialize() {
         recommendationGeneratorList = new ArrayList<>();
@@ -72,9 +90,22 @@ public class HomeController {
         loadHorizontalRecommendation();
     }
 
+    /**
+     * Loads additional horizontal recommendations into the UI when the scroll pane is
+     * scrolled to the bottom.
+     *
+     * This method listens for changes to the vertical scroll value of the scroll pane.
+     * When the scroll reaches the bottom and more recommendations are available, it:
+     * - Sets the `isLoading` flag to true to prevent concurrent loads.
+     * - Retrieves the next `RecommendationGenerator` from the list.
+     * - Generates a horizontal recommendation UI component using the `UIBuilder`.
+     * - Adds this component to the `recommendBox`.
+     * - Increments the index to point to the next recommendation.
+     * - Resets the `isLoading` flag to false.
+     */
     private void loadHorizontalRecommendation() {
         scrollpane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue.doubleValue() == 1.0 && !isLoading && index < recommendationGeneratorList.size()) {
+            if (newValue.doubleValue() >= 0.9 && !isLoading && index < recommendationGeneratorList.size()) {
                 isLoading = true;
                 RecommendationGenerator recommendationGenerator = recommendationGeneratorList.get(index);
                 recommendBox.getChildren().add(UIBuilder.generateHorizontalRecommendation(

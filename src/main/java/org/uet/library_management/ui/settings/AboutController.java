@@ -4,7 +4,19 @@ import javafx.fxml.FXML;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 
+/**
+ * Controller class for handling events and actions in the "About" section of the application.
+ *
+ * This class is responsible for managing the interaction logic and UI transitions associated with the "About" section.
+ */
 public class AboutController {
+    /**
+     * Handles the back button action in the "About" section, triggering a transition to the settings scene.
+     *
+     * This method is typically called when the user interacts with the back button in the "About"
+     * section of the application. It uses the SceneManager singleton to switch the current scene
+     * to the settings scene defined in the provided FXML file.
+     */
     @SneakyThrows
     @FXML
     public void handleBackButton() {

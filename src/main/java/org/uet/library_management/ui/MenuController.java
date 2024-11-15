@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.repositories.UserAvatarRepository;
-import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
 
@@ -166,51 +165,106 @@ public class MenuController {
         //FontManager.applyFontToLabel(label, "Nunito-Regular.ttf", 16);
     }
 
+    /**
+     * Handles the hover effect for a given button by changing its associated image.
+     *
+     * @param imageName the base name of the image to be displayed, without the extension and path
+     * @param imageView the ImageView component whose image will be changed
+     */
     private void handleButtonHover(String imageName, ImageView imageView) {
         imageView.setImage(new Image(getClass().getResourceAsStream(PREFIX_ICONS + imageName + ".png")));
     }
 
+    /**
+     * Handles the mouse click event on the search text field and transitions to the search scene.
+     *
+     * @param event the MouseEvent that triggered this handler
+     */
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("search/search.fxml");
     }
 
+    /**
+     * Handles the action for the "Home" menu item.
+     * This method clears the current scene stack and sets the scene to "home.fxml".
+     */
     @FXML
     private void handleHomeMenu() {
-        SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("home.fxml");
+//        if (timer != null) {
+//            timer.cancel();
+//        }
+//
+//        timer = new Timer();
+//
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(() -> {
+                    SceneManager.getInstance().clearStack();
+                    SceneManager.getInstance().pushSubScene("home.fxml");
+//                });
+//            }
+//        }, 300);
     }
 
+    /**
+     * Handles the action for the "Bookshelf" menu item.
+     *
+     * This method performs the following actions:
+     * - Clears the current scene stack.
+     * - Pushes "bookshelf.fxml" onto the sub-scene stack and sets it as the current sub-scene.
+     */
     @FXML
     private void handleBookshelfMenu() {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("bookshelf.fxml");
     }
 
+    /**
+     * Handles the action for the "Get All" menu item.
+     *
+     * This method performs the following actions:
+     * - Clears the current scene stack.
+     * - Pushes "getAll.fxml" onto the sub-scene stack and sets it as the current sub-scene.
+     */
     @FXML
     private void handleGetAllMenu() {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("getAll.fxml");
     }
 
+    /**
+     * Handles the action for the "Bookmark" menu item.
+     *
+     * This method performs the following actions:
+     * - Clears the current scene stack to ensure a fresh navigation state.
+     * - Pushes "bookmark.fxml" onto the sub-scene stack and sets it as the current sub-scene.
+     */
     @FXML
     private void handleBookmarkMenu() {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("bookmark.fxml");
     }
 
-    @FXML
-    private void handleFinishedMenu() {
-        SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("finished.fxml");
-    }
-
+    /**
+     * Handles the action for the "Add Books" menu item.
+     * This method performs the following actions:
+     * - Clears the current scene stack to ensure a fresh navigation state.
+     * - Pushes "addBooks.fxml" onto the sub-scene stack and sets it as the current sub-scene.
+     */
     @FXML
     private void handleAddBooksMenu() {
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("addBooks.fxml");
     }
 
+    /**
+     * Handles the action for the "Settings" menu item.
+     * This method opens a new window displaying the settings page,
+     * specifically loading the "settings/settings.fxml" file to populate the settings window.
+     * It ensures that the SceneManager singleton instance is used to manage the settings window.
+     */
     @SneakyThrows
     @FXML
     private void handleSettingsMenu() {

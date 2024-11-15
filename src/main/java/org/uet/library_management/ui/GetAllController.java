@@ -4,15 +4,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import org.uet.library_management.api.search.SearchByAuthor;
-import org.uet.library_management.api.search.SearchContext;
-import org.uet.library_management.api.sort.SortByAvgRating;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.repositories.documents.BookRepository;
-import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.UIBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +22,11 @@ public class GetAllController {
     @FXML
     public FlowPane flowPane;
 
+    /**
+     * Initializes the UI components for the GetAllController.
+     * Sets padding for the flowPane and populates it with book data retrieved from the BookRepository.
+     * This method is called automatically after the FXML file has been loaded.
+     */
     @FXML
     public void initialize() {
         flowPane.setPadding(new Insets(10,10,10,10));

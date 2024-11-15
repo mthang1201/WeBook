@@ -3,20 +3,15 @@ package org.uet.library_management.ui.auth;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
-import org.uet.library_management.tools.AlertUtil;
-import org.uet.library_management.tools.ImageLoaderUtil;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterController {
     @FXML
@@ -42,40 +37,11 @@ public class RegisterController {
 
     @FXML
     public PasswordField passwordField;
-    public Label emptyLabel;
-
-    @FXML
-    public ImageView nameIcon;
-
-    @FXML
-    public ImageView phoneIcon;
-
-    @FXML
-    public ImageView locationIcon;
-
-    @FXML
-    public ImageView emailIcon;
-
-    @FXML
-    public ImageView passwordIcon;
-
-    @FXML
-    public HBox nameBox;
-    public HBox phoneNumberBox;
-    public HBox emailBox;
-    public HBox addressBox;
-    public HBox passwordBox;
 
     @FXML
     public void initialize() {
         membershipStatusBox.getSelectionModel().selectFirst();
         privilegesBox.getSelectionModel().selectFirst();
-
-        emailIcon.setImage(ImageLoaderUtil.getImage("email.png"));
-        passwordIcon.setImage(ImageLoaderUtil.getImage("password.png"));
-        nameIcon.setImage(ImageLoaderUtil.getImage("name.png"));
-        phoneIcon.setImage(ImageLoaderUtil.getImage("phone.png"));
-        locationIcon.setImage(ImageLoaderUtil.getImage("location.png"));
     }
 
     @SneakyThrows
@@ -89,13 +55,8 @@ public class RegisterController {
         String privileges = privilegesBox.getValue();
         String password = passwordField.getText();
 
-/*        if (!validate(name, phoneNumber, email, address, password)) {
+        if (!validate(name, phoneNumber, email, address, password)) {
             System.out.println("Invalid input.");
-            return;
-        }*/
-
-        if (name.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty() || password.isEmpty()) {
-            emptyLabel.setStyle("-fx-text-fill: red;");
             return;
         }
 
@@ -109,14 +70,9 @@ public class RegisterController {
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
-    private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        return Pattern.matches(emailRegex, email);
+    private boolean validate(String name, String phoneNumber, String email, String address, String password) {
+        return true;
     }
-
-/*    private boolean validateName(String name) {
-
-    }*/
 
     @SneakyThrows
     @FXML

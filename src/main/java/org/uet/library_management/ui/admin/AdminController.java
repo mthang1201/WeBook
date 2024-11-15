@@ -12,6 +12,10 @@ public class AdminController {
     @FXML
     private BorderPane contentPane;
 
+    /**
+     * Initializes the admin controller by setting the main content pane and loading the initial sub-scene for the admin dashboard.
+     * This method is called automatically after the FXML file has been loaded.
+     */
     @FXML
     private void initialize() {
         SceneManager.getInstance().setContentPane(contentPane);
