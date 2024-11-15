@@ -11,19 +11,9 @@
       fx:controller="org.uet.library_management.ui.admin.AdminMenuController"
       styleClass="left-sider">
     <VBox styleClass="menu-pane">
-        <!--        Sách-->
-        <Label styleClass="menu-label" text="Sách" />
-        <Button fx:id="homeButton" styleClass="menu-button" onAction="#handleHomeMenu" text="Dashboard">
-            <graphic>
-                <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@../../icons/home.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-
-        <!--        Thư viện-->
-        <Label styleClass="menu-label" text="Thư viện" />
-        <Button fx:id="userButton" styleClass="menu-button" onAction="#handleUserMenu" text="UserPage">
+        <!--        Quản lý-->
+        <Label styleClass="menu-label" text="Quản lý" />
+        <Button fx:id="userButton" styleClass="menu-button" onAction="#handleUserMenu" text="Người dùng">
             <graphic>
                 <ImageView fx:id="userImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../../icons/books.png" />
@@ -31,7 +21,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="loanButton" styleClass="menu-button" onAction="#handleLoanMenu" text="LoanPage">
+        <Button fx:id="loanButton" styleClass="menu-button" onAction="#handleLoanMenu" text="Mượn/Trả">
             <graphic>
                 <ImageView fx:id="loanImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../../icons/upload.png" />
@@ -39,7 +29,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="editButton" styleClass="menu-button" onAction="#handleEditMenu" text="Sửa sách">
+        <Button fx:id="editButton" styleClass="menu-button" onAction="#handleEditMenu" text="Kho sách">
             <graphic>
                 <ImageView fx:id="editImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../../icons/edit.png" />

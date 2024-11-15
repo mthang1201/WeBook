@@ -52,13 +52,6 @@ public class AdminMenuController {
     @FXML
     public void initialize() {
         // Set mouse event handlers
-        homeButton.setOnMouseEntered(event ->
-                handleButtonHover("home-white", homeImageView)
-        );
-        homeButton.setOnMouseExited(event ->
-                handleButtonHover("home", homeImageView)
-        );
-
         userButton.setOnMouseEntered(event ->
                 handleButtonHover("books-white", userImageView)
         );
