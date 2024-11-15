@@ -431,6 +431,8 @@ public class UIBuilder {
      * @param book the book object for which the detail page is to be opened
      */
     public static void openBookDetailPage(Book book) {
+        BookService bookService = new BookService();
+        bookService.add(book);
         Mediator.bookDetail = book;
         SceneManager.getInstance().pushSubScene("bookDetailPage.fxml");
     }
