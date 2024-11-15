@@ -54,6 +54,7 @@ public class UIBuilder {
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(200);
             imageView.setFitHeight(300);
+            imageView.setPreserveRatio(true);
             imageView.setOnMouseClicked(event -> { openBookDetailPage(book); });
 
             Label titleLabel = new Label(book.getTitle());
@@ -123,26 +124,35 @@ public class UIBuilder {
 
         for (Book book : books) {
             ImageView imageView = new ImageView();
-            ExecutorService executor = Executors.newFixedThreadPool(5);
+            imageView.setFitWidth(75);
+            imageView.setFitHeight(100);
+            imageView.setPreserveRatio(true);
 
-            CompletableFuture.supplyAsync(() -> {
-                Image image = ImageCacheManager.getInstance().loadImage(
-                        book.getIsbn13(),
-                        book.getTitle(),
-                        book.getImageLinks()
-                );
+            StackPane imageContainer = new StackPane();
+            imageContainer.setStyle("-fx-background-color: gray;");
+            imageContainer.setPrefSize(75, 100);
+            imageContainer.getChildren().add(imageView);
 
-                return image;
-            }, executor).thenAccept(image -> {
-                Platform.runLater(() -> {
-                    imageView.setImage(image);
-                    imageView.setFitWidth(75);
-                    imageView.setFitHeight(100);
-                    imageView.setOnMouseClicked(event -> { openBookDetailPage(book); });
-                });
+            Task<Image> imageLoadingTask = new Task<Image>() {
+                @Override
+                protected Image call() throws Exception {
+                    return ImageCacheManager.getInstance().loadImage(
+                            book.getIsbn13(),
+                            book.getTitle(),
+                            book.getImageLinks()
+                    );
+                }
+            };
+
+            imageLoadingTask.setOnSucceeded(event -> {
+                Image image = imageLoadingTask.getValue();
+                imageView.setImage(image);
+                imageView.setOnMouseClicked(event2 -> openBookDetailPage(book));
             });
 
-            inYourLibraryHbox.getChildren().add(imageView);
+            new Thread(imageLoadingTask).start();
+
+            inYourLibraryHbox.getChildren().add(imageContainer);
         }
 
         return inYourLibraryHbox;
@@ -167,28 +177,37 @@ public class UIBuilder {
             hbox.setSpacing(10);
 
             ImageView imageView = new ImageView();
-            ExecutorService executor = Executors.newFixedThreadPool(5);
 
-            CompletableFuture.supplyAsync(() -> {
-                Image image = ImageCacheManager.getInstance().loadImage(
-                        book.getIsbn13(),
-                        book.getTitle(),
-                        book.getImageLinks()
-                );
+            imageView.setFitWidth(55);
+            imageView.setFitHeight(83);
+            imageView.setPreserveRatio(true);
 
-                return image;
-            }, executor).thenAccept(image -> {
-                Platform.runLater(() -> {
-                    imageView.setImage(image);
-                    imageView.setFitWidth(55);
-                    imageView.setFitHeight(83);
-                    imageView.setOnMouseClicked(event -> {
-                        openBookDetailPage(book);
-                    });
+            StackPane imageContainer = new StackPane();
+            imageContainer.setStyle("-fx-background-color: gray;");
+            imageContainer.setPrefSize(55, 83);
+
+            imageContainer.getChildren().add(imageView);
+            Task<Image> loadingImage = new Task<Image>() {
+                @Override
+                protected Image call() throws Exception {
+                    return ImageCacheManager.getInstance().loadImage(
+                            book.getIsbn13(),
+                            book.getTitle(),
+                            book.getImageLinks()
+                    );
+                }
+            };
+
+            loadingImage.setOnSucceeded(event -> {
+                imageView.setImage(loadingImage.getValue());
+                imageView.setOnMouseClicked(event1 -> {
+                    openBookDetailPage(book);
                 });
             });
 
-            hbox.getChildren().add(imageView);
+            new Thread(loadingImage).start();
+
+            hbox.getChildren().add(imageContainer);
 
             VBox vbox = new VBox();
             vbox.setPrefWidth(665);
@@ -328,8 +347,6 @@ public class UIBuilder {
         LayoutUtils.setHBoxNodeMargin(title, 20, 0, 0, 23);
         LayoutUtils.setHBoxNodeMargin(arrowButton, 21, 0, 0, 0);
 
-        ExecutorService executor = Executors.newFixedThreadPool(5);
-
         String cacheKey = searchTerm + header;
 
         List<Book> books;
@@ -351,8 +368,8 @@ public class UIBuilder {
             bookBox.setAlignment(Pos.CENTER);
 
             StackPane imageContainer = new StackPane();
-            imageContainer.setStyle("-fx-background-color: gray;"); // Set the background color
-            imageContainer.setPrefSize(300, 300); // Match ImageView size
+            imageContainer.setStyle("-fx-background-color: gray;");
+            imageContainer.setPrefSize(300, 300);
 
             ImageView bookImageView = new ImageView();
             bookImageView.setCache(true);
