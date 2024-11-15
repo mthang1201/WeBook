@@ -34,7 +34,6 @@
                styleClass="login-pane">
 
         <VBox spacing="30" alignment="CENTER" >
-            <Label fx:id="titleLoginLabel" />
             <ImageView fx:id="logo" fitHeight="50" fitWidth="200" preserveRatio="true">
                 <image>
                     <Image url="@../../icons/title.png" />

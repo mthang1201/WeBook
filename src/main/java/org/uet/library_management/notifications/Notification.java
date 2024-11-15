@@ -26,7 +26,6 @@ public class Notification {
         List<Loan> loans = loanService.findByUserId(SessionManager.user.getUserId());
         LocalDate today = LocalDate.now();
         for (Loan loan : loans) {
-            String status = loan.getStatus();
             LocalDate dueDate = LocalDate.parse(loan.getDueDate());
 
             if (ChronoUnit.DAYS.between(today, dueDate) == 2) {
@@ -40,7 +39,7 @@ public class Notification {
                 AlertUtil.showWarningAlert(
                         "Quá hạn",
                         "Cuốn " + loan.getTitle() + " đã hết hạn!",
-                        "Hãy trả cuốn " + loan.getTitle() + " trong thời gian sớm nhất không bạn sẽ bị phạt!",
+                        "Hãy trả cuốn " + loan.getTitle() + " trong thời gian sớm nhất nếu không bạn sẽ bị phạt!",
                         null
                 );
             }

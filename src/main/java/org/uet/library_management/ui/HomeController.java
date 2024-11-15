@@ -23,8 +23,8 @@ public class HomeController {
     @FXML
     private VBox recommendBox;
 
-    private boolean isLoading = false;
-    private int index = 0;
+    private boolean isLoading;
+    private int index;
     private List<RecommendationGenerator> recommendationGeneratorList;
 
     /**
@@ -47,6 +47,8 @@ public class HomeController {
      */
     @FXML
     public void initialize() {
+        index = 0;
+        isLoading = false;
         recommendationGeneratorList = new ArrayList<>();
         List<String> randomGenres = RecommendationGenerator.getRandomGenre();
         List<Book> randomBooks = RecommendationGenerator.getRandomTitleFromBookmarks();
