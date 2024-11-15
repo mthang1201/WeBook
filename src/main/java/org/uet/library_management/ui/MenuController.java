@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.repositories.UserAvatarRepository;
+import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.Mediator;
 import org.uet.library_management.tools.SessionManager;
 

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Button?>
 <?import java.lang.String?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.RegisterController"
@@ -18,20 +19,15 @@
               AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0"
               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <Label fx:id="titleLabel" styleClass="title-label" text="Đăng ký" />
-        <TextField fx:id="nameField" promptText="Họ và Tên" minWidth="300" maxWidth="300" />
-        <TextField fx:id="phoneNumberField" promptText="Số điện thoại" minWidth="300" maxWidth="300" />
-        <TextField fx:id="emailField" promptText="Email" minWidth="300" maxWidth="300" />
-        <TextField fx:id="addressField" promptText="Địa chỉ" minWidth="300" maxWidth="300" />
-        <Label fx:id="titleLabel" styleClass="title-label" text="Register" />
 
             <HBox fx:id="nameBox" styleClass="box" alignment="CENTER">
                 <ImageView fx:id="nameIcon" fitHeight="20" fitWidth="20" />
-                <TextField fx:id="nameField" styleClass="field" promptText="Name" />
+                <TextField fx:id="nameField" styleClass="field" promptText="Họ và Tên" />
             </HBox>
 
             <HBox fx:id="phoneNumberBox" styleClass="box" alignment="CENTER" >
                 <ImageView fx:id="phoneIcon" fitHeight="20" fitWidth="20" />
-                <TextField fx:id="phoneNumberField" styleClass="field" promptText="Phone number" />
+                <TextField fx:id="phoneNumberField" styleClass="field" promptText="Số điện thoại" />
             </HBox>
 
             <HBox fx:id="emailBox" styleClass="box" alignment="CENTER" >
@@ -41,7 +37,7 @@
 
             <HBox fx:id="addressBox" styleClass="box" alignment="CENTER">
                 <ImageView fx:id="locationIcon" fitHeight="20" fitWidth="20" />
-                <TextField fx:id="addressField" styleClass="field" promptText="Address" />
+                <TextField fx:id="addressField" styleClass="field" promptText="Địa chỉ" />
             </HBox>
 
             <HBox alignment = "CENTER" spacing = "50">
@@ -59,10 +55,10 @@
 
             <HBox fx:id="passwordBox" alignment="CENTER" styleClass="box" >
                 <ImageView fx:id="passwordIcon" fitHeight="20" fitWidth="20" />
-                <PasswordField fx:id="passwordField" styleClass="field" promptText="Password" />
+                <PasswordField fx:id="passwordField" styleClass="field" promptText="Mật khẩu" />
             </HBox>
 
-            <Label fx:id="emptyLabel" styleClass="empty-label" text="You must fill in all the fields" />
+            <Label fx:id="emptyLabel" styleClass="empty-label" text="Bạn phải điền đầy đủ thông tin!" />
 
             <HBox style="-fx-alignment: CENTER" spacing="10">
                 <Button styleClass="register-button" onAction="#handleCancelButton" text="Quay lại" />
