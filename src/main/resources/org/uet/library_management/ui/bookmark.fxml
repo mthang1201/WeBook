@@ -17,7 +17,7 @@
         <StackPane styleClass="stack-pane">
             <ScrollPane fx:id="verticalScrollpane" styleClass="vertical-scroll-pane" fitToWidth="true" pannable="true">
                 <content>
-                    <FlowPane fx:id="flowPane" styleClass="flow-pane" />
+                    <FlowPane fx:id="flowPane" styleClass="flow-pane" minHeight="1000"/>
                 </content>
             </ScrollPane>
             <VBox fx:id="noBooksVbox" alignment="CENTER" spacing="10">

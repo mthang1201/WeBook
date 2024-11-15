@@ -21,19 +21,24 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneManager.getInstance().setStage(stage);
+        stage.setWidth(1000);
+        stage.setHeight(800);
 
-//        stage.setMinHeight(600);
-//        stage.setMinWidth(800);
+        stage.setMinHeight(800);
+        stage.setMinWidth(600);
+
 //        stage.initStyle(StageStyle.DECORATED);
 //        stage.setOpacity(0.889);
 //        stage.setEffect(new GaussianBlur(10));
+//        stage.setMinWidth(800);
+//        stage.setMinHeight(600);
 
 
-//        SceneManager.getInstance().setScene("admin/admin.fxml");
-//        UserService userService = new UserService();
-//        SessionManager.user = userService.findByName("abc").get(0);
-        SceneManager.getInstance().setScene("main.fxml");
-//        SceneManager.getInstance().setScene("auth/login.fxml");
+        //SceneManager.getInstance().setScene("admin/admin.fxml");
+        UserService userService = new UserService();
+        SessionManager.user = userService.findByName("abc").get(0);
+        //SceneManager.getInstance().setScene("main.fxml");
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
     public static void main(String[] args) {
