@@ -11,9 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.search.SearchStrategy;
@@ -352,6 +350,9 @@ public class UIBuilder {
             bookBox.setSpacing(10);
             bookBox.setAlignment(Pos.CENTER);
 
+            StackPane imageContainer = new StackPane();
+            imageContainer.setStyle("-fx-background-color: gray;"); // Set the background color
+            imageContainer.setPrefSize(300, 300); // Match ImageView size
 
             ImageView bookImageView = new ImageView();
             bookImageView.setCache(true);
@@ -360,6 +361,8 @@ public class UIBuilder {
             bookImageView.setFitWidth(300);
             bookImageView.setFitHeight(300);
             bookImageView.setPreserveRatio(true);
+
+            imageContainer.getChildren().add(bookImageView);
 
             Task<Image> imageLoadingTask = new Task<Image>() {
                 @Override
@@ -391,7 +394,7 @@ public class UIBuilder {
             Label bookTitleLabel = new Label(book.getTitle());
             bookTitleLabel.setAlignment(Pos.CENTER);
 
-            bookBox.getChildren().addAll(bookImageView, bookTitleLabel);
+            bookBox.getChildren().addAll(imageContainer, bookTitleLabel);
 
             recommendList.getChildren().add(bookBox);
         }
