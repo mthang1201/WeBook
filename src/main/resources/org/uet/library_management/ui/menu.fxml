@@ -17,7 +17,7 @@
         </VBox>
 
 <!--        Sách-->
-        <Label styleClass="menu-label" text="Sách" />
+        <Label fx:id="menuLabel" styleClass="menu-label" text="Sách" />
         <Button fx:id="homeButton" styleClass="menu-button" onAction="#handleHomeMenu" text="Trang chủ">
             <graphic>
                 <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">

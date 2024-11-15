@@ -31,16 +31,16 @@ public class Notification {
 
             if (ChronoUnit.DAYS.between(today, dueDate) == 2) {
                 AlertUtil.showWarningAlert(
-                        "Reminder",
-                        "Your loan for \"" + loan.getTitle() + "\" is due soon! (2 days left)",
+                        "Nhắc nhở",
+                        "Cuốn \"" + loan.getTitle() + "\" sắp hết hạn! (còn 2 ngày)",
                         null,
                         null
                 );
             } else if (today.isAfter(dueDate)) {
                 AlertUtil.showWarningAlert(
-                        "Overdue",
-                        "Your loan for " + loan.getTitle() + " is overdue!",
-                        "Please return " + loan.getTitle() + " as soon as possible or you will be fined!",
+                        "Quá hạn",
+                        "Cuốn " + loan.getTitle() + " đã hết hạn!",
+                        "Hãy trả cuốn " + loan.getTitle() + " trong thời gian sớm nhất không bạn sẽ bị phạt!",
                         null
                 );
             }

@@ -52,7 +52,7 @@ public class HomeController {
         List<Book> randomBooks = RecommendationGenerator.getRandomTitleFromBookmarks();
 
         recommendationGeneratorList.add(new RecommendationGenerator("recommendation",
-                "Có thể bạn sẽ thích", null));
+                "Có Thể Bạn Sẽ Thích", null));
         for (int i = 0; i < 5; i++) {
             String genre = randomGenres.get(i);
             recommendationGeneratorList.add(new RecommendationGenerator(
@@ -66,7 +66,7 @@ public class HomeController {
             Book book = randomBooks.get(i);
             recommendationGeneratorList.add(new RecommendationGenerator(
                     book.getCategories(),
-                    "Tương tự " + book.getTitle(),
+                    "Tương Tự " + book.getTitle(),
                     new SearchByCategory())
             );
         }

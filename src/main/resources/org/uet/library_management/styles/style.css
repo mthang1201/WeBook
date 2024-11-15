@@ -77,3 +77,7 @@
 .separator {
     -fx-color : #000000;
 }
+
+.admin-head {
+    fx-background-color: #5cbcfa;
+}

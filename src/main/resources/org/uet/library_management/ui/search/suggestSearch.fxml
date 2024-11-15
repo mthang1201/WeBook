@@ -23,7 +23,7 @@
 
 <!--                        In Your Library-->
                         <VBox styleClass="in-your-library-pane">
-                            <Label styleClass="in-your-library-label" text="In Your Library" />
+                            <Label styleClass="in-your-library-label" text="Trong Thư Viện Của Bạn" />
                             <Separator styleClass="in-your-library-separator" />
                             <ScrollPane fx:id="horizontalScrollpane" styleClass="horizontal-scroll-pane" fitToWidth="true" pannable="true">
                                 <HBox fx:id="inYourLibraryHbox" styleClass="in-your-library-hbox"/>
@@ -32,7 +32,7 @@
 
 <!--                        Top Results-->
                         <HBox fx:id="headerAndSortBox" >
-                            <Label styleClass="top-results-label" text="Top Results" />
+                            <Label styleClass="top-results-label" text="Kết Quả Phù Hợp Nhất" />
                             <ChoiceBox fx:id="sortBox">
                                 <items>
                                     <FXCollections fx:factory="observableArrayList">

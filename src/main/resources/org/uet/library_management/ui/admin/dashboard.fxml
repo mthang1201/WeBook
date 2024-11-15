@@ -8,7 +8,7 @@
             fx:controller="org.uet.library_management.ui.admin.DashboardController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="head-label">
             <Label styleClass="head-label" text="Dashboard" />
             <Separator styleClass="separator" />
         </VBox>

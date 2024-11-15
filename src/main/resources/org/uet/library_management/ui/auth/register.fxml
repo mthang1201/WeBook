@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Button?>
 <?import java.lang.String?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.auth.RegisterController"
@@ -17,29 +18,51 @@
         <VBox alignment="CENTER" spacing="20"
               AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0"
               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-        <Label fx:id="titleLabel" styleClass="title-label" text="Register" />
-        <TextField fx:id="nameField" promptText="Name" minWidth="300" maxWidth="300" />
-        <TextField fx:id="phoneNumberField" promptText="Phone number" minWidth="300" maxWidth="300" />
-        <TextField fx:id="emailField" promptText="Email" minWidth="300" maxWidth="300" />
-        <TextField fx:id="addressField" promptText="Address" minWidth="300" maxWidth="300" />
+        <Label fx:id="titleLabel" styleClass="title-label" text="Đăng ký" />
+
+            <HBox fx:id="nameBox" styleClass="box" alignment="CENTER">
+                <ImageView fx:id="nameIcon" fitHeight="20" fitWidth="20" />
+                <TextField fx:id="nameField" styleClass="field" promptText="Họ và Tên" />
+            </HBox>
+
+            <HBox fx:id="phoneNumberBox" styleClass="box" alignment="CENTER" >
+                <ImageView fx:id="phoneIcon" fitHeight="20" fitWidth="20" />
+                <TextField fx:id="phoneNumberField" styleClass="field" promptText="Số điện thoại" />
+            </HBox>
+
+            <HBox fx:id="emailBox" styleClass="box" alignment="CENTER" >
+                <ImageView fx:id="emailIcon" fitHeight="20" fitWidth="20" />
+                <TextField fx:id="emailField" styleClass="field" promptText="Email" />
+            </HBox>
+
+            <HBox fx:id="addressBox" styleClass="box" alignment="CENTER">
+                <ImageView fx:id="locationIcon" fitHeight="20" fitWidth="20" />
+                <TextField fx:id="addressField" styleClass="field" promptText="Địa chỉ" />
+            </HBox>
+
             <HBox alignment = "CENTER" spacing = "50">
-                <ChoiceBox fx:id="membershipStatusBox">
+                <ChoiceBox fx:id="membershipStatusBox" styleClass="choice-box">
                     <String fx:value="Active"/>
                     <String fx:value="Inactive"/>
                 </ChoiceBox>
 
-                <ChoiceBox fx:id="privilegesBox" >
+                <ChoiceBox fx:id="privilegesBox" styleClass="choice-box">
                     <String fx:value="Standard"/>
                     <String fx:value="Premium"/>
                     <String fx:value="Admin"/>
                 </ChoiceBox>
             </HBox>
 
-            <PasswordField fx:id="passwordField" promptText="Password" minWidth="300" maxWidth="300" />
+            <HBox fx:id="passwordBox" alignment="CENTER" styleClass="box" >
+                <ImageView fx:id="passwordIcon" fitHeight="20" fitWidth="20" />
+                <PasswordField fx:id="passwordField" styleClass="field" promptText="Mật khẩu" />
+            </HBox>
+
+            <Label fx:id="emptyLabel" styleClass="empty-label" text="Bạn phải điền đầy đủ thông tin!" />
 
             <HBox style="-fx-alignment: CENTER" spacing="10">
-                <Button styleClass="register-button" onAction="#handleCancelButton" text="Cancel" />
-                <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Register" />
+                <Button styleClass="register-button" onAction="#handleCancelButton" text="Quay lại" />
+                <Button fx:id="registerButton" styleClass="register-button" onAction="#handleRegisterButton" mnemonicParsing="false" text="Đăng ký" />
             </HBox>
         </VBox>
     </AnchorPane>

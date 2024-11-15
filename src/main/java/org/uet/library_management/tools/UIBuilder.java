@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -291,6 +292,11 @@ public class UIBuilder {
 
         SearchContext searchContext = new SearchContext();
         VBox recommendBox = new VBox();
+        ScrollPane horizontalScrollpane = new ScrollPane();
+        horizontalScrollpane.setFitToWidth(true);
+        horizontalScrollpane.setPannable(true);
+        horizontalScrollpane.getStyleClass().add("horizontal-scroll-pane");
+
         HBox titleAndArrowKeyBox = new HBox();
         Label title = new Label();
         Button arrowButton = new Button();
@@ -390,7 +396,10 @@ public class UIBuilder {
             recommendList.getChildren().add(bookBox);
         }
         titleAndArrowKeyBox.getChildren().addAll(title, arrowButton);
-        recommendBox.getChildren().addAll(titleAndArrowKeyBox, recommendList);
+
+        horizontalScrollpane.setContent(recommendList);
+
+        recommendBox.getChildren().addAll(titleAndArrowKeyBox, horizontalScrollpane);
         return recommendBox;
     }
 

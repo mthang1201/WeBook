@@ -1,6 +1,6 @@
 .login {
     -fx-background-color: #94c6f7;
-
+    -fx-font-family: "Arial";
 }
 
 .login-pane {
@@ -15,13 +15,15 @@
     -fx-font-size: 36px;
     -fx-font-weight: bold;
     -fx-padding: 20 20 20 20;
-    -fx-font-family: "Kinetika Black";
+    /*-fx-font-family: "Kinetika Black";*/
+    -fx-font-family: "Arial";
 }
 
 #emailFieldBox, #passwordFieldBox {
-    -fx-background-color: #6495ED;
+    -fx-background-color: #a2c2fa;
     -fx-background-radius: 5px;
 }
+
 #emailLoginField, #passwordLoginField {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: white;
