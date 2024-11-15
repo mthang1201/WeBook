@@ -153,7 +153,7 @@ public class SuggestSearchController {
             @Override
             protected List<Book> call() throws Exception {
                 BookService bookService = new BookService();
-                return bookService.findByTitle(searchText);
+                return bookService.getTitlesFromBookmarks(searchText);
             }
         };
 

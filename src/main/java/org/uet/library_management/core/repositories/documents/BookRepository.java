@@ -113,6 +113,24 @@ public class BookRepository extends DocumentRepository<Book> {
         }
     }
 
+    public List<Book> getTitlesFromBookmarks(String searchTerm) {
+        // Directly concatenate searchTerm into the query string
+        String query = "SELECT b.* " +
+                "FROM " + db_table + " b " +
+                "JOIN bookmarks bm ON b.isbn13 = bm.isbn13 " +
+                "WHERE b.title LIKE '%" + searchTerm + "%';";
+
+        try (ResultSet rs = connectJDBC.executeQuery(query)) {
+            List<Book> books = new ArrayList<>();
+            while (rs.next()) {
+                books.add(populateDocument(rs));
+            }
+            return books;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Retrieves a list of books that match a given search term and have an average rating
      * equal to or greater than the specified minimum rating.
