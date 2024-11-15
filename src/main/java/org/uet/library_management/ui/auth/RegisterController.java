@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
@@ -50,6 +52,13 @@ public class RegisterController {
      */
     @FXML
     public void initialize() {
+        passwordField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleRegisterButton();
+                event.consume();  // Prevents the space character from being added to the text field
+            }
+        });
+
         membershipStatusBox.getSelectionModel().selectFirst();
         privilegesBox.getSelectionModel().selectFirst();
     }

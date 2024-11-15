@@ -11,7 +11,7 @@
             styleClass="content-pane">
     <top>
         <VBox>
-            <Label styleClass="head-label" text="Quản lý thành viên" />
+            <Label styleClass="head-label" text="Quản lý người dùng" />
             <Separator styleClass="separator" />
         </VBox>
     </top>

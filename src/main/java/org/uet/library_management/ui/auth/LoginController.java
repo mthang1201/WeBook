@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
@@ -59,6 +61,14 @@ public class LoginController {
     @SneakyThrows
     @FXML
     public void initialize() {
+        passwordLoginField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleLoginButton();
+                event.consume();  // Prevents the space character from being added to the text field
+            }
+        });
+
+
         FontManager.applyFontToLabel(titleLoginLabel, "Kinetika-Black.ttf", 16);
         FontManager.applyFontToTextField(emailLoginField, "Kinetika-Medium.ttf", 16);
         FontManager.applyFontToPasswordField(passwordLoginField, "Kinetika-Medium.ttf", 16);
