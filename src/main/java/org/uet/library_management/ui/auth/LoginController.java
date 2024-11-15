@@ -69,9 +69,9 @@ public class LoginController {
         });
 
 
-        FontManager.applyFontToLabel(titleLoginLabel, "Kinetika-Black.ttf", 16);
-        FontManager.applyFontToTextField(emailLoginField, "Kinetika-Medium.ttf", 16);
-        FontManager.applyFontToPasswordField(passwordLoginField, "Kinetika-Medium.ttf", 16);
+//        FontManager.applyFontToLabel(titleLoginLabel, "Kinetika-Black.ttf", 16);
+//        FontManager.applyFontToTextField(emailLoginField, "Kinetika-Medium.ttf", 16);
+//        FontManager.applyFontToPasswordField(passwordLoginField, "Kinetika-Medium.ttf", 16);
         emailIcon.setImage(ImageLoaderUtil.getImage("email.png"));
         passwordIcon.setImage(ImageLoaderUtil.getImage("password.png"));
     }

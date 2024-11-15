@@ -60,11 +60,11 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông báo" />
+    <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông Báo" />
 
     <Pane styleClass="spacing-pane" />
 
-    <Button fx:id="getAllButton" onAction="#handleAbout" styleClass="settings-button" text="About">
+    <Button fx:id="getAllButton" onAction="#handleAbout" styleClass="settings-button" text="Thông tin Hệ thống">
         <graphic>
             <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/getAll.png" />
@@ -74,5 +74,5 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Button fx:id="signOutButton" onAction="#handleSignOut" styleClass="settings-button" text="Sign Out" />
+    <Button fx:id="signOutButton" onAction="#handleSignOut" styleClass="settings-button" text="Đăng Xuất" />
 </VBox>
