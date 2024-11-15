@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,9 @@ public class MenuController {
     @FXML public ImageView addBooksImageView;
     @FXML public ImageView usernameImageView;
 
+    @FXML public Label menuLabel;
+
+
     private Timer timer;
 
     /**
@@ -55,6 +59,11 @@ public class MenuController {
      */
     @FXML
     public void initialize() {
+
+        FontManager.applyFontToButton(getAllButton, "Nunito Regular.ttf", 16);
+        FontManager.applyFontToButton(bookmarkButton, "Nunito Regular.ttf", 16);
+        FontManager.applyFontToLabel(menuLabel, "Nunuto Bold", 16);
+
         searchTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {

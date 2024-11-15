@@ -20,9 +20,10 @@
 }
 
 #emailFieldBox, #passwordFieldBox {
-    -fx-background-color: #6495ED;
+    -fx-background-color: #a2c2fa;
     -fx-background-radius: 5px;
 }
+
 #emailLoginField, #passwordLoginField {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: white;
