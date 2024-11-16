@@ -18,11 +18,13 @@ import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.core.services.PreferenceService;
 import org.uet.library_management.core.services.documents.BookService;
 import org.uet.library_management.tools.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -220,6 +222,9 @@ public class BookDetailController {
                     isbn13
             ));
 
+            List<String> bookCategory = Arrays.asList(Mediator.bookDetail.getCategories().split(",\\s*"));
+            PreferenceService preferenceService = new PreferenceService();
+            preferenceService.addPreferenceForUser(SessionManager.user.getUserId(), bookCategory);
             AlertUtil.showInformationsDialog(
                     "Thành công",
                     null,
