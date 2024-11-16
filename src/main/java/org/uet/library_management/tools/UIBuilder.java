@@ -226,12 +226,6 @@ public class UIBuilder {
 
             Button addToBookmarkButton = new Button("Get");
             addToBookmarkButton.setOnAction(e -> {
-               Bookmark bookmark = new Bookmark(
-                       SessionManager.user.getUserId(),
-                       book.getIsbn13()
-               );
-               bookmarkService.add(bookmark);
-
                BookService service = new BookService();
                service.add(book);
                //add category
