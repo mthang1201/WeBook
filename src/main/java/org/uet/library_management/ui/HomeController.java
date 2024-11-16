@@ -64,13 +64,15 @@ public class HomeController {
             ));
         }
 
-        for (int i = 0; i < 3; i++) {
-            Book book = randomBooks.get(i);
-            recommendationGeneratorList.add(new RecommendationGenerator(
-                    book.getCategories(),
-                    "Tương Tự " + book.getTitle(),
-                    new SearchByCategory())
-            );
+        if (randomBooks != null && randomBooks.size() >= 3) {
+            for (int i = 0; i < 3; i++) {
+                Book book = randomBooks.get(i);
+                recommendationGeneratorList.add(new RecommendationGenerator(
+                        book.getCategories(),
+                        "Tương Tự " + book.getTitle(),
+                        new SearchByCategory())
+                );
+            }
         }
 
         recommendationGeneratorList.add(new RecommendationGenerator(

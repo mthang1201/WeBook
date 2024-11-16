@@ -81,6 +81,11 @@ public class RecommendationGenerator {
     public static List<Book> getRandomTitleFromBookmarks() {
         BookService bookService = new BookService();
         List<Book> books = bookService.getRandomTitlesFromBookmarks();
+
+        if (books == null) {
+            return new ArrayList<>();
+        }
+
         Collections.shuffle(books);
         return books;
     }
