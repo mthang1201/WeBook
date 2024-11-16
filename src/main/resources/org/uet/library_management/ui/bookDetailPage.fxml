@@ -12,7 +12,11 @@
                 <HBox fx:id="bookInfoBox" alignment="CENTER_LEFT" prefHeight="400" prefWidth="600">
                     <ImageView fx:id="bookCover" fitHeight="400" fitWidth="200" preserveRatio="true" />
                     <VBox fx:id="mainDetailBox" fillWidth="true">
-                        <Label fx:id="title" />
+                        <HBox fx:id="titleAndBookmarkBox">
+                            <Label fx:id="title" />
+                            <Button fx:id="bookDetailBookmarkButton" onMouseClicked="#onBookmarkButtonClicked" />
+
+                        </HBox>
                         <Label fx:id="author" />
                         <HBox fx:id="rateCategoryBox" alignment="CENTER_LEFT">
                             <Label fx:id="rates" styleClass="ratesAndCategories" />

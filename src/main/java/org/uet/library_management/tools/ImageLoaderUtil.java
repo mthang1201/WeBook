@@ -37,10 +37,37 @@ public class ImageLoaderUtil {
         return imageUrl;
     }
 
+    /**
+     * Gets image.
+     *
+     * @param name the name
+     * @return the image
+     */
     public static Image getImage(String name) {
         return new Image(ImageLoaderUtil.class.getResourceAsStream(PREFIX_URL + name));
     }
 
+    /**
+     * Gets book mark image.
+     *
+     * @param isMarked the is marked
+     * @return the book mark image
+     */
+    public static Image getBookMarkImage(boolean isMarked) {
+        Image bookmarkImage = null;
+        if (isMarked == false ) {
+            bookmarkImage = ImageLoaderUtil.getImage("mark-white.png");
+        } else {
+            bookmarkImage = ImageLoaderUtil.getImage("mark-black.png");
+        }
+        return bookmarkImage;
+    }
+
+    /**
+     * Gets arrow image.
+     *
+     * @return the arrow image
+     */
     public static Image getArrowImage() {
         return new Image(ImageLoaderUtil.class.getResourceAsStream(ARROW_PATH));
     }

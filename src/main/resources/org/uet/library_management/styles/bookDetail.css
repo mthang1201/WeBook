@@ -27,7 +27,15 @@
      -fx-border-color: transparent;
 }
 .starButton:hover {
-     -fx-background-image: url('/org/uet/library_management/icons/filled-star.png');
+
+}
+#bookDetailBookmarkButton {
+     -fx-background-color: transparent;
+     -fx-background-size: contain;
+     -fx-border-color: transparent;
+}
+#bookDetailBookmarkButton:hover {
+
 }
 #backButton {
     -fx-text-fill: white;

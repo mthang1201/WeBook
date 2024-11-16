@@ -7,12 +7,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.uet.library_management.SceneManager;
+import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.DocumentEvaluation;
 import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.DocumentEvaluationService;
 import org.uet.library_management.core.services.LoanService;
 import org.uet.library_management.core.services.documents.BookService;
@@ -55,6 +58,7 @@ public class BookDetailController {
     //@FXML private ListView<String> commentListView;
     @FXML private Label reviewRate;
     @FXML private TextArea reviewArea;
+    @FXML private Button bookDetailBookmarkButton;
     @FXML private ToggleButton star1;
     @FXML private ToggleButton star2;
     @FXML private ToggleButton star3;
@@ -62,6 +66,7 @@ public class BookDetailController {
     @FXML private ToggleButton star5;
     @FXML private VBox RateAndReviewBox;
     @FXML private VBox existingReviewBox;
+    @FXML private HBox titleAndBookmarkBox;
 
     private boolean hasEvaluated;
     @FXML private VBox reviewBox;
@@ -69,6 +74,7 @@ public class BookDetailController {
 
     private boolean moreClicked = false;
     private boolean isBorrowed = false;
+    private boolean isMarked;
     private int stars;
 
     private DocumentEvaluationService evaluationService = new DocumentEvaluationService();
@@ -130,13 +136,19 @@ public class BookDetailController {
      */
     @FXML
     private void initialize() {
+        LayoutUtils.setHBoxMargin(titleAndBookmarkBox, 0, 0, 0, 10);
         LayoutUtils.setVboxMargin(RateAndReviewBox, 0, 0 ,0, 10);
         LayoutUtils.setVBoxNodeMargin(editReviewButton, 0, 0, 0 ,10);
 
         loadBookDetails(Mediator.bookDetail);
+        checkMarked();
+        ImageView mark = LayoutUtils.createImageView(
+                ImageLoaderUtil.getBookMarkImage(isMarked), 20, 20, true
+        );
         List<ImageView> starImageViews = LayoutUtils.createListImageViews(
                 ImageLoaderUtil.getStarImages(0), 50, 50, true);
 
+        bookDetailBookmarkButton.setGraphic(mark);
         star1.setGraphic(starImageViews.get(0));
         star2.setGraphic(starImageViews.get(1));
         star3.setGraphic(starImageViews.get(2));
@@ -161,6 +173,62 @@ public class BookDetailController {
 //        SceneManager.getInstance().setSubScene("search/suggestSearch.fxml");
         SceneManager.getInstance().popSubScene();
     }
+
+    /**
+     * Handles the event when the user clicks on the bookmark button for the book.
+     * This method will check the ISBN of the book, and if the ISBN is valid,
+     * it will either add or remove the bookmark based on the current state.
+     *
+     * If the ISBN of the book is invalid (null), an error message will be displayed.
+     * After the bookmark operation is completed, a success message will be shown.
+     */
+    @FXML
+    private void onBookmarkButtonClicked() {
+        String isbn13 = Mediator.bookDetail.getIsbn13();
+        if (isbn13 == null) {
+            AlertUtil.showInformationsDialog(
+                    "Lỗi",
+                    null,
+                    "ISBN của cuốn sách không hợp lệ. Vui lòng kiểm tra lại!",
+                    null
+            );
+            return;
+        }
+
+        isMarked = !isMarked;
+        ImageView mark = LayoutUtils.createImageView(
+                ImageLoaderUtil.getBookMarkImage(isMarked), 20, 20, true
+        );
+        bookDetailBookmarkButton.setGraphic(mark);
+        BookmarkService bookmarkService = new BookmarkService();
+
+        if (isMarked == false) {
+            bookmarkService.remove(new Bookmark(
+                    SessionManager.user.getUserId(),
+                    isbn13
+            ));
+
+            AlertUtil.showInformationsDialog(
+                    "Thành công",
+                    null,
+                    "Bạn đã bỏ đánh dấu cuốn sách này thành công!",
+                    null
+            );
+        } else {
+            bookmarkService.add(new Bookmark(
+                    SessionManager.user.getUserId(),
+                    isbn13
+            ));
+
+            AlertUtil.showInformationsDialog(
+                    "Thành công",
+                    null,
+                    "Bạn đã đánh dấu cuốn sách này thành công!",
+                    null
+            );
+        }
+    }
+
 
     /**
      * Handles the action event triggered when the borrow button is clicked.
@@ -523,6 +591,24 @@ public class BookDetailController {
 
         button.setOnMouseEntered(event -> scaleUp.playFromStart());
         button.setOnMouseExited(event -> scaleDown.playFromStart());
+    }
+
+    /**
+     * Checks if the current book has been marked (bookmarked) by the user.
+     * This method uses the BookmarkService to search for a bookmark based on
+     * the userId and the ISBN of the current book. If no bookmark is found,
+     * the 'isMarked' state will be set to false. If a bookmark is found,
+     * the 'isMarked' state will be set to true.
+     */
+    private void checkMarked() {
+        BookmarkService bookmarkService = new BookmarkService();
+        Bookmark bookmark = bookmarkService.findById(SessionManager.user.getUserId(), Mediator.bookDetail.getIsbn13());
+
+        if (bookmark == null) {
+            isMarked = false;
+        } else {
+            isMarked = true;
+        }
     }
 
     /**
