@@ -28,6 +28,11 @@ public class UserRepository implements MySQLRepository<User> {
         db_table = "users";
     }
 
+    public UserRepository(ConnectJDBC connectJDBC) {
+        this.connectJDBC = connectJDBC;
+        db_table = "users";
+    }
+
     /**
      * Populates a User object with data retrieved from a ResultSet.
      *
