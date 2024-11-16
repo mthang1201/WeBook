@@ -126,7 +126,6 @@ public class UIBuilder {
             ImageView imageView = new ImageView();
             imageView.setFitWidth(75);
             imageView.setFitHeight(100);
-            imageView.setPreserveRatio(true);
 
             StackPane imageContainer = new StackPane();
             imageContainer.setStyle("-fx-background-color: gray;");
@@ -180,13 +179,13 @@ public class UIBuilder {
 
             imageView.setFitWidth(55);
             imageView.setFitHeight(83);
-            imageView.setPreserveRatio(true);
 
             StackPane imageContainer = new StackPane();
             imageContainer.setStyle("-fx-background-color: gray;");
             imageContainer.setPrefSize(55, 83);
 
             imageContainer.getChildren().add(imageView);
+
             Task<Image> loadingImage = new Task<Image>() {
                 @Override
                 protected Image call() throws Exception {
@@ -203,6 +202,8 @@ public class UIBuilder {
                 imageView.setOnMouseClicked(event1 -> {
                     openBookDetailPage(book);
                 });
+
+
             });
 
             new Thread(loadingImage).start();
