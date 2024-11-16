@@ -25,6 +25,18 @@ public class BookmarkService {
     }
 
     /**
+     * Constructs a new BookmarkService object.
+     *
+     * Initializes an instance of the BookmarkRepository class which is used
+     * for performing CRUD operations on bookmarks.
+     *
+     * @param repository the BookmarkRepository instance to be used for data operations.
+     */
+    public BookmarkService(BookmarkRepository repository) {
+        this.repository = repository;
+    }
+
+    /**
      * Retrieves all bookmarks.
      *
      * @return a list of all {@link Bookmark} objects

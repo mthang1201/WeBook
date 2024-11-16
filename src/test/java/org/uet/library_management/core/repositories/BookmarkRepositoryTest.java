@@ -24,13 +24,13 @@ class BookmarkRepositoryTest {
     private ResultSet mockResultSet;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         repository = new BookmarkRepository(mockConnectJDBC);
     }
 
     @Test
-    void testFindAll() throws SQLException {
+    public void testFindAll() throws SQLException {
         // Mock behavior
         String query = "SELECT * FROM bookmarks";
         when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
@@ -50,7 +50,7 @@ class BookmarkRepositoryTest {
     }
 
     @Test
-    void testFindByUserId() throws SQLException {
+    public void testFindByUserId() throws SQLException {
         // Mock behavior
         String query = "SELECT * FROM bookmarks WHERE userId = ?";
         when(mockConnectJDBC.executeQueryWithParams(query, 1)).thenReturn(mockResultSet);
@@ -70,16 +70,16 @@ class BookmarkRepositoryTest {
     }
 
     @Test
-    void testAdd() {
+    public void testAdd() {
         // Mock behavior
         String query = "INSERT INTO bookmarks (userId, isbn13) VALUES (?, ?)";
         Bookmark bookmark = new Bookmark();
         bookmark.setUserId(1);
         bookmark.setIsbn13("123456789");
 
+        // Execute
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
-        // Execute
         repository.add(bookmark);
 
         // Verify
@@ -91,16 +91,16 @@ class BookmarkRepositoryTest {
     }
 
     @Test
-    void testRemove() {
+    public void testRemove() {
         // Mock behavior
         String query = "DELETE FROM bookmarks WHERE userId = ? AND isbn13 = ?";
         Bookmark bookmark = new Bookmark();
         bookmark.setUserId(1);
         bookmark.setIsbn13("123456789");
 
+        // Execute
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
-        // Execute
         repository.remove(bookmark);
 
         // Verify
@@ -112,14 +112,12 @@ class BookmarkRepositoryTest {
     }
 
     @Test
-    void testCountAll() throws SQLException {
+    public void testCountAll() throws SQLException {
         // Mock behavior
         String query = "SELECT COUNT(*) AS total FROM bookmarks";
         when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
         when(mockResultSet.next()).thenReturn(true);
         when(mockResultSet.getInt("total")).thenReturn(5);
-
-        doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
         // Execute
         int count = repository.countAll();

@@ -25,13 +25,13 @@ class UserRepositoryTest {
     private ResultSet mockResultSet;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         repository = new UserRepository(mockConnectJDBC);
     }
 
     @Test
-    void testFindAll() throws SQLException {
+    public void testFindAll() throws SQLException {
         // Mock behavior
         String query = "SELECT * FROM users";
         when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
@@ -57,7 +57,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testFindByEmail() throws SQLException {
+    public void testFindByEmail() throws SQLException {
         // Mock behavior
         String query = "SELECT * FROM users WHERE email = ?";
         when(mockConnectJDBC.executeQueryWithParams(query, "john.doe@example.com")).thenReturn(mockResultSet);
@@ -75,7 +75,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testAdd() {
+    public void testAdd() {
         // Mock behavior
         String query = "INSERT INTO users (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
         User user = new User();
@@ -87,9 +87,9 @@ class UserRepositoryTest {
         user.setPrivileges("Standard");
         user.setPasswordHash("hashedPassword");
 
+        // Execute
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
-        // Execute
         repository.add(user);
 
         // Verify
@@ -106,15 +106,15 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testRemove() {
+    public void testRemove() {
         // Mock behavior
         String query = "DELETE FROM users WHERE userId = ?";
         User user = new User();
         user.setUserId(1);
 
+        // Execute
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
-        // Execute
         repository.remove(user);
 
         // Verify
@@ -122,14 +122,12 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testCountAll() throws SQLException {
+    public void testCountAll() throws SQLException {
         // Mock behavior
         String query = "SELECT COUNT(*) AS total FROM users";
         when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
         when(mockResultSet.next()).thenReturn(true);
         when(mockResultSet.getInt("total")).thenReturn(5);
-
-        doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
         // Execute
         int count = repository.countAll();
