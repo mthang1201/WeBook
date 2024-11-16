@@ -16,8 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserRepositoryTest {
-
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Mock
     private ConnectJDBC mockConnectJDBC;
@@ -28,7 +27,7 @@ class UserRepositoryTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        userRepository = new UserRepository(mockConnectJDBC);
+        repository = new UserRepository(mockConnectJDBC);
     }
 
     @Test
@@ -47,7 +46,7 @@ class UserRepositoryTest {
         when(mockResultSet.getString("passwordHash")).thenReturn("hashedPassword");
 
         // Execute
-        List<User> users = userRepository.findAll();
+        List<User> users = repository.findAll();
 
         // Verify
         assertEquals(1, users.size());
@@ -67,7 +66,7 @@ class UserRepositoryTest {
         when(mockResultSet.getString("name")).thenReturn("John Doe");
 
         // Execute
-        Optional<User> userOpt = userRepository.findByEmail("john.doe@example.com");
+        Optional<User> userOpt = repository.findByEmail("john.doe@example.com");
 
         // Verify
         assertTrue(userOpt.isPresent());
@@ -76,7 +75,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testAddUser() {
+    void testAdd() {
         // Mock behavior
         String query = "INSERT INTO users (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
         User user = new User();
@@ -91,7 +90,7 @@ class UserRepositoryTest {
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
         // Execute
-        userRepository.add(user);
+        repository.add(user);
 
         // Verify
         verify(mockConnectJDBC, times(1)).executeUpdate(
@@ -107,7 +106,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void testRemoveUser() {
+    void testRemove() {
         // Mock behavior
         String query = "DELETE FROM users WHERE userId = ?";
         User user = new User();
@@ -116,7 +115,7 @@ class UserRepositoryTest {
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
         // Execute
-        userRepository.remove(user);
+        repository.remove(user);
 
         // Verify
         verify(mockConnectJDBC, times(1)).executeUpdate(query, 1);
@@ -133,7 +132,7 @@ class UserRepositoryTest {
         doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
         // Execute
-        int count = userRepository.countAll();
+        int count = repository.countAll();
 
         // Verify
         assertEquals(5, count);

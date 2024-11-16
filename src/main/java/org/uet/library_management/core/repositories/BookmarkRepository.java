@@ -30,6 +30,19 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
     }
 
     /**
+     * Constructs a new BookmarkRepository object.
+     *
+     * Initializes the database connection manager and sets the database table name
+     * for the repository.
+     *
+     * @param connectJDBC the ConnectJDBC object used to manage the database connection
+     */
+    public BookmarkRepository(ConnectJDBC connectJDBC) {
+        this.connectJDBC = connectJDBC;
+        db_table = "bookmarks";
+    }
+
+    /**
      * Populates a Bookmark object from a given ResultSet.
      *
      * @param rs the ResultSet containing the bookmark data

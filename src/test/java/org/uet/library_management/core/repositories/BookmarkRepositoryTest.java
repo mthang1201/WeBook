@@ -3,98 +3,129 @@ package org.uet.library_management.core.repositories;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.uet.library_management.ConnectJDBC;
 import org.uet.library_management.core.entities.Bookmark;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.times;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-public class BookmarkRepositoryTest {
-
-    @Mock
-    ConnectJDBC connectJDBC;
+class BookmarkRepositoryTest {
+    private BookmarkRepository repository;
 
     @Mock
-    ResultSet resultSet;
+    private ConnectJDBC mockConnectJDBC;
+
+    @Mock
+    private ResultSet mockResultSet;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        repository = new BookmarkRepository(mockConnectJDBC);
     }
 
     @Test
-    void testFindAllByPage() throws SQLException {
-        BookmarkRepository bookmarkRepository = new BookmarkRepository();
-        Bookmark bookmark1 = new Bookmark();
-        Bookmark bookmark2 = new Bookmark();
-        bookmark1.setIsbn13("978-3-16-148410-0");
-        bookmark1.setUserId(1);
-        bookmark2.setIsbn13("978-1-60309-427-6");
-        bookmark2.setUserId(2);
-        List<Bookmark> bookmarks = new ArrayList<>(Arrays.asList(bookmark1, bookmark2));
+    void testFindAll() throws SQLException {
+        // Mock behavior
+        String query = "SELECT * FROM bookmarks";
+        when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
+        when(mockResultSet.next()).thenReturn(true, true, false);
+        when(mockResultSet.getInt("userId")).thenReturn(1, 2);
+        when(mockResultSet.getString("isbn13")).thenReturn("1234567890123", "9876543210987");
 
-        when(connectJDBC.executeQuery("SELECT * FROM bookmarks LIMIT 2 OFFSET 0")).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
-        when(resultSet.getInt("userId")).thenReturn(1).thenReturn(2);
-        when(resultSet.getString("isbn13")).thenReturn("978-3-16-148410-0").thenReturn("978-1-60309-427-6");
+        // Execute
+        List<Bookmark> bookmarks = repository.findAll();
 
-        Mockito.doReturn(connectJDBC).when(bookmarkRepository).getConnectJDBC();
-
-        List<Bookmark> actualBookmarks = bookmarkRepository.findAllByPage(1, 2);
-
-        assertEquals(2, actualBookmarks.size());
-        assertEquals(bookmarks, actualBookmarks);
-        Mockito.verify(connectJDBC, times(1)).executeQuery("SELECT * FROM bookmarks LIMIT 2 OFFSET 0");
+        // Verify
+        assertEquals(2, bookmarks.size());
+        Bookmark bookmark = bookmarks.get(0);
+        assertEquals(1, bookmark.getUserId());
+        assertEquals("1234567890123", bookmark.getIsbn13());
+        verify(mockConnectJDBC, times(1)).executeQuery(query);
     }
 
     @Test
-    void testFindAllByPage_withEmptyResultSet() throws SQLException {
-        BookmarkRepository bookmarkRepository = new BookmarkRepository();
-        List<Bookmark> expectedBookmarks = new ArrayList<>();
+    void testFindByUserId() throws SQLException {
+        // Mock behavior
+        String query = "SELECT * FROM bookmarks WHERE userId = ?";
+        when(mockConnectJDBC.executeQueryWithParams(query, 1)).thenReturn(mockResultSet);
+        when(mockResultSet.next()).thenReturn(true, true, false);
+        when(mockResultSet.getInt("userId")).thenReturn(1, 2);
+        when(mockResultSet.getString("isbn13")).thenReturn("1234567890123", "9876543210987");
 
-        when(connectJDBC.executeQuery("SELECT * FROM bookmarks LIMIT 2 OFFSET 0")).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(false);
+        // Execute
+        List<Bookmark> bookmarks = repository.findByUserId(1);
 
-        List<Bookmark> actualBookmarks = bookmarkRepository.findAllByPage(1, 2);
+        // Verify
+        assertEquals(2, bookmarks.size());
+        Bookmark bookmark = bookmarks.get(0);
+        assertEquals(1, bookmark.getUserId());
+        assertEquals("1234567890123", bookmark.getIsbn13());
+        verify(mockConnectJDBC, times(1)).executeQueryWithParams(query, 1);
+    }
 
-        assertEquals(0, actualBookmarks.size());
-        assertEquals(expectedBookmarks, actualBookmarks);
-        Mockito.verify(connectJDBC, times(1)).executeQuery("SELECT * FROM bookmarks LIMIT 2 OFFSET 0");
+    @Test
+    void testAdd() {
+        // Mock behavior
+        String query = "INSERT INTO bookmarks (userId, isbn13) VALUES (?, ?)";
+        Bookmark bookmark = new Bookmark();
+        bookmark.setUserId(1);
+        bookmark.setIsbn13("123456789");
+
+        doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
+
+        // Execute
+        repository.add(bookmark);
+
+        // Verify
+        verify(mockConnectJDBC, times(1)).executeUpdate(
+                eq(query),
+                eq(1),
+                eq("123456789")
+        );
+    }
+
+    @Test
+    void testRemove() {
+        // Mock behavior
+        String query = "DELETE FROM bookmarks WHERE userId = ? AND isbn13 = ?";
+        Bookmark bookmark = new Bookmark();
+        bookmark.setUserId(1);
+        bookmark.setIsbn13("123456789");
+
+        doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
+
+        // Execute
+        repository.remove(bookmark);
+
+        // Verify
+        verify(mockConnectJDBC, times(1)).executeUpdate(
+                eq(query),
+                eq(1),
+                eq("123456789")
+        );
     }
 
     @Test
     void testCountAll() throws SQLException {
-        BookmarkRepository bookmarkRepository = new BookmarkRepository();
+        // Mock behavior
+        String query = "SELECT COUNT(*) AS total FROM bookmarks";
+        when(mockConnectJDBC.executeQuery(query)).thenReturn(mockResultSet);
+        when(mockResultSet.next()).thenReturn(true);
+        when(mockResultSet.getInt("total")).thenReturn(5);
 
-        when(connectJDBC.executeQuery("SELECT COUNT(*) AS total FROM bookmarks")).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getInt("total")).thenReturn(10);
+        doNothing().when(mockConnectJDBC).executeUpdate(anyString(), any());
 
-        int result = bookmarkRepository.countAll();
+        // Execute
+        int count = repository.countAll();
 
-        assertEquals(10, result);
-        Mockito.verify(connectJDBC, times(1)).executeQuery("SELECT COUNT(*) AS total FROM bookmarks");
-    }
-
-    @Test
-    void testCountAll_withSQLExceptionThrown() throws SQLException {
-        BookmarkRepository bookmarkRepository = new BookmarkRepository();
-
-        when(connectJDBC.executeQuery("SELECT COUNT(*) AS total FROM bookmarks")).thenThrow(SQLException.class);
-
-        Mockito.doReturn(connectJDBC).when(bookmarkRepository).getConnectJDBC();
-
-        assertThrows(RuntimeException.class, bookmarkRepository::countAll);
-        Mockito.verify(connectJDBC, times(1)).executeQuery("SELECT COUNT(*) AS total FROM bookmarks");
+        // Verify
+        assertEquals(5, count);
+        verify(mockConnectJDBC, times(1)).executeQuery(query);
     }
 }

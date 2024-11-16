@@ -28,6 +28,12 @@ public class UserRepository implements MySQLRepository<User> {
         db_table = "users";
     }
 
+    /**
+     * Constructs a UserRepository instance with the provided ConnectJDBC instance
+     * and sets the default database table to "users".
+     *
+     * @param connectJDBC the ConnectJDBC instance used to connect to and interact with the database.
+     */
     public UserRepository(ConnectJDBC connectJDBC) {
         this.connectJDBC = connectJDBC;
         db_table = "users";
