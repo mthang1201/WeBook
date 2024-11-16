@@ -128,23 +128,23 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
      * Retrieves a list of bookmarks for a given user and document from the database.
      *
      * @param userId the ID of the user
-     * @param documentId the ID of the document
+     * @param isbn13 the ID of the document
      * @return a list of {@link Bookmark} objects associated with the specified user and document
      * @throws RuntimeException if any SQL errors occur during the query execution
      */
-    public List<Bookmark> findById(int userId, int documentId) {
-        List<Bookmark> bookmarks = new ArrayList<>();
-        String query = "SELECT * FROM " + db_table + " WHERE userId = ? AND documentId = ?";
+    public Bookmark findById(int userId, String isbn13) {
+        Bookmark bookmark = null;
+        String query = "SELECT * FROM " + db_table + " WHERE userId = ? AND isbn13 = ?";
 
-        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId, documentId)) {
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId, isbn13)) {
             while (rs.next()) {
-                bookmarks.add(populateBookmark(rs));
+                bookmark = populateBookmark(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return bookmarks;
+        return bookmark;
     }
 
     /**

@@ -69,11 +69,11 @@ public class BookmarkService {
      * Retrieves a list of bookmarks for a given user and document.
      *
      * @param userId the ID of the user
-     * @param documentId the ID of the document
+     * @param isbn13 the ID of the document
      * @return a list of {@link Bookmark} objects associated with the specified user and document
      */
-    public List<Bookmark> findById(int userId, int documentId) {
-        return repository.findById(userId, documentId);
+    public Bookmark findById(int userId, String isbn13) {
+        return repository.findById(userId, isbn13);
     }
 
     /**
