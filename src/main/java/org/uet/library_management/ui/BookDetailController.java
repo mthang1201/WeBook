@@ -136,7 +136,7 @@ public class BookDetailController {
      */
     @FXML
     private void initialize() {
-        LayoutUtils.setHBoxMargin(titleAndBookmarkBox, 0, 0, 0, 10);
+        LayoutUtils.setHBoxNodeMargin(bookDetailBookmarkButton, 0, 0, 0, 10);
         LayoutUtils.setVboxMargin(RateAndReviewBox, 0, 0 ,0, 10);
         LayoutUtils.setVBoxNodeMargin(editReviewButton, 0, 0, 0 ,10);
 
