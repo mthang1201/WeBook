@@ -1,5 +1,6 @@
 .head-label {
-    -fx-font-family: "Montserrat Extrabold";
+    -fx-font-family: "Noto Serif Display Extrabold";
+    -fx-font-size: 40px;
 }
 #recommendBox {
     -fx-padding: 5;

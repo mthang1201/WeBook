@@ -5,6 +5,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.uet.library_management.api.search.*;
 import org.uet.library_management.core.entities.documents.Book;
+import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.RecommendationGenerator;
 import org.uet.library_management.tools.UIBuilder;
 
@@ -47,6 +48,7 @@ public class HomeController {
      */
     @FXML
     public void initialize() {
+        FontManager.loadFont("NotoSerifDisplay-ExtraBold.ttf", 16);
         index = 0;
         isLoading = false;
         recommendationGeneratorList = new ArrayList<>();
