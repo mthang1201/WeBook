@@ -138,7 +138,7 @@ public class LayoutUtils {
      * @return a VBox containing the visual representation of the review
      */
     public static VBox createReviewBox(DocumentEvaluation evaluation) {
-        VBox reviewBox = new VBox(10);
+        VBox reviewBox = new VBox(0);
         reviewBox.setPadding(new Insets(10));
 
         HBox avatarAndRatingInfo = new HBox(10);
@@ -167,8 +167,9 @@ public class LayoutUtils {
         avatarAndRatingInfo.getChildren().addAll(avatar, infoAndRatings);
 
         Text commentText = new Text(evaluation.getComment());
-        commentText.setWrappingWidth(300);
-        commentText.setStyle("-fx-font-size: 13px; -fx-text-fill: black;");
+        commentText.setWrappingWidth(500);
+        commentText.setStyle("-fx-font-size: 14px; -fx-text-fill: black; -fx-font-family: Montserrat");
+        setVBoxNodeMargin(commentText, 0, 0, 0, 20);
 
         reviewBox.getChildren().addAll(avatarAndRatingInfo, commentText);
 
