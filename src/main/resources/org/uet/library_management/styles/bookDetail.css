@@ -27,7 +27,7 @@
      -fx-border-color: transparent;
 }
 .starButton:hover {
-
+    -fx-background-color: #D3D3D3;
 }
 #bookDetailBookmarkButton {
      -fx-background-color: transparent;
@@ -35,6 +35,7 @@
      -fx-border-color: transparent;
 }
 #bookDetailBookmarkButton:hover {
+    -fx-background-color: #D3D3D3;
 
 }
 #backButton {
@@ -150,20 +151,29 @@
     -fx-background-color: #EFFBFF;
 }
 #postButton {
-    -fx-text-fill: white;
     -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 9999px;
+    -fx-background-radius: 9999px;
     -fx-font-family: "Montserrat";
+     -fx-pref-width: 75px;
+     -fx-pref-height: 25px;
+}
+#postButton:hover {
+    -fx-text-fill: black;
+    -fx-border-color: red;
+    -fx-background-color: transparent;
 }
 #editReviewButton {
-       -fx-border-color: black;
-       -fx-border-width: 2px;
-       -fx-border-style: solid;
-       -fx-text-fill: black;
-       -fx-font-family: "Montserrat";
-       -fx-background-color: white;
-       -fx-border-color: black;
-}
-#editReviewButton:hover {
     -fx-background-color: black;
     -fx-text-fill: white;
+    -fx-font-family: "Montserrat";
+    -fx-border-radius: 9999px;
+    -fx-background-radius: 9999px;
+}
+#editReviewButton:hover {
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-border-color: black;
 }
