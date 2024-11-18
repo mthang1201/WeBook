@@ -10,7 +10,7 @@
             fx:controller="org.uet.library_management.ui.admin.EditController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="admin-head">
             <Label styleClass="head-label" text="Quản lý kho sách" />
             <Separator styleClass="separator" />
         </VBox>
