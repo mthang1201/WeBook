@@ -10,7 +10,7 @@
             fx:controller="org.uet.library_management.ui.admin.LoanPageController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="admin-head">
             <Label styleClass="head-label" text="Quản lý mượn/trả" />
             <Separator styleClass="separator" />
         </VBox>

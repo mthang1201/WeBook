@@ -8,7 +8,7 @@
             fx:controller="org.uet.library_management.ui.admin.forms.LoanFormController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="admin-head">
             <Label styleClass="head-label" text="LoanForm" />
             <Separator styleClass="separator" />
         </VBox>
@@ -17,19 +17,23 @@
         <VBox styleClass="vbox-padding">
             <GridPane hgap="10">
                 <Label text="Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="titleField" prefHeight="25.0" prefWidth="353.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="titleField" styleClass="admin-text-field" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
                 <Label text="Authors" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="authorsField" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="authorsField" styleClass="admin-text-field" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
                 <Label text="ISBN 13" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <TextField fx:id="isbn13Field" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="isbn13Field" styleClass="admin-text-field" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
                 <Label text="Description" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                <TextField fx:id="descriptionField" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <TextField fx:id="descriptionField" styleClass="admin-text-field" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+
                 <Label text="Categories" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                <TextField fx:id="categoriesField" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <TextField fx:id="categoriesField" styleClass="admin-text-field" GridPane.columnIndex="0" GridPane.rowIndex="9" />
 
                 <Label fx:id="errorWarning" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="10" />
                 <columnConstraints>
-                    <ColumnConstraints />
+                    <ColumnConstraints prefWidth="700" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints />

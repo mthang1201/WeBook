@@ -10,7 +10,7 @@
             fx:controller="org.uet.library_management.ui.admin.UserPageController"
             styleClass="content-pane">
     <top>
-        <VBox>
+        <VBox styleClass="admin-head">
             <Label styleClass="head-label" text="Quản lý người dùng" />
             <Separator styleClass="separator" />
         </VBox>
