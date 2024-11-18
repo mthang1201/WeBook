@@ -96,7 +96,7 @@ public class AdminMenuController {
      */
     @FXML
     private void handleHomeMenu() {
-        SceneManager.getInstance().setSubScene("admin/dashboard.fxml");
+        SceneManager.getInstance().setSubScene("admin/userPage.fxml");
     }
 
     /**

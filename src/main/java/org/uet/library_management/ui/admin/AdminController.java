@@ -19,7 +19,7 @@ public class AdminController {
     @FXML
     private void initialize() {
         SceneManager.getInstance().setContentPane(contentPane);
-        SceneManager.getInstance().setSubScene("admin/dashboard.fxml");
+        SceneManager.getInstance().setSubScene("admin/userPage.fxml");
     }
 }
 
