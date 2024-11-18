@@ -70,8 +70,8 @@ public class AddBooksController {
      */
     private void printSuccessMessage() {
         AlertUtil.showWarningAlert(
-                "Successfully added Book",
-                "You have added a new book!",
+                "Thêm Sách Thành Công",
+                "Bạn đã thêm một cuốn sách mới!",
                 null,
                 null
         );
@@ -86,8 +86,8 @@ public class AddBooksController {
      */
     private void printFailedMessage() {
         AlertUtil.showWarningAlert(
-                "Failed to add Book",
-                "Your book does not exist in our library!",
+                "Thêm Sách Thất Bại",
+                "Cuốn sách của bạn không có trong thư viện của chúng tôi!",
                 null,
                 null
         );

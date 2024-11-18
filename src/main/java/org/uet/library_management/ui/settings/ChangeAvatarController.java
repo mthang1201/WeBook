@@ -105,8 +105,8 @@ public class ChangeAvatarController {
             );  // Triggers listener in ImageView
 
             AlertUtil.showWarningAlert(
-                    "Change avatar",
-                    "You have changed your avatar successfully.",
+                    "Thay Đổi Ảnh Đại Diện",
+                    "Bạn đã thay đổi ảnh đại diện thành công.",
                     null,
                     null
             );

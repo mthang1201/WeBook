@@ -389,9 +389,9 @@ public class BookDetailController {
             // Create a dialog for borrowing
 
             Alert dueDateDialog = AlertUtil.createInformationDialog(
-                    "Select Due Date",
+                    "Chọn Ngày Hạn",
                     null,
-                    "Please select a due date for borrowing the book:",
+                    "Vui lòng chọn ngày hạn để mượn sách:",
                     null
             );
 
@@ -403,15 +403,15 @@ public class BookDetailController {
                 LocalDate dueDate = dueDatePicker.getValue();
                 if (response == ButtonType.OK) {
                     if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
-                        AlertUtil.showErrorAlert("Invalid Date!",
+                        AlertUtil.showErrorAlert("Ngày trả không hợp lệ!",
                                 null,
-                                "Please select a future date!",
+                                "Vui lòng cho ngày trong tương lai!",
                                 null);
                         dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
                     } else {
-                        AlertUtil.showInformationsDialog("Success!",
+                        AlertUtil.showInformationsDialog("Thành Công!",
                                 null,
-                                "Your changes have been saved successfully!",
+                                "Các thay đổi của bạn đã được lưu thành công!",
                                 null);
                         Book book = Mediator.bookDetail;
                         Loan loan = new Loan(
@@ -525,9 +525,9 @@ public class BookDetailController {
 
             evaluationService.add(docEvaluation);
 
-            AlertUtil.showInformationsDialog("Review Posted!",
+            AlertUtil.showInformationsDialog("Đánh Giá Đã Được Đăng!",
                     null,
-                    "Your review has been posted successfully.",
+                    "Đánh giá của bạn đã được đăng thành công.",
                     null);
 
             reviewArea.clear();
@@ -541,9 +541,9 @@ public class BookDetailController {
             updateRatings();
 
         } else {
-            AlertUtil.showErrorAlert("Empty Comment!",
+            AlertUtil.showErrorAlert("Bình Luận Trống!",
                     null,
-                    "Please write a comment before posting.",
+                    "Vui lòng viết một bình luận trước khi đăng.",
                     null);
         }
     }
