@@ -28,6 +28,10 @@ import java.util.Optional;
 public class LoginController {
     @FXML
     public Label titleLoginLabel;
+    public Label invalidLabel;
+
+    @FXML
+    public Label inputAllLabel;
 
     @FXML
     public ImageView emailIcon;
@@ -98,22 +102,24 @@ public class LoginController {
             String password = passwordLoginField.getText();
 
             if (!validate(email, password)) {
-                System.out.println("Email or password are not valid.");
+                invalidLabel.setStyle("-fx-text-fill: red");
                 return;
             }
 
             UserService userService = new UserService();
             Optional<User> user = userService.findByEmail(email);
 
-            if (user.isEmpty()) {
-                System.out.println("User not found.");
+            if (user.isEmpty() || password.isEmpty()) {
+                inputAllLabel.setStyle("-fx-text-fill: red");
+                invalidLabel.setStyle("-fx-text-fill: transparent");
                 return;
             }
 
             String storedPasswordHash = user.get().getPasswordHash();
 
             if (!BCrypt.checkpw(password, storedPasswordHash)) {
-                System.out.println("Invalid credentials. Please try again.");
+                invalidLabel.setStyle("-fx-text-fill: red");
+                inputAllLabel.setStyle("-fx-text-fill: transparent");
                 return;
             }
 
