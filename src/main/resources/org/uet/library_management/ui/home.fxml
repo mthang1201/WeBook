@@ -15,7 +15,7 @@
     </top>
     <center>
         <ScrollPane fx:id="scrollpane" styleClass="scroll-pane" fitToWidth="true" pannable="true" vbarPolicy="ALWAYS">
-            <VBox fx:id="recommendBox" styleClass="scroll-pane" />
+            <VBox fx:id="recommendBox" styleClass="recommend-box" />
         </ScrollPane>
     </center>
 </BorderPane>
