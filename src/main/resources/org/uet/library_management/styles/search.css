@@ -67,7 +67,16 @@
 
 .in-your-library-pane {
     -fx-background-color: #e1f1fc;
+/*    -fx-min-width: 700;
+    -fx-max-width: 700;*/
 }
+
+.in-your-library-hbox {
+    -fx-background-color: #e1f1fc;
+/*    -fx-min-width: 700;
+    -fx-max-width: 700;*/
+}
+
 
 .horizontal-scroll-pane {
     -fx-background-color: #e1f1fc;

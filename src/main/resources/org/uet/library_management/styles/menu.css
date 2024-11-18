@@ -7,7 +7,7 @@
 .menu-pane {
     -fx-pref-height: 1080;
     -fx-alignment: TOP_CENTER;
-    -fx-background-color: linear-gradient(to bottom, #EAF4FF, #C1E2FF);
+    -fx-background-color: linear-gradient(to bottom, #deeeff, #C1E2FF);
 }
 
 .search-pane {

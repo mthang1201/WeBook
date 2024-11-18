@@ -39,6 +39,7 @@
 .settings-button {
     -fx-background-color : #91d4ff;
     -fx-text-fill: #262626;
+    -fx-font-weight: BOLD;
     -fx-pref-width: 410;
     -fx-pref-height: 30;
     -fx-alignment: CENTER_LEFT;

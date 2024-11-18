@@ -26,6 +26,10 @@
     -fx-padding: 0 0 0 0;
 }
 
+.recommend-box {
+    -fx-background-color: #e1f1fc;
+}
+
 .content-pane {
     /*-fx-background-color: linear-gradient(to right, #effbff, #bbeafa);*/
     -fx-background-color: #e1f1fc;
@@ -39,7 +43,6 @@
     -fx-font-size: 32px;
     -fx-padding: 40 0 0 40;
     -fx-text-fill: #ffffff;
-
 }
 
 .content {
@@ -74,10 +77,16 @@
     -fx-background-color: #63baf7;
 }
 
-.separator {
+/*.separator {
     -fx-color : #000000;
-}
+}*/
 
 .admin-head {
-    fx-background-color: #5cbcfa;
+    -fx-background-color: #5cbcfa;
+}
+
+.admin-text-field {
+    -fx-min-width: 700;
+    -fx-max-width: 700;
+    -fx-pref-width: 700;
 }
