@@ -367,6 +367,18 @@ public class BookDetailController {
      * and accessing session information, respectively.
      */
     private void handleBorrowButton() {
+        LoanService checkDue = new LoanService();
+        boolean hasOverdueLoan = checkDue.hasOverdueLoan(SessionManager.user.getUserId());
+        if (hasOverdueLoan == true) {
+            AlertUtil.showErrorAlert(
+                    "Mượn sách bị chặn",
+                    null,
+                    "Bạn có các khoản vay quá hạn. Vui lòng trả sách quá hạn để tiếp tục mượn sách.",
+                    null
+            );
+            return;
+        }
+
         if (isBorrowed == false) {
             DatePicker dueDatePicker = new DatePicker();
             dueDatePicker.setValue(LocalDate.now().plusWeeks(1));

@@ -97,6 +97,24 @@ public class LoanRepository implements MySQLRepository<Loan> {
     }
 
     /**
+     * Has overdue loan boolean.
+     *
+     * @param userId the user id
+     * @return the boolean
+     */
+    public boolean hasOverdueLoan(int userId) {
+        String query = "SELECT COUNT(loanId) from " + db_table + " WHERE userId = ? AND dueDate < CURRENT_DATE()";
+        try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId)) {
+            while (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    /**
      * Counts the total number of records in the loan database table.
      *
      * @return the total count of loan records in the database

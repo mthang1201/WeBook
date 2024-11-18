@@ -23,6 +23,16 @@ public class LoanService {
     }
 
     /**
+     * Has overdue loan boolean.
+     *
+     * @param userId the user id
+     * @return the boolean
+     */
+    public boolean hasOverdueLoan(int userId) {
+        return repository.hasOverdueLoan(userId);
+    }
+
+    /**
      * Retrieves all loan records.
      *
      * @return a list of Loan objects representing all loans
