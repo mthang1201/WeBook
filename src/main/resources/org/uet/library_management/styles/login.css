@@ -60,3 +60,7 @@
 #openRegisterButton:hover {
     -fx-text-fill: white;
 }
+
+.input-all-label {
+    -fx-text-fill: transparent;
+}
