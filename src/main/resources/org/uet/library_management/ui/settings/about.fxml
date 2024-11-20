@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.uet.library_management.ui.settings.AboutController"
@@ -14,6 +15,15 @@
         <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
     </top>
     <center>
-        <Label styleClass="settings-label" text="About" />
+        <VBox fx:id="copyrightBox" alignment="CENTER" spacing="10" prefWidth="400">
+            <ImageView fx:id="logoImage" />
+            <Label fx:id="appTitle" text="WeBooks" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Label fx:id="versionText" text="Version 1.0" />
+            <Label fx:id="copyrightText" text="Copyright © 2024 The Beast Inc."
+                   />
+            <Label fx:id="descriptionText" text="All rights reserved. The Beast Inc and The Beast Inc logo are trademarks of The Beast Inc, registered in Vietnam and other countries. WeBooks is a trademark of The Beast Inc."
+                   wrapText="true" textAlignment="CENTER" maxWidth="343" />
+        </VBox>
+
     </center>
 </BorderPane>
