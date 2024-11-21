@@ -3,8 +3,10 @@ package org.uet.library_management.api.search;
 import com.google.api.services.books.v1.Books;
 import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
+import javafx.application.Platform;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.BooksApiService;
+import org.uet.library_management.tools.AlertUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +35,20 @@ public class SearchByTitle implements SearchStrategy{
 //            String query = "intitle:\"" + title + "\"";
             Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
             volumesList.setMaxResults(10L);
-            Volumes volumes = volumesList.execute();
+            Volumes volumes;
+            try {
+                volumes = volumesList.execute();
+            } catch (IOException e) {
+                Platform.runLater(() -> {
+                    AlertUtil.showErrorAlert(
+                            "Không thể kết nối mạng!",
+                            "Vui lòng kiểm tra lại kết nối internet!",
+                            null,
+                            null
+                    );
+                });
+                return Collections.emptyList();
+            }
 
             if (volumes.getItems() != null && !volumes.getItems().isEmpty()) {
                 List<Book> bookList = new ArrayList<>();

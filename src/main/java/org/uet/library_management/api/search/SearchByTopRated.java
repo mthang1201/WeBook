@@ -3,9 +3,11 @@ package org.uet.library_management.api.search;
 import com.google.api.services.books.v1.Books;
 import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
+import javafx.application.Platform;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.BooksApiService;
 import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.tools.AlertUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +44,21 @@ public class SearchByTopRated implements SearchStrategy {
             Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
             volumesList.setMaxResults(40L);
 
-            Volumes volumes = volumesList.execute();
+            Volumes volumes;
+            try {
+                volumes = volumesList.execute();
+            } catch (IOException e) {
+                Platform.runLater(() -> {
+                    AlertUtil.showErrorAlert(
+                            "Không thể kết nối mạng!",
+                            "Vui lòng kiểm tra lại kết nối internet!",
+                            null,
+                            null
+                    );
+                });
+                //Deal with null volumes -> no error from consoles
+                return Collections.emptyList();
+            }
 
             Set<String> existingIsbns = new HashSet<>();
             List<Book> existingBooks = bookService.findAll();

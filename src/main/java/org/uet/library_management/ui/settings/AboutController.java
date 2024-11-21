@@ -15,6 +15,9 @@ public class AboutController {
     @FXML
     private ImageView logoImage;
 
+    /**
+     * Initialize.
+     */
     @SneakyThrows
     @FXML
     public void initialize() {
