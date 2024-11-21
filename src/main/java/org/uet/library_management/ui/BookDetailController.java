@@ -161,8 +161,6 @@ public class BookDetailController {
         displayReviews();
 
         checkBorrowed();
-        addHoverEffect(borrowButton);
-        addHoverEffect(returnButton);
     }
 
     /**
@@ -589,25 +587,6 @@ public class BookDetailController {
                 reviewBox.getChildren().add(LayoutUtils.createReviewBox(review));
             }
         }
-    }
-
-    /**
-     * Adds a hover effect to a button by scaling it up when the mouse enters
-     * and scaling it down when the mouse exits.
-     *
-     * @param button the Button to which the hover effect will be applied
-     */
-    private void addHoverEffect(Button button) {
-        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(300), button);
-        scaleUp.setToX(1.1);
-        scaleUp.setToY(1.1);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(300), button);
-        scaleDown.setToX(1.0);
-        scaleDown.setToY(1.0);
-
-        button.setOnMouseEntered(event -> scaleUp.playFromStart());
-        button.setOnMouseExited(event -> scaleDown.playFromStart());
     }
 
     /**
