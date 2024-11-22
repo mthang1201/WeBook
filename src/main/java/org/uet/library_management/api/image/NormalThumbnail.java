@@ -4,9 +4,10 @@ import com.google.api.services.books.v1.model.Volume;
 
 /**
  * The NormalThumbnail class is an implementation of the ImageURLGenerator interface.
- * It is responsible for generating the thumbnail image URL for a given Volume object.
+ * It generates the thumbnail image URL for a given Volume object.
  */
 public class NormalThumbnail implements ImageURLGenerator {
+
     private Volume volume;
 
     /**
@@ -31,4 +32,3 @@ public class NormalThumbnail implements ImageURLGenerator {
         return null;
     }
 }
-
