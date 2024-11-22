@@ -48,7 +48,9 @@ public class HomeController {
      */
     @FXML
     public void initialize() {
-        FontManager.loadFont("NotoSerifDisplay-ExtraBold.ttf", 16);
+        FontManager.loadFont("Nunito.ttf", 16);
+        FontManager.loadFont("NunitoBold.ttf", 16);
+        FontManager.loadFont("Merriweather-Bold.ttf", 16);
         index = 0;
         isLoading = false;
         recommendationGeneratorList = new ArrayList<>();

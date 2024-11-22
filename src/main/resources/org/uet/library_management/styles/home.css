@@ -1,17 +1,20 @@
 .head-label {
-    -fx-font-family: "Noto Serif Display Extrabold";
+    -fx-font-family: "Merriweather";
+    -fx-font-weight: bold;
     -fx-font-size: 40px;
 }
 #recommendBox {
     -fx-padding: 5;
+    -fx-background-color: #e1f1fc;
 }
+
 #titleAndArrowKeyBox {
 
 }
 .title {
     -fx-font-size: 24px;
     -fx-text-fill: black;
-    -fx-font-family: "Montserrat Extrabold";
+    -fx-font-family: "Nunito";
 
 }
 #arrowButton {
@@ -23,5 +26,9 @@
     -fx-padding: 10 0 0 20;
     -fx-font-size: 14px;
     -fx-font-family: "Montserrat SemiBold";
+    -fx-background-color: #e1f1fc;
+}
+
+.scroll-pane {
     -fx-background-color: #e1f1fc;
 }
