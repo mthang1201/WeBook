@@ -50,9 +50,29 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Button fx:id="getAllButton" onAction="#handlePassword" styleClass="settings-button" text="Mật khẩu">
+    <Button fx:id="passwordButton" onAction="#handlePassword" styleClass="settings-button" text="Mật khẩu">
         <graphic>
-            <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
+            <ImageView fx:id="passwordImageView" fitHeight="16" fitWidth="16">
+                <Image url="@../../icons/blacklock.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Pane styleClass="spacing-pane" />
+
+    <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông Báo">
+        <graphic>
+            <ImageView fx:id="notificationImageView" fitHeight="16" fitWidth="16">
+                <Image url="@../../icons/notification.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Pane styleClass="spacing-pane" />
+
+    <Button fx:id="infoButton" onAction="#handleAbout" styleClass="settings-button" text="Thông tin Hệ thống">
+        <graphic>
+            <ImageView fx:id="infoImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/getAll.png" />
             </ImageView>
         </graphic>
@@ -60,19 +80,12 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Button onAction="#handleNotifications" styleClass="settings-button" text="Thông Báo" />
-
-    <Pane styleClass="spacing-pane" />
-
-    <Button fx:id="getAllButton" onAction="#handleAbout" styleClass="settings-button" text="Thông tin Hệ thống">
+    <Button fx:id="signOutButton" onAction="#handleSignOut" styleClass="settings-button" text="Đăng Xuất">
         <graphic>
-            <ImageView fx:id="getAllImageView" fitHeight="16" fitWidth="16">
-                <Image url="@../../icons/getAll.png" />
+            <ImageView fx:id="signOutImageView" fitHeight="16" fitWidth="16">
+                <Image url="@../../icons/logout.png"/>
             </ImageView>
+
         </graphic>
     </Button>
-
-    <Pane styleClass="spacing-pane" />
-
-    <Button fx:id="signOutButton" onAction="#handleSignOut" styleClass="settings-button" text="Đăng Xuất" />
 </VBox>

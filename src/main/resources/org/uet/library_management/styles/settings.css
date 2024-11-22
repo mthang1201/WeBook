@@ -5,6 +5,7 @@
     -fx-font-size: 14px;
     /*-fx-alignment: LEFT;*/
     -fx-padding: 20 20 20 20;
+    -fx-font-family: "Nunito";
 }
 
 .user-section {
@@ -21,12 +22,14 @@
 .username-label {
     -fx-pref-width: 410;
     -fx-font-size: 16px;
+    -fx-font-family: "Nunito Black";
 }
 
 .email-label {
     -fx-pref-width: 410;
     -fx-font-size: 12px;
     -fx-text-fill: gray;
+    -fx-font-family: "Nunito";
 }
 
 .settings-label {
@@ -34,19 +37,21 @@
     -fx-pref-width: 170;
     -fx-font-size: 14px;
     -fx-padding: 0 0 5 20;
+    -fx-font-family: "Nunito";
 }
 
 .settings-button {
-    -fx-background-color : #91d4ff;
-    -fx-text-fill: #262626;
-    -fx-font-weight: BOLD;
+    -fx-background-color : #a1c5ff;
+    -fx-text-fill: #000000;
+    /*-fx-font-weight: BOLD;*/
     -fx-pref-width: 410;
     -fx-pref-height: 30;
     -fx-alignment: CENTER_LEFT;
+    -fx-font-family: "Nunito";
 }
 
 .settings-button:hover {
-    -fx-background-color: #5cbcfa;
+    -fx-background-color: #78acff;
     /*-fx-text-fill: #eeeeee;*/
 }
 
@@ -56,6 +61,7 @@
     -fx-font-size: 12px;
     -fx-font-weight: BOLD;
     -fx-padding: 5 0 0 20;
+    -fx-font-family: "Nunito";
 }
 
 .changes-vbox {
@@ -65,6 +71,7 @@
     -fx-font-size: 14px;
     /*-fx-alignment: LEFT;*/
     -fx-padding: 20 20 20 20;
+    -fx-font-family: "Nunito";
 }
 
 .changes-button {
@@ -73,4 +80,17 @@
     -fx-background-color: #0064e0;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
+    -fx-font-family: "Nunito";
+}
+
+.empty-label {
+    -fx-text-fill: transparent;
+    -fx-font-family: "Nunito";
+}
+
+.new-password-field {
+    -fx-background-color: #a2c2fa;
+    -fx-background-radius: 10px;
+    -fx-prompt-text-fill: black;
+    -fx-font-family: "Nunito";
 }

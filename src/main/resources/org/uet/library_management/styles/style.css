@@ -40,9 +40,11 @@
 
 .head-label {
     -fx-font-weight: BOLD;
-    -fx-font-size: 32px;
+    /*-fx-font-size: 32px;*/
     -fx-padding: 40 0 0 40;
     -fx-text-fill: #ffffff;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 40px;
 }
 
 .content {

@@ -1,6 +1,7 @@
 package org.uet.library_management.ui.settings;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import lombok.SneakyThrows;
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,12 +10,16 @@ import org.uet.library_management.core.services.UserService;
 import org.uet.library_management.tools.AlertUtil;
 import org.uet.library_management.tools.SessionManager;
 
+import java.lang.reflect.Field;
+
 /**
  * The ChangePasswordController class handles the logic for changing a user's password within the application.
  * It interacts with the UI elements and services to facilitate the password change process.
  */
 public class ChangePasswordController {
-    @FXML public PasswordField newPasswordField;
+    @FXML
+    public PasswordField newPasswordField;
+    public Label emptyLabel;
 
     /**
      * Handles the action event triggered by clicking the back button.
@@ -42,6 +47,12 @@ public class ChangePasswordController {
     @FXML
     public void handleChangePasswordButton() {
         String newPassword = newPasswordField.getText();
+
+        if (newPassword.isEmpty()) {
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
         String passwordHash = BCrypt.hashpw(newPassword, BCrypt.gensalt());
 
         SessionManager.user.setPasswordHash(passwordHash);

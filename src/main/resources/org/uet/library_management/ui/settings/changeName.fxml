@@ -10,7 +10,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.uet.library_management.ui.settings.ChangeNameController"
       styleClass="changes-vbox">
-    <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
+
 
     <Pane styleClass="spacing-pane" />
 
@@ -21,5 +21,8 @@
     <TextField fx:id="nameField" promptText="Your new name" />
     <Pane styleClass="spacing-pane" />
 
+    <VBox alignment="CENTER" spacing="10">
     <Button styleClass="changes-button" onAction="#handleChangeName" text="Change Name" />
+    <Button onAction="#handleBackButton" styleClass="changes-button" text="Quay lại" />
+    </VBox>
 </VBox>
