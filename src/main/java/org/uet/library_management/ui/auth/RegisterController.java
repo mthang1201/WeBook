@@ -10,7 +10,10 @@ import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.entities.User;
 import org.uet.library_management.core.services.UserService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.ImageLoaderUtil;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterController {
     @FXML
@@ -53,8 +56,10 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        membershipStatusBox.getSelectionModel().selectFirst();
-        privilegesBox.getSelectionModel().selectFirst();
+        //membershipStatusBox.getSelectionModel().selectFirst();
+        //privilegesBox.getSelectionModel().selectFirst();
+        FontManager.loadFont("Nunito.ttf", 16);
+        FontManager.loadFont("Nunito-Black.ttf", 20);
 
         nameIcon.setImage(ImageLoaderUtil.getImage("name.png"));
         phoneIcon.setImage(ImageLoaderUtil.getImage("phone.png"));
@@ -79,6 +84,36 @@ public class RegisterController {
             return;
         }
 
+        if (!validateEmail(email)) {
+            emptyLabel.setText("Email không hợp lệ!");
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
+        if (!validateName(name)) {
+            emptyLabel.setText("Tên không hợp lệ!");
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
+        if (!validatePhoneNumber(phoneNumber)) {
+            emptyLabel.setText("Số điện thoại không hợp lệ!");
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
+        if (!validateAddress(address)) {
+            emptyLabel.setText("Địa chỉ không hợp lệ!");
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            emptyLabel.setText("Mật khẩu không hợp lệ! Mật khẩu phải chứa ít nhất 1 chữ cái in hoa, 1 chỡ số và 1 ký tự đặc biệt.");
+            emptyLabel.setStyle("-fx-text-fill: red");
+            return;
+        }
+
         String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
 
         User newUser = new User(name, phoneNumber, email, address, membershipStatus, privileges, passwordHash);
@@ -89,10 +124,55 @@ public class RegisterController {
         SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
-    private boolean validate(String name, String phoneNumber, String email, String address, String password) {
+    private boolean validateEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern emailPattern = Pattern.compile(emailRegex);
+
+        if (!emailPattern.matcher(email).matches()) {
+            return false;
+        }
         return true;
     }
 
+    private boolean validateName(String name) {
+        String nameRegex = "^[a-zA-Z]+(([',.-][a-zA-Z ])?[a-zA-Z]*)*$";
+        Pattern namePattern = Pattern.compile(nameRegex);
+
+        if (!namePattern.matcher(name).matches()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        String phoneNumberRegex = "^\\+?[0-9]{1,3}?[-. ]?\\(?\\d{1,4}?\\)?[-. ]?\\d{1,4}[-. ]?\\d{1,9}$";
+        Pattern phoneNumberPattern = Pattern.compile(phoneNumberRegex);
+
+        if (!phoneNumberPattern.matcher(phoneNumber).matches()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateAddress(String address) {
+        String addressRegex = "^[a-zA-Z0-9\\s,.'-]+$";
+        Pattern addressPattern = Pattern.compile(addressRegex);
+
+        if (!addressPattern.matcher(address).matches()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePassword(String password) {
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).+$";
+        Pattern passwordPattern = Pattern.compile(passwordRegex);
+
+        if (!passwordPattern.matcher(password).matches()) {
+            return false;
+        }
+        return true;
+    }
     @SneakyThrows
     @FXML
     public void handleCancelButton() {
