@@ -23,8 +23,6 @@ public class DocumentEvaluation {
     private String comment;
     private Timestamp createdAt;
 
-
-
     /**
      * Constructs a new DocumentEvaluation instance with the given parameters.
      *

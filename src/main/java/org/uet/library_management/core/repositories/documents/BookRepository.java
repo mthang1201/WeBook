@@ -45,6 +45,7 @@ public class BookRepository extends DocumentRepository<Book> {
                 "publishedDate, description, isbn10, isbn13, pageCount, categories, averageRating, " +
                 "ratingsCount, imageLinks, language, maturityRating, printType) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         connectJDBC.executeUpdate(query, document.getTitle(), document.getAuthors(),
                 book.getPublisher(), document.getPublishedDate(), document.getDescription(),
                 book.getIsbn10(), book.getIsbn13(), book.getPageCount(), document.getCategories(),
@@ -68,6 +69,7 @@ public class BookRepository extends DocumentRepository<Book> {
                 "categories = ?, averageRating = ?, ratingsCount = ?, imageLinks = ?, " +
                 "language = ?, maturityRating = ?, printType = ? " +
                 "WHERE isbn13 = ?";
+
         connectJDBC.executeUpdate(query,
                 document.getTitle(),
                 document.getAuthors(),
@@ -171,7 +173,6 @@ public class BookRepository extends DocumentRepository<Book> {
      * @return The updated average rating of the book, or 0.0 if no ratings are found.
      */
     public double getUpdatedAverageRating(String isbn13) {
-
         String query = "SELECT AVG(rating) FROM documentEvaluations WHERE isbn13 = ?";
 
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {

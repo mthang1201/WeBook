@@ -72,6 +72,7 @@ public class UserAvatarRepository {
      */
     public void add(int userId, byte[] avatar) {
         String query = "INSERT INTO " + db_table + " (userId, avatar) VALUES (?, ?)";
+
         connectJDBC.executeUpdate(query, userId, avatar);
     }
 
@@ -83,6 +84,7 @@ public class UserAvatarRepository {
      */
     public void update(int userId, byte[] avatar) {
         String query = "UPDATE " + db_table + " SET avatar = ? WHERE userId = ?";
+
         connectJDBC.executeUpdate(query, avatar, userId);
     }
 
@@ -93,6 +95,7 @@ public class UserAvatarRepository {
      */
     public void remove(int userId) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ?";
+
         connectJDBC.executeUpdate(query, userId);
     }
 
@@ -106,6 +109,7 @@ public class UserAvatarRepository {
      */
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
+
         connectJDBC.executeUpdate(query);
     }
 }

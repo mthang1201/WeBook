@@ -39,6 +39,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
      */
     private Loan populateLoan(ResultSet rs) throws SQLException {
         Loan loan = new Loan();
+
         loan.setLoanId(rs.getInt("loanId"));
         loan.setLoanDate(rs.getString("loanDate"));
         loan.setDueDate(rs.getString("dueDate"));
@@ -104,6 +105,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
      */
     public boolean hasOverdueLoan(int userId) {
         String query = "SELECT COUNT(loanId) from " + db_table + " WHERE userId = ? AND dueDate < CURRENT_DATE()";
+
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId)) {
             while (rs.next()) {
                 return rs.getInt(1) > 0;
@@ -166,6 +168,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
     public Loan findById(int userId, String isbn13) {
         Loan loan = null;
         String query = "SELECT * FROM " + db_table + " WHERE userId = ? AND isbn13 = ?";
+
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId, isbn13)) {
             if (rs.next()) {
                 loan = populateLoan(rs);
@@ -186,6 +189,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
     public void add(Loan loan) {
         String query = "INSERT INTO " + db_table + " (loanDate, dueDate, returnDate, status, " +
                 "isbn13, title, userId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
                 loan.getReturnDate(), loan.getStatus(), loan.getIsbn13(), loan.getTitle(), loan.getUserId());
     }
@@ -212,6 +216,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
     @Override
     public void remove(Loan loan) {
         String query = "DELETE FROM " + db_table + " WHERE loanId = ?";
+
         connectJDBC.executeUpdate(query, loan.getLoanId());
     }
 
@@ -225,6 +230,7 @@ public class LoanRepository implements MySQLRepository<Loan> {
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
+
         connectJDBC.executeUpdate(query);
     }
 }

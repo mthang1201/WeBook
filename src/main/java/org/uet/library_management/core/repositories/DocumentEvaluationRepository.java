@@ -56,6 +56,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
      */
     public DocumentEvaluation getUserReview(String isbn13, int userId) {
         String query = "SELECT * FROM " + db_table + " WHERE isbn13 = '" + isbn13 + "' AND userId = '" + userId + "'";
+
         try (ResultSet rs = connectJDBC.executeQuery(query)) {
             if (rs.next()) {
                 return populateDocumentEvaluation(rs);
@@ -75,6 +76,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
      */
     public boolean hasEvaluated(String isbn13, int userId) {
         String query = "SELECT COUNT(*) FROM " + db_table + "  WHERE isbn13 = '" + isbn13 + "' AND userId = '" + userId + "'";
+
         try (ResultSet rs = connectJDBC.executeQuery(query)) {
             if (rs.next()) {
                 return rs.getInt(1) > 0;
@@ -95,6 +97,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
      */
     public double getAvgRatings(String isbn13) {
         String query = "SELECT AVG(rating) AS avgRating FROM " + db_table + " WHERE isbn13 = ?";
+
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {
             if (rs.next()) {
                 return rs.getDouble("avgRating");
@@ -116,6 +119,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     @Override
     public List<DocumentEvaluation> findAll() {
         String query = "SELECT * FROM " + db_table;
+
         try (ResultSet rs = connectJDBC.executeQuery(query)) {
             List<DocumentEvaluation> evaluations = new ArrayList<>();
             while (rs.next()) {
@@ -174,6 +178,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
      */
     public List<DocumentEvaluation> findByIsbn13(String isbn13) {
         String query = "SELECT * FROM " + db_table + " WHERE isbn13 = ?";
+
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, isbn13)) {
             List<DocumentEvaluation> evaluations = new ArrayList<>();
             while (rs.next()) {
@@ -193,6 +198,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
      */
     public List<DocumentEvaluation> findByUserId(int userId) {
         String query = "SELECT * FROM " + db_table + " WHERE userId = ?";
+
         try (ResultSet rs = connectJDBC.executeQueryWithParams(query, userId)) {
             List<DocumentEvaluation> evaluations = new ArrayList<>();
             while (rs.next()) {
@@ -213,6 +219,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     @Override
     public void add(DocumentEvaluation evaluation) {
         String query = "INSERT INTO " + db_table + " (isbn13, userId, rating, comment, createdAt) VALUES (?, ?, ?, ?, ?)";
+
         connectJDBC.executeUpdate(query, evaluation.getIsbn13(), evaluation.getUserId(), evaluation.getRating(),
                 evaluation.getComment(), evaluation.getCreatedAt());
     }
@@ -226,6 +233,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     @Override
     public void update(DocumentEvaluation evaluation) {
         String query = "UPDATE " + db_table + " SET rating = ?, comment = ?, createdAt = ? WHERE evaluationId = ?";
+
         connectJDBC.executeUpdate(query, evaluation.getRating(), evaluation.getComment(), evaluation.getCreatedAt(),
                 evaluation.getEvaluationId());
     }
@@ -239,6 +247,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     @Override
     public void remove(DocumentEvaluation evaluation) {
         String query = "DELETE FROM " + db_table + " WHERE evaluationId = ?";
+
         connectJDBC.executeUpdate(query, evaluation.getEvaluationId());
     }
 
@@ -254,6 +263,7 @@ public class DocumentEvaluationRepository implements MySQLRepository<DocumentEva
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
+
         connectJDBC.executeUpdate(query);
     }
 }
