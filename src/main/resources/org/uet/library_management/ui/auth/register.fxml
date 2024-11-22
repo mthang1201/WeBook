@@ -40,22 +40,24 @@
                 <TextField fx:id="addressField" styleClass="field" promptText="Địa chỉ" />
             </HBox>
 
-            <HBox alignment = "CENTER" spacing = "50">
-                <ChoiceBox fx:id="membershipStatusBox" styleClass="choice-box">
-                    <String fx:value="Active"/>
-                    <String fx:value="Inactive"/>
-                </ChoiceBox>
 
-                <ChoiceBox fx:id="privilegesBox" styleClass="choice-box">
-                    <String fx:value="Standard"/>
-                    <String fx:value="Premium"/>
-                    <String fx:value="Admin"/>
-                </ChoiceBox>
-            </HBox>
 
             <HBox fx:id="passwordBox" alignment="CENTER" styleClass="box" >
                 <ImageView fx:id="passwordIcon" fitHeight="20" fitWidth="20" />
                 <PasswordField fx:id="passwordField" styleClass="field" promptText="Mật khẩu" />
+            </HBox>
+
+            <HBox alignment = "CENTER" spacing = "50" opacity="0">
+                <ChoiceBox fx:id="membershipStatusBox" styleClass="choice-box" opacity="0">
+                    <!--<String fx:value="Active"/>
+                    <String fx:value="Inactive"/>-->
+                </ChoiceBox>
+
+                <ChoiceBox fx:id="privilegesBox" styleClass="choice-box" opacity="0">
+                    <!-- <String fx:value="Standard"/>
+                     <String fx:value="Premium"/>
+                     <String fx:value="Admin"/>-->
+                </ChoiceBox>
             </HBox>
 
             <Label fx:id="emptyLabel" styleClass="empty-label" text="Bạn phải điền đầy đủ thông tin!" />
