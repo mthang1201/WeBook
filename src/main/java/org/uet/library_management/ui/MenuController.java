@@ -61,9 +61,10 @@ public class MenuController {
     @FXML
     public void initialize() {
 
-        FontManager.applyFontToButton(getAllButton, "Nunito Regular.ttf", 16);
-        FontManager.applyFontToButton(bookmarkButton, "Nunito Regular.ttf", 16);
-        FontManager.applyFontToLabel(menuLabel, "Nunuto Bold", 16);
+        FontManager.loadFont("Nunito.ttf", 16);
+        FontManager.loadFont("NunitoBold.ttf", 16);
+
+        //FontManager.applyFontToLabel(menuLabel, "Nunito.ttf", 16);
 
         searchTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
