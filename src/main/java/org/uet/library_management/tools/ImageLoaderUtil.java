@@ -1,13 +1,6 @@
 package org.uet.library_management.tools;
 
 import javafx.scene.image.Image;
-
-import javax.sql.rowset.serial.SerialException;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +48,7 @@ public class ImageLoaderUtil {
      */
     public static Image getBookMarkImage(boolean isMarked) {
         Image bookmarkImage = null;
+
         if (isMarked == false ) {
             bookmarkImage = ImageLoaderUtil.getImage("mark-white.png");
         } else {
@@ -82,7 +76,6 @@ public class ImageLoaderUtil {
      * @return A list of star images representing the rating.
      */
     public static List<Image> getStarImages(int rating) {
-
         List<Image> starImages = new ArrayList<>();
 
         for (int i = 0; i < rating; i++) {

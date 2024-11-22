@@ -68,6 +68,7 @@ public class RecommendationGenerator {
                 "True Crime",
                 "Young Adult"
         );
+
         Collections.shuffle(genres);
         return genres;
     }
@@ -101,10 +102,13 @@ public class RecommendationGenerator {
     public static List<Book> getRecommendationForUsers(int userId) {
         PreferenceService preferenceService = new PreferenceService();
         SearchContext searchByCategory = new SearchContext();
-        searchByCategory.setStrategy(new SearchByCategory());
         String maxCategory = preferenceService.getMaxCategory(userId);
+
+        searchByCategory.setStrategy(new SearchByCategory());
+
         if (maxCategory != null) {
             List<Book> books = searchByCategory.executeSearch(maxCategory);
+
             if (books.size() < 3) {
                 searchByCategory.setStrategy(new SearchByTopRated());
                 return searchByCategory.executeSearch("fiction");

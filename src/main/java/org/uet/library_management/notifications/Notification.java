@@ -25,6 +25,7 @@ public class Notification {
         LoanService loanService = new LoanService();
         List<Loan> loans = loanService.findByUserId(SessionManager.user.getUserId());
         LocalDate today = LocalDate.now();
+
         for (Loan loan : loans) {
             LocalDate dueDate = LocalDate.parse(loan.getDueDate());
 
