@@ -1,56 +1,56 @@
 package org.uet.library_management.api.search;
+
 import com.google.api.services.books.v1.Books;
 import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
 import javafx.application.Platform;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.api.BooksApiService;
-import org.uet.library_management.api.image.ImageURLContext;
-import org.uet.library_management.api.image.NormalThumbnail;
-import org.uet.library_management.api.image.SmallThumbnail;
-import com.google.api.services.books.v1.model.Volume.VolumeInfo.IndustryIdentifiers;
 import org.uet.library_management.tools.AlertUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
 /**
- * A class that implements the SearchStrategy interface for conducting general searches
- * using the Google Books API. This class utilizes a singleton BooksApiService to perform
- * the search and returns a list of Book objects based on the given search term.
+ * Implements the SearchStrategy interface for conducting general searches
+ * using the Google Books API. Returns a list of Book objects based on the given search term.
  */
-public class SearchByGeneral implements SearchStrategy{
-    private BooksApiService booksApiService = BooksApiService.getInstance();
+public class SearchByGeneral implements SearchStrategy {
+
+    /**
+     * Singleton instance of BooksApiService used to interact with the Google Books API.
+     */
+    private final BooksApiService booksApiService = BooksApiService.getInstance();
 
     /**
      * Performs a search using the Google Books API based on the specified search term.
      *
-     * @param searchTerm The term to search for in the Google Books database.
-     * @return A list of Book objects that match the search criteria, or an empty list if no matches are found or an error occurs.
+     * @param searchTerm the term to search for in the Google Books database.
+     * @return a list of Book objects that match the search criteria, or an empty list if no matches are found or an error occurs.
      */
+    @Override
     public List<Book> search(String searchTerm) {
         try {
             Books books = booksApiService.createQuery();
-            Books.Volumes.List volumesList = books.volumes().list(searchTerm).setKey(getApiKey());
-            volumesList.setMaxResults(20L);
+            Books.Volumes.List volumesList = books.volumes()
+                    .list(searchTerm)
+                    .setKey(getApiKey())
+                    .setMaxResults(20L);
 
             Volumes volumes;
             try {
                 volumes = volumesList.execute();
             } catch (IOException e) {
-                Platform.runLater(() -> {
-                    AlertUtil.showErrorAlert(
-                            "Không thể kết nối mạng!",
-                            "Vui lòng kiểm tra lại kết nối internet!",
-                            null,
-                            null
-                    );
-                });
+                Platform.runLater(() -> AlertUtil.showErrorAlert(
+                        "Không thể kết nối mạng!",
+                        "Vui lòng kiểm tra lại kết nối internet!",
+                        null,
+                        null
+                ));
                 return Collections.emptyList();
             }
 
@@ -61,9 +61,8 @@ public class SearchByGeneral implements SearchStrategy{
                     bookList.add(newBook);
                 }
                 return bookList;
-            } else {
-                return Collections.emptyList();
             }
+            return Collections.emptyList();
         } catch (IOException e) {
             e.printStackTrace();
             return Collections.emptyList();
