@@ -38,7 +38,6 @@ public class ImageCacheManager {
         imageCache = new LinkedHashMap<String, Image>(MAX_CACHE_SIZE, 0.75f, true) {
             @Override
             protected boolean removeEldestEntry(Map.Entry<String, Image> eldest) {
-                //System.out.println("Remove" + eldest.getKey());
                 return size() > MAX_CACHE_SIZE;
             }
         };
@@ -75,7 +74,6 @@ public class ImageCacheManager {
             Image image = new Image(imageLinks, true);
           
             imageCache.put(cacheKey, image);
-            //saveImageToCache(cacheKey, image);
           
             return image;
         }
@@ -91,9 +89,9 @@ public class ImageCacheManager {
      */
     private void saveImageToCache(String cacheKey, Image image) {
         File newFile = new File(cacheDir + cacheKey.replaceAll("[|]", "_") + ".jpeg");
+
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "jpeg", newFile);
-            System.out.println("Image saved at: " + newFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

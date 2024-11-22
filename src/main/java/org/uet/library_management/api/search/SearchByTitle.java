@@ -16,11 +16,15 @@ import java.util.List;
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
 /**
- * A class implementing the SearchStrategy interface to search for books by their title.
- * It uses the Google Books API to perform the search and retrieve the book details.
+ * Implements the SearchStrategy interface to search for books by their title.
+ * It uses the Google Books API to perform the search and retrieve book details.
  */
-public class SearchByTitle implements SearchStrategy{
-    private BooksApiService booksApiService = BooksApiService.getInstance();
+public class SearchByTitle implements SearchStrategy {
+
+    /**
+     * Singleton instance of BooksApiService used to interact with the Google Books API.
+     */
+    private final BooksApiService booksApiService = BooksApiService.getInstance();
 
     /**
      * Searches for books by their title using the Google Books API.
@@ -28,25 +32,27 @@ public class SearchByTitle implements SearchStrategy{
      * @param title The title of the book to search for.
      * @return A list of books matching the search criteria or an empty list if no matches are found.
      */
+    @Override
     public List<Book> search(String title) {
         try {
             Books books = booksApiService.createQuery();
-            String query = "intitle:" + title ;
-//            String query = "intitle:\"" + title + "\"";
-            Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
-            volumesList.setMaxResults(10L);
+            String query = "intitle:" + title;
+
+            Books.Volumes.List volumesList = books.volumes()
+                    .list(query)
+                    .setKey(getApiKey())
+                    .setMaxResults(10L);
+
             Volumes volumes;
             try {
                 volumes = volumesList.execute();
             } catch (IOException e) {
-                Platform.runLater(() -> {
-                    AlertUtil.showErrorAlert(
-                            "Không thể kết nối mạng!",
-                            "Vui lòng kiểm tra lại kết nối internet!",
-                            null,
-                            null
-                    );
-                });
+                Platform.runLater(() -> AlertUtil.showErrorAlert(
+                        "Không thể kết nối mạng!",
+                        "Vui lòng kiểm tra lại kết nối internet!",
+                        null,
+                        null
+                ));
                 return Collections.emptyList();
             }
 
@@ -57,9 +63,8 @@ public class SearchByTitle implements SearchStrategy{
                     bookList.add(newBook);
                 }
                 return bookList;
-            } else {
-                return Collections.emptyList();
             }
+            return Collections.emptyList();
         } catch (IOException e) {
             e.printStackTrace();
             return Collections.emptyList();

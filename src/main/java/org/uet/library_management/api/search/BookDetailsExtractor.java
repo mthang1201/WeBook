@@ -2,80 +2,107 @@ package org.uet.library_management.api.search;
 
 import com.google.api.services.books.v1.model.Volume;
 import org.uet.library_management.core.entities.documents.Book;
-import org.uet.library_management.api.image.*;
+import org.uet.library_management.api.image.ImageURLContext;
+import org.uet.library_management.api.image.NormalThumbnail;
+import org.uet.library_management.api.image.SmallThumbnail;
 
 import java.util.List;
 
 /**
  * The BookDetailsExtractor class is responsible for extracting detailed information from a
- * Volume object and converting it into a Book object.
- * This extraction process includes authors, categories, ISBNs, image links, and various
- * other metadata about the book.
+ * Volume object and converting it into a Book object. This includes authors, categories,
+ * ISBNs, image links, and other metadata about the book.
  */
 public class BookDetailsExtractor {
+
     /**
      * Extracts the details of a book from a given Volume object and returns a corresponding Book instance.
      *
      * @param volume The Volume object containing the book's information.
      * @return A Book instance populated with the details extracted from the Volume object.
      */
-    public static Book extractBookDetails (Volume volume) {
-        //solve authors//
+    public static Book extractBookDetails(Volume volume) {
+        // Solve authors
         List<String> authors = volume.getVolumeInfo().getAuthors();
-        String str_authors = (authors != null && !authors.isEmpty()) ? String.join(", ", authors) : "Không có tác giả";
+        String strAuthors = (authors != null && !authors.isEmpty())
+                ? String.join(", ", authors)
+                : "Không có tác giả";
 
-        //solve categories//
+        // Solve categories
         List<String> categories = volume.getVolumeInfo().getCategories();
-        String str_categories = (categories != null && !categories.isEmpty()) ? String.join(", ", categories) : "Không có thể loại";
-        //solve isbn//
-        String isbn_10 = null;
-        String isbn_13 = null;
+        String strCategories = (categories != null && !categories.isEmpty())
+                ? String.join(", ", categories)
+                : "Không có thể loại";
+
+        // Solve ISBN
+        String isbn10 = null;
+        String isbn13 = null;
         if (volume.getVolumeInfo().getIndustryIdentifiers() != null) {
             for (Volume.VolumeInfo.IndustryIdentifiers identifier : volume.getVolumeInfo().getIndustryIdentifiers()) {
                 if ("ISBN_10".equals(identifier.getType())) {
-                    isbn_10 = identifier.getIdentifier();
+                    isbn10 = identifier.getIdentifier();
                 } else if ("ISBN_13".equals(identifier.getType())) {
-                    isbn_13 = identifier.getIdentifier();
+                    isbn13 = identifier.getIdentifier();
                 }
             }
         }
 
-        //solve imgLinks//
+        // Solve image links
         ImageURLContext imageURLContext = new ImageURLContext();
         imageURLContext.setImageURLGenerator(new NormalThumbnail(volume));
         if (imageURLContext.getImageURL() == null) {
             imageURLContext.setImageURLGenerator(new SmallThumbnail(volume));
         }
 
-        String title = volume.getVolumeInfo().getTitle() != null ? volume.getVolumeInfo().getTitle() : "Không có tiêu đề";
-        String publisher = volume.getVolumeInfo().getPublisher() != null ? volume.getVolumeInfo().getPublisher() : "Không có nhà xuất bản";
-        String publishedDate = volume.getVolumeInfo().getPublishedDate() != null ? volume.getVolumeInfo().getPublishedDate() : "Không có ngày xuất bản";
-        String description = volume.getVolumeInfo().getDescription() != null ? volume.getVolumeInfo().getDescription() : "Không có mô tả";
-        Integer pageCount = volume.getVolumeInfo().getPageCount() != null ? volume.getVolumeInfo().getPageCount() : 0;
-        Integer ratingsCount = volume.getVolumeInfo().getRatingsCount() != null ? volume.getVolumeInfo().getRatingsCount() : 0;
-        Double averageRating = volume.getVolumeInfo().getAverageRating() != null ? volume.getVolumeInfo().getAverageRating() : 0.0;
-        String maturityRating = volume.getVolumeInfo().getMaturityRating() != null ? volume.getVolumeInfo().getMaturityRating() : "Không có đánh giá trưởng thành";
-        String printType = volume.getVolumeInfo().getPrintType() != null ? volume.getVolumeInfo().getPrintType() : "Không có loại in";
-        String language = volume.getVolumeInfo().getLanguage() != null ? volume.getVolumeInfo().getLanguage() : "Không có ngôn ngữ";
+        // Extract other fields
+        String title = volume.getVolumeInfo().getTitle() != null
+                ? volume.getVolumeInfo().getTitle()
+                : "Không có tiêu đề";
+        String publisher = volume.getVolumeInfo().getPublisher() != null
+                ? volume.getVolumeInfo().getPublisher()
+                : "Không có nhà xuất bản";
+        String publishedDate = volume.getVolumeInfo().getPublishedDate() != null
+                ? volume.getVolumeInfo().getPublishedDate()
+                : "Không có ngày xuất bản";
+        String description = volume.getVolumeInfo().getDescription() != null
+                ? volume.getVolumeInfo().getDescription()
+                : "Không có mô tả";
+        int pageCount = volume.getVolumeInfo().getPageCount() != null
+                ? volume.getVolumeInfo().getPageCount()
+                : 0;
+        int ratingsCount = volume.getVolumeInfo().getRatingsCount() != null
+                ? volume.getVolumeInfo().getRatingsCount()
+                : 0;
+        double averageRating = volume.getVolumeInfo().getAverageRating() != null
+                ? volume.getVolumeInfo().getAverageRating()
+                : 0.0;
+        String maturityRating = volume.getVolumeInfo().getMaturityRating() != null
+                ? volume.getVolumeInfo().getMaturityRating()
+                : "Không có đánh giá trưởng thành";
+        String printType = volume.getVolumeInfo().getPrintType() != null
+                ? volume.getVolumeInfo().getPrintType()
+                : "Không có loại in";
+        String language = volume.getVolumeInfo().getLanguage() != null
+                ? volume.getVolumeInfo().getLanguage()
+                : "Không có ngôn ngữ";
         String thumbnailUrl = imageURLContext.getImageURL() + "&fife=w800&format=webp";
 
-        Book newBook = new Book(
+        return new Book(
                 title,
-                str_authors,
+                strAuthors,
                 publisher,
                 publishedDate,
                 description,
-                str_categories,
+                strCategories,
                 ratingsCount,
                 pageCount,
                 averageRating,
                 maturityRating,
                 printType,
                 language,
-                isbn_10,
-                isbn_13,
+                isbn10,
+                isbn13,
                 thumbnailUrl
         );
-        return newBook;
     }
 }

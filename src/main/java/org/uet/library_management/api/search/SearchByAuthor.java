@@ -13,10 +13,8 @@ import org.uet.library_management.tools.AlertUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.uet.library_management.api.BooksApiService.getApiKey;
 
@@ -25,12 +23,12 @@ import static org.uet.library_management.api.BooksApiService.getApiKey;
  * functionality to search for books by author name using the Google Books API.
  */
 public class SearchByAuthor implements SearchStrategy {
+
     /**
      * An instance of BooksApiService used to interact with the Books API.
      * It provides functionality for creating queries to search for books based on various criteria.
-     * This instance is used to fetch book data from an external API and is initialized as a singleton.
      */
-    private BooksApiService booksApiService = BooksApiService.getInstance();
+    private final BooksApiService booksApiService = BooksApiService.getInstance();
 
     /**
      * Executes a search query to find books by a specific author using the Google Books API.
@@ -38,25 +36,27 @@ public class SearchByAuthor implements SearchStrategy {
      * @param authorName The name of the author whose books are to be searched.
      * @return A list of books by the specified author, or an empty list if no books are found or if an error occurs.
      */
+    @Override
     public List<Book> search(String authorName) {
         try {
             Books books = booksApiService.createQuery();
-            String query = "author:" + authorName ;
-            //String query = "author:\"" + authorName + "\"";
-            Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
-            volumesList.setMaxResults(10L);
+            String query = "author:" + authorName;
+
+            Books.Volumes.List volumesList = books.volumes()
+                    .list(query)
+                    .setKey(getApiKey())
+                    .setMaxResults(10L);
+
             Volumes volumes;
             try {
                 volumes = volumesList.execute();
             } catch (IOException e) {
-                Platform.runLater(() -> {
-                    AlertUtil.showErrorAlert(
-                            "Không thể kết nối mạng!",
-                            "Vui lòng kiểm tra lại kết nối internet!",
-                            null,
-                            null
-                    );
-                });
+                Platform.runLater(() -> AlertUtil.showErrorAlert(
+                        "Không thể kết nối mạng!",
+                        "Vui lòng kiểm tra lại kết nối internet!",
+                        null,
+                        null
+                ));
                 return Collections.emptyList();
             }
 

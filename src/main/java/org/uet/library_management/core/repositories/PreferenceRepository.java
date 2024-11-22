@@ -38,6 +38,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
         for (String categoryName : categoryNames) {
             String queryCheck = "SELECT categoryCount FROM " + db_table + " WHERE userId = ? AND categoryName = ?";
             int count = 0;
+
             try (ResultSet rs = connectJDBC.executeQueryWithParams(queryCheck, userId, categoryName)) {
                 if (rs.next()) {
                     count = rs.getInt("categoryCount");
@@ -111,6 +112,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
      */
     private Preference populatePreference(ResultSet rs) throws SQLException {
         Preference preference = new Preference();
+
         preference.setUserId(rs.getInt("userId"));
         preference.setCategoryName(rs.getString("categoryName"));
         preference.setCategoryCount(rs.getInt("categoryCount"));
@@ -236,6 +238,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
     @Override
     public void add(Preference preference) {
         String query = "INSERT INTO " + db_table + " (userId, categoryName, categoryCount) VALUES (?, ?, ?)";
+
         connectJDBC.executeUpdate(query, preference.getUserId(), preference.getCategoryName(),
                 preference.getCategoryCount());
     }
@@ -248,6 +251,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
     @Override
     public void update(Preference preference) {
         String query = "UPDATE " + db_table + " SET categoryName = ?, categoryCount = ? WHERE userId = ?";
+
         connectJDBC.executeUpdate(query, preference.getCategoryName(), preference.getCategoryCount(),
                 preference.getUserId());
     }
@@ -260,6 +264,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
     @Override
     public void remove(Preference preference) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ? AND categoryName = ?";
+
         connectJDBC.executeUpdate(query, preference.getUserId(), preference.getCategoryName());
     }
 
@@ -271,6 +276,7 @@ public class PreferenceRepository implements MySQLRepository<Preference> {
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
+
         connectJDBC.executeUpdate(query);
     }
 }

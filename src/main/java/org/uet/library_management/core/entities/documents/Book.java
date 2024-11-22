@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book extends Document {
+
     private String publisher;
     private String isbn10;
     private String isbn13;

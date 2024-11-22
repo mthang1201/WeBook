@@ -2,7 +2,6 @@ package org.uet.library_management.tools;
 
 import javafx.scene.text.Font;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 
 /**
  * The FontManager class provides methods to manage and load custom fonts
@@ -22,9 +21,11 @@ public class FontManager {
      */
     public static Font loadFont(String myFont, double size) {
         Font font = Font.loadFont(FontManager.class.getResourceAsStream(PREFIX_URL + myFont), size);
+
         if (font == null) {
             font = Font.font("Arial", size);
         }
+
         return font;
     }
 

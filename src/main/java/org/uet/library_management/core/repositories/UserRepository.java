@@ -48,6 +48,7 @@ public class UserRepository implements MySQLRepository<User> {
      */
     private User populateUser(ResultSet rs) throws SQLException {
         User user = new User();
+
         user.setUserId(rs.getInt("userId"));
         user.setName(rs.getString("name"));
         user.setPhoneNumber(rs.getString("phoneNumber"));
@@ -176,7 +177,9 @@ public class UserRepository implements MySQLRepository<User> {
      */
     @Override
     public void add(User user) {
-        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address, membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + db_table + " (name, phoneNumber, email, address" +
+                ", membershipStatus, privileges, passwordHash) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         connectJDBC.executeUpdate(query, user.getName(), user.getPhoneNumber(), user.getEmail(),
                 user.getAddress(), user.getMembershipStatus(), user.getPrivileges(),
                 user.getPasswordHash());
@@ -203,6 +206,7 @@ public class UserRepository implements MySQLRepository<User> {
     @Override
     public void remove(User user) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ?";
+
         connectJDBC.executeUpdate(query, user.getUserId());
     }
 
@@ -220,6 +224,7 @@ public class UserRepository implements MySQLRepository<User> {
     @Override
     public void removeAll() {
         String query = "DELETE FROM " + db_table;
+
         connectJDBC.executeUpdate(query);
     }
 }

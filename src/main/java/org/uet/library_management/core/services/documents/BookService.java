@@ -59,13 +59,4 @@ public class BookService extends DocumentService<Book> {
         repository = new BookRepository();
     }
 
-    public List<String> suggest(String searchText) {
-        return Arrays.asList(
-            "asdfsad",
-                "sdfasdf",
-                "hello",
-                "cbr650rr",
-                "africa twin"
-        );
-    }
 }

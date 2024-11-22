@@ -177,6 +177,7 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
     @Override
     public void add(Bookmark bookmark) {
         String query = "INSERT INTO " + db_table + " (userId, isbn13) VALUES (?, ?)";
+
         connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getIsbn13());
     }
 
@@ -189,6 +190,7 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
     @Override
     public void update(Bookmark bookmark) {
         String query = "UPDATE " + db_table + " SET isbn13 = ? WHERE userId = ?";
+
         connectJDBC.executeUpdate(query, bookmark.getIsbn13(), bookmark.getUserId());
     }
 
@@ -200,6 +202,7 @@ public class BookmarkRepository implements MySQLRepository<Bookmark> {
     @Override
     public void remove(Bookmark bookmark) {
         String query = "DELETE FROM " + db_table + " WHERE userId = ? AND isbn13 = ?";
+
         connectJDBC.executeUpdate(query, bookmark.getUserId(), bookmark.getIsbn13());
     }
 

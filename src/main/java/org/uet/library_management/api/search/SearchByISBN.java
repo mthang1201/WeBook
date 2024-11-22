@@ -1,4 +1,5 @@
 package org.uet.library_management.api.search;
+
 import com.google.api.services.books.v1.Books;
 import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
@@ -19,35 +20,40 @@ import static org.uet.library_management.api.BooksApiService.getApiKey;
  * Utilizes the BooksApiService to interact with the Google Books API and fetch book
  * details based on the provided ISBN number.
  */
-public class SearchByISBN implements SearchStrategy{
-    private BooksApiService booksApiService = BooksApiService.getInstance();
+public class SearchByISBN implements SearchStrategy {
+
+    /**
+     * Singleton instance of BooksApiService used to interact with the Google Books API.
+     */
+    private final BooksApiService booksApiService = BooksApiService.getInstance();
 
     /**
      * Searches for books using the provided ISBN and returns a list of matching books.
      * Utilizes the Google Books API to fetch and extract book details based on the given ISBN number.
      *
-     * @param ISBN The International Standard Book Number (ISBN) to search for.
-     * @return A list of books that match the given ISBN. If no books are found, returns an empty list.
+     * @param ISBN the International Standard Book Number (ISBN) to search for.
+     * @return a list of books that match the given ISBN. If no books are found, returns an empty list.
      */
+    @Override
     public List<Book> search(String ISBN) {
         try {
             Books books = booksApiService.createQuery();
             String query = "isbn:" + ISBN;
-            Books.Volumes.List volumesList = books.volumes().list(query).setKey(getApiKey());
-            volumesList.setMaxResults(1L);
+            Books.Volumes.List volumesList = books.volumes()
+                    .list(query)
+                    .setKey(getApiKey())
+                    .setMaxResults(1L);
 
             Volumes volumes;
             try {
                 volumes = volumesList.execute();
             } catch (IOException e) {
-                Platform.runLater(() -> {
-                    AlertUtil.showErrorAlert(
-                            "Không thể kết nối mạng!",
-                            "Vui lòng kiểm tra lại kết nối internet!",
-                            null,
-                            null
-                    );
-                });
+                Platform.runLater(() -> AlertUtil.showErrorAlert(
+                        "Không thể kết nối mạng!",
+                        "Vui lòng kiểm tra lại kết nối internet!",
+                        null,
+                        null
+                ));
                 return Collections.emptyList();
             }
 
@@ -58,9 +64,8 @@ public class SearchByISBN implements SearchStrategy{
                     bookList.add(newBook);
                 }
                 return bookList;
-            } else {
-                return Collections.emptyList();
             }
+            return Collections.emptyList();
         } catch (IOException e) {
             e.printStackTrace();
             return Collections.emptyList();
