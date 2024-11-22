@@ -125,7 +125,7 @@ public class RegisterController {
     }
 
     private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@gmail.com";
         Pattern emailPattern = Pattern.compile(emailRegex);
 
         if (!emailPattern.matcher(email).matches()) {
