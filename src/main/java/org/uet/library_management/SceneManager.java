@@ -113,6 +113,7 @@ public class SceneManager {
     public void showNewWindow(String sceneName) throws IOException {
         if (settingsStage == null) {
             settingsStage = new Stage();
+            settingsStage.setResizable(false);
         }
         setSettingsScene(sceneName);
     }
