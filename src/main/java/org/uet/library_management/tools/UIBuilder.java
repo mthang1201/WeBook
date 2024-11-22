@@ -316,7 +316,8 @@ public class UIBuilder {
         title.setStyle(
                 "-fx-font-size: 24px;" +
                         "-fx-text-fill: black;" +
-                        "-fx-font-family: 'Montserrat Extrabold';"
+                        "-fx-font-family: 'Nunito';"
+
         );
 
         arrowButton.setStyle(
@@ -328,9 +329,10 @@ public class UIBuilder {
                 "-fx-spacing: 20;" +
                         "-fx-padding: 10 0 0 20;" +
                         "-fx-font-size: 14px;" +
-                        "-fx-font-family: 'Montserrat SemiBold';" +
                         "-fx-text-overrun: ellipsis;" +
-                        "-fx-max-width: 200px;"
+                        "-fx-max-width: 200px;" +
+                        "-fx-background-color: #e1f1fc;" +
+                        "-fx-font-family: 'Nunito';"
         );
 
         searchContext.setStrategy(searchStrategy);
