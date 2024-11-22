@@ -56,7 +56,7 @@
             </VBox>
 
             <Button fx:id="loginButton" onAction="#handleLoginButton" mnemonicParsing="false" text="Đăng nhập"
-                        minWidth="350" maxWidth="350" minHeight="35" maxHeight="35"/>
+                        minWidth="350" maxWidth="350" minHeight="40" maxHeight="40"/>
             <HBox fx:id="registerBox" alignment="CENTER">
                 <Label fx:id="askRegisterLabel" text="Chưa có tài khoản?"/>
                 <Button fx:id="openRegisterButton" onAction="#handleOpenRegisterButton" mnemonicParsing="false" text="Đăng ký" />

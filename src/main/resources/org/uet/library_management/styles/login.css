@@ -1,6 +1,5 @@
 .login {
     -fx-background-color: #94c6f7;
-    -fx-font-family: "Arial";
 }
 
 .login-pane {
@@ -13,10 +12,10 @@
 
 #titleLoginLabel {
     -fx-font-size: 36px;
-    -fx-font-weight: bold;
+    -fx-font-weight: 900;
     -fx-padding: 20 20 20 20;
     /*-fx-font-family: "Kinetika Black";*/
-    -fx-font-family: "Arial";
+    -fx-font-family: "Nunito Black";
 }
 
 #emailFieldBox, #passwordFieldBox {
@@ -28,7 +27,7 @@
     -fx-background-color: transparent;
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
-    -fx-font-family: "Kinetika Medium";
+    -fx-font-family: "Nunito";
     -fx-font-size: 12px;
 }
 
@@ -36,7 +35,7 @@
 #loginButton {
     -fx-background-color: white;
     -fx-text-fill: #007bff;
-    -fx-font-family: "Kinetika Black";
+    -fx-font-family: "Nunito Black";
     -fx-font-size: 18px;
     -fx-background-radius: 15px;
 }
@@ -46,7 +45,8 @@
 }
 
 #askRegisterLabel {
-     -fx-font-family: "Kinetika Medium";
+     /*-fx-font-family: "Nunito-Regular";*/
+     -fx-font-family: "Nunito";
 }
 
 #openRegisterButton {
@@ -56,6 +56,7 @@
     -fx-text-fill: #007bff;
     -fx-font-size: 18px;
     -fx-underline: true;
+    -fx-font-family: "Nunito Black";
 }
 #openRegisterButton:hover {
     -fx-text-fill: white;
@@ -63,4 +64,9 @@
 
 .input-all-label {
     -fx-text-fill: transparent;
+    -fx-font-family: "Nunito";
+}
+
+.empty-label {
+    -fx-font-family: "Nunito";
 }

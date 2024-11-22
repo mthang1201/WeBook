@@ -65,6 +65,9 @@ public class LoginController {
     @SneakyThrows
     @FXML
     public void initialize() {
+        FontManager.loadFont("Nunito.ttf", 16);
+        FontManager.loadFont("Nunito-Black.ttf", 40);
+
         passwordLoginField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 handleLoginButton();
