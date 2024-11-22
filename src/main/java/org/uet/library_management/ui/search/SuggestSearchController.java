@@ -118,7 +118,6 @@ public class SuggestSearchController {
 
         Set<String> existingIsbns = new HashSet<>();
 
-
         for (Book book : topRatedBooks) {
             double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
             book.setAverageRating(updatedAvgRating);

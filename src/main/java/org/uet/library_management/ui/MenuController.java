@@ -29,7 +29,6 @@ public class MenuController {
 
     @FXML public TextField searchTextField;
     @FXML public Button homeButton;
-    @FXML public Button bookshelfButton;
     @FXML public Button getAllButton;
     @FXML public Button bookmarkButton;
     @FXML public Button addBooksButton;
@@ -98,13 +97,6 @@ public class MenuController {
         );
         homeButton.setOnMouseExited(event ->
                 handleButtonHover("home", homeImageView)
-        );
-
-        bookshelfButton.setOnMouseEntered(event ->
-                handleButtonHover("bookshelf-white", bookshelfImageView)
-        );
-        bookshelfButton.setOnMouseExited(event ->
-                handleButtonHover("bookshelf", bookshelfImageView)
         );
 
         getAllButton.setOnMouseEntered(event ->
@@ -210,18 +202,7 @@ public class MenuController {
 //        }, 300);
     }
 
-    /**
-     * Handles the action for the "Bookshelf" menu item.
-     *
-     * This method performs the following actions:
-     * - Clears the current scene stack.
-     * - Pushes "bookshelf.fxml" onto the sub-scene stack and sets it as the current sub-scene.
-     */
-    @FXML
-    private void handleBookshelfMenu() {
-        SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("bookshelf.fxml");
-    }
+
 
     /**
      * Handles the action for the "Get All" menu item.

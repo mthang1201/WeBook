@@ -15,14 +15,11 @@ import javafx.scene.layout.*;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.search.SearchStrategy;
-import org.uet.library_management.core.entities.Bookmark;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.PreferenceService;
 import org.uet.library_management.core.services.documents.BookService;
-import org.uet.library_management.ui.HomeController;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
