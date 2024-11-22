@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.core.repositories.UserAvatarRepository;
+import org.uet.library_management.tools.FontManager;
 import org.uet.library_management.tools.SessionManager;
 
 /**
@@ -36,6 +37,9 @@ public class SettingsController {
      */
     @FXML
     public void initialize() {
+        FontManager.loadFont("Nunito.ttf", 20);
+        FontManager.loadFont("Nunito-Black.ttf", 20);
+
         if (SessionManager.user == null) {
             userName.setText("Anonymous");
             userEmail.setText("abc123@gmail.com");
