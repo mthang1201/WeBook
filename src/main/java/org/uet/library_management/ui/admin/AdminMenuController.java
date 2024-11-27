@@ -76,7 +76,7 @@ public class AdminMenuController {
         if (SessionManager.user != null) {
             usernameButton.setText(SessionManager.user.getName());
         } else {
-            usernameButton.setText("Test");
+            usernameButton.setText("Admin");
         }
     }
 
