@@ -50,9 +50,6 @@ public class RegisterController {
     @FXML
     public Label emptyLabel;
 
-    @FXML
-    public Label inputAllLabel;
-
 
     @FXML
     public void initialize() {
@@ -60,6 +57,7 @@ public class RegisterController {
         //privilegesBox.getSelectionModel().selectFirst();
         FontManager.loadFont("Nunito.ttf", 16);
         FontManager.loadFont("Nunito-Black.ttf", 20);
+        FontManager.loadFont("Nunito-Medium.ttf", 16);
 
         nameIcon.setImage(ImageLoaderUtil.getImage("name.png"));
         phoneIcon.setImage(ImageLoaderUtil.getImage("phone.png"));
@@ -135,7 +133,7 @@ public class RegisterController {
     }
 
     private boolean validateName(String name) {
-        String nameRegex = "^[a-zA-Z]+(([',.-][a-zA-Z ])?[a-zA-Z]*)*$";
+        String nameRegex = "^[a-zA-Z\s]+$";
         Pattern namePattern = Pattern.compile(nameRegex);
 
         if (!namePattern.matcher(name).matches()) {
@@ -145,7 +143,7 @@ public class RegisterController {
     }
 
     private boolean validatePhoneNumber(String phoneNumber) {
-        String phoneNumberRegex = "^\\+?[0-9]{1,3}?[-. ]?\\(?\\d{1,4}?\\)?[-. ]?\\d{1,4}[-. ]?\\d{1,9}$";
+        String phoneNumberRegex = "^[0-9]{10}$";
         Pattern phoneNumberPattern = Pattern.compile(phoneNumberRegex);
 
         if (!phoneNumberPattern.matcher(phoneNumber).matches()) {

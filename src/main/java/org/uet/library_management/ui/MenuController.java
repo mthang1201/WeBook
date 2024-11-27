@@ -60,8 +60,10 @@ public class MenuController {
     @FXML
     public void initialize() {
 
-        FontManager.loadFont("Nunito.ttf", 16);
-        FontManager.loadFont("NunitoBold.ttf", 16);
+        FontManager.loadFont("Nunito.ttf", 60);
+        FontManager.loadFont("Nunito-Bold.ttf", 16);
+        FontManager.loadFont("Nunito-Light.ttf", 16);
+        FontManager.loadFont("Nunito-Medium.ttf", 16);
 
         //FontManager.applyFontToLabel(menuLabel, "Nunito.ttf", 16);
 

@@ -67,6 +67,7 @@ public class LoginController {
     public void initialize() {
         FontManager.loadFont("Nunito.ttf", 16);
         FontManager.loadFont("Nunito-Black.ttf", 40);
+        FontManager.loadFont("Nunito-Medium.ttf", 16);
 
         passwordLoginField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -111,10 +112,15 @@ public class LoginController {
 
             UserService userService = new UserService();
             Optional<User> user = userService.findByEmail(email);
+            if (passwordLoginField.getText().isEmpty() || emailLoginField.getText().isEmpty()) {
+                invalidLabel.setStyle("-fx-text-fill: red");
+                invalidLabel.setText("Vui lòng nhập đủ email và mật khẩu!");
+                return;
+            }
 
-            if (user.isEmpty() || password.isEmpty()) {
-                inputAllLabel.setStyle("-fx-text-fill: red");
-                invalidLabel.setStyle("-fx-text-fill: transparent");
+            if (user.isEmpty()) {
+                invalidLabel.setStyle("-fx-text-fill: red");
+                invalidLabel.setText("Tài khoản không tồn tại!");
                 return;
             }
 
@@ -122,7 +128,7 @@ public class LoginController {
 
             if (!BCrypt.checkpw(password, storedPasswordHash)) {
                 invalidLabel.setStyle("-fx-text-fill: red");
-                inputAllLabel.setStyle("-fx-text-fill: transparent");
+                invalidLabel.setText("Mật khẩu không đúng. Vui lòng kiểm tra lại");
                 return;
             }
 

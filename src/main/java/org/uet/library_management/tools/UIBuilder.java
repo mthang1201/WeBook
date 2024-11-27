@@ -313,7 +313,7 @@ public class UIBuilder {
         title.setStyle(
                 "-fx-font-size: 24px;" +
                         "-fx-text-fill: black;" +
-                        "-fx-font-family: 'Nunito';"
+                        "-fx-font-family: 'Nunito Medium';"
 
         );
 
@@ -329,7 +329,7 @@ public class UIBuilder {
                         "-fx-text-overrun: ellipsis;" +
                         "-fx-max-width: 200px;" +
                         "-fx-background-color: #e1f1fc;" +
-                        "-fx-font-family: 'Nunito';"
+                        "-fx-font-family: 'Nunito Medium';"
         );
 
         searchContext.setStrategy(searchStrategy);
