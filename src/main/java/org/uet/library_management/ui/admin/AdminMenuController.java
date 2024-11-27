@@ -123,11 +123,11 @@ public class AdminMenuController {
 
     /**
      * Handles the event when the edit menu button is clicked.
-     * This method switches the current sub-scene to the "admin/edit.fxml" scene.
+     * This method switches the current sub-scene to the "admin/bookPage.fxml" scene.
      */
     @FXML
-    private void handleEditMenu() {
-        SceneManager.getInstance().setSubScene("admin/edit.fxml");
+    private void handleBookMenu() {
+        SceneManager.getInstance().setSubScene("admin/bookPage.fxml");
     }
 
     /**

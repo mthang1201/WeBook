@@ -16,7 +16,7 @@ import java.util.List;
  * Controller class for managing the editing interface of books.
  * This class uses JavaFX Pagination to display books in a paginated view.
  */
-public class EditController {
+public class BookPageController {
     @FXML
     private Pagination pagination;
 
@@ -26,7 +26,7 @@ public class EditController {
 //    private static final Map<Integer, List<Book>> booksCache = new LinkedHashMap<>();
 
     /**
-     * Initializes the EditController by setting up the BookService, configuring the pagination,
+     * Initializes the BookPageController by setting up the BookService, configuring the pagination,
      * and generating the initial page content.
      *
      * This method is automatically called when the FXML layout for this controller is loaded.
@@ -88,29 +88,32 @@ public class EditController {
 //        List<Book> books = booksCache.get(pageIndex);
         List<Book> books = service.findAllByPage(pageIndex + 1, PAGE_SIZE);
 
-        addLabelToGridPane(pageGrid, "Title", 1, 0);
-        addLabelToGridPane(pageGrid, "Authors", 2, 0);
-        addLabelToGridPane(pageGrid, "isbn13", 3, 0);
-        addLabelToGridPane(pageGrid, "Description", 4, 0);
-        addLabelToGridPane(pageGrid, "Categories", 5, 0);
+        Button createButton = new Button("Create");
+        createButton.setOnAction(event -> handleCreate());
+        pageGrid.add(createButton, 1, 0);
+        addLabelToGridPane(pageGrid, "Title", 2, 0);
+        addLabelToGridPane(pageGrid, "Authors", 3, 0);
+        addLabelToGridPane(pageGrid, "isbn13", 4, 0);
+        addLabelToGridPane(pageGrid, "Description", 5, 0);
+        addLabelToGridPane(pageGrid, "Categories", 6, 0);
 
         int rowIndex = 1;
         for (Book book : books) {
-            addLabelToGridPane(pageGrid, book.getTitle(), 1, rowIndex);
-            addLabelToGridPane(pageGrid, book.getAuthors(), 2, rowIndex);
-            addLabelToGridPane(pageGrid, book.getIsbn13(), 3, rowIndex);
-            addLabelToGridPane(pageGrid, book.getDescription(), 4, rowIndex);
-            addLabelToGridPane(pageGrid, book.getCategories(), 5, rowIndex);
+            addLabelToGridPane(pageGrid, book.getTitle(), 2, rowIndex);
+            addLabelToGridPane(pageGrid, book.getAuthors(), 3, rowIndex);
+            addLabelToGridPane(pageGrid, book.getIsbn13(), 4, rowIndex);
+            addLabelToGridPane(pageGrid, book.getDescription(), 5, rowIndex);
+            addLabelToGridPane(pageGrid, book.getCategories(), 6, rowIndex);
 
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("edit-button");
             editButton.setOnAction(event -> openBookForm(book));
-            pageGrid.add(editButton, 6, rowIndex);
+            pageGrid.add(editButton, 1, rowIndex);
 
             Button removeButton = new Button("Remove");
             removeButton.getStyleClass().add("remove-button");
             removeButton.setOnAction(event -> handleRemove(book));
-            pageGrid.add(removeButton, 7, rowIndex);
+            pageGrid.add(removeButton, 8, rowIndex);
 
             rowIndex++;
         }
@@ -128,16 +131,16 @@ public class EditController {
     private void addLabelToGridPane(GridPane pageGrid, String text, int columnIndex, int rowIndex) {
         Label label = new Label(text);
         switch (columnIndex) {
-            case 1:
+            case 2:
                 label.setPrefWidth(80);
                 break;
-            case 2, 3:
+            case 3, 4:
                 label.setPrefWidth(30);
                 break;
-            case 4:
+            case 5:
                 label.setPrefWidth(240);
                 break;
-            case 5:
+            case 6:
                 label.setPrefWidth(100);
                 break;
         }

@@ -88,11 +88,11 @@ public class UserPageController {
 //        List<User> users = usersCache.get(pageIndex);
         List<User> users = service.findAllByPage(pageIndex + 1, PAGE_SIZE);
 
-        addLabelToGridPane(pageGrid, "Title", 1, 0);
-        addLabelToGridPane(pageGrid, "Authors", 2, 0);
-        addLabelToGridPane(pageGrid, "isbn13", 3, 0);
-        addLabelToGridPane(pageGrid, "Description", 4, 0);
-        addLabelToGridPane(pageGrid, "Categories", 5, 0);
+        addLabelToGridPane(pageGrid, "Name", 1, 0);
+        addLabelToGridPane(pageGrid, "Email", 2, 0);
+        addLabelToGridPane(pageGrid, "Address", 3, 0);
+        addLabelToGridPane(pageGrid, "Status", 4, 0);
+        addLabelToGridPane(pageGrid, "Privileges", 5, 0);
 
         int rowIndex = 1;
         for (User user : users) {

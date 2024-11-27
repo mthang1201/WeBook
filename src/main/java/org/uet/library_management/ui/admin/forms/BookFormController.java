@@ -65,12 +65,12 @@ public class BookFormController {
     /**
      * Navigates back to the edit form view.
      *
-     * This method sets the sub-scene to "admin/edit.fxml",
+     * This method sets the sub-scene to "admin/bookPage.fxml",
      * effectively updating the current view to the edit form.
      */
     @FXML
     private void returnToEdit() {
-        SceneManager.getInstance().setSubScene("admin/edit.fxml");
+        SceneManager.getInstance().setSubScene("admin/bookPage.fxml");
     }
 
     /**

@@ -34,11 +34,11 @@ public class App extends Application {
 //        stage.setMinHeight(600);
 
 
-        //SceneManager.getInstance().setScene("admin/admin.fxml");
+        SceneManager.getInstance().setScene("admin/admin.fxml");
         UserService userService = new UserService();
-        SessionManager.user = userService.findByName("abc").get(0);
+//        SessionManager.user = userService.findByName("Takahashi Hoshino").get(0);
         //SceneManager.getInstance().setScene("main.fxml");
-        SceneManager.getInstance().setScene("auth/login.fxml");
+        //SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
     public static void main(String[] args) {

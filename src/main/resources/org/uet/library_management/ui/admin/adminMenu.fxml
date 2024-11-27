@@ -29,7 +29,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="editButton" styleClass="menu-button" onAction="#handleEditMenu" text="Kho sách">
+        <Button fx:id="editButton" styleClass="menu-button" onAction="#handleBookMenu" text="Kho sách">
             <graphic>
                 <ImageView fx:id="editImageView" fitHeight="16" fitWidth="16">
                     <Image url="@../../icons/edit.png" />

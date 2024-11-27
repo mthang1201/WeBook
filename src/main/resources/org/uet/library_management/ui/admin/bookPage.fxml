@@ -7,7 +7,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.uet.library_management.ui.admin.EditController"
+            fx:controller="org.uet.library_management.ui.admin.BookPageController"
             styleClass="content-pane">
     <top>
         <VBox styleClass="admin-head">

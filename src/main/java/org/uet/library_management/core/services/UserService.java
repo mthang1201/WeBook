@@ -91,6 +91,10 @@ public class UserService {
         repository.update(user);
     }
 
+    public void updateForm(User user) {
+        repository.updateForm(user);
+    }
+
     /**
      * Removes the specified user from the repository.
      *
