@@ -199,13 +199,13 @@ public class LoanRepository implements MySQLRepository<Loan> {
      *
      * @param loan the Loan object containing updated details of the loan to be saved in the database
      */
-    @Override
     public void update(Loan loan) {
         String query = "UPDATE " + db_table + " SET loanDate = ?, dueDate = ?, returnDate = ?, " +
-                "status = ?, userId = ?, title = ?, WHERE loanId = ?";
-//        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
-//                loan.getReturnDate(), loan.getStatus(), loan.getComments(), loan.getLoanId(),
-//                loan.getLoanId());
+                "status = ?, isbn13 = ?, title = ?, userId = ? WHERE loanId = ?";
+
+        connectJDBC.executeUpdate(query, loan.getLoanDate(), loan.getDueDate(),
+                loan.getReturnDate(), loan.getStatus(), loan.getIsbn13(), loan.getTitle(),
+                loan.getUserId(), loan.getLoanId());
     }
 
     /**

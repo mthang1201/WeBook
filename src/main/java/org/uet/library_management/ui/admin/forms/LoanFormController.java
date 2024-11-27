@@ -16,11 +16,13 @@ public class LoanFormController {
     private LoanService service;
 
     @FXML
-    private TextField titleField;
-    @FXML private TextField authorsField;
+    private TextField loanDateField;
+    @FXML private TextField dueDateField;
+    @FXML private TextField returnDateField;
+    @FXML private TextField statusField;
     @FXML private TextField isbn13Field;
-    @FXML private TextField descriptionField;
-    @FXML private TextField categoriesField;
+    @FXML private TextField titleField;
+    @FXML private TextField userIdField;
 
     @FXML private Label errorWarning;
 
@@ -40,25 +42,29 @@ public class LoanFormController {
         Loan loan = Mediator.loan;
         if (loan != null) {
             createMethod = false;
-            titleField.setText(loan.getLoanDate());
-            authorsField.setText(loan.getDueDate());
-            isbn13Field.setText(loan.getStatus());
-            descriptionField.setText(loan.getIsbn13());
-            categoriesField.setText(String.valueOf(loan.getUserId()));
+            loanDateField.setText(loan.getLoanDate());
+            dueDateField.setText(loan.getDueDate());
+            returnDateField.setText(loan.getReturnDate());
+            statusField.setText(loan.getStatus());
+            isbn13Field.setText(loan.getIsbn13());
+            titleField.setText(loan.getTitle());
+            userIdField.setText(String.valueOf(loan.getUserId()));
         }
     }
 
     /**
-     * Checks if any of the required form fields (title, authors, ISBN-13, description, categories) are empty or null.
+     * Checks if any of the required form fields (loanDate, dueDate, returnDate, status, isbn13, title, userId) are empty or null.
      *
      * @return true if any of the form fields are invalid (empty or null), false otherwise.
      */
     private boolean invalidField() {
-        if (titleField.getText() == null || titleField.getText().trim().equals("")) { return true; }
-        if (authorsField.getText() == null || authorsField.getText().trim().equals("")) { return true; }
+        if (loanDateField.getText() == null || loanDateField.getText().trim().equals("")) { return true; }
+        if (dueDateField.getText() == null || dueDateField.getText().trim().equals("")) { return true; }
+        if (returnDateField.getText() == null || returnDateField.getText().trim().equals("")) { return true; }
+        if (statusField.getText() == null || statusField.getText().trim().equals("")) { return true; }
         if (isbn13Field.getText() == null || isbn13Field.getText().trim().equals("")) { return true; }
-        if (descriptionField.getText() == null || descriptionField.getText().trim().equals("")) { return true; }
-        if (categoriesField.getText() == null || categoriesField.getText().trim().equals("")) { return true; }
+        if (titleField.getText() == null || titleField.getText().trim().equals("")) { return true; }
+        if (userIdField.getText() == null || userIdField.getText().trim().equals("")) { return true; }
         return false;
     }
 
@@ -85,20 +91,22 @@ public class LoanFormController {
      */
     @FXML
     private void handleSaveForm() {
-//        if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
+        // Uncomment this if validation is necessary
+        // if (invalidField()) { errorWarning.setText("Please fill out this form."); return; }
 
         Loan loan = new Loan();
 
-        loan.setLoanDate(titleField.getText());
-        loan.setDueDate(authorsField.getText());
-        loan.setStatus(isbn13Field.getText());
-        loan.setIsbn13(descriptionField.getText());
-        loan.setUserId(Integer.parseInt(categoriesField.getText()));
+        loan.setLoanDate(loanDateField.getText());
+        loan.setDueDate(dueDateField.getText());
+        loan.setReturnDate(returnDateField.getText());
+        loan.setStatus(statusField.getText());
+        loan.setIsbn13(isbn13Field.getText());
+        loan.setTitle(titleField.getText());
+        loan.setUserId(Integer.parseInt(userIdField.getText()));
 
         if (createMethod) {
             service.add(loan);
-        }
-        else {
+        } else {
             loan.setLoanId(Mediator.loan.getLoanId());
             service.update(loan);
         }
@@ -106,4 +114,3 @@ public class LoanFormController {
         returnToEdit();
     }
 }
-

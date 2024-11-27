@@ -15,7 +15,7 @@ import java.security.GeneralSecurityException;
 public class BooksApiService {
 
     private static final String APPLICATION_NAME = "WeBooks";
-    private static final String API_KEY = "AIzaSyBFeSPdr4seMW1NpLK72GPHVgIveJowPzo";
+    private static final String API_KEY = System.getenv("GOOGLE_BOOKS_API_KEY");;
     private static BooksApiService instance;
     private final JsonFactory jsonFactory;
 

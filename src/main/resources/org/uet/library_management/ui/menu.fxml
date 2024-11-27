@@ -26,14 +26,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="bookshelfButton" styleClass="menu-button" onAction="#handleBookshelfMenu" text="Giá sách">
-            <graphic>
-                <ImageView fx:id="bookshelfImageView" fitHeight="16" fitWidth="16">
-                    <Image url="@../icons/bookshelf.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-
 <!--        Thư viện-->
         <Label styleClass="menu-label" text="Thư viện" />
         <Button fx:id="getAllButton" styleClass="menu-button" onAction="#handleGetAllMenu" text="Đã mượn">

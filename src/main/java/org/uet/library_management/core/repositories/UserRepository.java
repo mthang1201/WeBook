@@ -170,6 +170,18 @@ public class UserRepository implements MySQLRepository<User> {
         return Optional.ofNullable(user);
     }
 
+    public void updateForm(User user) {
+        String query = "UPDATE " + db_table + " SET name = ?, phoneNumber = ?, email = ?, address = ?, membershipStatus = ?, privileges = ? WHERE userId = ?";
+        connectJDBC.executeUpdate(query,
+                user.getName(),
+                user.getPhoneNumber(),
+                user.getEmail(),
+                user.getAddress(),
+                user.getMembershipStatus(),
+                user.getPrivileges(),
+                user.getUserId());
+    }
+
     /**
      * Adds a user to the database.
      *
