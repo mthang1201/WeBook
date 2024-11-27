@@ -43,7 +43,7 @@
     -fx-background-color: black;
     -fx-opacity: 1;
     -fx-transition: 0.3s ease;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Nunito Medium";
 }
 #backButton:hover {
     -fx-background-color: #005A9E;
@@ -83,7 +83,7 @@
 #borrowButton {
     -fx-text-fill: white;
     -fx-background-color: black;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Nunito Medium";
 }
 #borrowButton:hover {
     -fx-background-color: white;
@@ -92,7 +92,7 @@
 #returnButton {
     -fx-text-fill: white;
     -fx-background-color: red;
-    -fx-font-family: "Montserrat";
+    -fx-font-family: "Nunito Medium";
 }
 #borrowButton:hover {
     -fx-background-color: white;

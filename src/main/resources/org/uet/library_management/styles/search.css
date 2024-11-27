@@ -5,12 +5,14 @@
     -fx-padding: 10 10 10 10;
     -fx-font-size: 14px;
     -fx-font-weight: BOLD;
+    -fx-font-family: "Nunito Black";
 }
 
 .suggestions-label {
     -fx-padding: 35 0 0 40;
     -fx-font-size: 16px;
     -fx-font-weight: BOLD;
+    -fx-font-family: "Nunito Medium";
 }
 
 .suggestions-vbox {
@@ -33,6 +35,7 @@
     -fx-font-weight: BOLD;
     -fx-background-color: #e1f1fc;
     -fx-pref-width: 1920;
+    -fx-font-family: "Nunito Medium";
 }
 
 .in-your-library-hbox {
@@ -46,6 +49,7 @@
 .top-results-label {
     -fx-font-size: 16px;
     -fx-font-weight: BOLD;
+    -fx-font-family: "Nunito Medium";
 }
 
 .top-results-vbox {
@@ -80,4 +84,13 @@
 
 .horizontal-scroll-pane {
     -fx-background-color: #e1f1fc;
+}
+
+.sort-style {
+    -fx-background-color: #add1ff;
+    -fx-min-width: 200;
+    -fx-max-width: 200;
+    -fx-min-height: 45;
+    -fx-max-height: 45;
+    -fx-font-family: "Nunito Medium";
 }

@@ -27,7 +27,7 @@
     -fx-background-color: transparent;
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
-    -fx-font-family: "Nunito";
+    -fx-font-family: "Nunito Medium";
     -fx-font-size: 12px;
 }
 
@@ -46,7 +46,7 @@
 
 #askRegisterLabel {
      /*-fx-font-family: "Nunito-Regular";*/
-     -fx-font-family: "Nunito";
+     -fx-font-family: "Nunito Medium";
 }
 
 #openRegisterButton {
@@ -64,9 +64,9 @@
 
 .input-all-label {
     -fx-text-fill: transparent;
-    -fx-font-family: "Nunito";
+    -fx-font-family: "Nunito Medium";
 }
 
 .empty-label {
-    -fx-font-family: "Nunito";
+    -fx-font-family: "Nunito Medium";
 }
