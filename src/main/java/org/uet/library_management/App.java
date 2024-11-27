@@ -27,18 +27,7 @@ public class App extends Application {
         stage.setMinHeight(800);
         stage.setMinWidth(600);
 
-//        stage.initStyle(StageStyle.DECORATED);
-//        stage.setOpacity(0.889);
-//        stage.setEffect(new GaussianBlur(10));
-//        stage.setMinWidth(800);
-//        stage.setMinHeight(600);
-
-
-        SceneManager.getInstance().setScene("admin/admin.fxml");
-        UserService userService = new UserService();
-//        SessionManager.user = userService.findByName("Takahashi Hoshino").get(0);
-        //SceneManager.getInstance().setScene("main.fxml");
-        //SceneManager.getInstance().setScene("auth/login.fxml");
+        SceneManager.getInstance().setScene("auth/login.fxml");
     }
 
     public static void main(String[] args) {
