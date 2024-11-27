@@ -13,16 +13,16 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Label text="Avatar" />
+    <Label text="Ảnh đại diện" />
 
     <Pane styleClass="spacing-pane" />
 
     <ImageView fx:id="imageView" fitWidth="300" preserveRatio="true"/>
-    <Button text="Upload Image" onAction="#uploadImage"/>
+    <Button text="Tải ảnh lên" onAction="#uploadImage"/>
 
     <Pane styleClass="spacing-pane" />
     <VBox alignment="CENTER" spacing="10">
-        <Button fx:id="changeAvatarButton" styleClass="changes-button" text="Change Avatar" />
+        <Button fx:id="changeAvatarButton" styleClass="changes-button" text="Thay đổi ảnh đại diện" />
         <Button onAction="#handleBackButton" styleClass="changes-button" text="Quay lại" />
     </VBox>
 </VBox>

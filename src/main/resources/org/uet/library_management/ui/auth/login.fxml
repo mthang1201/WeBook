@@ -52,7 +52,6 @@
 
             <VBox fx:id="errorLabel" alignment="CENTER" spacing="-15">
                 <Label fx:id="invalidLabel" styleClass="empty-label" alignment="CENTER" text="Tài khoản hoặc mật khẩu không đúng. Vui lòng kiểm tra lại" />
-                <Label fx:id="inputAllLabel" styleClass="input-all-label" alignment="CENTER" text="Vui lòng nhập đủ email và mật khẩu" />
             </VBox>
 
             <Button fx:id="loginButton" onAction="#handleLoginButton" mnemonicParsing="false" text="Đăng nhập"

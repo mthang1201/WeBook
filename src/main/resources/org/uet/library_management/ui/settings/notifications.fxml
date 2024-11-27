@@ -9,7 +9,7 @@
             fx:controller="org.uet.library_management.ui.settings.NotificationsController"
             styleClass="settings-window">
     <top>
-        <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
+        <Button onAction="#handleBackButton" styleClass="settings-button" text="Quay lại" />
     </top>
     <center>
         <Label styleClass="settings-label" text="Notifications" />

@@ -12,7 +12,7 @@
             fx:controller="org.uet.library_management.ui.settings.AboutController"
             styleClass="settings-window">
     <top>
-        <Button onAction="#handleBackButton" styleClass="settings-button" text="Back" />
+        <Button onAction="#handleBackButton" styleClass="settings-button" text="Quay lại" />
     </top>
     <center>
         <VBox fx:id="copyrightBox" alignment="CENTER" spacing="10" prefWidth="400">

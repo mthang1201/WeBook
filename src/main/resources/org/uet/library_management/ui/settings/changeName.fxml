@@ -14,15 +14,15 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Label text="Change name" />
+    <Label text="Thay đổi tên" />
 
     <Pane styleClass="spacing-pane" />
 
-    <TextField fx:id="nameField" promptText="Your new name" />
+    <TextField fx:id="nameField" styleClass="settings-field" promptText="Tên mới" />
     <Pane styleClass="spacing-pane" />
 
     <VBox alignment="CENTER" spacing="10">
-    <Button styleClass="changes-button" onAction="#handleChangeName" text="Change Name" />
+    <Button styleClass="changes-button" onAction="#handleChangeName" text="Thay đổi tên" />
     <Button onAction="#handleBackButton" styleClass="changes-button" text="Quay lại" />
     </VBox>
 </VBox>

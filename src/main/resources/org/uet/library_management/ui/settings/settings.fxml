@@ -24,7 +24,7 @@
 
     <!--        Sách-->
     <Label styleClass="settings-label" text="Thông tin cá nhân" />
-    <Button fx:id="homeButton" onAction="#handleAvatarButton" styleClass="settings-button" text="Avatar">
+    <Button fx:id="homeButton" onAction="#handleAvatarButton" styleClass="settings-button" text="Ảnh đại diện">
         <graphic>
             <ImageView fx:id="homeImageView" fitHeight="16" fitWidth="16">
                 <Image url="@../../icons/home.png" />

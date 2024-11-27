@@ -14,15 +14,15 @@
 
     <Pane styleClass="spacing-pane" />
 
-    <Label text="Email mới" />
+    <Label text="Thay đổi email" />
 
     <Pane styleClass="spacing-pane" />
 
-    <TextField fx:id="emailField" promptText="Your new email" />
+    <TextField fx:id="emailField" styleClass="settings-field" promptText="Email mới" />
     <Pane styleClass="spacing-pane" />
 
     <VBox alignment="CENTER" spacing="10">
-        <Button styleClass="changes-button" onAction="#handleChangeEmail" text="Change Email" />
+        <Button styleClass="changes-button" onAction="#handleChangeEmail" text="Thay đổi email" />
         <Button onAction="#handleBackButton" styleClass="changes-button" text="Quay lại" />
     </VBox>
 </VBox>
