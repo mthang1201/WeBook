@@ -33,7 +33,7 @@
 <!--                        Top Results-->
                         <HBox fx:id="headerAndSortBox" >
                             <Label styleClass="top-results-label" text="Kết Quả Phù Hợp Nhất" />
-                            <ChoiceBox fx:id="sortBox">
+                            <ChoiceBox fx:id="sortBox" styleClass="sort-style">
                                 <items>
                                     <FXCollections fx:factory="observableArrayList">
                                         <String fx:value="Alphabet" />
