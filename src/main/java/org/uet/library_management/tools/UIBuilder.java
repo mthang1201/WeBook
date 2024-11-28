@@ -57,7 +57,9 @@ public class UIBuilder {
 
             Label titleLabel = new Label(book.getTitle());
             titleLabel.setOnMouseClicked(event -> { openBookDetailPage(book); });
+            titleLabel.setStyle("-fx-font-weight: bold");
             Label authorsLabel = new Label(book.getAuthors());
+            authorsLabel.setStyle("-fx-text-fill: gray");
 
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
 
@@ -92,7 +94,9 @@ public class UIBuilder {
 
             Label titleLabel = new Label(book.getTitle());
             titleLabel.setOnMouseClicked(event -> { openBookDetailPage(book); });
+            titleLabel.setStyle("-fx-font-weight: bold");
             Label authorsLabel = new Label(book.getAuthors());
+            authorsLabel.setStyle("-fx-text-fill: gray");
             Label loanDate =  new Label("Ngày mượn: " + loan.getLoanDate());
             Label dueDate = new Label("Ngày hết hạn mượn: " + loan.getDueDate());
 
