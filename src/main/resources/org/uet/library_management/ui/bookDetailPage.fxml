@@ -24,8 +24,9 @@
                             <Label fx:id="rates" styleClass="ratesAndCategories" />
                             <Label fx:id="categories" styleClass="ratesAndCategories" />
                         </HBox>
-                        <Button fx:id="borrowButton" onAction="#onBorrowButtonClicked" text="Borrow" />
-                        <Button fx:id="returnButton" onAction="#onReturnButtonClicked" text="Return"/>
+                        <Pane prefHeight="120" />
+                        <Button fx:id="borrowButton" onAction="#onBorrowButtonClicked" text="Borrow" style="-fx-pref-width: 65" />
+                        <Button fx:id="returnButton" onAction="#onReturnButtonClicked" text="Return" style="-fx-pref-width: 65" />
                     </VBox>
                 </HBox>
 
