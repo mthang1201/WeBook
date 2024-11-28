@@ -116,6 +116,7 @@
     -fx-text-fill: black;
     -fx-font-size: 22px;
     -fx-padding: 20 0 0 10;
+    -fx-font-weight: bold;
 }
 #descriptionText {
     -fx-font-family: "Montserrat Light";

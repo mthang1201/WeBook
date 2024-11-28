@@ -35,7 +35,7 @@
                         <Label fx:id="descriptionText" />
                         <Button fx:id="moreButton" onAction="#onMoreButtonClicked" text="...More" visible="false" />
                     </VBox>
-                    <Separator />
+                    <Separator style="-fx-padding: 0 20 0 0"/>
 
                     <VBox fx:id="bookInformationBox">
                         <Label styleClass="section" text="Book Information" />
@@ -76,7 +76,7 @@
                             <Label fx:id="maturityRatingsName" styleClass="normalText" />
                         </HBox>
                     </VBox>
-                    <Separator />
+                    <Separator style="-fx-padding: 20 20 0 0"/>
 
                     <VBox fx:id="RateAndReviewBox" alignment="CENTER_LEFT">
                         <Label fx:id="rateHeader" text="Rate and review" style="-fx-font-weight: bold" />
