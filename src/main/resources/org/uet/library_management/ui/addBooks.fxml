@@ -18,7 +18,7 @@
     </top>
     <center>
         <VBox spacing="20" alignment="CENTER">
-            <Label text="Thêm cuốn sách bạn yêu thích vào đây" styleClass="content" />
+            <Label text="Thêm cuốn sách bạn yêu thích vào đây" styleClass="content" style="-fx-font-weight: bold" />
             <TextField fx:id="isbn10TextField" styleClass="isbn-text-field" promptText="ISBN 10" minWidth="300" maxWidth="300" />
             <TextField fx:id="isbn13TextField" styleClass="isbn-text-field" promptText="ISBN 13" minWidth="300" maxWidth="300" />
             <Button fx:id="addButton" onAction="#handleAddButton" text="Add" minWidth="100" maxWidth="100" />
