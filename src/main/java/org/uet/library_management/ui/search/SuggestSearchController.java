@@ -91,7 +91,7 @@ public class SuggestSearchController {
                     searchFromDb(searchText);
                 });
             }
-        }, 200);
+        }, 500);
     }
 
     /**
@@ -109,36 +109,49 @@ public class SuggestSearchController {
 
         onSearchLabel.setText("Đang hiển thị gợi ý liên quan đến \"" + searchText + "\"");
 
-        BookService bookService = new BookService();
-        List<Book> topRatedBooks = bookService.getTopRatedSearchTermBooks(1.0, searchText);
+        Task<List<Book>> searchTask = new Task<List<Book>>() {
+            @Override
+            protected List<Book> call() throws Exception {
+                BookService bookService = new BookService();
+                List<Book> topRatedBooks = bookService.getTopRatedSearchTermBooks(1.0, searchText);
 
-        SearchContext searchContext = new SearchContext();
-        searchContext.setStrategy(new SearchByGeneral());
-        List<Book> generalSearchResults = searchContext.executeSearch(searchText);
+                SearchContext searchContext = new SearchContext();
+                searchContext.setStrategy(new SearchByGeneral());
+                List<Book> generalSearchResults = searchContext.executeSearch(searchText);
 
-        Set<String> existingIsbns = new HashSet<>();
+                Set<String> existingIsbns = new HashSet<>();
+                List<Book> combinedResults = new ArrayList<>();
 
-        for (Book book : topRatedBooks) {
-            double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
-            book.setAverageRating(updatedAvgRating);
-            if (!existingIsbns.contains(book.getIsbn13())) {
-                combinedResults.add(book);
-                existingIsbns.add(book.getIsbn13());
+                for (Book book : topRatedBooks) {
+                    double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+                    book.setAverageRating(updatedAvgRating);
+                    if (!existingIsbns.contains(book.getIsbn13())) {
+                        combinedResults.add(book);
+                        existingIsbns.add(book.getIsbn13());
+                    }
+                }
+
+                for (Book book : generalSearchResults) {
+                    double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
+                    book.setAverageRating(updatedAvgRating);
+                    if (!existingIsbns.contains(book.getIsbn13())) {
+                        combinedResults.add(book);
+                        existingIsbns.add(book.getIsbn13());
+                    }
+                }
+
+                combinedResults.sort(new SortByAvgRating());
+
+                return combinedResults;
             }
-        }
+        };
 
-        for (Book book : generalSearchResults) {
-            double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
-            book.setAverageRating(updatedAvgRating);
-            if (!existingIsbns.contains(book.getIsbn13())) {
-                combinedResults.add(book);
-                existingIsbns.add(book.getIsbn13());
-            }
-        }
+        searchTask.setOnSucceeded(event -> {
+            List<Book> combinedResults = searchTask.getValue();
+            updateUI(combinedResults);
+        });
 
-        combinedResults.sort(new SortByAvgRating());
-
-        updateUI(combinedResults);
+        new Thread(searchTask).start();
     }
 
 

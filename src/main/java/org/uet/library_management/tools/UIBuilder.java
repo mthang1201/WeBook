@@ -341,8 +341,6 @@ public class UIBuilder {
      * @return a VBox containing the horizontal recommendation list
      */
     public static VBox generateHorizontalRecommendation(String searchTerm, String header, SearchStrategy searchStrategy) {
-
-        SearchContext searchContext = new SearchContext();
         VBox recommendBox = new VBox();
         ScrollPane horizontalScrollpane = new ScrollPane();
         horizontalScrollpane.setFitToWidth(true);
@@ -358,7 +356,6 @@ public class UIBuilder {
                 "-fx-font-size: 24px;" +
                         "-fx-text-fill: black;" +
                         "-fx-font-family: 'Nunito Medium';"
-
         );
 
         arrowButton.setStyle(
@@ -376,89 +373,103 @@ public class UIBuilder {
                         "-fx-font-family: 'Nunito Medium';"
         );
 
-        searchContext.setStrategy(searchStrategy);
-
         title.setText(header);
         arrowButton.setGraphic(LayoutUtils.createImageView(ImageLoaderUtil.getArrowImage(),
                 20, 20, true));
         LayoutUtils.setHBoxNodeMargin(title, 20, 0, 0, 23);
         LayoutUtils.setHBoxNodeMargin(arrowButton, 21, 0, 0, 0);
 
-        String cacheKey = searchTerm + header;
+        Task<List<Book>> recommendationTask = new Task<List<Book>>() {
+            @Override
+            protected List<Book> call() throws Exception {
+                SearchContext searchContext = new SearchContext();
+                searchContext.setStrategy(searchStrategy);
 
-        List<Book> books;
-        if ("recommendation".equals(searchTerm) && searchStrategy == null) {
-            if (SessionManager.defaultRecommendBooks.isEmpty()) {
-                SessionManager.defaultRecommendBooks = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
-            }
-            books = SessionManager.defaultRecommendBooks;
-        } else if (SessionManager.cacheBooks.containsKey(cacheKey)) {
-            books = SessionManager.cacheBooks.get(cacheKey);
-        } else {
-            books = searchContext.executeSearch(searchTerm);
-            SessionManager.cacheBooks.put(cacheKey, books);
-        }
+                String cacheKey = searchTerm + header;
+                List<Book> books;
 
-        for (Book book : books) {
-            VBox bookBox = new VBox();
-            bookBox.setSpacing(10);
-            bookBox.setAlignment(Pos.CENTER);
-
-            StackPane imageContainer = new StackPane();
-            imageContainer.setStyle("-fx-background-color: gray;");
-            imageContainer.setPrefSize(300, 300);
-
-            ImageView bookImageView = new ImageView();
-            bookImageView.setCache(true);
-            bookImageView.setCacheHint(CacheHint.SPEED);
-
-            bookImageView.setFitWidth(300);
-            bookImageView.setFitHeight(300);
-            bookImageView.setPreserveRatio(true);
-
-            imageContainer.getChildren().add(bookImageView);
-
-            Task<Image> imageLoadingTask = new Task<Image>() {
-                @Override
-                protected Image call() throws Exception {
-                    return ImageCacheManager.getInstance().loadImage(
-                            book.getIsbn13(),
-                            book.getTitle(),
-                            book.getImageLinks()
-                    );
+                if ("recommendation".equals(searchTerm) && searchStrategy == null) {
+                    if (SessionManager.defaultRecommendBooks.isEmpty()) {
+                        SessionManager.defaultRecommendBooks = RecommendationGenerator.getRecommendationForUsers(SessionManager.user.getUserId());
+                    }
+                    books = SessionManager.defaultRecommendBooks;
+                } else if (SessionManager.cacheBooks.containsKey(cacheKey)) {
+                    books = SessionManager.cacheBooks.get(cacheKey);
+                } else {
+                    books = searchContext.executeSearch(searchTerm);
+                    SessionManager.cacheBooks.put(cacheKey, books);
                 }
-            };
 
-            imageLoadingTask.setOnSucceeded(event -> {
-                Image bookImage = imageLoadingTask.getValue();
-                bookImageView.setImage(bookImage);
-                bookBox.setOnMouseClicked(event2 -> {
-                    openBookDetailPage(book);
+                return books;
+            }
+        };
+
+        recommendationTask.setOnSucceeded(event -> {
+            List<Book> books = recommendationTask.getValue();
+
+            for (Book book : books) {
+                VBox bookBox = new VBox();
+                bookBox.setSpacing(10);
+                bookBox.setAlignment(Pos.CENTER);
+
+                StackPane imageContainer = new StackPane();
+                imageContainer.setStyle("-fx-background-color: gray;");
+                imageContainer.setPrefSize(300, 300);
+
+                ImageView bookImageView = new ImageView();
+                bookImageView.setCache(true);
+                bookImageView.setCacheHint(CacheHint.SPEED);
+
+                bookImageView.setFitWidth(300);
+                bookImageView.setFitHeight(300);
+                bookImageView.setPreserveRatio(true);
+
+                imageContainer.getChildren().add(bookImageView);
+
+                // Tạo Task để tải ảnh cho từng sách
+                Task<Image> imageLoadingTask = new Task<Image>() {
+                    @Override
+                    protected Image call() throws Exception {
+                        return ImageCacheManager.getInstance().loadImage(
+                                book.getIsbn13(),
+                                book.getTitle(),
+                                book.getImageLinks()
+                        );
+                    }
+                };
+
+                imageLoadingTask.setOnSucceeded(event2 -> {
+                    Image bookImage = imageLoadingTask.getValue();
+                    bookImageView.setImage(bookImage);
+                    bookBox.setOnMouseClicked(event3 -> {
+                        openBookDetailPage(book);
+                    });
                 });
-            });
 
-            imageLoadingTask.setOnFailed(event -> {
-                Throwable exception = imageLoadingTask.getException();
-                exception.printStackTrace();
-            });
+                imageLoadingTask.setOnFailed(event2 -> {
+                    Throwable exception = imageLoadingTask.getException();
+                    exception.printStackTrace();
+                });
 
-            new Thread(imageLoadingTask).start();
+                new Thread(imageLoadingTask).start();
 
+                Label bookTitleLabel = new Label(book.getTitle());
+                bookTitleLabel.setAlignment(Pos.CENTER);
 
-            Label bookTitleLabel = new Label(book.getTitle());
-            bookTitleLabel.setAlignment(Pos.CENTER);
+                bookBox.getChildren().addAll(imageContainer, bookTitleLabel);
+                recommendList.getChildren().add(bookBox);
+            }
 
-            bookBox.getChildren().addAll(imageContainer, bookTitleLabel);
+            titleAndArrowKeyBox.getChildren().addAll(title, arrowButton);
+            horizontalScrollpane.setContent(recommendList);
+            recommendBox.getChildren().addAll(titleAndArrowKeyBox, horizontalScrollpane);
+        });
 
-            recommendList.getChildren().add(bookBox);
-        }
-        titleAndArrowKeyBox.getChildren().addAll(title, arrowButton);
+        new Thread(recommendationTask).start();
 
-        horizontalScrollpane.setContent(recommendList);
-
-        recommendBox.getChildren().addAll(titleAndArrowKeyBox, horizontalScrollpane);
         return recommendBox;
     }
+
 
 
 
