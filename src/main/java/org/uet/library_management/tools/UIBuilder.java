@@ -254,7 +254,9 @@ public class UIBuilder {
 
             titleLabel.setStyle("-fx-font-weight: bold");
             Label authorsLabel = new Label(book.getAuthors());
+            authorsLabel.setStyle("-fx-text-fill: gray");
             Label averageRatingLabel = new Label(String.format("%.1f", book.getAverageRating()));
+            averageRatingLabel.setStyle("-fx-text-fill: gray");
             double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
             book.setAverageRating(updatedAvgRating);
             averageRatingLabel.setText(String.format("%.1f", updatedAvgRating));
