@@ -58,6 +58,15 @@
     -fx-text-fill: #eeeeee;
 }
 
+.menu-button-active {
+    -fx-background-color: #73a2e1;
+    -fx-text-fill: #eeeeee;
+    -fx-font-family: "Nunito Medium";
+    -fx-pref-width: 170;
+    -fx-pref-height: 30;
+    -fx-alignment: CENTER_LEFT;
+}
+
 .username-button {
     -fx-background-color: linear-gradient(to bottom, #aac9f1, #73a2e1);
     -fx-pref-width: 200;

@@ -46,6 +46,11 @@ public class MenuController {
 
     private Timer timer;
 
+    boolean isHomePage;
+    boolean isGetAllPage;
+    boolean isBookmarkPage;
+    boolean isAddBooksPage;
+
     /**
      * Initializes the MenuController.
      * This method sets up various event listeners and handles the UI state
@@ -59,6 +64,12 @@ public class MenuController {
      */
     @FXML
     public void initialize() {
+        clearMenuButtonToDefault();
+        handleButtonHover("home-white", homeImageView);
+        homeButton.getStyleClass().clear();
+        homeButton.getStyleClass().add("menu-button-active");
+
+        isHomePage = true;
 
         FontManager.loadFont("Nunito.ttf", 60);
         FontManager.loadFont("Nunito-Bold.ttf", 16);
@@ -97,29 +108,41 @@ public class MenuController {
         homeButton.setOnMouseEntered(event ->
                 handleButtonHover("home-white", homeImageView)
         );
-        homeButton.setOnMouseExited(event ->
-                handleButtonHover("home", homeImageView)
+        homeButton.setOnMouseExited(event -> {
+                if (!isHomePage) {
+                    handleButtonHover("home", homeImageView);
+                }
+            }
         );
 
         getAllButton.setOnMouseEntered(event ->
                 handleButtonHover("getAll-white", getAllImageView)
         );
-        getAllButton.setOnMouseExited(event ->
-                handleButtonHover("getAll", getAllImageView)
+        getAllButton.setOnMouseExited(event -> {
+                if (!isGetAllPage) {
+                    handleButtonHover("getAll", getAllImageView);
+                }
+            }
         );
 
         bookmarkButton.setOnMouseEntered(event ->
                 handleButtonHover("bookmark-white", bookmarkImageView)
         );
-        bookmarkButton.setOnMouseExited(event ->
-                handleButtonHover("bookmark", bookmarkImageView)
+        bookmarkButton.setOnMouseExited(event -> {
+                if (!isBookmarkPage) {
+                    handleButtonHover("bookmark", bookmarkImageView);
+                }
+            }
         );
 
         addBooksButton.setOnMouseEntered(event ->
                 handleButtonHover("upload-white", addBooksImageView)
         );
-        addBooksButton.setOnMouseExited(event ->
-                handleButtonHover("upload", addBooksImageView)
+        addBooksButton.setOnMouseExited(event -> {
+                if (!isAddBooksPage) {
+                    handleButtonHover("upload", addBooksImageView);
+                }
+            }
         );
 
         if (SessionManager.user == null) {
@@ -161,6 +184,30 @@ public class MenuController {
         //FontManager.applyFontToLabel(label, "Nunito-Regular.ttf", 16);
     }
 
+    private void clearMenuButtonToDefault() {
+        handleButtonHover("home", homeImageView);
+        handleButtonHover("getAll", getAllImageView);
+        handleButtonHover("bookmark", bookmarkImageView);
+        handleButtonHover("upload", addBooksImageView);
+
+        homeButton.getStyleClass().clear();
+        homeButton.getStyleClass().add("menu-button");
+
+        getAllButton.getStyleClass().clear();
+        getAllButton.getStyleClass().add("menu-button");
+
+        bookmarkButton.getStyleClass().clear();
+        bookmarkButton.getStyleClass().add("menu-button");
+
+        addBooksButton.getStyleClass().clear();
+        addBooksButton.getStyleClass().add("menu-button");
+
+        isHomePage = false;
+        isGetAllPage = false;
+        isBookmarkPage = false;
+        isAddBooksPage = false;
+    }
+
     /**
      * Handles the hover effect for a given button by changing its associated image.
      *
@@ -197,14 +244,19 @@ public class MenuController {
 //            @Override
 //            public void run() {
 //                Platform.runLater(() -> {
+        clearMenuButtonToDefault();
+        handleButtonHover("home-white", homeImageView);
+        homeButton.getStyleClass().clear();
+        homeButton.getStyleClass().add("menu-button-active");
+
+        isHomePage = true;
+
                     SceneManager.getInstance().clearStack();
                     SceneManager.getInstance().pushSubScene("home.fxml");
 //                });
 //            }
 //        }, 300);
     }
-
-
 
     /**
      * Handles the action for the "Get All" menu item.
@@ -215,6 +267,13 @@ public class MenuController {
      */
     @FXML
     private void handleGetAllMenu() {
+        clearMenuButtonToDefault();
+        handleButtonHover("getAll-white", getAllImageView);
+        getAllButton.getStyleClass().clear();
+        getAllButton.getStyleClass().add("menu-button-active");
+
+        isGetAllPage = true;
+
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("borrowedBooks.fxml");
     }
@@ -228,6 +287,13 @@ public class MenuController {
      */
     @FXML
     private void handleBookmarkMenu() {
+        clearMenuButtonToDefault();
+        handleButtonHover("bookmark-white", bookmarkImageView);
+        bookmarkButton.getStyleClass().clear();
+        bookmarkButton.getStyleClass().add("menu-button-active");
+
+        isBookmarkPage = true;
+
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("bookmark.fxml");
     }
@@ -240,6 +306,13 @@ public class MenuController {
      */
     @FXML
     private void handleAddBooksMenu() {
+        clearMenuButtonToDefault();
+        handleButtonHover("upload-white", addBooksImageView);
+        addBooksButton.getStyleClass().clear();
+        addBooksButton.getStyleClass().add("menu-button-active");
+
+        isAddBooksPage = true;
+
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("addBooks.fxml");
     }
