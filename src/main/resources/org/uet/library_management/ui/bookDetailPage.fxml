@@ -15,11 +15,11 @@
                     <ImageView fx:id="bookCover" fitHeight="400" fitWidth="200" preserveRatio="true" />
                     <VBox fx:id="mainDetailBox" fillWidth="true">
                         <HBox fx:id="titleAndBookmarkBox">
-                            <Label fx:id="title" styleClass="ratesAndCategories" />
+                            <Label fx:id="title" styleClass="titleOfBookDetail" />
                             <Button fx:id="bookDetailBookmarkButton" onMouseClicked="#onBookmarkButtonClicked" />
 
                         </HBox>
-                        <Label fx:id="author" style="-fx-text-fill: rgba(255, 255, 255, 0.7); -fx-padding: 0 0 0 10;" />
+                        <Label fx:id="author" style="-fx-text-fill: rgba(255, 255, 255, 0.7)" />
                         <HBox fx:id="rateCategoryBox" alignment="CENTER_LEFT">
                             <Label fx:id="rates" styleClass="ratesAndCategories" />
                             <Label fx:id="categories" styleClass="ratesAndCategories" />
