@@ -12,7 +12,7 @@
 }
 .boldText {
     -fx-font-family: "Montserrat Semibold";
-    -fx-padding: 0 0 0 10;
+    /*-fx-padding: 0 0 0 10;*/
     -fx-font-size: 18px;
 }
 .normalText {
@@ -115,14 +115,14 @@
     -fx-font-family: "Montserrat Extrabold";
     -fx-text-fill: black;
     -fx-font-size: 22px;
-    -fx-padding: 20 0 0 10;
+    /*-fx-padding: 20 0 0 10;*/
     -fx-font-weight: bold;
 }
 #descriptionText {
     -fx-font-family: "Montserrat Light";
     -fx-text-fill: black;
     -fx-font-size: 16px;
-    -fx-padding: 0 0 0 10;
+    /*-fx-padding: 0 0 0 10;*/
     -fx-wrap-text: true;
     /*-fx-background-color: #EFFBFF;*/
 }

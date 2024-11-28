@@ -29,14 +29,14 @@
                         <Button fx:id="returnButton" onAction="#onReturnButtonClicked" text="Return" style="-fx-pref-width: 65" />
                     </VBox>
                 </HBox>
-
+                <Pane style="-fx-pref-height: 20; -fx-background-color: white" />
                 <VBox fx:id="descriptionAndCommentBox" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 50">
                     <VBox fx:id="descriptionBox" alignment="CENTER_LEFT" >
                         <Label styleClass="section" text="Description" />
                         <Label fx:id="descriptionText" />
                         <Button fx:id="moreButton" onAction="#onMoreButtonClicked" text="...More" visible="false" />
                     </VBox>
-                    <Separator style="-fx-padding: 0 20 0 0"/>
+                    <Separator style="-fx-padding: 20 20 20 0"/>
 
                     <VBox fx:id="bookInformationBox">
                         <Label styleClass="section" text="Book Information" />
@@ -77,7 +77,7 @@
                             <Label fx:id="maturityRatingsName" styleClass="normalText" />
                         </HBox>
                     </VBox>
-                    <Separator style="-fx-padding: 20 20 0 0"/>
+                    <Separator style="-fx-padding: 20 20 20 0"/>
 
                     <VBox fx:id="RateAndReviewBox" alignment="CENTER_LEFT">
                         <Label fx:id="rateHeader" text="Rate and review" style="-fx-font-weight: bold" />
@@ -103,6 +103,7 @@
                         <Label fx:id="yourReviewLabel" text="Your review: " styleClass="section"/>
                     </VBox>
                     <Button fx:id="editReviewButton" text="Edit Review" onAction="#onEditReviewClicked" />
+                    <Separator style="-fx-padding: 20 20 20 0"/>
                     <VBox fx:id="reviewsListBox">
                         <Label fx:id="Reviews" text="Reviews" styleClass="section"/>
                         <VBox fx:id="reviewBox" spacing="30"/>
