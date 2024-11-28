@@ -94,7 +94,10 @@
 
                         <Label styleClass="noteText" text="Review"/>
                         <HBox alignment="CENTER_LEFT">
-                            <TextArea fx:id="reviewArea" promptText="What do you think about this book?" prefWidth="500" prefRowCount="5"/>
+                            <TextArea fx:id="reviewArea" promptText="What do you think about this book?"
+                                      prefWidth="500" prefRowCount="5"
+                                      style="-fx-border-color: black"
+                            />
                         </HBox>
                         <Button fx:id="postButton" text="Post" onAction="#onPostCommentClicked" />
                     </VBox>
