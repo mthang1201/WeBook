@@ -211,12 +211,12 @@ public class MenuController {
      *
      * This method performs the following actions:
      * - Clears the current scene stack.
-     * - Pushes "getAll.fxml" onto the sub-scene stack and sets it as the current sub-scene.
+     * - Pushes "borrowedBooks.fxml" onto the sub-scene stack and sets it as the current sub-scene.
      */
     @FXML
     private void handleGetAllMenu() {
         SceneManager.getInstance().clearStack();
-        SceneManager.getInstance().pushSubScene("getAll.fxml");
+        SceneManager.getInstance().pushSubScene("borrowedBooks.fxml");
     }
 
     /**

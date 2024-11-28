@@ -37,6 +37,11 @@ public class BookService extends DocumentService<Book> {
         return bookRepository.getTitlesFromBookmarks(searchTerm);
     }
 
+    public List<Book> getBooksFromLoans() {
+        BookRepository bookRepository = (BookRepository) repository;
+        return bookRepository.getBooksFromLoans();
+    }
+
     /**
      * Retrieves a list of top-rated books based on a minimum rating and a search term.
      *

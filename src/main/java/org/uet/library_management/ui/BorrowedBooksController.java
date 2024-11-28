@@ -4,8 +4,13 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import org.uet.library_management.SceneManager;
+import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.repositories.documents.BookRepository;
+import org.uet.library_management.core.services.LoanService;
+import org.uet.library_management.core.services.documents.BookService;
+import org.uet.library_management.tools.SessionManager;
 import org.uet.library_management.tools.UIBuilder;
 
 import java.util.List;
@@ -15,7 +20,7 @@ import java.util.List;
  * with a list of books obtained from the BookRepository.
  * It manages interactions involving the verticalScrollpane and flowPane UI components.
  */
-public class GetAllController {
+public class BorrowedBooksController {
     @FXML
     public ScrollPane verticalScrollpane;
 
@@ -31,11 +36,13 @@ public class GetAllController {
     public void initialize() {
         flowPane.setPadding(new Insets(10,10,10,10));
 
-        BookRepository repository = new BookRepository();
-        List<Book> books = repository.getBooksFromLoans();
+        BookService bookService = new BookService();
+        List<Book> books = bookService.getBooksFromLoans();
+        LoanService loanService = new LoanService();
+        List<Loan> loans = loanService.findByUserId(SessionManager.user.getUserId());
 
         flowPane.getChildren().addAll(
-                UIBuilder.createFlowPane(books).getChildren()
+                UIBuilder.createBorrowedBooksFlowPane(books, loans).getChildren()
         );
 
     }

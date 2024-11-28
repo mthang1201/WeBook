@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import org.uet.library_management.SceneManager;
 import org.uet.library_management.api.search.SearchContext;
 import org.uet.library_management.api.search.SearchStrategy;
+import org.uet.library_management.core.entities.Loan;
 import org.uet.library_management.core.entities.documents.Book;
 import org.uet.library_management.core.services.BookmarkService;
 import org.uet.library_management.core.services.PreferenceService;
@@ -59,6 +60,43 @@ public class UIBuilder {
             Label authorsLabel = new Label(book.getAuthors());
 
             vbox.getChildren().addAll(imageView, titleLabel, authorsLabel);
+
+            flowPane.getChildren().add(vbox);
+        }
+
+        return flowPane;
+    }
+
+    public static FlowPane createBorrowedBooksFlowPane(List<Book> books, List<Loan> loans) {
+        FlowPane flowPane = new FlowPane();
+
+        for (Book book : books) {
+            VBox vbox = new VBox();
+
+            Image image = ImageCacheManager.getInstance().loadImage(book.getIsbn13(), book.getTitle(), book.getImageLinks());
+
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(300);
+            imageView.setPreserveRatio(true);
+            imageView.setOnMouseClicked(event -> { openBookDetailPage(book); });
+
+            Loan loan = loans.stream()
+                    .filter(l -> l.getIsbn13().equals(book.getIsbn13()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (book.getTitle() != null && book.getTitle().length() > 30) {
+                book.setTitle(book.getTitle().substring(0, 30) + "...");
+            }
+
+            Label titleLabel = new Label(book.getTitle());
+            titleLabel.setOnMouseClicked(event -> { openBookDetailPage(book); });
+            Label authorsLabel = new Label(book.getAuthors());
+            Label loanDate =  new Label("Ngày mượn: " + loan.getLoanDate());
+            Label dueDate = new Label("Ngày hết hạn mượn: " + loan.getDueDate());
+
+            vbox.getChildren().addAll(imageView, titleLabel, authorsLabel, loanDate, dueDate);
 
             flowPane.getChildren().add(vbox);
         }

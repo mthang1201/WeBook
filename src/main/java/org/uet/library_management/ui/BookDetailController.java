@@ -406,6 +406,12 @@ public class BookDetailController {
                                 "Vui lòng cho ngày trong tương lai!",
                                 null);
                         dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
+                    } else if (dueDate != null && dueDate.isAfter(LocalDate.now().plusMonths(1))) {
+                        AlertUtil.showErrorAlert("Ngày trả vượt quá giới hạn!",
+                                null,
+                                "Bạn chỉ có thể mượn sách trong vòng 1 tháng!",
+                                null);
+                        dueDatePicker.setValue(LocalDate.now().plusWeeks(1));
                     } else {
                         AlertUtil.showInformationsDialog("Thành Công!",
                                 null,
