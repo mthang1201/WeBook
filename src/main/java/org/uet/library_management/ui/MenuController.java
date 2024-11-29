@@ -234,16 +234,6 @@ public class MenuController {
      */
     @FXML
     private void handleHomeMenu() {
-//        if (timer != null) {
-//            timer.cancel();
-//        }
-//
-//        timer = new Timer();
-//
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                Platform.runLater(() -> {
         clearMenuButtonToDefault();
         handleButtonHover("home-white", homeImageView);
         homeButton.getStyleClass().clear();
@@ -251,11 +241,8 @@ public class MenuController {
 
         isHomePage = true;
 
-                    SceneManager.getInstance().clearStack();
-                    SceneManager.getInstance().pushSubScene("home.fxml");
-//                });
-//            }
-//        }, 300);
+        SceneManager.getInstance().clearStack();
+        SceneManager.getInstance().pushSubScene("home.fxml");
     }
 
     /**
