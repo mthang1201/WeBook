@@ -21,7 +21,7 @@
             <Label fx:id="versionText" text="Version 1.0" />
             <Label fx:id="copyrightText" text="Copyright © 2024 The Beast Inc."
                    />
-            <Label fx:id="descriptionText" text="All rights reserved. The Beast Inc and The Beast Inc logo are trademarks of The Beast Inc, registered in Vietnam and other countries. WeBooks is a trademark of The Beast Inc."
+            <Label fx:id="descriptionText" text="All rights reserved. The Beast Inc. and The Beast Inc. logo are trademarks of The Beast Inc., registered in Vietnam and other countries. WeBooks is a trademark of The Beast Inc."
                    wrapText="true" textAlignment="CENTER" maxWidth="343" />
         </VBox>
 

@@ -74,7 +74,8 @@ public class RegisterController {
         String email = emailField.getText();
         String address = addressField.getText();
         String membershipStatus = membershipStatusBox.getValue();
-        String privileges = privilegesBox.getValue();
+//        String privileges = privilegesBox.getValue();
+        String privileges = "Standard";
         String password = passwordField.getText();
 
         if (name.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty() || password.isEmpty()) {
