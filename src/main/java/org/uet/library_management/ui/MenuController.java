@@ -224,6 +224,7 @@ public class MenuController {
      * @param event the MouseEvent that triggered this handler
      */
     private void handleSearchTextFieldMouseClick(MouseEvent event) {
+        clearMenuButtonToDefault();
         SceneManager.getInstance().clearStack();
         SceneManager.getInstance().pushSubScene("search/search.fxml");
     }
@@ -313,6 +314,7 @@ public class MenuController {
     @SneakyThrows
     @FXML
     private void handleSettingsMenu() {
+        clearMenuButtonToDefault();
         SceneManager.getInstance().showNewWindow("settings/settings.fxml");
     }
 }
