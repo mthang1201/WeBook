@@ -56,6 +56,22 @@ public class SuggestSearchController {
         combinedResults = new ArrayList<>();
         verticalScrollpane.setFitToWidth(true);
         verticalScrollpane.setPannable(true);
+
+        String searchText = Mediator.text;
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    performSearch(searchText);
+                    searchFromDb(searchText);
+                });
+            }
+        }, 500);
+
         sortBox.setValue("Sort By");
         sortBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != null && oldValue.equals("Sort by")) {
@@ -77,21 +93,6 @@ public class SuggestSearchController {
             }
             updateUI(combinedResults);
         });
-        
-        String searchText = Mediator.text;
-        if (timer != null) {
-            timer.cancel();
-        }
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    performSearch(searchText);
-                    searchFromDb(searchText);
-                });
-            }
-        }, 500);
     }
 
     /**
@@ -120,7 +121,6 @@ public class SuggestSearchController {
                 List<Book> generalSearchResults = searchContext.executeSearch(searchText);
 
                 Set<String> existingIsbns = new HashSet<>();
-                List<Book> combinedResults = new ArrayList<>();
 
                 for (Book book : topRatedBooks) {
                     double updatedAvgRating = bookService.getUpdatedAverageRating(book.getIsbn13());
@@ -147,7 +147,6 @@ public class SuggestSearchController {
         };
 
         searchTask.setOnSucceeded(event -> {
-            List<Book> combinedResults = searchTask.getValue();
             updateUI(combinedResults);
         });
 

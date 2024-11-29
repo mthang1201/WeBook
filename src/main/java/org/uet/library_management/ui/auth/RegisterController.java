@@ -123,7 +123,7 @@ public class RegisterController {
     }
 
     private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@gmail.com";
+        String emailRegex = "^[a-zA-Z0-9.]+@gmail.com";
         Pattern emailPattern = Pattern.compile(emailRegex);
 
         if (!emailPattern.matcher(email).matches()) {
@@ -133,7 +133,7 @@ public class RegisterController {
     }
 
     private boolean validateName(String name) {
-        String nameRegex = "^[a-zA-Z\s]+$";
+        String nameRegex = "^[a-zA-Z ]+$";
         Pattern namePattern = Pattern.compile(nameRegex);
 
         if (!namePattern.matcher(name).matches()) {
@@ -153,7 +153,7 @@ public class RegisterController {
     }
 
     private boolean validateAddress(String address) {
-        String addressRegex = "^[a-zA-Z0-9\\s,.'-]+$";
+        String addressRegex = "^[a-zA-Z0-9 ]+$";
         Pattern addressPattern = Pattern.compile(addressRegex);
 
         if (!addressPattern.matcher(address).matches()) {
