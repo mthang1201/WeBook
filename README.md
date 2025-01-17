@@ -1,4 +1,4 @@
-# library_management
+# WeBook
 A library management application written from scratch in Java using the JavaFX development library. Apart from the core dictionary, the project also includes some extra features like suggestions.
 
 
